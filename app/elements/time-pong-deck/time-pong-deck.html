@@ -1,0 +1,275 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
+
+<dom-module id="time-pong-deck">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      :host .card-main {
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        left: 10%;
+        bottom: -70%;
+        border-radius: 10px;
+        border: 1px solid var(--primary-text-color);
+        box-shadow: 0px 0px 0px #ccc;
+        margin-bottom: -13px;
+        transition: all .7s ease-out;
+      }
+      :host .card-main .color-fill {
+        position: absolute;
+        top:0;
+        left:0;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        animation: soft-color-loop 10s infinite;
+        -moz-animation: soft-color-loop 10s infinite; /* Firefox */
+        -webkit-animation: soft-color-loop 10s infinite; /* Safari and Chrome */
+      }
+
+      :host .card-main.true {
+        width: 81%;
+        left: 9.5%;
+        bottom: 5%;
+        box-shadow: 0px 0px 13px var(--primary-text-color);
+        transition: all .7s ease-out;
+      }
+
+      :host .card-main.true.switching {
+        animation: card-flip .7s;
+        -moz-animation: card-flip .7s;
+        -webkit-animation: card-flip .7s;
+        animation-timing-function: ease-in-out;
+      }
+
+      @keyframes card-flip {
+        0%  {transform: scaleX(1) skewY(0deg);}
+        49.9% {transform: scaleX(0) skewY(4deg);}
+        50% {transform: scaleX(0) skewY(-4deg);}
+        100%{transform: scaleX(1) skewY(0deg);}
+      }
+
+      :host .card-stack {
+        height: 10%;
+        width: 80%;
+        left: 10%;
+        border-radius: 10px 10px 0 0;
+        border: 1px solid var(--primary-text-color);
+        border-bottom: 0;
+        position: absolute;
+        bottom: 0;
+        animation: soft-color-loop 10s infinite;
+        -moz-animation: soft-color-loop 10s infinite; /* Firefox */
+        -webkit-animation: soft-color-loop 10s infinite; /* Safari and Chrome */
+      }
+
+      :host .card-stack.card-1 {
+        box-shadow: 0px 3px 5px var(--primary-text-color);
+      }
+
+      :host .card-stack.card-2 {
+        margin-bottom: -3px;
+      }
+
+      :host .card-stack.card-3 {
+        margin-bottom: -6px;
+      }
+
+      :host .card-stack.card-4 {
+        margin-bottom: -9px;
+      }
+    </style>
+
+    <div class="card-stack card-1"></div>
+    <div class="card-stack card-2"></div>
+    <div class="card-stack card-3"></div>
+    <div class="card-stack card-4"></div>
+
+    <div class$="card-main {{isOpen}} {{cardStatus}}">
+      <div class="color-fill">
+        <!--<div class$="card-main {{isOpen}} {{cardStatus}}" on-tap="toggleCard">-->
+        <time-pong-card
+          id="timePongCard"
+          sober-card="{{soberCard}}"
+          drunk-card="{{drunkCard}}"
+          switching="{{cardStatus}}"></time-pong-card>
+      </div>
+    </div>
+
+    <iron-signals on-iron-signal-timer-finished="toggleCard"></iron-signals>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'time-pong-deck',
+
+        properties: {
+          cards: {
+            type: Object,
+            notify: true
+          },
+          soberCard: {
+            type: Object,
+            notify: true
+          },
+          drunkCard: {
+            type: Object,
+            notify: true
+          },
+          isOpen: {
+            type: Boolean,
+            value: false,
+            notify: true
+          }
+        },
+
+        toggleCard: function() {
+          if (!this.isOpen) {
+            // Randomly select the rarity based on however I'll do that...
+            var rarityBounds = {
+              bluemoon: 2,
+              rare: 8,
+              uncommon: 20,
+              common: 70
+            };
+
+            var result =  Math.random() * 100;
+            console.log('random rarity number: ' + result);
+
+            if (result < rarityBounds.bluemoon) {
+              // pick a bluemoon card
+              this.soberCard = getRandomArrayItem(this.cards.bluemoon.sober);
+              this.drunkCard = getRandomArrayItem(this.cards.bluemoon.drunk);
+            } else if(result < rarityBounds.rare) {
+              // pick a rare card
+              this.soberCard = getRandomArrayItem(this.cards.rare.sober);
+              this.drunkCard = getRandomArrayItem(this.cards.rare.drunk);
+            } else if(result < rarityBounds.uncommon) {
+              // pick an uncommon card
+              this.soberCard = getRandomArrayItem(this.cards.uncommon.sober);
+              this.drunkCard = getRandomArrayItem(this.cards.uncommon.drunk);
+            } else {
+              // pick a common card
+              this.soberCard = getRandomArrayItem(this.cards.common.sober);
+              this.drunkCard = getRandomArrayItem(this.cards.common.drunk);
+            }
+
+            console.log(this.drunkCard);
+            console.log(this.soberCard);
+            this.$.timePongCard.reset();
+          }
+
+          this.isOpen = !this.isOpen;
+        },
+
+        ready: function() {
+          // Fetch the card list from the db
+
+          // Pluck out the card categories that don't match the user's config
+
+          // Store the resulting list in our module property
+          this.cards = {
+            common: {
+              drunk: [
+                {
+                  creator: 'Jake Turner',
+                  created: '08/05/2016',
+                  categories: ['CORE'],
+                  title: 'Drink!',
+                  rule1: 'No excuses.',
+                  rule2: null,
+                  rule3: null
+                }
+              ],
+              sober: [
+                {
+                  creator: 'Jake Turner',
+                  created: '08/05/2016',
+                  categories: ['CORE'],
+                  title: 'common sober placeholder!',
+                  rule1: 'blah',
+                  rule2: null,
+                  rule3: null
+                }
+              ]
+            },
+            uncommon: {
+              drunk: [
+                {
+                  creator: 'Jake Turner',
+                  created: '08/05/2016',
+                  categories: ['CORE'],
+                  title: 'Return to sender',
+                  rule1: 'Return the ball and cup to the person who last passed it to you this round. They drink.',
+                  rule2: 'If you were the only person to take a shot this round, you drink twice instead.',
+                  rule3: null
+                }
+              ],
+              sober: [
+                {
+                  creator: 'Jake Turner',
+                  created: '08/05/2016',
+                  categories: ['CORE'],
+                  title: 'Fetch',
+                  rule1: 'Fetch a drink for everyone running on empty.',
+                  rule2: 'If no one is empty, fetch a drink for someone that asks.',
+                  rule3: 'If no one asks, fetch a stick from outside. That\'s a good boy!'
+                }
+              ]
+            },
+            rare: {
+              drunk: [],
+              sober: []
+            },
+            bluemoon: {
+              drunk: [
+                {
+                  creator: 'Jake Turner',
+                  created: '08/05/2016',
+                  categories: ['CORE'],
+                  title: 'The witches\' potion',
+                  rule1: 'Get a cup. The three people to your left each pour a portion of their drink into it.',
+                  rule2: 'Top it up with your drink.',
+                  rule3: 'Now skull!'
+                }
+              ],
+              sober: []
+            }
+          }
+        }
+      });
+
+      function getRandomArrayItem(array) {
+        var length = array ? array.length : 0;
+        var index = Math.floor(Math.random() * length);
+        return array[index];
+      }
+    })();
+  </script>
+</dom-module>
+
+<!--TODO: Create categories. 'Drunk / Sober'. Add a button at the top of the card to switch between drunk and sober punishment.-->
+ <!--Sober punishemnets can be things like fetching drinks? Ice down the top or pants? If I add in 'adult' cards as an additional genre, these could-->
+ <!--also fall under sober... Need to make sure whatever punishments are picked, they are quick. The game is supposed to be fast paced!-->
+
+ <!--Will need to pass into the card module both a sober and a drunk data object. Maybe make a flipping animation for the card. ScaleX it, .5 linear.-->
+ <!--In the js set a timeout function that waits .25s before switching the data model pointer-->

@@ -26,8 +26,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   /* Application theme */
 
   :root {
-    --primary-text-color: var(--paper-grey-900);
-    --primary-background-color: #ffffff;
+    --primary-text-color: #333;
+    --primary-background-color: #fafafa;
+    --overlay-background-color: #999;
+    --link-color: #3B76D4;
     --secondary-text-color: #737373;
     --disabled-text-color: #9b9b9b;
     --divider-color: #dbdbdb;
@@ -137,11 +139,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     /* Required for main area's paper-scroll-header-panel custom condensing transformation */
     -webkit-transform-origin: left center;
     transform-origin: left center;
-  }
-
-  /* Height of the scroll area */
-  .content {
-    height: 900px;
   }
 
   section[data-route="home"] paper-material {

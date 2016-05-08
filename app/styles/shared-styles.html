@@ -25,6 +25,51 @@
           font-size: 24px!important;
         }
       }
+
+      @-moz-keyframes soft-color-loop /* Firefox */
+      {
+        0%   {background-color: #FFE3E3;}
+        33%  {background-color: #E3E4FF;}
+        66%   {background-color: #E5FFE3;}
+        100%   {background-color: #FFE3E3;}
+      }
+      @-webkit-keyframes soft-color-loop /* Safari and Chrome */
+      {
+        0%   {background-color: #FFE3E3;}
+        33%  {background-color: #E3E4FF;}
+        66%   {background-color: #E5FFE3;}
+        100%   {background-color: #FFE3E3;}
+      }
+
+      @-moz-keyframes highlight-color-loop /* Firefox */
+      {
+        0%   {color: #FF7878;}
+        33%  {color: #787AFF;}
+        66%   {color: #BCFF78;}
+        100%   {color: #FF7878;}
+      }
+      @-webkit-keyframes highlight-color-loop /* Safari and Chrome */
+      {
+        0%   {color: #FF7878;}
+        33%  {color: #787AFF;}
+        66%   {color: #BCFF78;}
+        100%   {color: #FF7878;}
+      }
+
+      @-moz-keyframes border-highlight-color-loop /* Firefox */
+      {
+        0%   {border-color: #FF7878;}
+        33%  {border-color: #787AFF;}
+        66%   {border-color: #BCFF78;}
+        100%   {border-color: #FF7878;}
+      }
+      @-webkit-keyframes border-highlight-color-loop /* Safari and Chrome */
+      {
+        0%   {border-color: #FF7878;}
+        33%  {border-color: #787AFF;}
+        66%   {border-color: #BCFF78;}
+        100%   {border-color: #FF7878;}
+      }
     </style>
   </template>
 </dom-module>

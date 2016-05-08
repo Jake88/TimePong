@@ -1,0 +1,167 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
+
+<dom-module id="app-timer">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      :host paper-button {
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -75px;
+        margin-top: -75px;
+        background-color: #fff;
+        border: 15px solid #B3FFB8;
+        color: #B3FFB8;
+        transition: all .3s linear;
+      }
+
+      :host paper-button.true {
+        border-color: #FF7878;
+        color: #FF7878;
+        transition: all .5s linear;
+      }
+
+      :host paper-button iron-icon {
+        --iron-icon-height: 50%;
+        --iron-icon-width: 50%;
+        position: absolute;
+        top: 25%;
+        left: 25%;
+      }
+
+      :host paper-button iron-icon.clockHand {
+        transform-origin: right;
+        --iron-icon-height: 50%;
+        --iron-icon-width: 40%;
+        left: 10%;
+        top: 25%;
+      }
+
+      :host paper-button iron-icon.clockHand.fast {
+        -webkit-animation: spin 2s infinite linear;
+      }
+
+      :host paper-button iron-icon.clockHand.slow {
+        -webkit-animation: spin 20s infinite linear;
+      }
+
+      @-webkit-keyframes spin {
+        0%  {-webkit-transform: rotate(0deg);}
+        100% {-webkit-transform: rotate(360deg);}
+      }
+
+      :host paper-button .timer {
+        @apply(--paper-font-display2);
+        position: relative;
+        top: 100px;
+        color: #ccc;
+        opacity: 1;
+        transition: opacity .5s ease-in;
+      }
+
+      :host paper-button .timer.true {
+        opacity: 0;
+        transition: all 0s ease-out;
+      }
+    </style>
+    <paper-button raised class$="{{isRunning}}" on-tap="timerPress">
+      <iron-icon hidden$="{{isRunning}}" icon="av:play-arrow"></iron-icon>
+      <iron-icon hidden$="{{!isRunning}}" icon="icons:remove" class="clockHand slow"></iron-icon>
+      <iron-icon hidden$="{{!isRunning}}" icon="icons:remove" class="clockHand fast"></iron-icon>
+
+      <p class$="timer {{isRunning}}">{{toFixed(timer)}}</p>
+    </paper-button>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'app-timer',
+
+        properties: {
+          isRunning: {
+            type: Boolean,
+            notify: true,
+            value: null
+          },
+          timer: {
+            type: Number,
+            value: 0,
+            notify: false
+          },
+          timeinterval: {
+            type: String
+          }
+
+        },
+
+        toFixed: function(val) {
+          return (val / 1000).toFixed(2);
+        },
+
+        timerPress: function() {
+          if (this.isRunning) {
+            stopTimer.bind(this)();
+          } else {
+            // Starting the timer;
+            // These should be stored in a config where the user can make changes to them.
+            var maxMilliseconds = 4000;
+            var minMilliseconds = 1200;
+
+            // Get the random amount of time our timer will go for
+            var millisecondsToAdd = Math.random() * (maxMilliseconds - minMilliseconds) + minMilliseconds;
+
+            console.log(millisecondsToAdd);
+
+            // Variable to hold the previous intervals date (for a diff)
+            var previousDate = Date.now();
+
+            // Variable to hold the current time counter
+            this.timer = 0;
+
+            this.timeinterval = setInterval(interval.bind(this), 37);
+
+            this.isRunning = true;
+          }
+
+          function interval() {
+            var t = Date.now() - previousDate;
+            previousDate = Date.now();
+            this.timer += t;
+            if(this.timer > millisecondsToAdd){
+              this.fire('iron-signal', {name: 'timer-finished'});
+              stopTimer.bind(this)();
+            }
+          }
+
+          function stopTimer() {
+            clearInterval(this.timeinterval);
+            this.isRunning = false;
+            this.notifyPath('this.timer');
+          }
+        }
+      });
+    })();
+  </script>
+</dom-module>
