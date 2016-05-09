@@ -1,9 +1,21 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
 
-<dom-module id="time-pong-card">
+<dom-module id="time-pong-card-face-one">
   <template>
     <style>
+      :host .wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 10px;
+        height: 100%;
+        width: 100%;
+        animation: soft-color-loop 10s infinite;
+        -moz-animation: soft-color-loop 10s infinite; /* Firefox */
+        -webkit-animation: soft-color-loop 10s infinite; /* Safari and Chrome */
+      }
+
       :host .card-overflow-container {
         width: 100%;
         overflow: hidden;
@@ -17,7 +29,6 @@
       :host .card-overflow-container.footer {
         right: -7px;
       }
-
 
       :host .card-overflow-container::before {
         content: "";
@@ -110,8 +121,12 @@
         width: 100%;
         box-sizing: border-box;
         padding: 20px;
+        padding-bottom: 60px;
         position: relative;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
       }
 
       :host .card-body h2 {
@@ -126,77 +141,38 @@
         position: relative;
       }
 
-      :host .change-cat-button {
-        position: absolute;
-        bottom: 20px;
-        left: 0;
-        width: 100%;
-        justify-content: center;
-        display: flex;
-        align-items: center;
-        color: var(--link-color);
-        z-index: 3;
-      }
-
-      :host .change-cat-button span {
-        border-bottom: 1px solid var(--link-color);
-      }
-
-      :host .card-body iron-icon {
-        position: absolute;
-        bottom: -75px;
-        right: -125px;
-        color: #f6f6f6;
-        --iron-icon-height: 400px;
-        --iron-icon-width: 400px;
-        z-index: 2;
-      }
-
-      :host .card-body iron-icon.sober-icon {
-        --iron-icon-height: 550px;
-        --iron-icon-width: 550px;
-        bottom: -115px;
-        right: -195px;
-      }
-
     </style>
+    <div class="wrapper" on-tap="closeCard">
 
-    <div class="card-overflow-container header">
-      <div class="card-banner header">
-      </div>
-    </div>
-    <p class="card-hightlight-text header" on-tap="closeCard">Time Pong</p>
-
-    <div class="card-body">
-      <div class="inner-border">
-        <h2>{{data.title}}</h2>
-
-        <p>{{data.rule1}}</p>
-
-        <p>{{data.rule2}}</p>
-
-        <p>{{data.rule3}}</p>
-
-        <div class="change-cat-button" hidden$="{{soberSelected}}" on-tap="switchCard">
-          <!--<iron-icon icon="maps:local-cafe"></iron-icon>-->
-          <span>I prefer sobriety</span>
+      <div class="card-overflow-container header">
+        <div class="card-banner header">
         </div>
-        <div class="change-cat-button" hidden$="{{!soberSelected}}" on-tap="switchCard">
-          <!--<iron-icon icon="maps:local-bar"></iron-icon>-->
-          <span>Get me drunk</span>
+      </div>
+      <p class="card-hightlight-text header">
+        Time Pong
+      </p>
+
+      <div class="card-body">
+        <div class="inner-border">
+          <h2>{{data.title}}</h2>
+
+          <p>{{data.rule1}}</p>
+
+          <p>{{data.rule2}}</p>
+
+          <p>{{data.rule3}}
+
+          <content></content>
+
         </div>
-
-        <iron-icon icon="maps:local-bar"></iron-icon>
-        <iron-icon icon="icons:block" class="sober-icon" hidden$="{{!soberSelected}}"></iron-icon>
       </div>
-    </div>
 
-    <div class="card-overflow-container footer">
-      <div class="card-banner footer">
+      <div class="card-overflow-container footer">
+        <div class="card-banner footer">
+        </div>
       </div>
+      <p class="card-hightlight-text footer">A ping pong drinking game</p>
     </div>
-    <p class="card-hightlight-text footer">A ping pong drinking game</p>
-
   </template>
 
   <script>
@@ -204,62 +180,17 @@
       'use strict';
 
       Polymer({
-        is: 'time-pong-card',
+        is: 'time-pong-card-face-one',
 
         properties: {
-          soberCard: Object,
-          drunkCard: Object,
           data: {
             type: Object,
             notify: true
-          },
-          switching: {
-            type: String,
-            notify: true
-          },
-          soberSelected: {
-            type: Boolean,
-            notify: true
-          }
-        },
-
-        switchCard: function() {
-          function changeCardData() {
-            if (this.data === this.soberCard) {
-              this.data = this.drunkCard;
-              this.soberSelected = false;
-            } else {
-              this.data = this.soberCard;
-              this.soberSelected = true;
-            }
-
-            // Set a delay for the flip animation to finish playing out.
-            setTimeout(stopAnimation.bind(this), 350);
-          }
-
-          function stopAnimation() {
-            this.switching = null;
-          }
-
-          if (!this.switching) {
-            this.switching = 'switching';
-            // Set a delay that matches half our card flip animation before we change card data.
-            setTimeout(changeCardData.bind(this), 350);
           }
         },
 
         closeCard: function() {
-          this.fire('iron-signal', {name: 'timer-finished'});
-        },
-
-        ready: function() {
-          this.reset();
-        },
-
-        reset: function() {
-          this.switching = null;
-          this.data = this.drunkCard;
-          this.soberSelected = false;
+          this.fire('iron-signal', {name: 'close-card'});
         }
       });
     })();
