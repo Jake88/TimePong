@@ -7,8 +7,10 @@
       :host div.content {
         height: 100%;
         width: 100%;
-        background-color: var(--primary-background-color);
+        max-width: 400px;
+        margin: auto;
         transition: all .5s linear;
+        position: relative;
       }
 
       :host div.content.true {
@@ -17,10 +19,20 @@
       }
 
     </style>
+
     <div class$="content {{isCardOpen}}">
-      <section data-route="home" tabindex="-1">
+      <section data-route="home">
+        <div class="effects-container">
+          <time-pong-effect-card id="spell-effect" data="{{currentEffects.spell}}" label="Spell" index="0"></time-pong-effect-card>
+          <time-pong-effect-card id="curse-effect" data="{{currentEffects.curse}}" label="Curse" index="1"></time-pong-effect-card>
+        </div>
+
         <app-timer is-running="{{isTimerRunning}}"></app-timer>
-        <time-pong-deck is-open="{{isCardOpen}}"></time-pong-deck>
+
+        <time-pong-deck
+          is-open="{{isCardOpen}}"
+          current-effects="{{currentEffects}}">
+        </time-pong-deck>
       </section>
     </div>
   </template>
@@ -33,6 +45,11 @@
         is: 'page-time-pong',
 
         properties: {
+          currentEffects: {
+            type: Object,
+            notify: true,
+            value: function() { return {};}
+          }
         }
       });
     })();

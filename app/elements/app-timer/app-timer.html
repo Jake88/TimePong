@@ -29,14 +29,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin-left: -75px;
         margin-top: -75px;
         background-color: #fff;
-        border: 15px solid #B3FFB8;
-        color: #B3FFB8;
+        border: 15px solid var(--green-highlight);
+        color: var(--green-highlight);
         transition: all .3s linear;
       }
 
       :host paper-button.true {
-        border-color: #FF7878;
-        color: #FF7878;
+        border-color: var(--red-highlight);
+        color: var(--red-highlight);
         transition: all .5s linear;
       }
 
@@ -126,8 +126,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           } else {
             // Starting the timer;
             // These should be stored in a config where the user can make changes to them.
-            var maxMilliseconds = 4000;
-            var minMilliseconds = 1200;
+            var maxMilliseconds = 50;
+            var minMilliseconds = 10;
 
             // Get the random amount of time our timer will go for
             var millisecondsToAdd = Math.random() * (maxMilliseconds - minMilliseconds) + minMilliseconds;
@@ -151,6 +151,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.timer += t;
             if(this.timer > millisecondsToAdd){
               this.fire('iron-signal', {name: 'timer-finished'});
+              playSound();
               stopTimer.bind(this)();
             }
           }
@@ -159,6 +160,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             clearInterval(this.timeinterval);
             this.isRunning = false;
             this.notifyPath('this.timer');
+          }
+
+          function playSound() {
+            new Audio('../../sounds/times-up-tone.mp3').play();
           }
         }
       });

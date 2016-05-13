@@ -1,67 +1,34 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
 
-<dom-module id="time-pong-card-face-one">
+<dom-module id="time-pong-card-back-one">
   <template>
     <style>
       :host .wrapper {
         @apply(--absolute-template);
+        @apply(--soft-color-loop);
         border-radius: 10px;
         font-family: 'Roboto', 'Noto', sans-serif;
         -webkit-font-smoothing: antialiased;
-        background-color: var(--light-grey);
-      }
-      :host .wrapper.Bluemoon {
-        background-color: var(--blue-soft);
-      }
-      :host .wrapper.Rare {
-        background-color: var(--red-soft);
-      }
-      :host .wrapper.Uncommon {
-        background-color: var(--green-soft);
       }
 
-      :host .wrapper .card-banner {
+      :host .card-banner {
+        @apply(--highlight-color-loop);
         box-sizing:border-box;
         line-height: 40px;
         height: 40px;
         width: 85%;
         background-color: var(--primary-text-color);
         position: relative;
-        color: var(--light-grey);
-        border-color: var(--overlay-background-color);
       }
-      :host .wrapper.Bluemoon .card-banner {
-        color: var(--blue-soft);
-        border-color: var(--blue-highlight);
-      }
-      :host .wrapper.Rare .card-banner {
-        color: var(--red-soft);
-        border-color: var(--red-highlight);
-      }
-      :host .wrapper.Uncommon .card-banner {
-        color: var(--green-soft);
-        border-color: var(--green-highlight);
-      }
-
-      :host .wrapper .card-banner:after {
+      :host .card-banner:after {
         @apply(--pseudo-element);
+        @apply(--border-highlight-color-loop);
         width: 40px;
         height: 40px;
         transform: skewY(45deg);
         background-color: var(--primary-text-color);
-        border-color: var(--overlay-background-color);
       }
-      :host .wrapper.Bluemoon .card-banner:after {
-        border-color: var(--blue-highlight);
-      }
-      :host .wrapper.Rare .card-banner:after {
-        border-color: var(--red-highlight);
-      }
-      :host .wrapper.Uncommon .card-banner:after {
-        border-color: var(--green-highlight);
-      }
-
       :host .card-banner:before {
         @apply(--pseudo-element);
       }
@@ -107,25 +74,15 @@
       }
 
 
-      :host .wrapper .card-body {
+      :host .card-body {
+        @apply(--border-highlight-color-loop);
         border-left: 2px solid;
         border-right: 2px solid;
         height:calc(100% - 120px);
         margin: 0 calc(15% - 33px);
         text-align: center;
         background-color: var(--primary-background-color);
-        border-color: var(--overlay-background-color);
       }
-      :host .wrapper.Bluemoon .card-body {
-        border-color: var(--blue-highlight);
-      }
-      :host .wrapper.Rare .card-body {
-        border-color: var(--red-highlight);
-      }
-      :host .wrapper.Uncommon .card-body {
-        border-color: var(--green-highlight);
-      }
-
       :host .card-body .inner-border {
         @apply(--relative-template);
         border-left: 2px solid var(--primary-text-color);
@@ -135,35 +92,77 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: center;
       }
 
-      :host .card-body h2 {
-        margin-top: 0;
-        position:relative;
-      }
-
-      :host .card-body p {
+      :host .card-body .inner-border h2 {
+        margin-bottom: 20px;
         font-weight: 100;
       }
 
+      :host .card-body .inner-border .answers {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        border-top: 1px solid var(--light-grey);
+        border-bottom: 1px solid var(--light-grey);
+      }
+
+      :host .card-body .inner-border .answers .answer {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        position: relative;
+      }
+
+      :host .card-body .inner-border .answers .answer.drunk paper-ripple{
+        color: var(--green-highlight);
+      }
+      :host .card-body .inner-border .answers .answer.sober paper-ripple{
+        color: var(--blue-highlight);
+      }
+      :host .card-body .inner-border .answers .answer iron-icon {
+        --iron-icon-height: 50px;
+        --iron-icon-width: 50px;
+      }
+      :host .card-body .inner-border .answers .answer.drunk iron-icon {
+        color: var(--green-highlight);
+      }
+      :host .card-body .inner-border .answers .answer.sober iron-icon {
+        color: var(--blue-highlight);
+      }
+
     </style>
-    <div class$="wrapper {{data.rarity}}" on-tap="closeCard">
+    <div class="wrapper">
       <div class="card-banner header">
         Time Pong
       </div>
 
       <div class="card-body">
         <div class="inner-border">
-          <h2>{{data.title}}</h2>
-          <template is="dom-repeat" items="{{data.rules}}">
-            <p>{{item}}</p>
-          </template>
+          <h2>Are you drinking?</h2>
+          <div class="answers">
+            <div id="drunk-button" class="answer drunk" on-tap="selectCard">
+              <paper-ripple></paper-ripple>
+              <iron-icon icon="maps:local-bar"></iron-icon>
+              <span>Yes</span>
+            </div>
+            <div id="sober-button" class="answer sober" on-tap="selectCard">
+              <paper-ripple></paper-ripple>
+              <iron-icon icon="maps:local-drink"></iron-icon>
+              <span>No</span>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="card-banner footer">
-        <span>{{data.rarity}}</span>
+        A ping pong drinking game
       </div>
     </div>
   </template>
@@ -173,19 +172,18 @@
       'use strict';
 
       Polymer({
-        is: 'time-pong-card-face-one',
+        is: 'time-pong-card-back-one',
 
         properties: {
-          data: Object,
-          isEffect: Boolean
+          cardSelected: {
+            type: String,
+            notify: true
+          }
         },
 
-        closeCard: function() {
-          if (this.isEffect) {
-            this.fire('view-effect-card', this.data);
-          } else {
-            this.fire('iron-signal', {name: 'close-card'});
-          }
+        selectCard: function(e) {
+          this.cardSelected = e.currentTarget.id === 'drunk-button' ? 'drunk' : 'sober';
+          this.fire('iron-signal', {name: 'flip-card'});
         }
       });
     })();

@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
 
 <dom-module id="time-pong-deck">
   <template>
@@ -14,37 +15,35 @@
         width: 80%;
         height: 80%;
         left: 10%;
-        bottom: -70%;
+        bottom: 10%;
         border-radius: 10px;
         margin-bottom: -13px;
         perspective: 1000px;
+        transform: rotateZ(-1deg) translateY(89%);
         transition: all .9s ease-in-out;
+        z-index: 2;
       }
 
       :host .flip-container.true {
-        width: 81%;
-        left: 9.5%;
-        bottom: 10%;
+        transform: rotateZ(0deg) translateY(-10%);
         transition: all .9s ease-in-out;
       }
 
       :host .flip-container .card-main {
-        position: absolute;
-        width: 100%;
-        height: 100%;
+        @apply(--absolute-template);
         left: 0;
         bottom: 0;
         border-radius: 10px;
         border: 1px solid var(--primary-text-color);
-        box-shadow: 0px 0px 0px var(--primary-text-color);
+        box-shadow: 0px 0px 3px var(--primary-text-color);
       }
 
       :host .flip-container.true .card-main {
         box-shadow: 0px 0px 13px var(--primary-text-color);
       }
 
-      /* flip the pane when hovered */
-      .flip-container.sober .flipper {
+      .flip-container.true.sober .flipper,
+      .flip-container.true.drunk .flipper {
         transform: rotateY(180deg);
       }
 
@@ -55,23 +54,21 @@
       }
 
       /* hide back of pane during swap */
-      .front, .back {
-        width: 100%;
-        height: 100%;
+      .face, .back {
+        @apply(--absolute-template);
         backface-visibility: hidden;
-        position: absolute;
         top: 0;
         left: 0;
       }
 
-      /* front pane, placed above back */
-      .front {
-        z-index: 2;
+      /* face pane, placed above back */
+      .back {
+        z-index: 100;
         transform: rotateY(0deg);
       }
 
       /* back, initially hidden pane */
-      .back {
+      .face {
         transform: rotateY(180deg);
       }
 
@@ -79,79 +76,75 @@
         height: 10%;
         width: 80%;
         left: 10%;
+        bottom: 10%;
         border-radius: 10px 10px 0 0;
         border: 1px solid var(--primary-text-color);
         border-bottom: 0;
         position: absolute;
-        bottom: 0;
+        box-shadow: 0px 0px 2px var(--primary-text-color);
         animation: soft-color-loop 10s infinite;
         -moz-animation: soft-color-loop 10s infinite; /* Firefox */
         -webkit-animation: soft-color-loop 10s infinite; /* Safari and Chrome */
       }
 
       :host .card-stack.card-1 {
-        box-shadow: 0px 3px 5px var(--primary-text-color);
+        transform: rotateZ(-2deg) translate(-3px);
       }
 
       :host .card-stack.card-2 {
-        margin-bottom: -3px;
+        margin-bottom: -4px;
+        transform: rotateZ(1deg) translate(3px);
       }
 
       :host .card-stack.card-3 {
-        margin-bottom: -6px;
+        margin-bottom: -7px;
+        transform: rotateZ(-1deg) translate(10px);
       }
 
       :host .card-stack.card-4 {
-        margin-bottom: -9px;
+        margin-bottom: -11px;
+        transform: rotateZ(-2deg) translate(-5px);
       }
 
       :host .change-cat-button {
-        position: absolute;
+        @apply(--absolute-template);
         bottom: 20px;
         left: 0;
-        width: 100%;
+        height: initial;
         justify-content: center;
         display: flex;
         align-items: center;
         color: var(--link-color);
-        z-index: 3;
       }
 
       :host .change-cat-button span {
         border-bottom: 1px solid var(--link-color);
       }
     </style>
-
+    {{currentEffects.spell.title}}
     <div class="card-stack card-1"></div>
     <div class="card-stack card-2"></div>
     <div class="card-stack card-3"></div>
     <div class="card-stack card-4"></div>
 
-    <div class$="flip-container {{isOpen}} {{cardSelected}}">
+    <div class$="flip-container {{isOpen}} {{selectedCard}}">
       <div class="card-main flipper">
-        <time-pong-card-face-one
-          id="drunkCard"
-          class="front"
-          data="{{drunkCard}}">
-          <div class="change-cat-button" hidden$="{{soberSelected}}" on-tap="switchCard">
-            <span>I prefer sobriety</span>
-            <iron-icon icon="icons:chevron-right"></iron-icon>
-          </div>
-        </time-pong-card-face-one>
+        <time-pong-card-back-one
+          id="cardBack"
+          class="back"
+          card-selected="{{selectedCard}}">
+        </time-pong-card-back-one>
 
         <time-pong-card-face-one
-          id="soberCard"
-          class="back"
-          data="{{soberCard}}">
-          <div class="change-cat-button" hidden$="{{!soberSelected}}" on-tap="switchCard">
-            <iron-icon icon="maps:local-bar"></iron-icon>
-            <span>I've changed my mind</span>
-          </div>
+          id="currentCard"
+          class="face"
+          data="{{currentCard}}">
         </time-pong-card-face-one>
       </div>
     </div>
 
     <iron-signals on-iron-signal-timer-finished="drawCard"></iron-signals>
+    <iron-signals on-iron-signal-flip-card="flipCard"></iron-signals>
     <iron-signals on-iron-signal-close-card="closeCard"></iron-signals>
 
 
@@ -161,6 +154,14 @@
     (function() {
       'use strict';
 
+      var _BOUNDS = {
+        basic: 35,
+        common: 65,
+        uncommon: 85,
+        rare: 97,
+        bluemoon: 100
+      };
+
       Polymer({
         is: 'time-pong-deck',
 
@@ -169,109 +170,116 @@
             type: Object,
             notify: true
           },
-          soberCard: {
+          currentCard: {
             type: Object,
             notify: true
           },
-          drunkCard: {
+          currentEffects: {
             type: Object,
             notify: true
           },
+          previousCard: Object,
           isOpen: {
             type: Boolean,
-            value: false,
             notify: true
           },
-          cardSelected: {
+          selectedCard: {
             type: String,
-            value: false,
             notify: true
           }
         },
 
-        switchCard: function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          if (this.cardSelected !== 'sober') {
-            this.cardSelected = 'sober';
-          } else {
-            this.cardSelected = 'drunk';
-          }
+        flipCard: function() {
+          // Go off and find a valid card to show to the user.
+          this.currentCard = findRandomCard(this.cards, this.selectedCard, this.currentCard, this.previousCard);
         },
 
         closeCard: function() {
-          if (this.cardSelected === 'sober') {
-            this.cardSelected = 'drunk';
-            setTimeout(this.closeCard.bind(this), 800);
-            return;
+          // TODO: Check to see if the current Spell needs to expire. If so, Animate it up, get the user to click on it and fade it out.
+          // TODO: On click o the lingering card, clear the lingering card property
+
+          // If the current card is a curse or a spell, set it.
+          if (this.currentCard.type === 'curse') {
+            console.log('curse selected');
+            this.set('currentEffects.curse', _.cloneDeep(this.currentCard));
           }
+
+          if (this.currentCard.type === 'spell') {
+            console.log('spell selected');
+            this.set('currentEffects.spell', _.cloneDeep(this.currentCard));
+          }
+
+          this.selectedCard = null;
           this.isOpen = false;
         },
 
         drawCard: function() {
-          if (!this.isOpen) {
-            // Randomly select the rarity based on however I'll do that...
-            var rarityBounds = {
-              bluemoon: 3,
-              rare: 10,
-              uncommon: 35,
-              common: 100
-            };
-
-            var result =  Math.random() * 100;
-            console.log('random rarity number: ' + result);
-
-            if (result < rarityBounds.bluemoon) {
-              // pick a bluemoon card
-              this.soberCard = getRandomArrayItem(this.cards.bluemoon.sober);
-              this.drunkCard = getRandomArrayItem(this.cards.bluemoon.drunk);
-            } else if(result < rarityBounds.rare) {
-              // pick a rare card
-              this.soberCard = getRandomArrayItem(this.cards.rare.sober);
-              this.drunkCard = getRandomArrayItem(this.cards.rare.drunk);
-            } else if(result < rarityBounds.uncommon) {
-              // pick an uncommon card
-              this.soberCard = getRandomArrayItem(this.cards.uncommon.sober);
-              this.drunkCard = getRandomArrayItem(this.cards.uncommon.drunk);
-            } else {
-              // pick a common card
-              this.soberCard = getRandomArrayItem(this.cards.common.sober);
-              this.drunkCard = getRandomArrayItem(this.cards.common.drunk);
-            }
-          }
-
           this.isOpen = true;
         },
 
         ready: function() {
-          // Fetch the card list from the db
+          // TODO Fetch the card list from the db
 
-          // Pluck out the card categories that don't match the user's config
+          // TODO Pluck out the card categories that don't match the user's config
 
-          // Store the resulting list in our module property
+          // TODO Store the resulting list in our module property
+
+
+
+          // TODO: Add card types. Actions / Lingerers(Spells). Spells have expirery times on them. They last for X rounds
+          // TODO and then die off. While a spell card is in play, only action cards can be drawn. (Drawing another spell while a spell is already
+          // TODO in play is likely to have conflicting results.)
+
+          // TODO: Add Spell and Curse card spots to sit at the top of the timer dashboard. They can be clicked to view.
+
+
           this.cards = {
+            basic: {
+              drunk: {
+                creator: 'Jake Turner',
+                created: '08/05/2016',
+                categories: ['CORE'],
+                rarity: 'Basic',
+                type: 'action',
+                title: 'Drink!',
+                rules: ['Take a drink.']
+              },
+              sober: {
+                creator: 'Jake Turner',
+                created: '08/05/2016',
+                categories: ['CORE'],
+                rarity: 'Basic',
+                type: 'action',
+                title: 'Drink!',
+                rules: ['Sobriety doesn\'t mean you die of thirst.',
+                        'Drink whatever it is you drink.']
+              }
+            },
             common: {
               drunk: [
                 {
                   creator: 'Jake Turner',
                   created: '08/05/2016',
                   categories: ['CORE'],
-                  title: 'Drink!',
-                  rule1: 'No excuses.',
-                  rule2: null,
-                  rule3: null
-                }
-              ],
-              sober: [
+                  rarity: 'Common',
+                  type: 'curse',
+                  title: 'Curse: The Witch\'s Curse',
+                  rules: ['You are the witch. Create a curse of your choosing.',
+                          'Curse Card: Stays in effect until a new one is revealed.',
+                          'If anyone breaks the curse they drink.']
+                },
                 {
                   creator: 'Jake Turner',
                   created: '08/05/2016',
                   categories: ['CORE'],
-                  title: 'common sober placeholder!',
-                  rule1: 'blah',
-                  rule2: null,
-                  rule3: null
+                  rarity: 'Common',
+                  type: 'spell',
+                  title: 'spell test',
+                  rules: ['dont keep this card']
                 }
+            ],
+              sober: [
+
               ]
             },
             uncommon: {
@@ -280,10 +288,11 @@
                   creator: 'Jake Turner',
                   created: '08/05/2016',
                   categories: ['CORE'],
+                  rarity: 'Uncommon',
+                  type: 'action',
                   title: 'Return to sender',
-                  rule1: 'Return the ball and cup to the person who last passed it to you this round. They drink.',
-                  rule2: 'If you were the only person to take a shot this round, you drink twice instead.',
-                  rule3: null
+                  rules: ['Return the ball and cup to the person who last passed it to you this round. They drink.',
+                          'If you were the only person to take a shot this round, you drink twice instead.']
                 }
               ],
               sober: [
@@ -291,10 +300,12 @@
                   creator: 'Jake Turner',
                   created: '08/05/2016',
                   categories: ['CORE'],
+                  rarity: 'Uncommon',
+                  type: 'action',
                   title: 'Fetch',
-                  rule1: 'Fetch a drink for everyone running on empty.',
-                  rule2: 'If no one is empty, fetch a drink for someone that asks.',
-                  rule3: 'If no one asks, fetch a stick from outside. That\'s a good boy!'
+                  rules: ['Fetch a drink for everyone running on empty.',
+                          'If no one is empty, fetch a drink for someone that asks.',
+                          'If no one asks, fetch a stick from outside. That\'s a good boy!']
                 }
               ]
             },
@@ -308,10 +319,12 @@
                   creator: 'Jake Turner',
                   created: '08/05/2016',
                   categories: ['CORE'],
-                  title: 'The witches\' potion',
-                  rule1: 'Get a cup. The three people to your left each pour a portion of their drink into it.',
-                  rule2: 'Top it up with your drink.',
-                  rule3: 'Now skull!'
+                  rarity: 'Bluemoon',
+                  type: 'action',
+                  title: 'The witch\'s potion',
+                  rules: ['Get a cup. The three people to your left each pour a portion of their drink into it.',
+                          'Top it up with your drink.',
+                          'Now skull!']
                 }
               ],
               sober: [
@@ -319,16 +332,58 @@
                   creator: 'Jake Turner',
                   created: '08/05/2016',
                   categories: ['CORE'],
+                  rarity: 'Bluemoon',
+                  type: 'action',
                   title: 'Now that\'s hot!',
-                  rule1: 'Find and eat a chilli.',
-                  rule2: 'If no chilli can be found, take a shot of hot sauce.',
-                  rule3: 'If no hot sauce exists, ___ do something..?'
+                  rules: []
                 }
               ]
             }
           }
         }
       });
+
+      function findRandomCard(cards, selectedCard, previousCard, isSpellActive) {
+        var result =  Math.random() * 100;
+        console.log('random rarity number: ' + result);
+
+        // Special check to see if we found basic card, and that the previous one wasn't.
+        if (result < _BOUNDS.basic && cards.basic[selectedCard] !== previousCard) {
+          return cards.basic[selectedCard];
+        }
+
+        // Helper function to tidy up code. Finds a random valid card of the array passed in.
+        function findCardInRarity(raritySet) {
+          return getRandomArrayItem(getValidCards(raritySet[selectedCard], previousCard, isSpellActive));
+        }
+
+        var foundCard;
+        if(result < _BOUNDS.common) {
+          foundCard = findCardInRarity(cards.common);
+        } else if(result < _BOUNDS.uncommon) {
+          foundCard = findCardInRarity(cards.uncommon);
+        } else if(result < _BOUNDS.rare) {
+          foundCard = findCardInRarity(cards.rare);
+        } else if(result < _BOUNDS.bluemoon) {
+          foundCard = findCardInRarity(cards.bluemoon);
+        } else {
+          // Should never happen, but if we find no card, just spit out the basic.
+          foundCard = cards.default[selectedCard];
+        }
+
+        return foundCard;
+      }
+
+      function getValidCards(cardOptions, previousCard, isSpellActive) {
+        var x = _.filter(cardOptions, function(card) {
+          // Is a spell card currently in play. If so, remove all other spells.
+          if (isSpellActive && card.type === 'spell') {
+            return false;
+          }
+          return card !== previousCard;
+        });
+        return x;
+      }
 
       function getRandomArrayItem(array) {
         var length = array ? array.length : 0;
@@ -339,9 +394,3 @@
   </script>
 </dom-module>
 
-<!--TODO: Create categories. 'Drunk / Sober'. Add a button at the top of the card to switch between drunk and sober punishment.-->
- <!--Sober punishemnets can be things like fetching drinks? Ice down the top or pants? If I add in 'adult' cards as an additional genre, these could-->
- <!--also fall under sober... Need to make sure whatever punishments are picked, they are quick. The game is supposed to be fast paced!-->
-
- <!--Will need to pass into the card module both a sober and a drunk data object. Maybe make a flipping animation for the card. ScaleX it, .5 linear.-->
- <!--In the js set a timeout function that waits .25s before switching the data model pointer-->

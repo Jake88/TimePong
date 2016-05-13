@@ -5,6 +5,49 @@
 <dom-module id="shared-styles">
   <template>
     <style>
+      :root {
+        --absolute-template: {
+          box-sizing: border-box;
+          position: absolute;
+          height: 100%;
+          width: 100%;
+        }
+
+        --relative-template: {
+          box-sizing: border-box;
+          position: relative;
+          height: 100%;
+          width: 100%;
+        }
+
+        --pseudo-element: {
+          content: "";
+          box-sizing: border-box;
+          position: absolute;
+          height: 0;
+          width: 0;
+        }
+
+        --soft-color-loop: {
+          animation: soft-color-loop 10s infinite;
+          -moz-animation: soft-color-loop 10s infinite; /* Firefox */
+          -webkit-animation: soft-color-loop 10s infinite; /* Safari and Chrome */
+        }
+
+        --highlight-color-loop: {
+          animation: highlight-color-loop 10s infinite;
+          -moz-animation: highlight-color-loop 10s infinite; /* Firefox */
+          -webkit-animation: highlight-color-loop 10s infinite; /* Safari and Chrome */
+        }
+
+        --border-highlight-color-loop: {
+          animation: border-highlight-color-loop 10s infinite;
+          -moz-animation: border-highlight-color-loop 10s infinite; /* Firefox */
+          -webkit-animation: border-highlight-color-loop 10s infinite; /* Safari and Chrome */
+        }
+
+      }
+
       .page-title {
         @apply(--paper-font-display2);
       }
@@ -28,47 +71,47 @@
 
       @-moz-keyframes soft-color-loop /* Firefox */
       {
-        0%   {background-color: #FFE3E3;}
-        33%  {background-color: #E3E4FF;}
-        66%   {background-color: #E5FFE3;}
-        100%   {background-color: #FFE3E3;}
+        0%   {background-color: var(--red-soft);}
+        33%  {background-color: var(--blue-soft);}
+        66%   {background-color: var(--green-soft);}
+        100%   {background-color: var(--red-soft);}
       }
       @-webkit-keyframes soft-color-loop /* Safari and Chrome */
       {
-        0%   {background-color: #FFE3E3;}
-        33%  {background-color: #E3E4FF;}
-        66%   {background-color: #E5FFE3;}
-        100%   {background-color: #FFE3E3;}
+        0%   {background-color: var(--red-soft);}
+        33%  {background-color: var(--blue-soft);}
+        66%   {background-color: var(--green-soft);}
+        100%   {background-color: var(--red-soft);}
       }
 
       @-moz-keyframes highlight-color-loop /* Firefox */
       {
-        0%   {color: #FF7878;}
-        33%  {color: #787AFF;}
-        66%   {color: #BCFF78;}
-        100%   {color: #FF7878;}
+        0%   {color: var(--red-highlight);}
+        33%  {color: var(--blue-highlight);}
+        66%   {color: var(--green-highlight);}
+        100%   {color: var(--red-highlight);}
       }
       @-webkit-keyframes highlight-color-loop /* Safari and Chrome */
       {
-        0%   {color: #FF7878;}
-        33%  {color: #787AFF;}
-        66%   {color: #BCFF78;}
-        100%   {color: #FF7878;}
+        0%   {color: var(--red-highlight);}
+        33%  {color: var(--blue-highlight);}
+        66%   {color: var(--green-highlight);}
+        100%   {color: var(--red-highlight);}
       }
 
       @-moz-keyframes border-highlight-color-loop /* Firefox */
       {
-        0%   {border-color: #FF7878;}
-        33%  {border-color: #787AFF;}
-        66%   {border-color: #BCFF78;}
-        100%   {border-color: #FF7878;}
+        0%   {border-color: var(--red-highlight);}
+        33%  {border-color: var(--blue-highlight);}
+        66%   {border-color: var(--green-highlight);}
+        100%   {border-color: var(--red-highlight);}
       }
       @-webkit-keyframes border-highlight-color-loop /* Safari and Chrome */
       {
-        0%   {border-color: #FF7878;}
-        33%  {border-color: #787AFF;}
-        66%   {border-color: #BCFF78;}
-        100%   {border-color: #FF7878;}
+        0%   {border-color: var(--red-highlight);}
+        33%  {border-color: var(--blue-highlight);}
+        66%   {border-color: var(--green-highlight);}
+        100%   {border-color: var(--red-highlight);}
       }
     </style>
   </template>

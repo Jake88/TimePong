@@ -154,6 +154,15 @@ gulp.task('fonts', function() {
     }));
 });
 
+// Copy sound files to dist
+gulp.task('sounds', function() {
+  return gulp.src(['app/sounds/**'])
+    .pipe(gulp.dest(dist('sounds')))
+    .pipe($.size({
+      title: 'sounds'
+    }));
+});
+
 // Scan your HTML for assets & optimize them
 gulp.task('html', function() {
   return optimizeHtmlTask(
@@ -241,6 +250,7 @@ gulp.task('serve', ['styles'], function() {
   gulp.watch(['app/styles/**/*.css'], ['styles', reload]);
   gulp.watch(['app/scripts/**/*.js'], reload);
   gulp.watch(['app/images/**/*'], reload);
+  gulp.watch(['app/sounds/**/*'], reload);
 });
 
 // Build and serve the output from the dist build
@@ -271,7 +281,7 @@ gulp.task('default', ['clean'], function(cb) {
   // Uncomment 'cache-config' if you are going to use service workers.
   runSequence(
     ['ensureFiles', 'copy', 'styles'],
-    ['images', 'fonts', 'html'],
+    ['images', 'sounds', 'fonts', 'html'],
     'vulcanize', // 'cache-config',
     cb);
 });

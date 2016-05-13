@@ -1,0 +1,112 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
+
+<dom-module id="time-pong-effect-card">
+  <template>
+    <style include="shared-styles">
+      :host {
+        --left-pos: 0;
+      }
+
+      :host .effect-wrapper {
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        top: 10px;
+        margin-top:20px;
+        left: 0;
+        z-index: 1;
+        transform-origin: top left;
+        transform: translate3d(var(--left-pos), 0, 0) scale(.2);
+        transition: all .9s ease-out;
+      }
+
+      :host.open .effect-wrapper {
+        animation: enter 1s ease-in;
+        z-index: 99;
+        transform:  translate3d(12%, 0 , 0) scale(1);
+        transition: all .9s ease-out;
+      }
+
+      :host time-pong-card-face-one {
+        @apply(--absolute-element);
+        border-radius: 10px;
+        box-shadow: 0 5px 25px #999;
+      }
+      :host.open time-pong-card-face-one {
+
+        box-shadow: 0 5px 5px #999;
+      }
+
+      :host h4 {
+        position: absolute;
+        width: 100%;
+        top: -100px;
+        color: var(--light-grey);
+        font-size: 65px;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 100;
+        margin: 0;
+      }
+      :host.active h4 {
+        color: var(--overlay-background-color);
+      }
+      :host.open h4 {
+        display: none;
+      }
+    </style>
+
+    <div class="effect-wrapper">
+      <h4>{{label}}</h4>
+      <time-pong-card-face-one
+        id="effectCard"
+        data="{{data}}"
+        is-effect="true">
+      </time-pong-card-face-one>
+    </div>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'time-pong-effect-card',
+
+        properties: {
+          data: {
+            type: Object,
+            observer: '_dataChanged'
+          },
+          label: String,
+          index: Number
+        },
+
+        attached: function() {
+          this.addEventListener('view-effect-card', this.toggleCard);
+
+          //GENERATE DYNAMIC LEFT POSITION BASED ON CARD INDEX
+          // How far left should this card sit?
+          var leftPos = 25 * this.index;
+          this.customStyle['--left-pos'] = leftPos + '%';
+          this.updateStyles(); // mandatory for the CSS variables shim
+        },
+
+        _dataChanged: function(newVal) {
+          if(newVal) {
+            this.toggleClass('active', true);
+          } else {
+            this.toggleClass('active', false);
+          }
+        },
+
+        toggleCard: function() {
+          this.toggleClass('open');
+        }
+
+      });
+    })();
+  </script>
+</dom-module>
