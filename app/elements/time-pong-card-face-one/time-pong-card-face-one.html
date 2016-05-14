@@ -131,23 +131,54 @@
         border-left: 2px solid var(--primary-text-color);
         border-right: 2px solid var(--primary-text-color);
         padding: 20px;
-        padding-bottom: 60px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content:center;
       }
 
       :host .card-body h2 {
         margin-top: 0;
+        margin-bottom: 10px;
         position:relative;
+      }
+
+      :host .card-body .rule-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        flex-grow: 1;
       }
 
       :host .card-body p {
         font-weight: 100;
+        margin: 5px 0;
+      }
+
+      :host .inner-footer {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        text-align: right;
+        padding-right: 20px;
+      }
+
+      :host .expired {
+        @apply(--absolute-template);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 50px;
+        color: var(--red-highlight);
+        transform: rotateZ(-35deg);
+        top: 0;
+        left: 0;
+        font-weight: bold;
       }
 
     </style>
+
     <div class$="wrapper {{data.rarity}}" on-tap="closeCard">
       <div class="card-banner header">
         Time Pong
@@ -156,14 +187,24 @@
       <div class="card-body">
         <div class="inner-border">
           <h2>{{data.title}}</h2>
-          <template is="dom-repeat" items="{{data.rules}}">
-            <p>{{item}}</p>
-          </template>
+          <div class="rule-wrapper">
+            <template is="dom-repeat" items="{{data.rules}}">
+              <p>{{item}}</p>
+            </template>
+          </div>
+          <p class="inner-footer" hidden$="{{hasNoDuration}}">
+            {{data.duration}} rounds
+          </p>
+
         </div>
       </div>
 
       <div class="card-banner footer">
         <span>{{data.rarity}}</span>
+      </div>
+
+      <div class="expired" hidden$="{{notExpired}}">
+        Expired
       </div>
     </div>
   </template>
@@ -176,16 +217,41 @@
         is: 'time-pong-card-face-one',
 
         properties: {
-          data: Object,
-          isEffect: Boolean
+          data: {
+            type: Object,
+            notify: true,
+            observer: '_dataCheck'
+          } ,
+          isEffect: Boolean,
+          hasNoDuration: {
+            type: Boolean,
+            value: true
+          },
+          notExpired: {
+            type: Boolean,
+            value: true
+          }
         },
 
         closeCard: function() {
           if (this.isEffect) {
-            this.fire('view-effect-card', this.data);
+            if (this.notExpired) {
+              this.fire('view-effect-card', this.data);
+            } else {
+              this.fire('close-card');
+            }
           } else {
-            this.fire('iron-signal', {name: 'close-card'});
+            this.fire('close-card');
           }
+        },
+
+        _dataCheck: function(newVal) {
+          this.notExpired = true;
+          this.hasNoDuration = !newVal.duration
+        },
+
+        expire: function() {
+          this.notExpired = false;
         }
       });
     })();
