@@ -118,13 +118,15 @@
         justify-content: center;
         padding: 10px;
         position: relative;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
       }
 
-      :host .card-body .inner-border .answers .answer.drunk paper-ripple{
-        color: var(--green-highlight);
+      :host .card-body .inner-border .answers .answer.drunk:active {
+        background-color: var(--green-soft);
       }
-      :host .card-body .inner-border .answers .answer.sober paper-ripple{
-        color: var(--blue-highlight);
+      :host .card-body .inner-border .answers .answer.sober:active {
+        background-color: var(--blue-soft);
       }
       :host .card-body .inner-border .answers .answer iron-icon {
         --iron-icon-height: 50px;
@@ -148,12 +150,10 @@
           <h2>Are you drinking?</h2>
           <div class="answers">
             <div id="drunk-button" class="answer drunk" on-tap="selectCard">
-              <paper-ripple></paper-ripple>
               <iron-icon icon="maps:local-bar"></iron-icon>
               <span>Yes</span>
             </div>
             <div id="sober-button" class="answer sober" on-tap="selectCard">
-              <paper-ripple></paper-ripple>
               <iron-icon icon="maps:local-drink"></iron-icon>
               <span>No</span>
             </div>

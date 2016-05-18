@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17f14ab3-2ea2-493b-aab9-7fd7e6f5b6b9" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/elements/time-pong-card-face-two/time-pong-card-face-two.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/elements/app-timer/app-timer.html" afterPath="$PROJECT_DIR$/app/elements/app-timer/app-timer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/elements/elements.html" afterPath="$PROJECT_DIR$/app/elements/elements.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/elements/page-time-pong/page-time-pong.html" afterPath="$PROJECT_DIR$/app/elements/page-time-pong/page-time-pong.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/elements/time-pong-card-face-one/time-pong-card-face-one.html" afterPath="$PROJECT_DIR$/app/elements/time-pong-card-face-one/time-pong-card-face-one.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/shared-styles.html" afterPath="$PROJECT_DIR$/app/styles/shared-styles.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/elements/time-pong-card-back-one/time-pong-card-back-one.html" afterPath="$PROJECT_DIR$/app/elements/time-pong-card-back-one/time-pong-card-back-one.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/elements/time-pong-deck/time-pong-deck.html" afterPath="$PROJECT_DIR$/app/elements/time-pong-deck/time-pong-deck.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/elements/time-pong-effect-card/time-pong-effect-card.html" afterPath="$PROJECT_DIR$/app/elements/time-pong-effect-card/time-pong-effect-card.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -32,11 +35,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="time-pong-deck.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="time-pong-deck.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/elements/time-pong-deck/time-pong-deck.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.0392156" vertical-offset="3319" max-vertical-offset="11280">
-              <caret line="235" column="0" selection-start-line="235" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
+            <state vertical-scroll-proportion="10.361991" vertical-offset="0" max-vertical-offset="12135">
+              <caret line="458" column="37" selection-start-line="458" selection-start-column="37" selection-end-line="458" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -45,18 +48,18 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.375" vertical-offset="1410" max-vertical-offset="2190">
-              <caret line="117" column="48" selection-start-line="117" selection-start-column="48" selection-end-line="117" selection-end-column="48" />
+            <state vertical-scroll-proportion="-18.125" vertical-offset="1140" max-vertical-offset="2190">
+              <caret line="105" column="41" selection-start-line="105" selection-start-column="8" selection-end-line="105" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="elements.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/elements/elements.html">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/test/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.625" vertical-offset="180" max-vertical-offset="870">
-              <caret line="45" column="54" selection-start-line="45" selection-start-column="54" selection-end-line="45" selection-end-column="54" />
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="645">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -65,8 +68,28 @@
       <file leaf-file-name="time-pong-card-face-one.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/elements/time-pong-card-face-one/time-pong-card-face-one.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.3333335" vertical-offset="1984" max-vertical-offset="3975">
-              <caret line="147" column="26" selection-start-line="147" selection-start-column="24" selection-end-line="147" selection-end-column="26" />
+            <state vertical-scroll-proportion="-45.625" vertical-offset="2610" max-vertical-offset="3975">
+              <caret line="247" column="38" selection-start-line="247" selection-start-column="38" selection-end-line="247" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app-timer.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/elements/app-timer/app-timer.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="2.0588236" vertical-offset="2100" max-vertical-offset="2775">
+              <caret line="133" column="36" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="time-pong-card-face-two.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/elements/time-pong-card-face-two/time-pong-card-face-two.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-17.5" vertical-offset="0" max-vertical-offset="1140">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -75,38 +98,18 @@
       <file leaf-file-name="time-pong-card-back-one.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/elements/time-pong-card-back-one/time-pong-card-back-one.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-82.5" vertical-offset="570" max-vertical-offset="2955">
-              <caret line="170" column="17" selection-start-line="170" selection-start-column="17" selection-end-line="170" selection-end-column="17" />
+            <state vertical-scroll-proportion="-7.5686274" vertical-offset="1429" max-vertical-offset="2955">
+              <caret line="121" column="54" selection-start-line="121" selection-start-column="54" selection-end-line="121" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app-timer.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/elements/app-timer/app-timer.html">
+      <file leaf-file-name="shared-styles.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/styles/shared-styles.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5652174" vertical-offset="1695" max-vertical-offset="2670">
-              <caret line="139" column="56" selection-start-line="139" selection-start-column="56" selection-end-line="139" selection-end-column="56" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="page-time-pong.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/elements/page-time-pong/page-time-pong.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.125" vertical-offset="75" max-vertical-offset="960">
-              <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/styles/main.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
-              <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+            <state vertical-scroll-proportion="-29.375" vertical-offset="0" max-vertical-offset="2070">
+              <caret line="47" column="48" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -115,18 +118,18 @@
       <file leaf-file-name="time-pong-effect-card.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/elements/time-pong-effect-card/time-pong-effect-card.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.3333335" vertical-offset="619" max-vertical-offset="2670">
-              <caret line="56" column="10" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="10" />
+            <state vertical-scroll-proportion="-7.5" vertical-offset="1350" max-vertical-offset="2835">
+              <caret line="102" column="3" selection-start-line="102" selection-start-column="3" selection-end-line="102" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app-theme.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/styles/app-theme.html">
+      <file leaf-file-name="page-time-pong.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/elements/page-time-pong/page-time-pong.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.375" vertical-offset="105" max-vertical-offset="4020">
-              <caret line="30" column="30" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="30" />
+            <state vertical-scroll-proportion="-5.625" vertical-offset="120" max-vertical-offset="960">
+              <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -148,15 +151,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/elements/time-pong-card-back-one/time-pong-card-back-one.html" />
+        <option value="$PROJECT_DIR$/app/styles/main.css" />
+        <option value="$PROJECT_DIR$/app/elements/time-pong-card-face-one/time-pong-card-face-one.html" />
         <option value="$PROJECT_DIR$/app/index.html" />
         <option value="$PROJECT_DIR$/app/elements/elements.html" />
-        <option value="$PROJECT_DIR$/app/styles/main.css" />
+        <option value="$PROJECT_DIR$/app/elements/time-pong-card-face-two/time-pong-card-face-two.html" />
         <option value="$PROJECT_DIR$/app/elements/page-time-pong/page-time-pong.html" />
         <option value="$PROJECT_DIR$/app/elements/time-pong-effect-card/time-pong-effect-card.html" />
-        <option value="$PROJECT_DIR$/app/elements/time-pong-card-face-one/time-pong-card-face-one.html" />
-        <option value="$PROJECT_DIR$/app/elements/time-pong-deck/time-pong-deck.html" />
+        <option value="$PROJECT_DIR$/app/elements/time-pong-card-back-one/time-pong-card-back-one.html" />
+        <option value="$PROJECT_DIR$/app/styles/shared-styles.html" />
         <option value="$PROJECT_DIR$/app/elements/app-timer/app-timer.html" />
+        <option value="$PROJECT_DIR$/app/elements/time-pong-deck/time-pong-deck.html" />
       </list>
     </option>
   </component>
@@ -260,6 +265,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="polymer-starter-kit-1.3.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="polymer-starter-kit-1.3.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="elements" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -305,6 +328,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="time-pong-deck" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="polymer-starter-kit-1.3.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="polymer-starter-kit-1.3.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="elements" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="time-pong-card-face-two" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -416,6 +461,12 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editorconfig.notification" value="Applied .editorconfig settings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/elements" />
+      <recent name="$PROJECT_DIR$/app/scripts" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
@@ -686,15 +737,15 @@
       <option name="number" value="Default" />
       <updated>1462923471538</updated>
       <workItem from="1462923471569" duration="18562000" />
-      <workItem from="1463049390990" duration="38370000" />
+      <workItem from="1463049390990" duration="73037000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56932000" />
+    <option name="totallyTimeSpent" value="91599000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="834" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="834" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -830,14 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/styles/app-theme.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.375" vertical-offset="105" max-vertical-offset="4020">
-          <caret line="30" column="30" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/styles/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
@@ -846,66 +889,140 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/elements/time-pong-card-back-one/time-pong-card-back-one.html">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-82.5" vertical-offset="570" max-vertical-offset="2955">
-          <caret line="170" column="17" selection-start-line="170" selection-start-column="17" selection-end-line="170" selection-end-column="17" />
+        <state vertical-scroll-proportion="-18.75" vertical-offset="0" max-vertical-offset="675">
+          <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.925926" vertical-offset="1766" max-vertical-offset="4860">
+          <caret line="159" column="25" selection-start-line="159" selection-start-column="25" selection-end-line="159" selection-end-column="25" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/soundmanager2-jsmin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1770">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.bowerrc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bower.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="330">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/elements/elements.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.625" vertical-offset="180" max-vertical-offset="870">
-          <caret line="45" column="54" selection-start-line="45" selection-start-column="54" selection-end-line="45" selection-end-column="54" />
+        <state vertical-scroll-proportion="-21.625" vertical-offset="141" max-vertical-offset="885">
+          <caret line="44" column="61" selection-start-line="44" selection-start-column="61" selection-end-line="44" selection-end-column="61" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/index.html">
+    <entry file="file://$PROJECT_DIR$/app/styles/app-theme.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.375" vertical-offset="1410" max-vertical-offset="2190">
-          <caret line="117" column="48" selection-start-line="117" selection-start-column="48" selection-end-line="117" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.625" vertical-offset="465" max-vertical-offset="4020">
+          <caret line="30" column="30" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/elements/time-pong-effect-card/time-pong-effect-card.html">
+    <entry file="file://$PROJECT_DIR$/app/elements/time-pong-card-face-two/time-pong-card-face-two.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.3333335" vertical-offset="619" max-vertical-offset="2670">
-          <caret line="56" column="10" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="10" />
+        <state vertical-scroll-proportion="-17.5" vertical-offset="0" max-vertical-offset="1140">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/elements/time-pong-deck/time-pong-deck.html">
+    <entry file="file://$PROJECT_DIR$/app/elements/time-pong-card-back-one/time-pong-card-back-one.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.0392156" vertical-offset="3319" max-vertical-offset="11280">
-          <caret line="235" column="0" selection-start-line="235" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
+        <state vertical-scroll-proportion="-7.5686274" vertical-offset="1429" max-vertical-offset="2955">
+          <caret line="121" column="54" selection-start-line="121" selection-start-column="54" selection-end-line="121" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/elements/time-pong-card-face-one/time-pong-card-face-one.html">
+    <entry file="file://$PROJECT_DIR$/app/styles/shared-styles.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.3333335" vertical-offset="1984" max-vertical-offset="3975">
-          <caret line="147" column="26" selection-start-line="147" selection-start-column="24" selection-end-line="147" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/elements/page-time-pong/page-time-pong.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.125" vertical-offset="75" max-vertical-offset="960">
-          <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+        <state vertical-scroll-proportion="-29.375" vertical-offset="0" max-vertical-offset="2070">
+          <caret line="47" column="48" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/elements/app-timer/app-timer.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5652174" vertical-offset="1695" max-vertical-offset="2670">
-          <caret line="139" column="56" selection-start-line="139" selection-start-column="56" selection-end-line="139" selection-end-column="56" />
+        <state vertical-scroll-proportion="2.0588236" vertical-offset="2100" max-vertical-offset="2775">
+          <caret line="133" column="36" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/test/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.125" vertical-offset="1140" max-vertical-offset="2190">
+          <caret line="105" column="41" selection-start-line="105" selection-start-column="8" selection-end-line="105" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/elements/time-pong-card-face-one/time-pong-card-face-one.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-45.625" vertical-offset="2610" max-vertical-offset="3975">
+          <caret line="247" column="38" selection-start-line="247" selection-start-column="38" selection-end-line="247" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/elements/page-time-pong/page-time-pong.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.625" vertical-offset="120" max-vertical-offset="960">
+          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/elements/time-pong-effect-card/time-pong-effect-card.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.5" vertical-offset="1350" max-vertical-offset="2835">
+          <caret line="102" column="3" selection-start-line="102" selection-start-column="3" selection-end-line="102" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/elements/time-pong-deck/time-pong-deck.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="10.361991" vertical-offset="0" max-vertical-offset="12135">
+          <caret line="458" column="37" selection-start-line="458" selection-start-column="37" selection-end-line="458" selection-end-column="37" />
           <folding />
         </state>
       </provider>

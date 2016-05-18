@@ -11,23 +11,19 @@
 
       /* entire container, keeps perspective */
       :host .flip-container {
-        position: absolute;
-        width: 80%;
-        height: 80%;
-        left: 10%;
-        bottom: 5%;
+        @apply(--card-wrapper);
+        top: var(--top-pos-closed);
+        margin-top: -85px;
         border-radius: 10px;
-        margin-bottom: -13px;
         perspective: 1000px;
-        transform: rotateZ(-1deg) translateY(89%);
-        transition: all .9s ease-in-out;
+        transform: rotateZ(-1deg) translate3d(0, 0, 0);
+        transition: transform .9s linear;
         z-index: 2;
       }
 
       :host.open .flip-container {
-        transform: rotateZ(0deg) translateY(-10%);
-        transition: all .9s ease-in-out;
-        z-index: 99;
+        transform: rotateZ(0deg) translate3d(0, var(--top-pos-opened), 0);
+        z-index: 4;
       }
 
       :host .flip-container .card-main {
@@ -36,11 +32,11 @@
         bottom: 0;
         border-radius: 10px;
         border: 1px solid var(--primary-text-color);
-        box-shadow: 0px 0px 3px var(--primary-text-color);
+        box-shadow: 0 0 3px var(--primary-text-color);
       }
 
       :host.open .flip-container .card-main {
-        box-shadow: 0px 0px 13px var(--primary-text-color);
+        box-shadow: 0 0 13px var(--primary-text-color);
       }
 
       :host.open .flip-container.sober .flipper,
@@ -49,7 +45,8 @@
       }
 
       .flipper {
-        transition: .8s;
+        transition: .8s linear;
+        -webkit-transform-style: preserve-3d;
         transform-style: preserve-3d;
         position: relative;
       }
@@ -65,46 +62,46 @@
       /* face pane, placed above back */
       .back {
         z-index: 100;
-        transform: rotateY(0deg);
+        transform: translate3d(0, 0, 0) rotateY(0deg);
       }
 
       /* back, initially hidden pane */
       .face {
-        transform: rotateY(180deg);
+        transform: translate3d(0, 0, 0) rotateY(180deg);
       }
 
       :host .card-stack {
-        height: 15%;
-        width: 80%;
-        left: 10%;
+        height: 85px;
+        width: calc(100% - 60px);
+        left: 30px;
         bottom: 0;
         border-radius: 10px 10px 0 0;
         border: 1px solid var(--primary-text-color);
         border-bottom: 0;
         position: absolute;
-        box-shadow: 0px 0px 2px var(--primary-text-color);
+        box-shadow: 0 0 2px var(--primary-text-color);
         animation: soft-color-loop 10s infinite;
         -moz-animation: soft-color-loop 10s infinite; /* Firefox */
         -webkit-animation: soft-color-loop 10s infinite; /* Safari and Chrome */
       }
 
       :host .card-stack.card-1 {
-        transform: rotateZ(-2deg) translate(-3px);
+        transform: rotateZ(-2deg) translate(0, 3px);
       }
 
       :host .card-stack.card-2 {
         margin-bottom: -4px;
-        transform: rotateZ(1deg) translate(3px);
+        transform: rotateZ(1deg) translate(0, 5px);
       }
 
       :host .card-stack.card-3 {
         margin-bottom: -7px;
-        transform: rotateZ(-1deg) translate(10px);
+        transform: rotateZ(-1deg) translate(0, 8px);
       }
 
       :host .card-stack.card-4 {
         margin-bottom: -11px;
-        transform: rotateZ(-2deg) translate(-5px);
+        transform: rotateZ(-2deg) translate(0, 10px);
       }
 
       :host .change-cat-button {
@@ -148,7 +145,7 @@
     <div class="card-stack card-3"></div>
     <div class="card-stack card-4"></div>
 
-    <div class$="flip-container {{selectedCard}}">
+    <div id="flipContainer" class$="flip-container {{selectedCard}}">
       <div class="card-main flipper">
         <time-pong-card-back-one
           id="cardBack"
@@ -201,6 +198,13 @@
             type: String,
             notify: true
           }
+        },
+
+        attached: function() {
+          // Generate a variable to hold the card height in px.
+          this.customStyle['--top-pos-closed'] = this.$.flipContainer.offsetHeight + 'px';
+          this.customStyle['--top-pos-opened'] = -this.$.flipContainer.offsetHeight + 45 + 'px';
+          this.updateStyles(); // mandatory for the CSS variables shim
         },
 
         ready: function() {
@@ -292,7 +296,7 @@
       }
 
       function tempCardsArray() {
-        return {
+        return {  // Change model to be a flat array. Use lodash when the user is selecting cards to filter out 'invalid' cards.
           basic: {
             drunk: {
               creator: 'Jake Turner',
@@ -315,11 +319,12 @@
             }
           },
           common: {
-            drunk: [
+            drunk: [  // Possibly convert drunk /sober to be properties on each card. 'isDrunk: Boolean', 'isSober: Boolean'
               {
                 creator: 'Jake Turner',
                 created: '08/05/2016',
-                categories: ['CORE'],
+                categories: ['CORE'], // Rename 'category' for deck.
+
                 rarity: 'Common',
                 type: 'action',
                 title: 'Sharing is caring',
@@ -440,8 +445,19 @@
                 rules: ['Put your finger on your nose.',
                         'Stare everyone down until they follow suite.',
                         'The last person to do so, drinks.']
+              },
+              {
+                creator: 'Jake Turner',
+                created: '08/05/2016',
+                categories: ['CORE'],
+                rarity: 'Common',
+                type: 'action',
+                title: 'Drop and gimme... one',
+                rules: ['Drop down and perform one push up.',
+                        'If you can\'t, perform one sit up.',
+                        'If you can\'t, stand up',
+                        'If you can\'t, you should seek help.']
               }
-
             ]
           },
           uncommon: {
@@ -554,6 +570,17 @@
                 rules: ['Pick a person. Give them a word starting with \'B\'.',
                         'If they can’t spell it, you’re a ‘B’ully, and you both drink.',
                         'If they can spell it... you have to drink.']
+              },
+              {
+                creator: 'Jake Turner',
+                created: '08/05/2016',
+                categories: ['CORE'],
+                rarity: 'Uncommon',
+                type: 'action',
+                title: 'A hole in one',
+                rules: ['Place the cup flat on it\'s side on the ground.',
+                        'Take a step back and drop the ball. You have one shot. Putt the ball in using your foot.',
+                        'If you succeed choose someone to skull, if you fail, take a drink.']
               }
             ],
             sober: [
@@ -561,7 +588,7 @@
                 creator: 'Jake Turner',
                 created: '08/05/2016',
                 categories: ['CORE'],
-                rarity: 'Common',
+                rarity: 'Uncommon',
                 type: 'action',
                 title: 'Fetch',
                 rules: ['Fetch a drink for everyone running on empty.',
@@ -571,8 +598,28 @@
               {
                 creator: 'Jake Turner',
                 created: '08/05/2016',
+                categories: ['CORE'],
+                rarity: 'Uncommon',
+                type: 'action',
+                title: 'Twerk it like Miley',
+                rules: ['Stand up.',
+                        'Face away from the group.',
+                        'Make Miley proud.']
+              },
+              {
+                creator: 'Jake Turner',
+                created: '08/05/2016',
+                categories: ['CORE'],
+                rarity: 'Uncommon',
+                type: 'action',
+                title: 'You\'re a Belieber',
+                rules: ['Sing the chorus of any Justin Bieber song.']
+              },
+              {
+                creator: 'Jake Turner',
+                created: '08/05/2016',
                 categories: ['W&W'],
-                rarity: 'Common',
+                rarity: 'Uncommon',
                 type: 'spell',
                 duration: 3,
                 title: 'Spell: Three\'s a crowd',
@@ -586,7 +633,7 @@
                 creator: 'Jake Turner',
                 created: '08/05/2016',
                 categories: ['W&W'],
-                rarity: 'Common',
+                rarity: 'Uncommon',
                 type: 'spell',
                 duration: 3,
                 title: 'Spell: Multiball',
@@ -599,7 +646,7 @@
                 creator: 'Jake Turner',
                 created: '08/05/2016',
                 categories: ['W&W'],
-                rarity: 'Common',
+                rarity: 'Uncommon',
                 type: 'spell',
                 duration: 3,
                 title: 'Spell: Double or nothing',
@@ -666,6 +713,16 @@
                 rules: ['Place the cup in the middle of everyone. Take your shot.',
                         'If you score, you must be Kobe Bryant and everybody drinks in your name.',
                         'If you miss, skip the next round while you practice your free throw.']
+              },
+              {
+                creator: 'Jake Turner',
+                created: '08/05/2016',
+                categories: ['CORE'],
+                rarity: 'Rare',
+                type: 'action',
+                title: 'Kiss the closest frog',
+                rules: ['Kiss the person next to you on the cheek.',
+                        'If they turn into a prince, you must be a princess!']
               }
             ]
           },

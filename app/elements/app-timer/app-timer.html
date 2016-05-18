@@ -31,14 +31,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-color: #fff;
         border: 15px solid var(--green-highlight);
         color: var(--green-highlight);
-        transition: all .3s linear;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
       }
+      :host paper-button:active {
+        background-color: var(--green-soft);
+      }
 
-      :host paper-button.true {
+      :host.running paper-button {
         border-color: var(--red-highlight);
         color: var(--red-highlight);
-        transition: all .5s linear;
+      }
+      :host.running paper-button:active {
+        background-color: var(--red-soft);
       }
 
       :host paper-button iron-icon {
@@ -70,26 +74,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         100% {-webkit-transform: rotate(360deg);}
       }
 
-      :host paper-button .timer {
+      :host paper-button .timer-text {
         @apply(--paper-font-display2);
         position: relative;
-        top: 100px;
+        top: 85px;
         color: #ccc;
         opacity: 1;
         transition: opacity .5s ease-in;
       }
 
-      :host paper-button .timer.true {
+      :host.running paper-button .timer-text {
         opacity: 0;
         transition: all 0s ease-out;
       }
     </style>
-    <paper-button raised class$="{{isRunning}}" on-tap="timerPress">
+    <paper-button noink on-tap="timerPress">
       <iron-icon hidden$="{{isRunning}}" icon="av:play-arrow"></iron-icon>
       <iron-icon hidden$="{{!isRunning}}" icon="icons:remove" class="clockHand slow"></iron-icon>
       <iron-icon hidden$="{{!isRunning}}" icon="icons:remove" class="clockHand fast"></iron-icon>
 
-      <p class$="timer {{isRunning}}">{{toFixed(timer)}}</p>
+      <p class="timer-text">{{toFixed(timer)}}</p>
     </paper-button>
   </template>
 
@@ -127,8 +131,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           } else {
             // Starting the timer;
             // These should be stored in a config where the user can make changes to them.
-            var maxMilliseconds = 40000;
-            var minMilliseconds = 2000;
+            var maxMilliseconds = 60; //40000;
+            var minMilliseconds = 50; //2000;
 
             // Get the random amount of time our timer will go for
             var millisecondsToAdd = Math.random() * (maxMilliseconds - minMilliseconds) + minMilliseconds;
@@ -144,6 +148,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.timeinterval = setInterval(interval.bind(this), 37);
 
             this.isRunning = true;
+            this.toggleClass('running', true);
           }
 
           function interval() {
@@ -160,6 +165,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           function stopTimer() {
             clearInterval(this.timeinterval);
             this.isRunning = false;
+            this.toggleClass('running', false);
             this.notifyPath('this.timer');
           }
 
