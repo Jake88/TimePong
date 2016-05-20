@@ -217,8 +217,7 @@
           }
         },
 
-        attached: function() {
-          // Generate a variable to hold the card height in px.
+        reRender: function() {
           this.customStyle['--top-pos-closed'] = this.$.flipContainer.offsetHeight + 'px';
           this.customStyle['--top-pos-opened'] = -this.$.flipContainer.offsetHeight + 45 + 'px';
           this.updateStyles(); // mandatory for the CSS variables shim

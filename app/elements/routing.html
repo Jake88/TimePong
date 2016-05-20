@@ -22,62 +22,58 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     // Middleware
-    function scrollToTop(ctx, next) {
-      app.scrollPageToTop();
-      next();
-    }
-
     function closeDrawer(ctx, next) {
       app.closeDrawer();
       next();
     }
 
     function setFocus(selected){
-//      document.querySelector('section[data-route="' + selected + '"] .page-title').focus();
+      // Calls focus on the selected element. The focus function should be set up
+      // to 'reset' or 'initilise' the page we're switching too.
+      document.querySelector('iron-pages *[data-route="' + selected + '"]').focus();
     }
 
     // Routes
-    page('*', scrollToTop, closeDrawer, function(ctx, next) {
+    page('*', closeDrawer, function(ctx, next) {
       next();
     });
 
     page('/', function() {
       app.route = 'home';
+      app.pageTitle = 'Home';
       setFocus(app.route);
     });
 
     page(app.baseUrl, function() {
       app.route = 'home';
+      app.pageTitle = 'Home';
       setFocus(app.route);
     });
 
-    page('/users', function() {
-      app.route = 'users';
+    page('/time-pong', function() {
+      app.route = 'time-pong';
+      app.pageTitle = 'Time Pong';
       setFocus(app.route);
     });
 
-    page('/users/:name', function(data) {
-      app.route = 'user-info';
-      app.params = data.params;
+    page('/card-list', function() {
+      app.route = 'card-list';
+      app.pageTitle = 'Time Pong - Card List';
       setFocus(app.route);
     });
 
-    page('/contact', function() {
-      app.route = 'contact';
-      setFocus(app.route);
-    });
-
-    page('/books', function() {
-      app.route = 'books';
-      setFocus(app.route);
-    });
+//    page('/users/:name', function(data) {
+//      app.route = 'user-info';
+//      app.params = data.params;
+//      setFocus(app.route);
+//    });
 
     // 404
-    page('*', function() {
-      app.$.toast.text = 'Can\'t find: ' + window.location.href  + '. Redirected you to Home Page';
-      app.$.toast.show();
-      page.redirect(app.baseUrl);
-    });
+//    page('*', function() {
+//      app.$.toast.text = 'Can\'t find: ' + window.location.href  + '. Redirected you to Home Page';
+//      app.$.toast.show();
+//      page.redirect(app.baseUrl);
+//    });
 
     // add #! before urls
     page({

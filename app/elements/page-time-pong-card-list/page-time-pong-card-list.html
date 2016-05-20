@@ -1,0 +1,44 @@
+<!-- Add your elements here -->
+<link rel="import" href="../../styles/app-theme.html">
+<link rel="import" href="../../styles/shared-styles.html">
+<link rel="import" href="../time-pong-card-utility/time-pong-card-utility.html">
+
+
+<dom-module id="page-time-pong-card-list">
+  <template>
+    <style include="shared-styles">
+      :host div.content {
+        height: calc(100% - 56px);
+        width: 100%;
+        overflow-y: scroll;
+      }
+    </style>
+
+    <div class="content">
+      <time-pong-card-utility></time-pong-card-utility>
+      stuff
+    </div>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'page-time-pong-card-list',
+
+        properties: {
+          cardList: {
+            type: Object,
+            notify: true,
+            value: function() { return {};}
+          }
+        },
+
+        ready: function() {
+        }
+
+      });
+    })();
+  </script>
+</dom-module>

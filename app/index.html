@@ -1,14 +1,4 @@
 <!doctype html>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <html lang="en">
 
 <head>
@@ -70,9 +60,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <!-- Drawer Scroll Header Panel -->
       <paper-header-panel drawer fixed>
 
-        <!-- Drawer Toolbar -->
+        <!-- Drawer top bar -->
         <paper-toolbar id="drawerToolbar">
-          <span class="menu-name">Menu</span>
+          <span class="menu-name">Drinking Games</span>
         </paper-toolbar>
 
         <!-- Drawer Content -->
@@ -80,6 +70,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <a data-route="home" href="{{baseUrl}}">
             <iron-icon icon="home"></iron-icon>
             <span>Home</span>
+          </a>
+          <a data-route="time-pong" href="{{baseUrl}}time-pong">
+            <iron-icon icon="maps:local-bar"></iron-icon>
+            <span>Time Pong</span>
+          </a>
+          <a data-route="card-list" href="{{baseUrl}}card-list">
+            <iron-icon icon="view-carousel"></iron-icon>
+            <span>Card List</span>
           </a>
         </paper-menu>
       </paper-header-panel>
@@ -89,27 +87,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <!-- Main Toolbar -->
         <paper-toolbar id="mainToolbar">
           <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-
-          <span class="space"></span>
-
-          <!-- Toolbar icons -->
-          <paper-icon-button icon="refresh"></paper-icon-button>
-          <paper-icon-button icon="search"></paper-icon-button>
-
           <!-- Application name -->
           <div class="middle middle-container">
-            <div class="app-name">Time Pong</div>
+            <div class="app-name">[[pageTitle]]</div>
           </div>
+
         </paper-toolbar>
 
         <!-- Main Content -->
-        <page-time-pong></page-time-pong>
+        <iron-pages attr-for-selected="data-route" selected="{{route}}">
+          <div data-route="home"></div>
+          <page-time-pong data-route="time-pong"></page-time-pong>
+          <page-time-pong-card-list data-route="card-list"></page-time-pong-card-list>
+        </iron-pages>
+
       </div>
     </paper-drawer-panel>
-
-    <paper-toast id="toast">
-      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
-    </paper-toast>
 
     <!-- Uncomment next block to enable Service Worker support (1/2) -->
     <!--

@@ -15,27 +15,24 @@
         width: 100%;
         margin: auto;
         max-width: 400px;
-        -webkit-transition: all .5s linear;
-        transition: all .5s linear;
         position: relative;
       }
     </style>
 
-    <time-pong-card-utility></time-pong-card-utility>
 
     <div class="content">
-      <section data-route="home">
-        <div class="effects-container">
-          <time-pong-effect-card id="spellEffect" data="{{currentEffects.spell}}" label="Spell" index="0"></time-pong-effect-card>
-          <time-pong-effect-card id="curseEffect" data="{{currentEffects.curse}}" label="Curse" index="1"></time-pong-effect-card>
-        </div>
+      <time-pong-card-utility></time-pong-card-utility>
 
-        <app-timer is-running="{{isTimerRunning}}"></app-timer>
+      <div class="effects-container">
+        <time-pong-effect-card id="spellEffect" data="{{currentEffects.spell}}" label="Spell" index="0"></time-pong-effect-card>
+        <time-pong-effect-card id="curseEffect" data="{{currentEffects.curse}}" label="Curse" index="1"></time-pong-effect-card>
+      </div>
 
-        <time-pong-deck
-          current-card="{{currentCard}}">
-        </time-pong-deck>
-      </section>
+      <app-timer is-running="{{isTimerRunning}}"></app-timer>
+
+      <time-pong-deck
+        current-card="{{currentCard}}">
+      </time-pong-deck>
     </div>
   </template>
 
@@ -62,6 +59,11 @@
           this.addEventListener('timer-finished', this.timerFinished);
           this.addEventListener('category-selected', this.chooseCard);
           this.addEventListener('round-end', this.roundEnd);
+        },
+
+        focus: function() {
+          this.currentEffects = {};
+          this.$$('time-pong-deck').reRender();
         },
 
         timerFinished: function() {
