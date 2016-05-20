@@ -9,16 +9,7 @@
         border-radius: 10px;
         font-family: 'Roboto', 'Noto', sans-serif;
         -webkit-font-smoothing: antialiased;
-        background-color: var(--light-grey);
-      }
-      :host .wrapper.Bluemoon {
-        background-color: var(--blue-soft);
-      }
-      :host .wrapper.Rare {
-        background-color: var(--red-soft);
-      }
-      :host .wrapper.Uncommon {
-        background-color: var(--green-soft);
+        background-color: var(--card-soft-color);
       }
 
       :host .wrapper .card-banner {
@@ -28,20 +19,8 @@
         width: 85%;
         background-color: var(--primary-text-color);
         position: relative;
-        color: var(--light-grey);
-        border-color: var(--overlay-background-color);
-      }
-      :host .wrapper.Bluemoon .card-banner {
-        color: var(--blue-soft);
-        border-color: var(--blue-highlight);
-      }
-      :host .wrapper.Rare .card-banner {
-        color: var(--red-soft);
-        border-color: var(--red-highlight);
-      }
-      :host .wrapper.Uncommon .card-banner {
-        color: var(--green-soft);
-        border-color: var(--green-highlight);
+        color: var(--card-soft-color);
+        border-color: var(--card-highlight-color);
       }
 
       :host .wrapper .card-banner:after {
@@ -50,16 +29,7 @@
         height: 40px;
         transform: skewY(45deg);
         background-color: var(--primary-text-color);
-        border-color: var(--overlay-background-color);
-      }
-      :host .wrapper.Bluemoon .card-banner:after {
-        border-color: var(--blue-highlight);
-      }
-      :host .wrapper.Rare .card-banner:after {
-        border-color: var(--red-highlight);
-      }
-      :host .wrapper.Uncommon .card-banner:after {
-        border-color: var(--green-highlight);
+        border-color: var(--card-highlight-color);
       }
 
       :host .card-banner:before {
@@ -114,16 +84,7 @@
         margin: 0 calc(15% - 33px);
         text-align: center;
         background-color: var(--primary-background-color);
-        border-color: var(--overlay-background-color);
-      }
-      :host .wrapper.Bluemoon .card-body {
-        border-color: var(--blue-highlight);
-      }
-      :host .wrapper.Rare .card-body {
-        border-color: var(--red-highlight);
-      }
-      :host .wrapper.Uncommon .card-body {
-        border-color: var(--green-highlight);
+        border-color: var(--card-highlight-color);
       }
 
       :host .card-body .inner-border {
@@ -164,9 +125,9 @@
         padding-right: 20px;
       }
 
-      :host .expired {
+      :host .expired-text {
         @apply(--absolute-template);
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: center;
         font-size: 50px;
@@ -177,9 +138,13 @@
         font-weight: bold;
       }
 
+      :host.expired .expired-text{
+        display: flex;
+      }
+
     </style>
 
-    <div class$="wrapper {{data.rarity}}" on-tap="closeCard">
+    <div class="wrapper">
       <div class="card-banner header">
         Time Pong
       </div>
@@ -192,8 +157,8 @@
               <p>{{item}}</p>
             </template>
           </div>
-          <p class="inner-footer" hidden$="{{hasNoDuration}}">
-            {{data.duration}} rounds
+          <p class="inner-footer">
+            {{_getDuration(data.duration)}}
           </p>
 
         </div>
@@ -203,7 +168,7 @@
         <span>{{data.rarity}}</span>
       </div>
 
-      <div class="expired" hidden$="{{notExpired}}">
+      <div class="expired-text">
         Expired
       </div>
     </div>
@@ -220,38 +185,32 @@
           data: {
             type: Object,
             notify: true,
-            observer: '_dataCheck'
-          } ,
-          isEffect: Boolean,
-          hasNoDuration: {
-            type: Boolean,
-            value: true
-          },
-          notExpired: {
-            type: Boolean,
-            value: true
+            observer: '_dataChange'
           }
         },
 
-        closeCard: function() {
-          if (this.isEffect) {
-            if (this.notExpired) {
-              this.fire('view-effect-card', this.data);
-            } else {
-              this.fire('close-card');
-            }
-          } else {
-            this.fire('close-card');
+        _dataChange: function() {
+          function updateStyle() {
+            this.updateStyles();
           }
-        },
-
-        _dataCheck: function(newVal) {
-          this.notExpired = true;
-          this.hasNoDuration = !newVal.duration
+          setTimeout(updateStyle.bind(this), 10); // mandatory for the CSS variables shim
         },
 
         expire: function() {
-          this.notExpired = false;
+          this.toggleClass('expired', true);
+        },
+
+        reset: function() {
+          this.toggleClass('expired', false);
+        },
+
+        _getDuration: function(duration) {
+          if (duration > 1) {
+            return  duration + ' rounds remain';
+          } else if (duration === 1) {
+            return duration + ' round remains';
+          }
+          return '';
         }
       });
     })();

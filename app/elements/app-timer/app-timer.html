@@ -156,7 +156,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             previousDate = Date.now();
             this.timer += t;
             if(this.timer > millisecondsToAdd){
-              this.fire('iron-signal', {name: 'timer-finished'});
+              this.fire('timer-finished', this.timer);
               playSound();
               stopTimer.bind(this)();
             }

@@ -174,16 +174,9 @@
       Polymer({
         is: 'time-pong-card-back-one',
 
-        properties: {
-          cardSelected: {
-            type: String,
-            notify: true
-          }
-        },
-
         selectCard: function(e) {
-          this.cardSelected = e.currentTarget.id === 'drunk-button' ? 'drunk' : 'sober';
-          this.fire('iron-signal', {name: 'flip-card'});
+          var isDrinking = e.currentTarget.id === 'drunk-button';
+          this.fire('category-selected', isDrinking);
         }
       });
     })();

@@ -5,7 +5,20 @@
   <template>
     <style include="shared-styles">
       :host {
-        --left-pos: 0;
+        --card-highlight-color: var(--yellow-highlight);
+        --card-soft-color: var(--yellow-soft);
+      }
+      :host .uncommon {
+        --card-highlight-color: var(--green-highlight);
+        --card-soft-color: var(--green-soft);
+      }
+      :host .rare {
+        --card-highlight-color: var(--red-highlight);
+        --card-soft-color: var(--red-soft);
+      }
+      :host .bluemoon {
+        --card-highlight-color: var(--blue-highlight);
+        --card-soft-color: var(--blue-soft);
       }
 
       :host .effect-wrapper {
@@ -92,7 +105,8 @@
     <div class="effect-wrapper">
       <h4>{{label}}</h4>
       <time-pong-card-face-one
-        id="effectCard"
+        on-tap="toggleCard"
+        class$="{{data.rarity}}"
         data="{{data}}"
         is-effect="true">
       </time-pong-card-face-one>
@@ -117,13 +131,7 @@
           index: Number
         },
 
-        ready: function() {
-          this.addEventListener('close-card', this.fade);
-        },
-
         attached: function() {
-          this.addEventListener('view-effect-card', this.toggleCard);
-
           //GENERATE DYNAMIC LEFT POSITION BASED ON CARD INDEX
           var baseLeftMargin = 30;
           var leftPosClosed = 100 * this.index + baseLeftMargin;
@@ -137,9 +145,27 @@
           this.toggleClass('active', (newVal && newVal.title));
         },
 
+        roundEnd: function() {
+          if (this.data && this.data.duration) {
+            this.set('data.duration', this.data.duration -= 1);
+            if (this.data.duration === 0) {
+              setTimeout(this.expire.bind(this), 500);
+            }
+          }
+        },
+
+        expire: function() {
+          this.toggleCard();
+          this.$$('time-pong-card-face-one').expire();
+        },
+
         toggleCard: function() {
           if (this.className.indexOf('animating') === -1) {
-            this.toggleClass('open');
+            if (this.data.duration === 0 && this.className.indexOf('open') > -1) {
+              this.fade();
+            } else {
+              this.toggleClass('open');
+            }
             this.toggleClass('overlay');
             this.toggleClass('animating');
             setTimeout(this.stopAnimating.bind(this), 500);
@@ -150,32 +176,16 @@
           this.toggleClass('animating', false);
         },
 
-        roundEnd: function() {
-          if (this.data && this.data.duration) {
-            this.data.duration -= 1;
-            this.notifyPath('data.duration');
-            if (this.data.duration === 0) {
-              setTimeout(this.expire.bind(this), 500);
-            }
-          }
-        },
-
-        expire: function() {
-          this.toggleCard();
-          this.$.effectCard.expire();
-        },
-
         fade: function() {
           this.toggleClass('fade', true);
-          this.toggleClass('overlay', false);
-          setTimeout(this.stopAnimating.bind(this), 500);
           setTimeout(this.clearEffect.bind(this), 300)
         },
 
         clearEffect: function() {
-          this.data = {};
+          this.data = null;
           this.toggleClass('open', false);
           this.toggleClass('fade', false);
+          this.$$('time-pong-card-face-one').reset();
         }
       });
     })();

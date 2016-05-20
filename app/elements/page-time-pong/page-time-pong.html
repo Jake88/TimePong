@@ -15,6 +15,8 @@
 
     </style>
 
+    <time-pong-card-utility></time-pong-card-utility>
+
     <div class="content">
       <section data-route="home">
         <div class="effects-container">
@@ -25,7 +27,7 @@
         <app-timer is-running="{{isTimerRunning}}"></app-timer>
 
         <time-pong-deck
-          current-effects="{{currentEffects}}">
+          current-card="{{currentCard}}">
         </time-pong-deck>
       </section>
     </div>
@@ -43,15 +45,46 @@
             type: Object,
             notify: true,
             value: function() { return {};}
+          },
+          currentCard: {
+            type: Object,
+            notify: true
           }
         },
 
         ready: function() {
-          this.addEventListener('round-end', function() {
-            this.$.spellEffect.roundEnd();
-            this.$.curseEffect.roundEnd();
-          });
+          this.addEventListener('timer-finished', this.timerFinished);
+          this.addEventListener('category-selected', this.chooseCard);
+          this.addEventListener('round-end', this.roundEnd);
+        },
+
+        timerFinished: function() {
+          this.$$('time-pong-deck').drawCard();
+        },
+
+        chooseCard: function(e) {
+          var filters = {
+            isDrinking: e.detail,
+            isSpellActive: !!this.currentEffects.spell
+          };
+
+          this.currentCard = this.$$('time-pong-card-utility').getRandomCard(filters);
+        },
+
+        roundEnd: function(e) {
+          this.$.spellEffect.roundEnd();
+          this.$.curseEffect.roundEnd();
+
+          // If the current card is a curse or a spell, set it.
+          if (this.currentCard.type === 'curse') {
+            this.set('currentEffects.curse', _.cloneDeep(this.currentCard));
+          }
+
+          if (this.currentCard.type === 'spell') {
+            this.set('currentEffects.spell', _.cloneDeep(this.currentCard));
+          }
         }
+
       });
     })();
   </script>
