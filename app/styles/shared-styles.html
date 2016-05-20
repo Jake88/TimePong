@@ -40,7 +40,7 @@
           -moz-user-select: none;      /* Firefox */
           -ms-user-select: none;       /* Internet Explorer/Edge */
           user-select: none;
-         }
+        }
 
         --soft-color-loop: {
           animation: soft-color-loop 10s infinite;
@@ -61,70 +61,48 @@
         }
       }
 
-      .page-title {
-        @apply(--paper-font-display2);
-      }
-
-      .app-menu {
-        --paper-menu-selected-item: {
-          color: #fff;
-          background: var(--light-primary-color);
-        }
-      }
-
-      paper-menu a > *, paper-menu paper-item > *, paper-menu paper-icon-item > * {
-        pointer-events: none;
-      }
-
       @media (max-width: 600px) {
         .page-title {
           font-size: 24px!important;
         }
       }
-
-      @-moz-keyframes soft-color-loop /* Firefox */
-      {
+      @-webkit-keyframes soft-color-loop
+        /* Safari and Chrome */ {
         0%   {background-color: var(--red-soft);}
         33%  {background-color: var(--blue-soft);}
         66%   {background-color: var(--green-soft);}
         100%   {background-color: var(--red-soft);}
       }
-      @-webkit-keyframes soft-color-loop /* Safari and Chrome */
-      {
-        0%   {background-color: var(--red-soft);}
-        33%  {background-color: var(--blue-soft);}
-        66%   {background-color: var(--green-soft);}
-        100%   {background-color: var(--red-soft);}
-      }
-
-      @-moz-keyframes highlight-color-loop /* Firefox */
-      {
+      @-webkit-keyframes highlight-color-loop
+        /* Safari and Chrome */ {
         0%   {color: var(--red-highlight);}
         33%  {color: var(--blue-highlight);}
         66%   {color: var(--green-highlight);}
         100%   {color: var(--red-highlight);}
       }
-      @-webkit-keyframes highlight-color-loop /* Safari and Chrome */
-      {
-        0%   {color: var(--red-highlight);}
-        33%  {color: var(--blue-highlight);}
-        66%   {color: var(--green-highlight);}
-        100%   {color: var(--red-highlight);}
+      @-webkit-keyframes border-highlight-color-loop
+        /* Safari and Chrome */ {
+        0%   {border-color: var(--red-highlight);}
+        33%  {border-color: var(--blue-highlight);}
+        66%   {border-color: var(--green-highlight);}
+        100%   {border-color: var(--red-highlight);}
       }
 
-      @-moz-keyframes border-highlight-color-loop /* Firefox */
-      {
-        0%   {border-color: var(--red-highlight);}
-        33%  {border-color: var(--blue-highlight);}
-        66%   {border-color: var(--green-highlight);}
-        100%   {border-color: var(--red-highlight);}
+
+
+      .page-title {
+      @apply(--paper-font-display2);
       }
-      @-webkit-keyframes border-highlight-color-loop /* Safari and Chrome */
-      {
-        0%   {border-color: var(--red-highlight);}
-        33%  {border-color: var(--blue-highlight);}
-        66%   {border-color: var(--green-highlight);}
-        100%   {border-color: var(--red-highlight);}
+
+      .app-menu {
+      --paper-menu-selected-item: {
+         color: #fff;
+         background: var(--light-primary-color);
+       }
+      }
+
+      paper-menu a > *, paper-menu paper-item > *, paper-menu paper-icon-item > * {
+        pointer-events: none;
       }
     </style>
   </template>

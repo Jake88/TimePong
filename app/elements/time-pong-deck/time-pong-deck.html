@@ -26,23 +26,27 @@
 
       /* entire container, keeps perspective */
       :host .flip-container {
-        @apply(--card-wrapper);
+      @apply(--card-wrapper);
         top: var(--top-pos-closed);
         margin-top: -85px;
         border-radius: 10px;
+        -webkit-perspective: 1000px;
         perspective: 1000px;
+        -webkit-transform: rotateZ(-1deg) translate3d(0, 0, 0);
         transform: rotateZ(-1deg) translate3d(0, 0, 0);
+        -webkit-transition: -webkit-transform .9s linear;
         transition: transform .9s linear;
         z-index: 2;
       }
 
       :host.open .flip-container {
+        -webkit-transform: rotateZ(0deg) translate3d(0, var(--top-pos-opened), 0);
         transform: rotateZ(0deg) translate3d(0, var(--top-pos-opened), 0);
         z-index: 4;
       }
 
       :host .flip-container .card-main {
-        @apply(--absolute-template);
+      @apply(--absolute-template);
         left: 0;
         bottom: 0;
         border-radius: 10px;
@@ -55,10 +59,12 @@
       }
 
       :host.open.flipped .flip-container .flipper {
+        -webkit-transform: rotateY(180deg);
         transform: rotateY(180deg);
       }
 
       .flipper {
+        -webkit-transition: .8s linear;
         transition: .8s linear;
         -webkit-transform-style: preserve-3d;
         transform-style: preserve-3d;
@@ -67,7 +73,8 @@
 
       /* hide back of pane during swap */
       .face, .back {
-        @apply(--absolute-template);
+      @apply(--absolute-template);
+        -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
         top: 0;
         left: 0;
@@ -76,11 +83,13 @@
       /* face pane, placed above back */
       .back {
         z-index: 100;
+        -webkit-transform: translate3d(0, 0, 0) rotateY(0deg);
         transform: translate3d(0, 0, 0) rotateY(0deg);
       }
 
       /* back, initially hidden pane */
       .face {
+        -webkit-transform: translate3d(0, 0, 0) rotateY(180deg);
         transform: translate3d(0, 0, 0) rotateY(180deg);
       }
 
@@ -94,37 +103,49 @@
         border-bottom: 0;
         position: absolute;
         box-shadow: 0 0 2px var(--primary-text-color);
+        -webkit-animation: soft-color-loop 10s infinite;
         animation: soft-color-loop 10s infinite;
-        -moz-animation: soft-color-loop 10s infinite; /* Firefox */
-        -webkit-animation: soft-color-loop 10s infinite; /* Safari and Chrome */
       }
 
       :host .card-stack.card-1 {
+        -webkit-transform: rotateZ(-2deg) translate(0, 3px);
         transform: rotateZ(-2deg) translate(0, 3px);
       }
 
       :host .card-stack.card-2 {
         margin-bottom: -4px;
+        -webkit-transform: rotateZ(1deg) translate(0, 5px);
         transform: rotateZ(1deg) translate(0, 5px);
       }
 
       :host .card-stack.card-3 {
         margin-bottom: -7px;
+        -webkit-transform: rotateZ(-1deg) translate(0, 8px);
         transform: rotateZ(-1deg) translate(0, 8px);
       }
 
       :host .card-stack.card-4 {
         margin-bottom: -11px;
+        -webkit-transform: rotateZ(-2deg) translate(0, 10px);
         transform: rotateZ(-2deg) translate(0, 10px);
       }
 
       :host .change-cat-button {
-        @apply(--absolute-template);
+      @apply(--absolute-template);
         bottom: 20px;
         left: 0;
         height: initial;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
         justify-content: center;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
         align-items: center;
         color: var(--link-color);
       }
@@ -135,6 +156,8 @@
 
       :host .dark-overlay {
         opacity: 0;
+        filter: alpha(opacity=0);
+        -webkit-transition: opacity .5s linear, z-index 1s linear;
         transition: opacity .5s linear, z-index 1s linear;
         position: absolute;
         top: -2000px;
@@ -147,7 +170,9 @@
 
       :host.open .dark-overlay {
         opacity: .5;
+        filter: alpha(opacity=50);
         z-index: 4;
+        -webkit-transition: opacity .5s linear;
         transition: opacity .5s linear;
       }
     </style>

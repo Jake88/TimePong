@@ -50,6 +50,8 @@
       }
 
       :host paper-button iron-icon.clockHand {
+        -webkit-transform-origin: right;
+        -ms-transform-origin: right;
         transform-origin: right;
         --iron-icon-height: 50%;
         --iron-icon-width: 40%;
@@ -59,28 +61,34 @@
 
       :host paper-button iron-icon.clockHand.fast {
         -webkit-animation: spin 2s infinite linear;
+        animation: spin 2s infinite linear;
       }
 
       :host paper-button iron-icon.clockHand.slow {
         -webkit-animation: spin 20s infinite linear;
+        animation: spin 20s infinite linear;
       }
 
       @-webkit-keyframes spin {
-        0%  {-webkit-transform: rotate(0deg);}
-        100% {-webkit-transform: rotate(360deg);}
+        0%  {-webkit-transform: rotate(0deg);transform: rotate(0deg);}
+        100% {-webkit-transform: rotate(360deg);transform: rotate(360deg);}
       }
 
       :host paper-button .timer-text {
-        @apply(--paper-font-display2);
+      @apply(--paper-font-display2);
         position: relative;
         top: 85px;
         color: #ccc;
         opacity: 1;
+        filter: alpha(opacity=100);
+        -webkit-transition: opacity .5s ease-in;
         transition: opacity .5s ease-in;
       }
 
       :host.running paper-button .timer-text {
         opacity: 0;
+        filter: alpha(opacity=0);
+        -webkit-transition: all 0s ease-out;
         transition: all 0s ease-out;
       }
     </style>

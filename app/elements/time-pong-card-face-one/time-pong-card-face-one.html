@@ -5,7 +5,7 @@
   <template>
     <style>
       :host .wrapper {
-        @apply(--absolute-template);
+      @apply(--absolute-template);
         border-radius: 10px;
         font-family: 'Roboto', 'Noto', sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -24,16 +24,18 @@
       }
 
       :host .wrapper .card-banner:after {
-        @apply(--pseudo-element);
+      @apply(--pseudo-element);
         width: 40px;
         height: 40px;
+        -webkit-transform: skewY(45deg);
+        -ms-transform: skewY(45deg);
         transform: skewY(45deg);
         background-color: var(--primary-text-color);
         border-color: var(--card-highlight-color);
       }
 
       :host .card-banner:before {
-        @apply(--pseudo-element);
+      @apply(--pseudo-element);
       }
       :host .card-banner.header {
         margin-left: -7px;
@@ -46,6 +48,8 @@
         border-right: 2px solid;
         border-top: 2px solid;
         right: -40px;
+        -webkit-transform-origin: left;
+        -ms-transform-origin: left;
         transform-origin: left;
         top:-2px;
       }
@@ -64,6 +68,8 @@
       }
       :host .card-banner.footer:after {
         left: -40px;
+        -webkit-transform-origin: right;
+        -ms-transform-origin: right;
         transform-origin: right;
         border-left: 2px solid;
         border-bottom: 2px solid;
@@ -88,13 +94,23 @@
       }
 
       :host .card-body .inner-border {
-        @apply(--relative-template);
+      @apply(--relative-template);
         border-left: 2px solid var(--primary-text-color);
         border-right: 2px solid var(--primary-text-color);
         padding: 20px;
         overflow: hidden;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
         flex-direction: column;
+        -webkit-box-pack:center;
+        -webkit-justify-content:center;
+        -ms-flex-pack:center;
         justify-content:center;
       }
 
@@ -105,9 +121,21 @@
       }
 
       :host .card-body .rule-wrapper {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
         flex-direction: column;
+        -webkit-justify-content: space-around;
+        -ms-flex-pack: distribute;
         justify-content: space-around;
+        -webkit-box-flex: 1;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
         flex-grow: 1;
       }
 
@@ -126,12 +154,19 @@
       }
 
       :host .expired-text {
-        @apply(--absolute-template);
+      @apply(--absolute-template);
         display: none;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
         justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
         align-items: center;
         font-size: 50px;
         color: var(--red-highlight);
+        -webkit-transform: rotateZ(-35deg);
         transform: rotateZ(-35deg);
         top: 0;
         left: 0;
@@ -139,9 +174,11 @@
       }
 
       :host.expired .expired-text{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
         display: flex;
       }
-
     </style>
 
     <div class="wrapper">
