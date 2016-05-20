@@ -1,23 +1,19 @@
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
 
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/paper-styles/typography.html">
+<!-- Iron elements -->
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/av-icons.html">
+
+<!-- Paper elements -->
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<!-- Add your elements here -->
+<link rel="import" href="../../styles/app-theme.html">
+<link rel="import" href="../../styles/shared-styles.html">
+
 
 <dom-module id="app-timer">
   <template>
     <style include="shared-styles">
-      :host {
-        display: block;
-      }
-
       :host paper-button {
         height: 150px;
         width: 150px;
@@ -117,22 +113,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           },
           timeinterval: {
             type: String
-          }
+          },
+          audio: Object
+        },
 
+        ready: function() {
+          this.audio = new Audio('../../sounds/times-up-tone.mp3');
         },
 
         toFixed: function(val) {
           return (val / 1000).toFixed(2);
         },
 
+        playSound: function() {
+          this.audio.play();
+        },
+
         timerPress: function() {
           if (this.isRunning) {
             stopTimer.bind(this)();
           } else {
+            // Ensure our audio file is downloaded and ready to play
+            this.audio.play();
+            this.audio.pause();
+
             // Starting the timer;
             // These should be stored in a config where the user can make changes to them.
-            var maxMilliseconds = 60; //40000;
-            var minMilliseconds = 50; //2000;
+            var maxMilliseconds = 2000; //40000;
+            var minMilliseconds = 1000; //2000;
 
             // Get the random amount of time our timer will go for
             var millisecondsToAdd = Math.random() * (maxMilliseconds - minMilliseconds) + minMilliseconds;
@@ -157,7 +165,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.timer += t;
             if(this.timer > millisecondsToAdd){
               this.fire('timer-finished', this.timer);
-              playSound();
+              this.playSound();
               stopTimer.bind(this)();
             }
           }
@@ -167,10 +175,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.isRunning = false;
             this.toggleClass('running', false);
             this.notifyPath('this.timer');
-          }
-
-          function playSound() {
-            new Audio('../../sounds/times-up-tone.mp3').play();
           }
         }
       });
