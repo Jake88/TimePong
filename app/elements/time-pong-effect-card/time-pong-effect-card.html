@@ -1,55 +1,34 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
 
+<link rel="import" href="../time-pong-card-face-two/time-pong-card-face-two.html">
+
 <dom-module id="time-pong-effect-card">
   <template>
     <style include="shared-styles">
       :host .effect-wrapper {
-      @apply(--card-wrapper);
-        left: var(--left-pos-closed);
-        margin-top: 20px;
-        -webkit-transform-origin: top left;
-        transform-origin: top left;
-        -webkit-transform: scale(.2);
-        transform: scale(.2);
         z-index: 1;
         border: 1px solid #ccc;
         border-radius: 3px;
-      }
-      :host.active .effect-wrapper {
-        border: none;
-      }
-      :host.animating .effect-wrapper {
-        z-index: 4;
-      }
-      :host.open .effect-wrapper {
-        z-index: 4;
+        height: 5.75em;
+        width: 3.75em;
+        margin-top: 1em;
       }
 
-
-      :host time-pong-card-face-one {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        -webkit-transform-origin: top left;
-        transform-origin: top left;
-        -webkit-transform: translate3d(0, 0, 0) scale(1);
-        transform: translate3d(0, 0, 0) scale(1);
-        -webkit-transition: opacity .5s ease-out, -webkit-transform .5s ease-out;
-        transition: opacity .5s ease-out, -webkit-transform .5s ease-out;
-        transition: transform .5s ease-out, opacity .5s ease-out;
-        transition: transform .5s ease-out, opacity .5s ease-out, -webkit-transform .5s ease-out;
+      :host time-pong-card-face-two {
+      @apply(--card-wrapper);
         border-radius: 10px;
         display: none;
+        z-index: 4;
+        -webkit-transition: opacity .4s;
+        transition: .4s;
       }
-      :host.active time-pong-card-face-one {
+
+      :host.open time-pong-card-face-two {
         display: block;
       }
-      :host.open time-pong-card-face-one {
-        -webkit-transform: translate3d(var(--left-pos-open), -300px, 0) scale(5);
-        transform: translate3d(var(--left-pos-open), -300px, 0) scale(5);
-      }
-      :host.fade time-pong-card-face-one {
+      :host.fade time-pong-card-face-two {
+        display: block;
         opacity: 0;
         -webkit-transition: .4s;
         transition: .4s;
@@ -59,13 +38,6 @@
         position: relative;
         width: 100%;
         color: var(--light-grey);
-        font-size: 13px;
-        text-align: center;
-        text-transform: uppercase;
-        -webkit-transform-origin: bottom;
-        transform-origin: bottom;
-        -webkit-transform: scale(5);
-        transform: scale(5);
         font-weight: 100;
         margin: -17px 0 2px 0;
       }
@@ -98,15 +70,20 @@
 
     <div class="dark-overlay"></div>
 
-    <div class="effect-wrapper">
+    <time-pong-card-face-two
+      on-tap="toggleCard"
+      class$="{{data.rarity}}"
+      data="{{data}}"
+      is-effect="true">
+    </time-pong-card-face-two>
+
+    <div class="effect-wrapper" on-tap="toggleCard">
       <h4>{{label}}</h4>
-      <time-pong-card-face-one
-        on-tap="toggleCard"
-        class$="{{data.rarity}}"
-        data="{{data}}"
-        is-effect="true">
-      </time-pong-card-face-one>
+      <iron-icon icon="block"></iron-icon>
+      <h4>{{data.title}}</h4>
     </div>
+
+
 
   </template>
 
@@ -127,16 +104,6 @@
           index: Number
         },
 
-        attached: function() {
-          //GENERATE DYNAMIC LEFT POSITION BASED ON CARD INDEX
-          var baseLeftMargin = 30;
-          var leftPosClosed = 100 * this.index + baseLeftMargin;
-          var leftPosOpen = 30 - leftPosClosed;
-          this.customStyle['--left-pos-closed'] = leftPosClosed + 'px';
-          this.customStyle['--left-pos-open'] = leftPosOpen * 5 + 'px'; // *5 due to our css scale increase
-          this.updateStyles(); // mandatory for the CSS variables shim
-        },
-
         _dataChanged: function(newVal) {
           this.toggleClass('active', (newVal && newVal.title));
         },
@@ -152,7 +119,7 @@
 
         expire: function() {
           this.toggleCard();
-          this.$$('time-pong-card-face-one').expire();
+          this.$$('time-pong-card-face-two').expire();
         },
 
         toggleCard: function() {
@@ -181,7 +148,7 @@
           this.data = null;
           this.toggleClass('open', false);
           this.toggleClass('fade', false);
-          this.$$('time-pong-card-face-one').reset();
+          this.$$('time-pong-card-face-two').reset();
         }
       });
     })();

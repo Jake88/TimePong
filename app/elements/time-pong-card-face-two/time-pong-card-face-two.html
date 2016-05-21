@@ -96,7 +96,7 @@
         position: relative;
       }
 
-      :host.hasDuration .left-bar .duration-display {
+      :host .left-bar .duration-display.showDuration {
         visibility: visible;
       }
 
@@ -194,7 +194,7 @@
           <h4 class="side-text">{{data.title}}</h4>
         </div>
 
-        <div class="duration-display">
+        <div id="duration" class="duration-display">
           <h4>Rounds</h4>
           <iron-icon icon="cached"></iron-icon>
           <p>{{data.duration}}</p>
@@ -240,9 +240,9 @@
         },
 
         _dataChange: function(newVal) {
-          this.toggleClass('hasDuration', false);
-          if (newVal.duration) {
-            this.toggleClass('hasDuration', true);
+          this.toggleClass('showDuration', false, this.$.duration);
+          if (newVal && newVal.duration) {
+            this.toggleClass('showDuration', true, this.$.duration);
           }
 
           function updateStyle() {

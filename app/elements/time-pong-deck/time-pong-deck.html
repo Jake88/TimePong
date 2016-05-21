@@ -1,7 +1,7 @@
 <!-- Add your elements here -->
 <link rel="import" href="../../styles/app-theme.html">
 <link rel="import" href="../../styles/shared-styles.html">
-<link rel="import" href="../time-pong-card-face-one/time-pong-card-face-one.html">
+<link rel="import" href="../time-pong-card-face-two/time-pong-card-face-two.html">
 <link rel="import" href="../time-pong-card-back-one/time-pong-card-back-one.html">
 
 <dom-module id="time-pong-deck">
@@ -10,21 +10,18 @@
       /* entire container, keeps perspective */
       :host .flip-container {
       @apply(--card-wrapper);
-        top: var(--top-pos-closed);
-        margin-top: -85px;
-        border-radius: 10px;
         -webkit-perspective: 1000px;
         perspective: 1000px;
-        -webkit-transform: rotateZ(-1deg) translate3d(0, 0, 0);
-        transform: rotateZ(-1deg) translate3d(0, 0, 0);
+        -webkit-transform: rotateZ(-1deg) translate3d(0, var(--top-pos-closed), 0);
+        transform: rotateZ(-1deg) translate3d(0, var(--top-pos-closed), 0);
         -webkit-transition: -webkit-transform .9s linear;
         transition: transform .9s linear;
         z-index: 2;
       }
 
       :host.open .flip-container {
-        -webkit-transform: rotateZ(0deg) translate3d(0, var(--top-pos-opened), 0);
-        transform: rotateZ(0deg) translate3d(0, var(--top-pos-opened), 0);
+        -webkit-transform: rotateZ(0deg) translate3d(0, 0, 0);
+        transform: rotateZ(0deg) translate3d(0, 0, 0);
         z-index: 4;
       }
 
@@ -77,14 +74,15 @@
       }
 
       :host .card-stack {
-        height: 85px;
-        width: calc(100% - 60px);
-        left: 30px;
+        position: absolute;
+        height: 4em;
+        width: 18.75em;
+        left: 50%;
+        margin-left: -9.375em;
         bottom: 0;
         border-radius: 10px 10px 0 0;
         border: 1px solid var(--primary-text-color);
         border-bottom: 0;
-        position: absolute;
         box-shadow: 0 0 2px var(--primary-text-color);
         -webkit-animation: soft-color-loop 10s infinite;
         animation: soft-color-loop 10s infinite;
@@ -111,30 +109,6 @@
         margin-bottom: -11px;
         -webkit-transform: rotateZ(-2deg) translate(0, 10px);
         transform: rotateZ(-2deg) translate(0, 10px);
-      }
-
-      :host .change-cat-button {
-      @apply(--absolute-template);
-        bottom: 20px;
-        left: 0;
-        height: initial;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        color: var(--link-color);
-      }
-
-      :host .change-cat-button span {
-        border-bottom: 1px solid var(--link-color);
       }
 
       :host .dark-overlay {
@@ -175,12 +149,12 @@
           selected-category="{{cardCategory}}">
         </time-pong-card-back-one>
 
-        <time-pong-card-face-one
+        <time-pong-card-face-two
           on-tap="closeCard"
           id="currentCard"
           class$="face {{currentCard.rarity}}"
           data="{{currentCard}}">
-        </time-pong-card-face-one>
+        </time-pong-card-face-two>
       </div>
     </div>
 
@@ -200,9 +174,16 @@
           }
         },
 
+        ready: function() {
+          this.customStyle['--top-pos-closed'] = 100 + '%';
+          this.updateStyles();
+        },
+
         reRender: function() {
-          this.customStyle['--top-pos-closed'] = this.$.flipContainer.offsetHeight + 'px';
-          this.customStyle['--top-pos-opened'] = -this.$.flipContainer.offsetHeight + 45 + 'px';
+          var h = document.querySelector('page-time-pong .content').offsetHeight;
+
+          console.log(h);
+          this.customStyle['--top-pos-closed'] = h - 60 + 'px';
           this.updateStyles(); // mandatory for the CSS variables shim
         },
 
