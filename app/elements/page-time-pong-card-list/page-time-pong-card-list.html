@@ -2,21 +2,94 @@
 <link rel="import" href="../../styles/app-theme.html">
 <link rel="import" href="../../styles/shared-styles.html">
 <link rel="import" href="../time-pong-card-utility/time-pong-card-utility.html">
+<link rel="import" href="../time-pong-card-face-one/time-pong-card-face-one.html">
 
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
 
 <dom-module id="page-time-pong-card-list">
   <template>
     <style include="shared-styles">
       :host div.content {
         height: calc(100% - 56px);
-        width: 100%;
-        overflow-y: scroll;
+        /*width: 100%;*/
+        overflow: scroll;
+        position: absolute;
+      }
+
+      :host .filter-select {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin: 0 20px;
+      }
+
+      :host paper-dropdown-menu {
+        width: 48%;
+      }
+
+      :host paper-dropdown-menu:first-child {
+        margin-right: 4%;
+      }
+
+      :host h3 {
+        text-align: center;
+      }
+
+      :host .cards-container {
+        display: flex;
+        flex-direction: row;
+      }
+
+      :host .card-wrapper {
+        position: relative;
+        box-sizing: border-box;
+        height: 450px;
+        width: 300px;
+        margin: 20px;
+
+        box-shadow: 0 3px 3px #ccc;
+        border-radius: 10px;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        max-width: inherit !important;
       }
     </style>
 
     <div class="content">
-      <time-pong-card-utility></time-pong-card-utility>
-      stuff
+      <time-pong-card-utility card-list></time-pong-card-utility>
+
+      <div class="filter-select">
+        <paper-dropdown-menu label="Card property" on-iron-select="selectCardProperty" horizontal-align="left">
+          <paper-listbox id="cardPropertySelect" class="dropdown-content" attr-for-selected="code">
+            <template is="dom-repeat" items="{{cardProperties}}">
+              <paper-item code="{{item.code}}">{{item.label}}</paper-item>
+            </template>
+          </paper-listbox>
+        </paper-dropdown-menu>
+
+        <paper-dropdown-menu hidden="{{!hasOptions}}" label="Property option" on-iron-select="selectPropertyOption" horizontal-align="left">
+          <paper-listbox id="propertyOptionSelect" class="dropdown-content" attr-for-selected="code">
+            <template is="dom-repeat" items="{{propertyOptions}}">
+              <paper-item code="{{item}}">{{item}}</paper-item>
+            </template>
+          </paper-listbox>
+        </paper-dropdown-menu>
+      </div>
+
+      <h3>{{filteredCardList.length}} cards found.</h3>
+
+      <div class="cards-container">
+        <template is="dom-repeat" items="{{filteredCardList}}">
+          <div class="card-wrapper">
+            <time-pong-card-face-one data="{{item}}"></time-pong-card-face-one>
+          </div>
+        </template>
+      </div>
+
     </div>
   </template>
 
@@ -28,14 +101,66 @@
         is: 'page-time-pong-card-list',
 
         properties: {
-          cardList: {
-            type: Object,
-            notify: true,
-            value: function() { return {};}
-          }
+          cardList: Object
         },
 
         ready: function() {
+          this.cardProperties = [
+            {
+              code: '',
+              label: 'None'
+            },
+            {
+              code: 'rarity',
+              label: 'Rarity'
+            },
+            {
+              code: 'type',
+              label: 'Type'
+            },
+            {
+              code: 'deck',
+              label: 'Expansion'
+            },
+            {
+              code: 'forDrinkers',
+              label: 'For drinkers'
+            },
+            {
+              code: 'forNonDrinkers',
+              label: 'For non drinkers'
+            }
+          ];
+        },
+
+        selectCardProperty: function(e) {
+          this.propertyOptions = _.compact(_.uniq(_.map(this.cardList, e.detail.item.code)));
+
+          switch (this.propertyOptions.length) {
+            case 0 :
+              this.filteredCardList = this.cardList;
+              this.hasOptions = false;
+              break;
+            case 1 :
+              var tempObj = {};
+              tempObj[e.detail.item.code] = this.propertyOptions[0];
+              this.filteredCardList = _.filter(this.cardList, tempObj);
+              this.hasOptions = false;
+              break;
+            default :
+              this.hasOptions = true;
+          };
+        },
+
+        selectPropertyOption: function(e) {
+          var tempObj = {};
+          tempObj[this.$.cardPropertySelect.selected] = e.detail.item.code;
+          this.filteredCardList = _.filter(this.cardList, tempObj);
+        },
+
+        attached: function() {
+          this.hasOptions = false;
+          this.filteredCardList = this.cardList = this.$$('time-pong-card-utility').getGrandList();
         }
 
       });

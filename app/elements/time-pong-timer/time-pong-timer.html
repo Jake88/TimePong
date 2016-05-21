@@ -11,7 +11,7 @@
 <link rel="import" href="../../styles/shared-styles.html">
 
 
-<dom-module id="app-timer">
+<dom-module id="time-pong-timer">
   <template>
     <style include="shared-styles">
       :host paper-button {
@@ -106,7 +106,7 @@
       'use strict';
 
       Polymer({
-        is: 'app-timer',
+        is: 'time-pong-timer',
 
         properties: {
           isRunning: {
@@ -134,6 +134,7 @@
         },
 
         playSound: function() {
+          this.audio.volume = 1;
           this.audio.play();
         },
 
@@ -142,8 +143,11 @@
             stopTimer.bind(this)();
           } else {
             // Ensure our audio file is downloaded and ready to play
-            this.audio.play();
-            this.audio.pause();
+            if (!this.audio.loaded) {
+              this.audio.volume = 0;
+              this.audio.play();
+              this.audio.loaded = true;
+            }
 
             // Starting the timer;
             // These should be stored in a config where the user can make changes to them.

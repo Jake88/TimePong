@@ -1,7 +1,7 @@
 <!-- Add your elements here -->
 <link rel="import" href="../../styles/app-theme.html">
 <link rel="import" href="../../styles/shared-styles.html">
-<link rel="import" href="../app-timer/app-timer.html">
+<link rel="import" href="../time-pong-timer/time-pong-timer.html">
 <link rel="import" href="../time-pong-deck/time-pong-deck.html">
 <link rel="import" href="../time-pong-effect-card/time-pong-effect-card.html">
 <link rel="import" href="../time-pong-card-utility/time-pong-card-utility.html">
@@ -28,7 +28,7 @@
         <time-pong-effect-card id="curseEffect" data="{{currentEffects.curse}}" label="Curse" index="1"></time-pong-effect-card>
       </div>
 
-      <app-timer is-running="{{isTimerRunning}}"></app-timer>
+      <time-pong-timer is-running="{{isTimerRunning}}"></time-pong-timer>
 
       <time-pong-deck
         current-card="{{currentCard}}">

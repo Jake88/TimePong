@@ -1,0 +1,72 @@
+<!-- Add your elements here -->
+<link rel="import" href="../../styles/app-theme.html">
+<link rel="import" href="../../styles/shared-styles.html">
+
+
+<dom-module id="page-home">
+  <template>
+    <style include="shared-styles">
+      :host div.content {
+        height: calc(100% - 56px);
+        width: 100%;
+        position: relative;
+      }
+
+      :host h3 {
+        margin-left: 40px;
+      }
+
+      :host ul {
+        display: none;
+      }
+
+      :host.showList ul {
+        display: block;
+      }
+
+      :host li {
+        margin-bottom: 10px;
+      }
+    </style>
+
+    <div class="content">
+      <h3 on-tap="toggleList">TODO</h3>
+      <ul>
+        <template is="dom-repeat" items="{{todoList}}">
+          <li>{{item}}</li>
+        </template>
+      </ul>
+    </div>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'page-home',
+
+        properties: {
+          todoList: {
+            type: Object,
+            value: [
+              'Fixed card height 300 and width 460 (10px padding either side. Margin auto should work) for consistency across the app',
+              'Card redesign?',
+              'Icons for the game - icon set needs creating',
+              'Rules and help icon set.',
+              'Short concise rules - some rules overflow',
+              'Add \'restrict\' property to cards. This property will restrict the next card o be of a specific type. For use with Double or Nothing.',
+              'Function cards,',
+              'No ball mode - Add a quick timing / reflex sort of game so people pass round the device - like the game Paul Davis showed'
+            ]
+          }
+        },
+
+        toggleList: function() {
+          this.toggleClass('showList');
+        }
+
+      });
+    })();
+  </script>
+</dom-module>

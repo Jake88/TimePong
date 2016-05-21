@@ -29,9 +29,14 @@
         ready: function() {
           // TODO Fetch the card list from the db
           // this.grandCardList = db.allCards
+          this.grandCardList = tempCardsArray(); // TODO Remove once we're getting it from filteredFunction
           // TODO Pluck out the card categories that don't match the user's config
           // this.filteredCardList = filterUnwantedDecks(this.grandCardList, user.config)
           this.filteredCardList = tempCardsArray(); // TODO Remove once we're getting it from filteredFunction
+        },
+
+        getGrandList: function() {
+          return _.cloneDeep(this.grandCardList);
         },
 
         /*

@@ -9,7 +9,16 @@
         border-radius: 10px;
         font-family: 'Roboto', 'Noto', sans-serif;
         -webkit-font-smoothing: antialiased;
-        background-color: var(--card-soft-color);
+        background-color: var(--yellow-soft);
+      }
+      :host .wrapper.bluemoon {
+        background-color: var(--blue-soft);
+      }
+      :host .wrapper.rare {
+        background-color: var(--red-soft);
+      }
+      :host .wrapper.uncommon {
+        background-color: var(--green-soft);
       }
 
       :host .wrapper .card-banner {
@@ -19,8 +28,20 @@
         width: 85%;
         background-color: var(--primary-text-color);
         position: relative;
-        color: var(--card-soft-color);
-        border-color: var(--card-highlight-color);
+        color: var(--yellow-soft);
+        border-color: var(--yellow-highlight);
+      }
+      :host .wrapper.bluemoon .card-banner {
+        color: var(--blue-soft);
+        border-color: var(--blue-highlight);
+      }
+      :host .wrapper.rare .card-banner {
+        color: var(--red-soft);
+        border-color: var(--red-highlight);
+      }
+      :host .wrapper.uncommon .card-banner {
+        color: var(--green-soft);
+        border-color: var(--green-highlight);
       }
 
       :host .wrapper .card-banner:after {
@@ -31,7 +52,16 @@
         -ms-transform: skewY(45deg);
         transform: skewY(45deg);
         background-color: var(--primary-text-color);
-        border-color: var(--card-highlight-color);
+        border-color: var(--yellow-highlight);
+      }
+      :host .wrapper.bluemoon .card-banner:after {
+        border-color: var(--blue-highlight);
+      }
+      :host .wrapper.rare .card-banner:after {
+        border-color: var(--red-highlight);
+      }
+      :host .wrapper.uncommon .card-banner:after {
+        border-color: var(--green-highlight);
       }
 
       :host .card-banner:before {
@@ -90,7 +120,16 @@
         margin: 0 calc(15% - 33px);
         text-align: center;
         background-color: var(--primary-background-color);
-        border-color: var(--card-highlight-color);
+        border-color: var(--yellow-highlight);
+      }
+      :host .wrapper.bluemoon .card-body {
+        border-color: var(--blue-highlight);
+      }
+      :host .wrapper.rare .card-body {
+        border-color: var(--red-highlight);
+      }
+      :host .wrapper.uncommon .card-body {
+        border-color: var(--green-highlight);
       }
 
       :host .card-body .inner-border {
@@ -181,7 +220,7 @@
       }
     </style>
 
-    <div class="wrapper">
+    <div class$="wrapper {{data.rarity}}">
       <div class="card-banner header">
         Time Pong
       </div>
