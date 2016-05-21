@@ -240,7 +240,6 @@
         },
 
         _dataChange: function(newVal) {
-          this.toggleClass('expired', true);
           this.toggleClass('hasDuration', false);
           if (newVal.duration) {
             this.toggleClass('hasDuration', true);
