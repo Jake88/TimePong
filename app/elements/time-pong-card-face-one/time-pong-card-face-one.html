@@ -9,15 +9,15 @@
         border-radius: 10px;
         font-family: 'Roboto', 'Noto', sans-serif;
         -webkit-font-smoothing: antialiased;
-        background-color: var(--yellow-soft);
-      }
-      :host .wrapper.bluemoon {
-        background-color: var(--blue-soft);
+        background-color: var(--orange-soft);
       }
       :host .wrapper.rare {
+        background-color: var(--blue-soft);
+      }
+      :host .wrapper.special {
         background-color: var(--red-soft);
       }
-      :host .wrapper.uncommon {
+      :host .wrapper.limited {
         background-color: var(--green-soft);
       }
 
@@ -28,18 +28,18 @@
         width: 85%;
         background-color: var(--primary-text-color);
         position: relative;
-        color: var(--yellow-soft);
-        border-color: var(--yellow-highlight);
+        color: var(--orange-soft);
+        border-color: var(--orange-highlight);
       }
-      :host .wrapper.bluemoon .card-banner {
+      :host .wrapper.rare .card-banner {
         color: var(--blue-soft);
         border-color: var(--blue-highlight);
       }
-      :host .wrapper.rare .card-banner {
+      :host .wrapper.special .card-banner {
         color: var(--red-soft);
         border-color: var(--red-highlight);
       }
-      :host .wrapper.uncommon .card-banner {
+      :host .wrapper.limited .card-banner {
         color: var(--green-soft);
         border-color: var(--green-highlight);
       }
@@ -52,15 +52,15 @@
         -ms-transform: skewY(45deg);
         transform: skewY(45deg);
         background-color: var(--primary-text-color);
-        border-color: var(--yellow-highlight);
-      }
-      :host .wrapper.bluemoon .card-banner:after {
-        border-color: var(--blue-highlight);
+        border-color: var(--orange-highlight);
       }
       :host .wrapper.rare .card-banner:after {
+        border-color: var(--blue-highlight);
+      }
+      :host .wrapper.special .card-banner:after {
         border-color: var(--red-highlight);
       }
-      :host .wrapper.uncommon .card-banner:after {
+      :host .wrapper.limited .card-banner:after {
         border-color: var(--green-highlight);
       }
 
@@ -120,15 +120,15 @@
         margin: 0 calc(15% - 33px);
         text-align: center;
         background-color: var(--primary-background-color);
-        border-color: var(--yellow-highlight);
-      }
-      :host .wrapper.bluemoon .card-body {
-        border-color: var(--blue-highlight);
+        border-color: var(--orange-highlight);
       }
       :host .wrapper.rare .card-body {
+        border-color: var(--blue-highlight);
+      }
+      :host .wrapper.special .card-body {
         border-color: var(--red-highlight);
       }
-      :host .wrapper.uncommon .card-body {
+      :host .wrapper.limited .card-body {
         border-color: var(--green-highlight);
       }
 

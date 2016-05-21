@@ -1,0 +1,265 @@
+<link rel="import" href="../../styles/app-theme.html">
+<link rel="import" href="../../styles/shared-styles.html">
+
+<link rel="import" href="../../bower_components/iron-icons/maps-icons.html">
+
+<dom-module id="time-pong-card-face-two">
+  <template>
+    <style>
+      :host .wrapper {
+        box-sizing: border-box;
+        position: relative;
+        height: 28.75em;
+        width: 18.75em;
+        background-color: var(--orange-soft);
+        border: .2em solid var(--orange-soft);
+        border-radius: .7em;
+        display: flex;
+        flex-direction: row;
+      }
+      :host .wrapper.limited {
+        background-color: var(--green-soft);
+        border-color: var(--green-soft);
+      }
+      :host .wrapper.special {
+        background-color: var(--red-soft);
+        border-color: var(--red-soft);
+      }
+      :host .wrapper.rare {
+        background-color: var(--blue-soft);
+        border-color: var(--blue-soft);
+      }
+
+
+      :host .left-bar {
+        width: 5em;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: var(--secondary-text-color);
+      }
+
+      :host.expired .left-bar {
+        color: var(--light-grey);
+      }
+
+      :host h4 {
+        text-transform: uppercase;
+        font-size: .6em;
+        margin: 0;
+        font-weight: 100;
+      }
+
+      :host .left-bar div {
+        text-align: center;
+        padding: 1em 0;
+      }
+
+      :host .left-bar .type-display iron-icon {
+        --iron-icon-height: 2.5em;
+        --iron-icon-width: 2.5em;
+        opacity: .5;
+      }
+
+      :host .left-bar .title-display {
+        flex: 1 1 100%;
+        box-shadow: inset 0 0 1em var(--orange-highlight);
+        border-radius: 0em 1em 0em 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        width: 2em;
+        white-space: nowrap;
+        font-size: 1em;
+      }
+      :host .left-bar .title-display h4 {
+        font-size: .8em;
+      }
+      :host .wrapper.limited .left-bar .title-display {
+        box-shadow: inset 0 0 1em var(--green-highlight);
+      }
+      :host .wrapper.special .left-bar .title-display {
+        box-shadow: inset 0 0 1em var(--red-highlight);
+      }
+      :host .wrapper.rare .left-bar .title-display {
+        box-shadow: inset 0 0 1em var(--blue-highlight);
+      }
+
+      :host .left-bar .title-display .side-text {
+        transform: rotateZ(-90deg);
+      }
+
+      :host .left-bar .duration-display {
+        visibility: hidden;
+        position: relative;
+      }
+
+      :host.hasDuration .left-bar .duration-display {
+        visibility: visible;
+      }
+
+      :host .left-bar .duration-display iron-icon {
+        --iron-icon-height: 2.5em;
+        --iron-icon-width: 2.5em;
+        opacity: .5;
+      }
+
+      :host .left-bar .duration-display p {
+        position: absolute;
+        bottom: 1.9em;
+        left: 1.1em;
+        margin: 0;
+        font-weight: 100;
+        font-size: .9em;
+      }
+
+      :host .main-container {
+        flex: 1 1 100%;
+        border-radius: 10px;
+        background-color: var(--primary-background-color);
+        padding: 1em;
+      }
+
+      :host.expired .main-container {
+        color: var(--light-grey);
+      }
+
+      :host .main-container iron-icon.background-icon {
+        position: absolute;
+        bottom: -1.9em;
+        right: -1.9em;
+        --iron-icon-height: 14em;
+        --iron-icon-width: 14em;
+        color: var(--orange-soft);
+        opacity: .7;
+      }
+      :host .wrapper.limited .main-container iron-icon.background-icon {
+        color: var(--green-soft);
+      }
+      :host .wrapper.special .main-container iron-icon.background-icon {
+        color: var(--red-soft);
+      }
+      :host .wrapper.rare .main-container iron-icon.background-icon {
+        color: var(--blue-soft);
+      }
+
+      :host .main-container .content {
+        position: relative;
+      }
+
+      :host .main-container h2 {
+        font-weight: 100;
+        margin-bottom: 1em;
+        margin-top: 0;
+      }
+
+      :host .main-container p {
+        font-weight: 100;
+        margin-bottom: 1em;
+      }
+
+      :host .expired-text {
+        @apply(--absolute-template);
+        height: inherit;
+        display: none;
+        font-size: 4.5em;
+        color: var(--red-highlight);
+        bottom: 2rem;
+        left: 0;
+        text-align: center;
+        font-weight: bold;
+        text-shadow: 0 1px 1px var(--secondary-text-color);
+      }
+
+      :host.expired .expired-text{
+        display: block;
+      }
+    </style>
+
+    <div class$="wrapper {{data.rarity}}">
+
+      <div class="left-bar">
+
+        <div class="type-display">
+          <h4>
+            {{data.rarity}}<br/>
+            {{data.type}}
+          </h4>
+          <iron-icon icon="block"></iron-icon>
+        </div>
+
+        <div class="title-display">
+          <h4 class="side-text">{{data.title}}</h4>
+        </div>
+
+        <div class="duration-display">
+          <h4>Rounds</h4>
+          <iron-icon icon="cached"></iron-icon>
+          <p>{{data.duration}}</p>
+        </div>
+      </div>
+
+
+      <div class="main-container">
+
+        <iron-icon class="background-icon" icon="maps:local-bar"></iron-icon>
+
+        <div class="content">
+          <h2>{{data.title}}</h2>
+          <template is="dom-repeat" items="{{data.rules}}">
+            <p>{{item}}</p>
+          </template>
+        </div>
+
+        <div class="expired-text">
+          Expired
+        </div>
+
+      </div>
+
+
+
+    </div>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'time-pong-card-face-two',
+
+        properties: {
+          data: {
+            type: Object,
+            notify: true,
+            observer: '_dataChange'
+          }
+        },
+
+        _dataChange: function(newVal) {
+          this.toggleClass('expired', true);
+          this.toggleClass('hasDuration', false);
+          if (newVal.duration) {
+            this.toggleClass('hasDuration', true);
+          }
+
+          function updateStyle() {
+            this.updateStyles();
+          }
+          setTimeout(updateStyle.bind(this), 10); // Hack to ensure styles are updated after the data changes.
+        },
+
+        expire: function() {
+          this.toggleClass('expired', true);
+        },
+
+        reset: function() {
+          this.toggleClass('expired', false);
+        }
+      });
+    })();
+  </script>
+</dom-module>

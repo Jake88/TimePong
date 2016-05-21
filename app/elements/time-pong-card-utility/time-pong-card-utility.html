@@ -5,10 +5,10 @@
 
       var _BOUNDS = {
         basic: 35,
-        common: 65,
-        uncommon: 85,
-        rare: 97,
-        bluemoon: 100
+        regular: 65,
+        limited: 85,
+        special: 97,
+        rare: 100
       };
 
       Polymer.timePongUtility = Polymer({
@@ -62,14 +62,14 @@
           // Special check to see if we draw a basic card.
           if (result < _BOUNDS.basic && _.get(this.lastFoundCard, 'rarity') !== 'basic') {
             filters.rarity = 'basic';
-          } else if(result < _BOUNDS.common) {
-            filters.rarity = 'common';
-          } else if(result < _BOUNDS.uncommon) {
-            filters.rarity = 'uncommon';
+          } else if(result < _BOUNDS.regular) {
+            filters.rarity = 'regular';
+          } else if(result < _BOUNDS.limited) {
+            filters.rarity = 'limited';
+          } else if(result < _BOUNDS.special) {
+            filters.rarity = 'special';
           } else if(result < _BOUNDS.rare) {
             filters.rarity = 'rare';
-          } else if(result < _BOUNDS.bluemoon) {
-            filters.rarity = 'bluemoon';
           } else {
             // Should never happen, but if we find no card, just spit out the basic.
             filters.rarity = 'basic';
@@ -140,13 +140,13 @@
             rules: ['Sobriety doesn\'t mean you die of thirst.',
               'Drink whatever it is you people drink.']
           },
-          // ------------ COMMON
+          // ------------ regular
           {
             creator: 'Jake Turner',
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'common',
+            rarity: 'regular',
             type: 'action',
             title: 'Sharing is caring',
             rules: ['Choose friend to share your losing experience.',
@@ -157,7 +157,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'W&W',
-            rarity: 'common',
+            rarity: 'regular',
             type: 'action',
             title: 'The Witch\'s cauldron',
             rules: ['The first time this card is drawn, place an empty cup in the middle. This is the witch’s cauldron.',
@@ -169,7 +169,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'common',
+            rarity: 'regular',
             type: 'action',
             title: 'Dodged a bullet',
             rules: ['Allocate your drink to someone else.']
@@ -179,7 +179,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'common',
+            rarity: 'regular',
             type: 'action',
             title: 'Give and take',
             rules: ['Give one drink.',
@@ -190,7 +190,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'common',
+            rarity: 'regular',
             type: 'action',
             title: 'Trick shot',
             rules: ['Take a shot, bouncing the ball off the wall, ceiling, floor or other ‘tricky’ surface.',
@@ -202,7 +202,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'common',
+            rarity: 'regular',
             type: 'action',
             title: 'Return to sender',
             rules: ['Return the ball and cup to the person who last passed it to you this round. They drink.',
@@ -214,7 +214,7 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'W&W',
-            rarity: 'common',
+            rarity: 'regular',
             type: 'spell',
             duration: 3,
             title: 'Spell: Lead Cup',
@@ -227,7 +227,7 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'W&W',
-            rarity: 'common',
+            rarity: 'regular',
             type: 'spell',
             duration: 3,
             title: 'Spell: Reversal',
@@ -239,7 +239,7 @@
             created: '08/05/2016',
             forNonDrinkers: true,
             deck: 'W&W',
-            rarity: 'common',
+            rarity: 'regular',
             type: 'action',
             title: 'The Wizard\'s hat',
             rules: ['You don the wizard’s hat.',
@@ -251,7 +251,7 @@
             created: '08/05/2016',
             forNonDrinkers: true,
             deck: 'core',
-            rarity: 'common',
+            rarity: 'regular',
             type: 'action',
             title: 'Moosic to our ears',
             rules: ['Give us your best bovine imitation.']
@@ -261,7 +261,7 @@
             created: '08/05/2016',
             forNonDrinkers: true,
             deck: 'core',
-            rarity: 'common',
+            rarity: 'regular',
             type: 'action',
             title: 'All you ever do is give',
             rules: ['Choose a person to drink.']
@@ -272,7 +272,7 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'core',
-            rarity: 'common',
+            rarity: 'regular',
             type: 'action',
             title: 'You\'re so nosey!',
             rules: ['Put your finger on your nose.',
@@ -285,7 +285,7 @@
             deck: 'core',
             forDrinkers: true,
             forNonDrinkers: true,
-            rarity: 'common',
+            rarity: 'regular',
             type: 'action',
             title: 'Drop and gimme... one',
             rules: ['Drop down and perform one push up.',
@@ -293,13 +293,13 @@
               'If you can\'t, stand up',
               'If you can\'t, you should seek help.']
           },
-          // ------------ UNCOMMON
+          // ------------ limited
           {
             creator: 'Jake Turner',
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'action',
             title: 'Redemption',
             rules: ['You have one shot to redeem yourself.',
@@ -311,7 +311,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'action',
             title: 'You\'re doing it wrong',
             rules: ['Drink from the opposite side of the cup.',
@@ -322,7 +322,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'action',
             title: 'Rehydrate',
             rules: ['Slow down, cowboy. You’re looking a little tipsy!',
@@ -334,7 +334,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'action',
             title: 'Tops and red, pants and blue',
             rules: ['Anyone wearing these',
@@ -346,7 +346,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'action',
             title: 'Lovers\' lane',
             rules: ['Choose someone to love and sit next to them.',
@@ -359,7 +359,7 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'W&W',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'curse',
             title: 'Curse: The Witch\'s curse',
             rules: ['You are the witch. Create a curse of your choosing.',
@@ -372,7 +372,7 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'W&W',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'curse',
             title: 'Curse: A girl has no name',
             rules: ['You cannot use the real or abbreviated name of anyone in the group.',
@@ -385,7 +385,7 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'W&W',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'curse',
             title: 'Curse: Orgasmic',
             rules: ['Before each drink, moan like you mean it.',
@@ -398,7 +398,7 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'W&W',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'curse',
             title: 'Curse: What’s the point?',
             rules: ['You cannot point with your fingers.',
@@ -410,7 +410,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'W&W',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'action',
             title: 'Spelling bee',
             rules: ['Pick a person. Give them a word starting with \'B\'.',
@@ -422,7 +422,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'action',
             title: 'A hole in one',
             rules: ['Place the cup flat on it\'s side on the ground.',
@@ -434,7 +434,7 @@
             created: '08/05/2016',
             forNonDrinkers: true,
             deck: 'core',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'action',
             title: 'Fetch',
             rules: ['Fetch a drink for everyone running on empty.',
@@ -447,7 +447,7 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'core',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'action',
             title: 'Twerk it like Miley',
             rules: ['Stand up.',
@@ -459,7 +459,7 @@
             created: '08/05/2016',
             forNonDrinkers: true,
             deck: 'core',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'action',
             title: 'You\'re a Belieber',
             rules: ['Sing the chorus of any Justin Bieber song.']
@@ -470,7 +470,7 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'W&W',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'spell',
             duration: 3,
             title: 'Spell: Three\'s a crowd',
@@ -486,7 +486,7 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'W&W',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'spell',
             duration: 3,
             title: 'Spell: Multiball',
@@ -501,7 +501,7 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'W&W',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'spell',
             duration: 3,
             title: 'Spell: The gatekeeper',
@@ -515,7 +515,7 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'W&W',
-            rarity: 'uncommon',
+            rarity: 'limited',
             type: 'spell',
             duration: 3,
             title: 'Spell: Double or nothing',
@@ -525,13 +525,13 @@
               'If the same person has both cups, they perform the action twice.',
               'The effects of spell cards leave play with the spell expires.']
           },
-          // ------------ RARE
+          // ------------ special
           {
             creator: 'Jake Turner',
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'rare',
+            rarity: 'special',
             type: 'action',
             title: 'Skull',
             rules: ['No explanation needed.']
@@ -541,7 +541,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'rare',
+            rarity: 'special',
             type: 'action',
             title: 'This round\'s on me',
             rules: ['Take a drink for each other person playing.']
@@ -551,7 +551,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'rare',
+            rarity: 'special',
             type: 'action',
             title: 'This round\'s on them',
             rules: ['Take a drink from each other person\'s glass.']
@@ -562,7 +562,7 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'core',
-            rarity: 'rare',
+            rarity: 'special',
             type: 'action',
             title: 'Get out of jail free',
             rules: ['Save this card for when you need it most.',
@@ -573,7 +573,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'rare',
+            rarity: 'special',
             type: 'action',
             title: 'Thirsty',
             rules: ['Sit out next round.',
@@ -585,7 +585,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'rare',
+            rarity: 'special',
             type: 'action',
             title: 'Mmmm, Spicey!',
             rules: ['You have 10 seconds.',
@@ -598,7 +598,7 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'core',
-            rarity: 'rare',
+            rarity: 'special',
             type: 'action',
             title: 'Is that Kobe?!',
             rules: ['Place the cup in the middle of everyone. Take your shot.',
@@ -611,19 +611,19 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'core',
-            rarity: 'rare',
+            rarity: 'special',
             type: 'action',
             title: 'Kiss the closest frog',
             rules: ['Kiss the person next to you on the cheek.',
               'If they turn into a prince, you must be a princess!']
           },
-          // ------------ BLUEMOON
+          // ------------ rare
           {
             creator: 'Jake Turner',
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'W&W',
-            rarity: 'bluemoon',
+            rarity: 'rare',
             type: 'action',
             title: 'The witch\'s potion',
             rules: ['Get a cup. The three people to your left each pour a portion of their drink into it.',
@@ -635,7 +635,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'bluemoon',
+            rarity: 'rare',
             type: 'action',
             title: 'The racism is real',
             rules: ['You, and anyone of your ethnicity, must skull their drink.']
@@ -645,7 +645,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'bluemoon',
+            rarity: 'rare',
             type: 'action',
             title: 'Our friend, Sharon',
             rules: ['Drink if you know a Sharon.',
@@ -656,7 +656,7 @@
             created: '08/05/2016',
             forNonDrinkers: true,
             deck: 'core',
-            rarity: 'bluemoon',
+            rarity: 'rare',
             type: 'action',
             title: 'Now that\'s hot!',
             rules: ['Find and bite a hot chilli.',
@@ -668,7 +668,7 @@
             created: '08/05/2016',
             forNonDrinkers: true,
             deck: 'core',
-            rarity: 'bluemoon',
+            rarity: 'rare',
             type: 'action',
             title: 'Host\'s most gross',
             rules: ['The host of the house gets to choose something from their cupboard.',
@@ -679,7 +679,7 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
-            rarity: 'bluemoon',
+            rarity: 'rare',
             type: 'action',
             title: 'Two girls, one cup',
             rules: ['Caution, this can get messy',

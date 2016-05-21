@@ -3,6 +3,7 @@
 <link rel="import" href="../../styles/shared-styles.html">
 <link rel="import" href="../time-pong-card-utility/time-pong-card-utility.html">
 <link rel="import" href="../time-pong-card-face-one/time-pong-card-face-one.html">
+<link rel="import" href="../time-pong-card-face-two/time-pong-card-face-two.html">
 
 <link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
@@ -13,14 +14,19 @@
     <style include="shared-styles">
       :host div.content {
         height: calc(100% - 56px);
-        /*width: 100%;*/
         overflow: scroll;
-        position: absolute;
       }
 
       :host .filter-select {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
         flex-direction: row;
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
         justify-content: flex-start;
         margin: 0 20px;
       }
@@ -38,20 +44,26 @@
       }
 
       :host .cards-container {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
         flex-direction: row;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -ms-flex-pack: distribute;
+        justify-content: space-around;
       }
 
       :host .card-wrapper {
         position: relative;
-        box-sizing: border-box;
-        height: 450px;
+        height: 460px;
         width: 300px;
-        margin: 20px;
-
         box-shadow: 0 3px 3px #ccc;
         border-radius: 10px;
-        display: inline-block;
+        margin-bottom: 20px;
       }
 
       .dropdown-content {
@@ -85,7 +97,7 @@
       <div class="cards-container">
         <template is="dom-repeat" items="{{filteredCardList}}">
           <div class="card-wrapper">
-            <time-pong-card-face-one data="{{item}}"></time-pong-card-face-one>
+            <time-pong-card-face-two data="{{item}}"></time-pong-card-face-two>
           </div>
         </template>
       </div>
