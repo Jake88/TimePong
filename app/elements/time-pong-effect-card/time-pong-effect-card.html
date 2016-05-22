@@ -6,44 +6,109 @@
 <dom-module id="time-pong-effect-card">
   <template>
     <style include="shared-styles">
-      :host .effect-wrapper {
-        z-index: 1;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        height: 5.75em;
-        width: 3.75em;
-        margin-top: 1em;
+      :host h4 {
+        position: relative;
+        width: 100%;
+        font-weight: 100;
+        text-align: center;
+        margin: 0;
+        text-transform: uppercase;
+        font-size: .7em;
       }
+      :host h4.label {
+        margin-top: .5em;
+        line-height: 2em;
+        color: var(--light-grey);
+      }
+      :host.active h4.label {
+        line-height: 2em;
+        color: var(--secondary-text-color);
+      }
+
+      :host .effect-wrapper {
+        box-sizing: border-box;
+        padding: .3em;
+        z-index: 1;
+        border: 1px solid var(--light-grey);
+        border-radius: .2em;
+        height: 6.9em;
+        width: 4.5em;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        color: var(--light-grey);
+        background-color: var(--primary-background-color);
+      }
+
+      :host.active .effect-wrapper {
+        color: var(--secondary-text-color);
+        box-shadow: 0 2px 2px var(--overlay-background-color);
+        border-color: var(--orange-highlight);
+        background-color: var(--orange-soft);
+        transition: box-shadow .5s, transform .5s;
+        cursor: pointer;
+      }
+      :host.active .effect-wrapper iron-icon {
+        color: var(--orange-highlight);
+      }
+      :host.active .effect-wrapper.limited {
+        border-color: var(--green-highlight);
+        background-color: var(--green-soft);
+      }
+      :host.active .effect-wrapper.limited iron-icon {
+        color: var(--green-highlight);
+      }
+      :host.active .effect-wrapper.special {
+        border-color: var(--red-highlight);
+        background-color: var(--red-soft);
+      }
+      :host.active .effect-wrapper.special iron-icon {
+        color: var(--red-highlight);
+      }
+      :host.active .effect-wrapper.rare {
+        border-color: var(--blue-highlight);
+        background-color: var(--blue-soft);
+      }
+      :host.active .effect-wrapper.rare iron-icon {
+        color: var(--blue-highlight);
+      }
+
+      :host.active .effect-wrapper:hover {
+        transform: scale(1.1);
+        box-shadow: 0 5px 8px var(--secondary-text-color);
+      }
+
+      :host .effect-wrapper .icon-wrapper {
+        flex-grow: 1;
+      }
+
+      :host .effect-wrapper iron-icon {
+        --iron-icon-height: 2.7em;
+        --iron-icon-width: 100%;
+        text-align: center;
+        margin-top: .5em;
+        margin-bottom: .5em;
+      }
+
 
       :host time-pong-card-face-two {
       @apply(--card-wrapper);
         border-radius: 10px;
         display: none;
         z-index: 4;
+        opacity: 0;
         -webkit-transition: opacity .4s;
-        transition: .4s;
+        transition: opacity .4s;
       }
-
       :host.open time-pong-card-face-two {
         display: block;
+        opacity: 1;
       }
       :host.fade time-pong-card-face-two {
         display: block;
         opacity: 0;
-        -webkit-transition: .4s;
-        transition: .4s;
       }
 
-      :host h4 {
-        position: relative;
-        width: 100%;
-        color: var(--light-grey);
-        font-weight: 100;
-        margin: -17px 0 2px 0;
-      }
-      :host.active h4 {
-        color: var(--overlay-background-color);
-      }
 
       :host .dark-overlay {
         opacity: 0;
@@ -77,10 +142,15 @@
       is-effect="true">
     </time-pong-card-face-two>
 
-    <div class="effect-wrapper" on-tap="toggleCard">
-      <h4>{{label}}</h4>
-      <iron-icon icon="block"></iron-icon>
-      <h4>{{data.title}}</h4>
+    <div>
+      <h4 class="label">{{label}}</h4>
+
+      <div class$="effect-wrapper {{data.rarity}}" on-tap="toggleCard">
+        <div class="icon-wrapper">
+          <iron-icon icon="block"></iron-icon>
+        </div>
+        <h4 class="title">{{stripLabel(data.title)}}</h4>
+      </div>
     </div>
 
 
@@ -102,6 +172,10 @@
           },
           label: String,
           index: Number
+        },
+
+        stripLabel: function(title) {
+          return title ? title.replace(this.label + ': ', '') : '';
         },
 
         _dataChanged: function(newVal) {

@@ -14,20 +14,23 @@
 <dom-module id="time-pong-timer">
   <template>
     <style include="shared-styles">
+      :host {
+        display: block;
+        width: 100%;
+      }
+
       :host paper-button {
-        height: 150px;
-        width: 150px;
+        height: 9em;
+        width: 9em;
         border-radius: 50%;
         cursor: pointer;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-left: -75px;
-        margin-top: -75px;
+        position: relative;
+        margin: 2em auto;
         background-color: #fff;
         border: 15px solid var(--green-highlight);
         color: var(--green-highlight);
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        display: block;
       }
       :host paper-button:active {
         background-color: var(--green-soft);
@@ -92,6 +95,7 @@
         transition: all 0s ease-out;
       }
     </style>
+
     <paper-button noink on-tap="timerPress">
       <iron-icon hidden$="{{isRunning}}" icon="av:play-arrow"></iron-icon>
       <iron-icon hidden$="{{!isRunning}}" icon="icons:remove" class="clockHand slow"></iron-icon>
