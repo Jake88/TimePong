@@ -123,11 +123,14 @@
             creator: 'Jake Turner',
             created: '08/05/2016',
             forDrinkers: true,
-            deck: 'core',
+            deck: 'W&W',
             rarity: 'basic',
             type: 'action',
-            title: 'Drink!',
-            rules: ['Take a drink.']
+            drinkValue: '1',
+            title: 'The Witch\'s Cauldron',
+            rules: ['The first time this card is drawn, place an empty cup in the middle. This is the witch’s cauldron.',
+              'Pour a generous shot of your drink in. If you fill it (group decision) you skull it',
+              'When the game ends, if the cauldron is still brewing, the last person to have drawn this card drinks it.']
           },
           {
             creator: 'Jake Turner',
@@ -136,6 +139,7 @@
             deck: 'core',
             rarity: 'basic',
             type: 'action',
+            drinkValue: '1',
             title: 'Drink!',
             rules: ['Sobriety doesn\'t mean you die of thirst.',
               'Drink whatever it is you people drink.']
@@ -148,6 +152,7 @@
             deck: 'core',
             rarity: 'regular',
             type: 'action',
+            drinkValue: '1',
             title: 'Sharing is caring',
             rules: ['Choose friend to share your losing experience.',
               'Both of you drink.']
@@ -156,13 +161,12 @@
             creator: 'Jake Turner',
             created: '08/05/2016',
             forDrinkers: true,
-            deck: 'W&W',
+            deck: 'Core',
             rarity: 'regular',
             type: 'action',
-            title: 'The Witch\'s cauldron',
-            rules: ['The first time this card is drawn, place an empty cup in the middle. This is the witch’s cauldron.',
-              'Pour a generous shot of your drink in. If you fill it (group decision) you skull it',
-              'When the game ends, if the cauldron is still brewing, the last person to have drawn this card drinks it.']
+            drinkValue: '1',
+            title: 'Drink!',
+            rules: []
           },
           {
             creator: 'Jake Turner',
@@ -171,6 +175,18 @@
             deck: 'core',
             rarity: 'regular',
             type: 'action',
+            drinkValue: '2',
+            title: 'Drink!',
+            rules: []
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'core',
+            rarity: 'regular',
+            type: 'action',
+            drinkValue: '2',
             title: 'Dodged a bullet',
             rules: ['Allocate your drink to someone else.']
           },
@@ -181,6 +197,7 @@
             deck: 'core',
             rarity: 'regular',
             type: 'action',
+            drinkValue: '2',
             title: 'Give and take',
             rules: ['Give one drink.',
               'Take two.']
@@ -192,6 +209,7 @@
             deck: 'core',
             rarity: 'regular',
             type: 'action',
+            drinkValue: '2',
             title: 'Trick shot',
             rules: ['Take a shot, bouncing the ball off the wall, ceiling, floor or other ‘tricky’ surface.',
               'If you get it in, you get bragging rights and choose someone to skull.',
@@ -204,14 +222,16 @@
             deck: 'core',
             rarity: 'regular',
             type: 'action',
+            drinkValue: '2',
             title: 'Return to sender',
             rules: ['Return the ball and cup to the person who last passed it to you this round. They drink.',
-              'If you were the only person to take a shot this round, you drink twice instead.']
+              'If you were the only person to take a shot this round, have double the drinks']
           },
           {
             creator: 'Jake Turner',
             created: '08/05/2016',
             forNonDrinkers: true,
+            forDrinkers: true,
             deck: 'W&W',
             rarity: 'regular',
             type: 'action',
@@ -247,25 +267,12 @@
             forNonDrinkers: true,
             deck: 'core',
             rarity: 'regular',
-            type: 'action',
+            type: 'ability',
+            drinkValue: '1',
             title: 'You\'re so nosey!',
-            rules: ['Put your finger on your nose.',
-              'Stare everyone down until they follow suite.',
-              'The last person to do so, drinks.']
-          },
-          {
-            creator: 'Jake Turner',
-            created: '08/05/2016',
-            deck: 'core',
-            forDrinkers: true,
-            forNonDrinkers: true,
-            rarity: 'regular',
-            type: 'action',
-            title: 'Drop and gimme... one',
-            rules: ['Drop down and perform one push up.',
-              'If you can\'t, perform one sit up.',
-              'If you can\'t, stand up',
-              'If you can\'t, you should seek help.']
+            rules: ['During the next round, you may put your finger on your nose.',
+              'The last person to follow suit must finish their drink.',
+              'This ability has a one time use.']
           },
           {
             creator: 'Jake Turner',
@@ -275,6 +282,7 @@
             deck: 'W&W',
             rarity: 'regular',
             type: 'curse',
+            drinkValue: '1',
             title: 'Curse: The Witch\'s curse',
             rules: ['You are the witch. Create a curse of your choosing.',
               'The curse is in effect until a new one is revealed.',
@@ -288,6 +296,7 @@
             deck: 'W&W',
             rarity: 'regular',
             type: 'curse',
+            drinkValue: '1',
             title: 'Curse: A girl has no name',
             rules: ['You cannot use the real or abbreviated name of anyone in the group.',
               'The curse is in effect until a new one is revealed.',
@@ -301,6 +310,7 @@
             deck: 'W&W',
             rarity: 'regular',
             type: 'curse',
+            drinkValue: '1',
             title: 'Curse: Orgasmic',
             rules: ['Before each drink, moan like you mean it.',
               'The curse is in effect until a new one is revealed.',
@@ -314,10 +324,24 @@
             deck: 'W&W',
             rarity: 'regular',
             type: 'curse',
+            drinkValue: '1',
             title: 'Curse: What’s the point?',
             rules: ['You cannot point with your fingers.',
               'The curse is in effect until a new one is revealed.',
               'If anyone breaks the curse they drink.']
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'core',
+            rarity: 'regular',
+            type: 'action',
+            drinkValue: '1',
+            title: 'Lovers\' lane',
+            rules: ['Choose someone to love and sit next to them.',
+              'Whenever one drinks, so does the other.',
+              'You remain lovers until Lovers’ Lane is drawn again.']
           },
           // ------------ limited
           {
@@ -329,9 +353,31 @@
             rarity: 'limited',
             type: 'spell',
             duration: 3,
+            drinkValue: '2',
             title: 'Spell: Lead Cup',
             rules: ['No matter what, you may only pass to the person on your left.',
               'The effects of spell cards leave play with the spell expires.']
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'core',
+            rarity: 'regular',
+            type: 'action',
+            drinkValue: '4',
+            title: 'Drink!',
+            rules: []
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            deck: 'core',
+            forNonDrinkers: true,
+            rarity: 'limited',
+            type: 'action',
+            title: 'Drop and gimme ten',
+            rules: ['Perform ten push ups.']
           },
           {
             creator: 'Jake Turner',
@@ -342,6 +388,7 @@
             rarity: 'limited',
             type: 'spell',
             duration: 3,
+            drinkValue: '2',
             title: 'Spell: Reversal',
             rules: ['Instead of passing left on subsequent tries, pass to the right.',
               'The effects of spell cards leave play with the spell expires.']
@@ -355,6 +402,7 @@
             rarity: 'limited',
             type: 'spell',
             duration: 3,
+            drinkValue: '2',
             title: 'Spell: Free throws',
             rules: ['The cup now sits in the middle of the table.',
               'Players must shoot the ball in without bouncing.',
@@ -367,10 +415,11 @@
             deck: 'core',
             rarity: 'limited',
             type: 'action',
+            drinkValue: '4',
             title: 'Redemption',
             rules: ['You have one shot to redeem yourself.',
               'If you miss, drink twice for the shame you bring on your family.',
-              'If you succeed, you’re safe... for now.']
+              'If you succeed, you’re safe.']
           },
           {
             creator: 'Jake Turner',
@@ -379,6 +428,7 @@
             deck: 'core',
             rarity: 'limited',
             type: 'action',
+            drinkValue: '2',
             title: 'You\'re doing it wrong',
             rules: ['Drink from the opposite side of the cup.',
               '( Place your lips on the far side of the cup. Now tilt your head forward until you can take your drink. )']
@@ -390,6 +440,7 @@
             deck: 'core',
             rarity: 'limited',
             type: 'action',
+            drinkValue: '0',
             title: 'Rehydrate',
             rules: ['Slow down, cowboy. You’re looking a little tipsy!',
               'Get excluded from rounds until you drink a glass of water.',
@@ -402,6 +453,7 @@
             deck: 'core',
             rarity: 'limited',
             type: 'action',
+            drinkValue: '3',
             title: 'Tops are red, pants are blue',
             rules: ['Anyone wearing these',
               'drinks with you.',
@@ -414,34 +466,11 @@
             deck: 'core',
             rarity: 'limited',
             type: 'action',
-            title: 'Lovers\' lane',
-            rules: ['Choose someone to love and sit next to them.',
-              'Whenever one drinks, so does the other.',
-              'You remain lovers until Lovers’ Lane is drawn again.']
-          },
-          {
-            creator: 'Jake Turner',
-            created: '08/05/2016',
-            forDrinkers: true,
-            deck: 'W&W',
-            rarity: 'limited',
-            type: 'action',
-            title: 'Spelling bee',
-            rules: ['Pick a person. Give them a word starting with \'B\'.',
-              'If they can’t spell it, you’re a ‘B’ully, and you both drink.',
-              'If they can spell it... you have to drink.']
-          },
-          {
-            creator: 'Jake Turner',
-            created: '08/05/2016',
-            forDrinkers: true,
-            deck: 'core',
-            rarity: 'limited',
-            type: 'action',
+            drinkValue: '3',
             title: 'A hole in one',
             rules: ['Place the cup flat on it\'s side on the ground.',
               'Take a step back and drop the ball. You have one shot. Putt the ball in using your foot.',
-              'If you succeed choose someone to skull, if you fail, take a drink.']
+              'If you succeed choose someone to skull, if you fail, drink.']
           },
           {
             creator: 'Jake Turner',
@@ -458,23 +487,12 @@
           {
             creator: 'Jake Turner',
             created: '08/05/2016',
+            forNonDrinkers: true,
             forDrinkers: true,
-            forNonDrinkers: true,
             deck: 'core',
             rarity: 'limited',
             type: 'action',
-            title: 'Twerk it like Miley',
-            rules: ['Stand up.',
-              'Face away from the group.',
-              'Make Miley proud.']
-          },
-          {
-            creator: 'Jake Turner',
-            created: '08/05/2016',
-            forNonDrinkers: true,
-            deck: 'core',
-            rarity: 'limited',
-            type: 'action',
+            drinkValue: '2',
             title: 'You\'re a Belieber',
             rules: ['Sing the chorus of any Justin Bieber song.']
           },
@@ -487,6 +505,7 @@
             rarity: 'limited',
             type: 'spell',
             duration: 3,
+            drinkValue: '2',
             title: 'Spell: Three\'s a crowd',
             rules: ['Add two balls to the game.',
               'The two people adjacent to the player must bounce their balls in as well.',
@@ -503,6 +522,7 @@
             rarity: 'limited',
             type: 'spell',
             duration: 3,
+            drinkValue: '2',
             title: 'Spell: Multiball',
             rules: ['Add one ball to the game.',
               'The player must now get both balls in before passing.',
@@ -518,6 +538,7 @@
             rarity: 'limited',
             type: 'spell',
             duration: 3,
+            drinkValue: '2',
             title: 'Spell: The gatekeeper',
             rules: ['You are the Gatekeeper.',
               'When you sink the ball, you may pass the cup to anyone.',
@@ -532,6 +553,7 @@
             rarity: 'limited',
             type: 'spell',
             duration: 3,
+            drinkValue: '2',
             title: 'Spell: Double or nothing',
             rules: ['Add another ball and cup.',
               'Start the cups on opposite sides of the circle and play with both simultaneously.',
@@ -544,9 +566,24 @@
             creator: 'Jake Turner',
             created: '08/05/2016',
             forDrinkers: true,
+            forNonDrinkers: true,
             deck: 'core',
             rarity: 'special',
             type: 'action',
+            drinkValue: '4',
+            title: 'Twerk it like Miley',
+            rules: ['Stand up.',
+              'Face away from the group.',
+              'Make Miley proud.']
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'core',
+            rarity: 'special',
+            type: 'action',
+            drinkValue: 'S',
             title: 'Skull',
             rules: ['No explanation needed.']
           },
@@ -557,18 +594,9 @@
             deck: 'core',
             rarity: 'special',
             type: 'action',
+            drinkValue: 'X',
             title: 'This round\'s on me',
-            rules: ['Take a drink for each other person playing.']
-          },
-          {
-            creator: 'Jake Turner',
-            created: '08/05/2016',
-            forDrinkers: true,
-            deck: 'core',
-            rarity: 'special',
-            type: 'action',
-            title: 'This round\'s on them',
-            rules: ['Take a drink from each other person\'s glass.']
+            rules: ['Take X drinks where X is the number of people playing.']
           },
           {
             creator: 'Jake Turner',
@@ -577,7 +605,8 @@
             forNonDrinkers: true,
             deck: 'core',
             rarity: 'special',
-            type: 'action',
+            type: 'ability',
+            drinkValue: '0',
             title: 'Get out of jail free',
             rules: ['Save this card for when you need it most.',
               'It has a one time use, and can get you out of doing the action of another card.']
@@ -589,6 +618,7 @@
             deck: 'core',
             rarity: 'special',
             type: 'action',
+            drinkValue: 'X',
             title: 'Thirsty',
             rules: ['Fill your drink. When full, sit out the following round.',
               'When the timer is started, start drinking.',
@@ -601,8 +631,9 @@
             deck: 'core',
             rarity: 'special',
             type: 'action',
+            drinkValue: 'S',
             title: 'Mmmm, Spicey!',
-            rules: ['You have 10 seconds.',
+            rules: ['You have 5 seconds.',
               'Name the five spice girls.',
               'If you fail, skull your drink.']
           },
@@ -610,14 +641,14 @@
             creator: 'Jake Turner',
             created: '08/05/2016',
             forDrinkers: true,
-            forNonDrinkers: true,
             deck: 'core',
             rarity: 'special',
             type: 'action',
-            title: 'Is that Kobe?!',
+            drinkValue: '4',
+            title: 'Kobe!',
             rules: ['Place the cup in the middle of everyone. Take your shot.',
               'If you score, you must be Kobe Bryant and everybody drinks in your name.',
-              'If you miss, skip the next round while you practice your free throw.']
+              'If you miss, drink and skip the next round.']
           },
           {
             creator: 'Jake Turner',
@@ -627,11 +658,10 @@
             deck: 'core',
             rarity: 'special',
             type: 'action',
-            title: 'Kiss the closest frog',
-            rules: ['Kiss the person next to you on the cheek.',
-              'If they turn into a prince, you must be a princess!']
+            drinkValue: '4',
+            title: 'Kiss the closest person',
+            rules: ['Kiss the person next to you (anywhere).']
           },
-          // ------------ rare
           {
             creator: 'Jake Turner',
             created: '08/05/2016',
@@ -639,6 +669,7 @@
             deck: 'W&W',
             rarity: 'rare',
             type: 'action',
+            drinkValue: 'S',
             title: 'The witch\'s potion',
             rules: ['Get a cup. The three people to your left each pour a portion of their drink into it.',
               'Top it up with your drink.',
@@ -651,6 +682,7 @@
             deck: 'core',
             rarity: 'rare',
             type: 'action',
+            drinkValue: 'S',
             title: 'The racism is real',
             rules: ['You, and anyone of your ethnicity, must skull their drink.']
           },
@@ -661,6 +693,7 @@
             deck: 'core',
             rarity: 'rare',
             type: 'action',
+            drinkValue: 'S',
             title: 'Our friend, Sharon',
             rules: ['Drink if you know a Sharon.',
               'Skull if you don\'t']
@@ -695,6 +728,7 @@
             deck: 'core',
             rarity: 'rare',
             type: 'action',
+            drinkValue: 'S',
             title: 'Two girls, one cup',
             rules: ['Caution, this can get messy',
               'Pick a girl. She picks another.',
@@ -708,6 +742,7 @@
             deck: 'core',
             rarity: 'rare',
             type: 'action',   // GLOBAL??
+            drinkValue: 'X',
             title: 'Waterfall',
             rules: ['All drinkers refill their cups before the timer starts.',
               'When the timer is started, play normally except all drinkers must start drinking.',
