@@ -178,6 +178,8 @@
       }
     </style>
 
+    <iron-meta id="appPropsMeta"></iron-meta>
+
     <div class$="wrapper {{data.rarity}}">
 
       <div class="left-bar">
@@ -213,9 +215,9 @@
           </template>
         </div>
 
-        <div class="drinks">
+        <div class="drinks" hidden="{{hideDrinksLabel(data.drinkValue)}}">
           <h1>{{data.drinkValue}}</h1>
-          <h4>Drinks</h4>
+          <h4>{{getDrinkLabel(data.drinkValue)}}</h4>
         </div>
 
         <div class="expired-text">
@@ -254,6 +256,17 @@
             this.updateStyles();
           }
           setTimeout(updateStyle.bind(this), 10); // Hack to ensure styles are updated after the data changes.
+        },
+
+        getDrinkLabel: function(drinksValue) {
+          return ['1', 'S'].indexOf(drinksValue) > -1 ? 'Drink' : 'Drinks';
+        },
+
+        hideDrinksLabel: function(drinksValue) {
+          var appProps = this.$.appPropsMeta.byKey('appProps');
+          if (_.isUndefined(drinksValue) || !appProps.isDrinking) {
+            return true;
+          }
         },
 
         expire: function() {
