@@ -228,8 +228,6 @@
 
       </div>
 
-
-
     </div>
   </template>
 
@@ -266,7 +264,7 @@
 
         hideDrinksLabel: function(drinksValue) {
           var appProps = this.$.appPropsMeta.byKey('appProps');
-          if (_.isUndefined(drinksValue) || !appProps.isDrinking) {
+          if (_.isUndefined(drinksValue) || appProps.isNonDrinking) {
             return true;
           }
         },

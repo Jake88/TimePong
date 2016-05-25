@@ -97,7 +97,7 @@
             isSpellActive: !!this.currentEffects.spell
           };
 
-          this.appProps.isDrinking = !!e.detail;
+          this.appProps.isNonDrinking = !e.detail;
 
           this.currentCard = this.$$('time-pong-card-utility').getRandomCard(filters);
         },

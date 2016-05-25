@@ -123,9 +123,6 @@
             value: 0,
             notify: false
           },
-          timeinterval: {
-            type: String
-          },
           audio: Object
         },
 
@@ -144,7 +141,9 @@
 
         timerPress: function() {
           if (this.isRunning) {
-            stopTimer.bind(this)();
+            this.isRunning = false;
+            this.toggleClass('running', false);
+            clearTimeout(this.timeout);
           } else {
             // Ensure our audio file is downloaded and ready to play
             if (!this.audio.loaded) {
@@ -161,36 +160,22 @@
             // Get the random amount of time our timer will go for
             var millisecondsToAdd = Math.random() * (maxMilliseconds - minMilliseconds) + minMilliseconds;
 
-            console.log(millisecondsToAdd);
-
-            // Variable to hold the previous intervals date (for a diff)
-            var previousDate = Date.now();
-
-            // Variable to hold the current time counter
-            this.timer = 0;
-
-            this.timeinterval = setInterval(interval.bind(this), 37);
+            this.timeout = setTimeout(stopTimer.bind(this), millisecondsToAdd);
 
             this.isRunning = true;
             this.toggleClass('running', true);
-          }
 
-          function interval() {
-            var t = Date.now() - previousDate;
-            previousDate = Date.now();
-            this.timer += t;
-            if(this.timer > millisecondsToAdd){
-              this.fire('timer-finished', this.timer);
-              this.playSound();
-              stopTimer.bind(this)();
-            }
+            this.timer = millisecondsToAdd;
+            this.notifyPath('this.timer');
           }
 
           function stopTimer() {
-            clearInterval(this.timeinterval);
+            this.fire('timer-finished', this.timer);
+            clearTimeout(this.timeout);
             this.isRunning = false;
             this.toggleClass('running', false);
-            this.notifyPath('this.timer');
+            this.playSound();
+            return false;
           }
         }
       });

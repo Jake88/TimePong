@@ -31,8 +31,8 @@
         z-index: 1;
         border: 1px solid var(--light-grey);
         border-radius: .2em;
-        height: 6.9em;
-        width: 4.5em;
+        height: 7.2em;
+        width: 4.9em;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -73,11 +73,6 @@
         color: var(--blue-highlight);
       }
 
-      :host.active .effect-wrapper:hover {
-        transform: scale(1.1);
-        box-shadow: 0 5px 8px var(--secondary-text-color);
-      }
-
       :host .effect-wrapper .icon-wrapper {
         flex-grow: 1;
       }
@@ -95,45 +90,57 @@
       @apply(--card-wrapper);
         border-radius: 10px;
         display: none;
-        z-index: 4;
+        z-index: 999;
         opacity: 0;
-        -webkit-transition: opacity .4s;
-        transition: opacity .4s;
+        -webkit-transform: translate3d(0, -10em, 0);
+        transform: translate3d(0, -10em, 0);
+        -webkit-transition: opacity .3s, transform .3s linear;
+        transition: opacity .3s, transform .3s linear;
       }
       :host.open time-pong-card-face-two {
-        display: block;
+        -webkit-transition: opacity .3s, transform .3s linear;
+        transition: opacity .3s, transform .3s linear;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
         opacity: 1;
       }
       :host.fade time-pong-card-face-two {
-        display: block;
         opacity: 0;
       }
 
 
-      :host .dark-overlay {
+      :host .overlay-wrapper {
+        position: fixed;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        left: 100%
+      }
+      :host.overlay .overlay-wrapper {
+        left: 0;
+      }
+
+      :host .overlay-inner {
+        position:absolute;
         opacity: 0;
         -webkit-transition: opacity .5s linear;
         transition: opacity .5s linear;
-        position: absolute;
-        top: -2000px;
-        left: -2000px;
-        width: 5000px;
-        height: 5000px;
-        background-color: #333;
-        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--overlay-background-color);
+        z-index: 900;
       }
-      :host.animating .dark-overlay {
-        z-index: 3;
-      }
-      :host.overlay .dark-overlay {
-        z-index: 3;
+      :host.overlay .overlay-inner {
         opacity: .7;
-        -webkit-transition: opacity .5s linear;
-        transition: opacity .5s linear;
       }
     </style>
 
-    <div class="dark-overlay"></div>
+    <div class="overlay-wrapper">
+      <div class="overlay-inner"></div>
+    </div>
+
 
     <time-pong-card-face-two
       on-tap="toggleCard"
@@ -186,35 +193,43 @@
           if (this.data && this.data.duration) {
             this.set('data.duration', this.data.duration -= 1);
             if (this.data.duration === 0) {
-              setTimeout(this.expire.bind(this), 500);
+              setTimeout(this.expire.bind(this), 200);
             }
           }
         },
 
         expire: function() {
+
           this.toggleCard();
           this.$$('time-pong-card-face-two').expire();
         },
 
         toggleCard: function() {
           if (this.className.indexOf('animating') === -1) {
-            if (this.data.duration === 0 && this.className.indexOf('open') > -1) {
-              this.fade();
-            } else {
-              this.toggleClass('open');
-            }
-            this.toggleClass('overlay');
-            this.toggleClass('animating');
-            setTimeout(this.stopAnimating.bind(this), 500);
+            this.$$('time-pong-card-face-two').style.display = 'block';
+            setTimeout(function() {
+              if (this.data.duration === 0 && this.className.indexOf('open') > -1) {
+                this.fade();
+              } else {
+                this.toggleClass('open');
+              }
+              this.toggleClass('overlay');
+              this.toggleClass('animating');
+              setTimeout(this.stopAnimating.bind(this), 400);
+            }.bind(this), 40);
           }
         },
 
         stopAnimating: function() {
+          if (this.className.indexOf('open') === -1) {
+            this.$$('time-pong-card-face-two').style.display = 'none';
+          }
           this.toggleClass('animating', false);
         },
 
         fade: function() {
           this.toggleClass('fade', true);
+          this.toggleClass('active', false);
           setTimeout(this.clearEffect.bind(this), 300)
         },
 
