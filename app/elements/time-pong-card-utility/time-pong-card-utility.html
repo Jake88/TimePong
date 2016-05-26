@@ -128,9 +128,22 @@
             type: 'action',
             drinkValue: '1',
             title: 'The Witch\'s Cauldron',
-            rules: ['The first time this card is drawn, place an empty cup in the middle. This is the witch’s cauldron.',
-              'Pour a generous shot of your drink in. If you fill it (group decision) you skull it',
-              'When the game ends, if the cauldron is still brewing, the last person to have drawn this card drinks it.']
+            rules: ['If the cauldron doesn\'t exist, place an empty cup in the middle. This is now The Witch\'s Cauldron.',
+              'Pour two drinks worth of your drink in. If you fill the cauldron, you skull it'],
+            primaryDrinkRule: {
+              value: '1',
+              type: 'skull',
+              person: 'you',
+              description: 'Wearing red or blue',
+              condition: 'success'    // optional condition FOR CONDITION CARDS ONLY. Could this also be 'punishment' for when a curse is disobeyed? Too complicated?
+            },
+            secondaryDrinkRule: {
+              value: '1',
+              type: 'drink',
+              person: 'someone',
+              description: 'Choose someone',
+              condition: 'failure'    // optional condition FOR CONDITION CARDS ONLY.
+            }
           },
           {
             creator: 'Jake Turner',
