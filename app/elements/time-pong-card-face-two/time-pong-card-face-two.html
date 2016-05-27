@@ -2,6 +2,7 @@
 <link rel="import" href="../../styles/shared-styles.html">
 
 <link rel="import" href="../../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/social-icons.html">
 <link rel="import" href="../../bower_components/iron-meta/iron-meta.html">
 
 
@@ -66,9 +67,9 @@
 
       :host .left-bar .title-display {
         flex: 1 1 100%;
-        /*box-shadow: inset 0 0 1em var(--orange-highlight);*/
-        box-shadow: inset 2px 2px 3px var(--drop-shadow-color);
-        background-color: var(--orange-soft-tint);
+        box-shadow: inset 0 0 1em rgba(0,0,0,.1);
+        /*box-shadow: inset 2px 2px 3px var(--drop-shadow-color);*/
+        /*background-color: var(--orange-soft-tint);*/
         border-radius: 0em 1em 0em 1em;
         display: flex;
         justify-content: center;
@@ -121,9 +122,8 @@
 
       :host .main-container {
         flex: 1 1 100%;
-        border-radius: 10px;
-        background-color: var(--primary-background-color);
-        padding: 1em;
+        display: flex;
+        flex-direction: column;
       }
 
       :host.expired .main-container {
@@ -150,7 +150,12 @@
       }
 
       :host .main-container .content {
+        border-radius: .7em;
+        border: 1px solid var(--orange-soft-tint);
+        background-color: var(--primary-background-color);
+        padding: 1em;
         position: relative;
+        flex: 1 1 100%;
       }
 
       :host .main-container h2 {
@@ -164,72 +169,91 @@
         margin-bottom: 1em;
       }
 
-      :host .main-container .drinks {
-        box-sizing: border-box;
-        position: absolute;
-        bottom: -.2em;
-        right: -.2em;
-        height: 5em;
-        width: 5em;
-        border-radius: 90% 0 .7em 0;
-        z-index: 2; /*TODO not needed if no icon needs hiding*/
-        background-color: var(--orange-soft-tint);
-        overflow: hidden; /*TODO not needed if no icon needs hiding*/
-      }
-
-      :host .main-container .drinks .shadow-wrapper {
+      :host .drinks-container {
+        display: flex;
+        flex-direction: row;
         box-sizing: border-box;
         position: relative;
-        height: 100%;
-        width: 100%;
-        padding-top: 1.3em;
-        padding-right: .5em;
-        border-radius: 90% 0 .7em 0;
-        font-weight: 100;
-        box-shadow: inset 2px 2px 2px var(--drop-shadow-color);
-        text-align: right;
+        border-radius: .7em;
+        color: var(--secondary-text-color);
+        background-color: var(--orange-soft-tint);
+        border: 1px solid var(--orange-soft-tint);
+        margin-top: .2em;
+        text-align: center;
+        height: 3em;
+        overflow: hidden;
+        -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC); /* this fixes the overflow:hidden in Chrome/Opera */
       }
-
-      :host .main-container .drinks iron-icon.drinks-icon {
-        position: absolute;
-        bottom: -.4em;
-        right: -.4em;
-        --iron-icon-height: 5em;
-        --iron-icon-width: 5em;
-        color: var(--orange-highlight);
-        opacity: .7;
+      :host .drinks-container div {
+        flex: 1 1 25%;
+        /*box-shadow: inset 0 0 5em rgba(0,0,0,.1);*/
+        /*box-shadow: inset 0 0 3em rgba(255,255,255,1);*/
       }
-
-      /*:host .main-container .drinks .side-text {*/
-        /*position: absolute;*/
-        /*bottom: 3.6em;*/
-        /*right: 2.7em;*/
-
-        /*transform: rotateZ(-90deg);*/
-      /*}*/
-      :host .main-container .drinks .side-text {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        transform: rotateZ(-90deg);
-        font-size: 1.5em;
-        transform-origin: left;
+      :host .drinks-container iron-icon {
+        --iron-icon-height: 2.5em;
+        --iron-icon-width: 2.5em;
+        color: var(--secondary-text-color);
+      }
+      :host .drinks-container h4 {
+        position: relative;
+        margin-top: -.9em;
         font-weight: bold;
-        opacity: .2;
-
+        font-size: .7em;
+        padding-top: .2em;
+        background-color: var(--primary-background-color);
+        border-top: 1px solid var(--secondary-text-color);
       }
 
-      :host .main-container .drinks h1 {
-        position: absolute;
+      :host .drinks-container .drink-rule-description {
+        background-color: var(--primary-background-color);
+        font-size: .7em;
         margin: 0;
-        font-size: 5em;
-        left: 2rem;
-        top: 0;
-        color: #FFD078;
+        flex: 1 1 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: .2em;
+        font-weight: normal;
+        color: var(--primary-text-color);
+        border-radius: 50% 50% 0 0;
+        position: relative;
+      }
+
+      :host .drinks-container .drink-rule-description .drink-rule-condition {
+        text-align: center;
+        text-transform: uppercase;
+        flex: 0 1 100%;
+      }
+      :host .drinks-container .drink-rule-description .drink-rule-condition.success {
+        color: var(--green-highlight);
+      }
+      :host .drinks-container .drink-rule-description .drink-rule-condition.fail {
+        color: var(--red-highlight);
+      }
+
+      :host .or-text {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        line-height: 1rem;
+        padding-top: 2px;
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: var(--orange-soft);
+        border-radius: 50%;
+        border: 1px solid var(--orange-soft-tint);
+        position: absolute;
+        bottom: 2.4rem;
+        right: 10rem;
+        font-size:.7em;
+        text-transform: uppercase;
+        box-shadow: 0 1px 1px var(--secondary-text-color);
       }
 
       :host .expired-text {
-        @apply(--absolute-template);
+      @apply(--absolute-template);
         height: inherit;
         display: none;
         font-size: 4.5em;
@@ -257,7 +281,7 @@
             {{data.rarity}}<br/>
             {{data.type}}
           </h4>
-          <iron-icon icon="block"></iron-icon>
+          <iron-icon icon="star"></iron-icon>
         </div>
 
         <div class="title-display">
@@ -273,7 +297,6 @@
 
 
       <div class="main-container">
-
         <iron-icon class="background-icon" icon="maps:local-bar"></iron-icon>
 
         <div class="content">
@@ -283,20 +306,44 @@
           </template>
         </div>
 
-        <div class="drinks" hidden="{{hideDrinksLabel(data.drinkValue)}}">
-          <!--<iron-icon class="drinks-icon" icon="maps:local-drink"></iron-icon>-->
-          <div class="shadow-wrapper">
-            <h1>{{data.drinkValue}}</h1>
-            <h4 class="side-text">Have</h4>
-            <!--<h4>{{getDrinkLabel(data.drinkValue)}}</h4>-->
+        <div class="drinks-container" hidden="{{hideElement(data.primaryDrinkRule)}}">
+          <div class="drink-rule-person">
+            <iron-icon icon="social:person"></iron-icon>
+            <h4>{{data.primaryDrinkRule.person}}</h4>
+          </div>
+          <p class="drink-rule-description">
+            <span class$="drink-rule-condition {{data.primaryDrinkRule.condition}}">{{data.primaryDrinkRule.condition}}</span>
+            <span>{{data.primaryDrinkRule.description}}</span>
+          </p>
+          <div class="drink-rule-drinks">
+            <iron-icon icon="maps:local-drink"></iron-icon>
+            <h4>{{data.primaryDrinkRule.value}}</h4>
           </div>
         </div>
+
+        <div class="drinks-container" hidden="{{hideElement(data.secondaryDrinkRule)}}">
+          <div class="drink-rule-person">
+            <iron-icon icon="social:person"></iron-icon>
+            <h4>{{data.secondaryDrinkRule.person}}</h4>
+          </div>
+          <p class="drink-rule-description">
+            <span class$="drink-rule-condition {{data.secondaryDrinkRule.condition}}">{{data.secondaryDrinkRule.condition}}</span>
+            <span>{{data.secondaryDrinkRule.description}}</span>
+          </p>
+          <div class="drink-rule-drinks">
+            <iron-icon icon="face"></iron-icon>
+            <h4>{{data.secondaryDrinkRule.value}}</h4>
+          </div>
+        </div>
+
+        <span class="or-text">or</span>
 
         <div class="expired-text">
           Expired
         </div>
-
       </div>
+
+
 
     </div>
   </template>
@@ -332,9 +379,9 @@
           return ['1', 'S'].indexOf(drinksValue) > -1 ? 'Drink' : 'Drinks';
         },
 
-        hideDrinksLabel: function(drinksValue) {
+        hideElement: function(property) {
           var appProps = this.$.appPropsMeta.byKey('appProps');
-          if (_.isUndefined(drinksValue) || appProps.isNonDrinking) {
+          if (_.isUndefined(property) || appProps.isNonDrinking) {
             return true;
           }
         },
