@@ -135,6 +135,7 @@
         },
 
         playSound: function() {
+          console.log('timer sound played');
           this.audio.volume = 1;
           this.audio.play();
         },
@@ -147,6 +148,7 @@
           } else {
             // Ensure our audio file is downloaded and ready to play
             if (!this.audio.loaded) {
+              console.log('timer sound loaded');
               this.audio.volume = 0;
               this.audio.play();
               this.audio.loaded = true;
@@ -162,6 +164,7 @@
 
             this.timeout = setTimeout(stopTimer.bind(this), millisecondsToAdd);
 
+            console.log('timer started');
             this.isRunning = true;
             this.toggleClass('running', true);
 
@@ -170,6 +173,7 @@
           }
 
           function stopTimer() {
+            console.log('timer stopped');
             this.fire('timer-finished', this.timer);
             clearTimeout(this.timeout);
             this.isRunning = false;

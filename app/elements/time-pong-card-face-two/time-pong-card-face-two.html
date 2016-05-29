@@ -3,8 +3,9 @@
 
 <link rel="import" href="../../bower_components/iron-icons/maps-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/social-icons.html">
-<link rel="import" href="../../bower_components/iron-meta/iron-meta.html">
+<link rel="import" href="../../bower_components/iron-icons/places-icons.html">
 
+<link rel="import" href="../../bower_components/iron-meta/iron-meta.html">
 
 <dom-module id="time-pong-card-face-two">
   <template>
@@ -149,15 +150,18 @@
       :host .wrapper .panel-head .panel-head-header h3.success {
         color: var(--limited-highlight);
       }
-      :host .wrapper .panel-head .panel-head-header h3.fail {
+      :host .wrapper .panel-head .panel-head-header h3.failure {
         color: var(--special-highlight);
       }
 
       :host .panel .panel-content {
         background-color: var(--primary-background-color);
+        border-radius: 0 0 .7em .7em;
         flex: 1 1 100%;
         padding: 1em .7em;
         font-weight: 100;
+        display: flex;
+        flex-direction: column;
       }
       :host .panel .panel-content p {
         font-weight: 100;
@@ -167,8 +171,13 @@
         margin: 0;
       }
       :host .panel .panel-content .flavour-text {
+        font-size: .8em;
         font-style: oblique;
-        color: var(--overlay-background-color);
+        color: var(--light-grey);
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        justify-content: flex-end;
       }
 
       :host .expired-text {
@@ -197,7 +206,7 @@
         <div class="panel-head">
           <div class="panel-head-corner">
             <h4>type</h4>
-            <iron-icon icon="star"></iron-icon>
+            <iron-icon icon="places:fitness-center"></iron-icon>
           </div>
           <div class="panel-head-header">
             <h4>{{data.rarity}}</h4>

@@ -127,6 +127,7 @@
             rarity: 'basic',
             type: 'action',
             title: 'The Witch\'s Cauldron',
+            flavour: 'One toad\'s tongue with an owl\'s lung. Three cigarette butts and two squirrel nuts. Brew them for a bit, then skull that shit.',
             rules: ['If The Witch\'s Cauldron does not exist, create it by placing an empty cup in the middle.',
               'Pour two shots of your drink into the cauldron.'],
             primaryDrinkRule: {
@@ -144,17 +145,9 @@
             deck: 'core',
             rarity: 'basic',
             type: 'action',
-            drinkValue: '1',
             title: 'Drink!',
             rules: ['Sobriety doesn\'t mean you die of thirst.',
-              'Drink whatever it is you people drink.'],
-            primaryDrinkRule: {
-              type: 'conditional', // Options 'Mandatory (must do)' / 'Success' (Only on Challenge cards) / 'Fail (Only on Challenge cards)' / 'Conditional (IF wearing blue or red drink)' / 'Punishment (What you do if you break the curse)'
-              value: 'skull',
-              drink: 'skull',
-              person: 'you',
-              description: 'If the cauldron is full, skull it.'
-            }
+              'Drink whatever it is you people drink.']
           },
           // ------------ regular
           {
@@ -239,12 +232,24 @@
             forDrinkers: true,
             deck: 'core',
             rarity: 'regular',
-            type: 'action',
-            drinkValue: '2',
+            type: 'challenge',
             title: 'Trick shot',
-            rules: ['Take a shot, bouncing the ball off the wall, ceiling, floor or other ‘tricky’ surface.',
-              'If you get it in, you get bragging rights and choose someone to skull.',
-              'If you miss, drink.']
+            rules: ['Take a shot, bouncing the ball off the wall, ceiling, floor or other ’tricky’ surface.'],
+            flavour: '360 no scope.',
+            primaryDrinkRule: {
+              type: 'success', // Options 'Mandatory (must do)' / 'Success' (Only on Challenge cards) / 'Fail (Only on Challenge cards)' / 'Conditional (IF wearing blue or red drink)' / 'Punishment (What you do if you break the curse)'
+              value: 'skull',
+              drink: 'skull',
+              person: 'someone',
+              description: 'Choose someone to skull.'
+            },
+            secondaryDrinkRule: {
+              type: 'failure', // Options 'Mandatory (must do)' / 'Success' (Only on Challenge cards) / 'Failure (Only on Challenge cards)' / 'Conditional (IF wearing blue or red drink)' / 'Punishment (What you do if you break the curse)'
+              value: 'one',
+              drink: 'drink',
+              person: 'you',
+              description: 'You drink.'
+            }
           },
           {
             creator: 'Jake Turner',
@@ -499,6 +504,7 @@
             type: 'action',
             drinkValue: '3',
             title: 'A hole in one',
+            flavour: 'Go home, Ball! Are you too good for you home?!',
             rules: ['Place the cup flat on it\'s side on the ground.',
               'Take a step back and drop the ball. You have one shot. Putt the ball in using your foot.',
               'If you succeed choose someone to skull, if you fail, drink.']
