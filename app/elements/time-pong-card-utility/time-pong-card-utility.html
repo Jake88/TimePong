@@ -147,6 +147,11 @@
           rules: Array[String] - List of instructions to do for the card (Optional)
 
           primaryRule: {
+            //TODO: NOTE Drinking Rule restrictions:
+            //    Only ONE primary rule can be applied.
+            //    ONLY ONE secondary rule can be applied of each drinkStatus (hideFromDrinkers / nonDrinkers must be set on BOTH
+            //        secondary rules for them to be applied, otherwise only one can be set.)
+
             hideFromDrinkers: Boolean - hide if this rule shouldn't be seen for drinkers
             hideFromNonDrinkers: Boolean - hide if this rule shouldn't be seen for non drinkers
             type: String - What type of rule is this
@@ -159,7 +164,7 @@
             description: String - A brief description/instruction of the rule (ie: choose someone, everyone wearing X)
           }
 
-          secondaryRule: {
+          secondaryRule: { TODO: Convert this to an array so we can have 2 secondary rules MAX on a card.
             ^^^^ same as primary rule.
           }
         }
