@@ -9,247 +9,152 @@
 <dom-module id="time-pong-card-face-two">
   <template>
     <style>
+      :host h4 {
+        text-transform: uppercase;
+        font-size: .7em;
+        margin: 0;
+      }
+
       :host .wrapper {
         box-sizing: border-box;
         position: relative;
         height: 28.75em;
         width: 18.75em;
-        background-color: var(--orange-soft);
-        border: .2em solid var(--orange-soft);
+        background-color: var(--common-soft-tint);
+        border: .2em solid var(--common-highlight);
+        padding: .2em;
         border-radius: .7em;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
       }
       :host .wrapper.limited {
-        background-color: var(--green-soft);
-        border-color: var(--green-soft);
+        background-color: var(--limited-soft-tint);
+        border-color: var(--limited-highlight);
       }
       :host .wrapper.special {
-        background-color: var(--red-soft);
-        border-color: var(--red-soft);
+        background-color: var(--special-soft-tint);
+        border-color: var(--special-highlight);
       }
       :host .wrapper.rare {
-        background-color: var(--blue-soft);
-        border-color: var(--blue-soft);
+        background-color: var(--rare-soft-tint);
+        border-color: var(--rare-highlight);
       }
 
-
-      :host .left-bar {
-        width: 5em;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: var(--secondary-text-color);
-      }
-
-      :host.expired .left-bar {
+      :host.expired .wrapper {
         color: var(--light-grey);
       }
 
-      :host h4 {
-        text-transform: uppercase;
-        font-size: .6em;
-        margin: 0;
-        font-weight: 100;
-      }
-
-      :host .left-bar div {
-        text-align: center;
-        padding: 1em 0;
-      }
-
-      :host .left-bar .type-display iron-icon {
-        --iron-icon-height: 2.5em;
-        --iron-icon-width: 2.5em;
-        opacity: .5;
-      }
-
-      :host .left-bar .title-display {
-        flex: 1 1 100%;
-        box-shadow: inset 0 0 1em rgba(0,0,0,.1);
-        /*box-shadow: inset 2px 2px 3px var(--drop-shadow-color);*/
-        /*background-color: var(--orange-soft-tint);*/
-        border-radius: 0em 1em 0em 1em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-sizing: border-box;
-        width: 2em;
-        white-space: nowrap;
-        font-size: 1em;
-      }
-      :host .left-bar .title-display h4 {
-        font-size: .8em;
-      }
-      :host .wrapper.limited .left-bar .title-display {
-        box-shadow: inset 0 0 1em var(--green-highlight);
-      }
-      :host .wrapper.special .left-bar .title-display {
-        box-shadow: inset 0 0 1em var(--red-highlight);
-      }
-      :host .wrapper.rare .left-bar .title-display {
-        box-shadow: inset 0 0 1em var(--blue-highlight);
-      }
-
-      :host .left-bar .title-display .side-text {
-        transform: rotateZ(-90deg);
-      }
-
-      :host .left-bar .duration-display {
-        visibility: hidden;
-        position: relative;
-      }
-
-      :host .left-bar .duration-display.showDuration {
-        visibility: visible;
-      }
-
-      :host .left-bar .duration-display iron-icon {
-        --iron-icon-height: 2.5em;
-        --iron-icon-width: 2.5em;
-        opacity: .5;
-      }
-
-      :host .left-bar .duration-display p {
-        position: absolute;
-        bottom: 1.9em;
-        left: 1.1em;
-        margin: 0;
-        font-weight: 100;
-        font-size: .9em;
-      }
-
-      :host .main-container {
-        flex: 1 1 100%;
-        display: flex;
-        flex-direction: column;
-      }
-
-      :host.expired .main-container {
-        color: var(--light-grey);
-      }
-
-      :host .main-container iron-icon.background-icon {
-        position: absolute;
-        bottom: -1.9em;
-        right: -1.9em;
-        --iron-icon-height: 14em;
-        --iron-icon-width: 14em;
-        color: var(--orange-soft);
-        opacity: .7;
-      }
-      :host .wrapper.limited .main-container iron-icon.background-icon {
-        color: var(--green-soft);
-      }
-      :host .wrapper.special .main-container iron-icon.background-icon {
-        color: var(--red-soft);
-      }
-      :host .wrapper.rare .main-container iron-icon.background-icon {
-        color: var(--blue-soft);
-      }
-
-      :host .main-container .content {
+      :host .wrapper .panel {
         border-radius: .7em;
-        border: 1px solid var(--orange-soft-tint);
-        background-color: var(--primary-background-color);
-        padding: 1em;
+        background-color: var(--common-soft);
+        border: 1px solid var(--common-highlight);
+        color: var(--secondary-text-color);
+        margin-top: .2em;
         position: relative;
-        flex: 1 1 100%;
+        text-align: center;
+        overflow: hidden;
+        flex-shrink: 0;
       }
-
-      :host .main-container h2 {
-        font-weight: 100;
-        margin-bottom: 1em;
+      :host .wrapper.limited .panel {
+        background-color: var(--limited-soft);
+        border-color: var(--limited-highlight);
+      }
+      :host .wrapper.special .panel {
+        background-color: var(--special-soft);
+        border-color: var(--special-highlight);
+      }
+      :host .wrapper.rare .panel {
+        background-color: var(--rare-soft);
+        border-color: var(--rare-highlight);
+      }
+      :host .wrapper .main-panel {
+        display:flex;
+        flex-direction: column;
+        flex: 1 1 100%;
         margin-top: 0;
       }
 
-      :host .main-container p {
-        font-weight: 100;
-        margin-bottom: 1em;
+
+      :host .wrapper .main-panel h2 {
+        padding: .5em 0;
+        margin: 0;
       }
 
-      :host .drinks-container {
+      :host .panel-head {
         display: flex;
         flex-direction: row;
-        box-sizing: border-box;
-        position: relative;
-        border-radius: .7em;
-        color: var(--secondary-text-color);
-        background-color: var(--orange-soft-tint);
-        border: 1px solid var(--orange-soft-tint);
-        margin-top: .2em;
-        text-align: center;
-        height: 3em;
+        height: 3.4em;
         overflow: hidden;
-        -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC); /* this fixes the overflow:hidden in Chrome/Opera */
       }
-      :host .drinks-container div {
-        flex: 1 1 25%;
-        /*box-shadow: inset 0 0 5em rgba(0,0,0,.1);*/
-        /*box-shadow: inset 0 0 3em rgba(255,255,255,1);*/
+      :host .panel-head .panel-head-corner {
+        flex: 1 1 20%;
       }
-      :host .drinks-container iron-icon {
-        --iron-icon-height: 2.5em;
-        --iron-icon-width: 2.5em;
-        color: var(--secondary-text-color);
+      :host .panel-head .panel-head-corner:first-child {
+        padding-left: .5em;
       }
-      :host .drinks-container h4 {
-        position: relative;
-        margin-top: -.9em;
-        font-weight: bold;
-        font-size: .7em;
-        padding-top: .2em;
-        background-color: var(--primary-background-color);
-        border-top: 1px solid var(--secondary-text-color);
+      :host .panel-head .panel-head-corner:last-child {
+        padding-right: .5em;
+      }
+      :host .panel-head iron-icon {
+        --iron-icon-height: 2.2em;
+        --iron-icon-width: 2.2em;
+      }
+      :host .panel-head .panel-head-corner h4 {
+        padding-top: .4em;
+        font-weight: 100;
       }
 
-      :host .drinks-container .drink-rule-description {
+      :host .panel-head .panel-head-header {
         background-color: var(--primary-background-color);
-        font-size: .7em;
-        margin: 0;
-        flex: 1 1 50%;
+        flex: 1 1 60%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        padding: .2em;
-        font-weight: normal;
-        color: var(--primary-text-color);
-        border-radius: 50% 50% 0 0;
-        position: relative;
-      }
-
-      :host .drinks-container .drink-rule-description .drink-rule-condition {
-        text-align: center;
-        text-transform: uppercase;
-        flex: 0 1 100%;
-      }
-      :host .drinks-container .drink-rule-description .drink-rule-condition.success {
-        color: var(--green-highlight);
-      }
-      :host .drinks-container .drink-rule-description .drink-rule-condition.fail {
-        color: var(--red-highlight);
-      }
-
-      :host .or-text {
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        line-height: 1rem;
-        padding-top: 2px;
-        width: 1.5rem;
-        height: 1.5rem;
-        background-color: var(--orange-soft);
+        height: 6em;
+        margin-top: .5em;
+        padding-top: .7em;
         border-radius: 50%;
-        border: 1px solid var(--orange-soft-tint);
-        position: absolute;
-        bottom: 2.4rem;
-        right: 10rem;
-        font-size:.7em;
+      }
+      :host .panel-head .panel-head-header h4 {
+        color: var(--overlay-background-color);
+      }
+      :host .wrapper .panel-head .panel-head-header h3 {
+        font-size: 1em;
         text-transform: uppercase;
-        box-shadow: 0 1px 1px var(--secondary-text-color);
+        margin: .1em 0 0 0;
+        color: var(--common-highlight);
+      }
+      :host .wrapper.limited .panel-head .panel-head-header h3 {
+        color: var(--limited-highlight);
+      }
+      :host .wrapper.special .panel-head .panel-head-header h3 {
+        color: var(--special-highlight);
+      }
+      :host .wrapper.rare .panel-head .panel-head-header h3 {
+        color: var(--rare-highlight);
+      }
+      :host .wrapper .panel-head .panel-head-header h3.success {
+        color: var(--limited-highlight);
+      }
+      :host .wrapper .panel-head .panel-head-header h3.fail {
+        color: var(--special-highlight);
+      }
+
+      :host .panel .panel-content {
+        background-color: var(--primary-background-color);
+        flex: 1 1 100%;
+        padding: 1em .7em;
+        font-weight: 100;
+      }
+      :host .panel .panel-content p {
+        font-weight: 100;
+        margin: 0 0 .7em 0;
+      }
+      :host .panel .panel-content p:last-child {
+        margin: 0;
+      }
+      :host .panel .panel-content .flavour-text {
+        font-style: oblique;
+        color: var(--overlay-background-color);
       }
 
       :host .expired-text {
@@ -257,7 +162,7 @@
         height: inherit;
         display: none;
         font-size: 4.5em;
-        color: var(--red-highlight);
+        color: var(--special-highlight);
         bottom: 2rem;
         left: 0;
         text-align: center;
@@ -273,77 +178,74 @@
     <iron-meta id="appPropsMeta"></iron-meta>
 
     <div class$="wrapper {{data.rarity}}">
-
-      <div class="left-bar">
-
-        <div class="type-display">
-          <h4>
-            {{data.rarity}}<br/>
-            {{data.type}}
-          </h4>
-          <iron-icon icon="star"></iron-icon>
+      <div class="main-panel panel">
+        <h2>{{data.title}}</h2>
+        <div class="panel-head">
+          <div class="panel-head-corner">
+            <h4>type</h4>
+            <iron-icon icon="star"></iron-icon>
+          </div>
+          <div class="panel-head-header">
+            <h4>{{data.rarity}}</h4>
+            <h3>{{data.type}}</h3>
+          </div>
+          <div class="panel-head-corner">
+            <h4>Deck</h4>
+            <iron-icon icon="alarm"></iron-icon>
+          </div>
         </div>
-
-        <div class="title-display">
-          <h4 class="side-text">{{data.title}}</h4>
-        </div>
-
-        <div id="duration" class="duration-display">
-          <h4>Rounds</h4>
-          <iron-icon icon="cached"></iron-icon>
-          <p>{{data.duration}}</p>
-        </div>
-      </div>
-
-
-      <div class="main-container">
-        <iron-icon class="background-icon" icon="maps:local-bar"></iron-icon>
-
-        <div class="content">
-          <h2>{{data.title}}</h2>
+        <div class="panel-content">
           <template is="dom-repeat" items="{{data.rules}}">
             <p>{{item}}</p>
           </template>
+          <p class="flavour-text">{{data.flavour}}</p>
         </div>
+      </div>
 
-        <div class="drinks-container" hidden="{{hideElement(data.primaryDrinkRule)}}">
-          <div class="drink-rule-person">
-            <iron-icon icon="social:person"></iron-icon>
-            <h4>{{data.primaryDrinkRule.person}}</h4>
+      <div class="panel-head-card panel" hidden="{{hideElement(data.primaryDrinkRule)}}">
+        <div class="panel-head">
+          <div class="panel-head-corner">
+            <h4> {{data.primaryDrinkRule.person}} </h4>
+            <iron-icon icon="social:group"></iron-icon>
           </div>
-          <p class="drink-rule-description">
-            <span class$="drink-rule-condition {{data.primaryDrinkRule.condition}}">{{data.primaryDrinkRule.condition}}</span>
-            <span>{{data.primaryDrinkRule.description}}</span>
-          </p>
-          <div class="drink-rule-drinks">
-            <iron-icon icon="maps:local-drink"></iron-icon>
+          <div class="panel-head-header">
+            <h4>Rule type</h4>
+            <h3 class$="{{data.primaryDrinkRule.type}}">{{data.primaryDrinkRule.type}}</h3>
+          </div>
+          <div class="panel-head-corner">
             <h4>{{data.primaryDrinkRule.value}}</h4>
+            <iron-icon icon="maps:local-drink"></iron-icon>
           </div>
         </div>
+        <div class="panel-content">
+          <p>{{data.primaryDrinkRule.description}}</p>
+        </div>
+      </div>
 
-        <div class="drinks-container" hidden="{{hideElement(data.secondaryDrinkRule)}}">
-          <div class="drink-rule-person">
-            <iron-icon icon="social:person"></iron-icon>
-            <h4>{{data.secondaryDrinkRule.person}}</h4>
+      <div class="panel-head-card panel" hidden="{{hideElement(data.secondaryDrinkRule)}}">
+        <div class="panel-head">
+          <div class="panel-head-corner">
+            <h4> {{data.secondaryDrinkRule.person}} </h4>
+            <iron-icon icon="social:group"></iron-icon>
           </div>
-          <p class="drink-rule-description">
-            <span class$="drink-rule-condition {{data.secondaryDrinkRule.condition}}">{{data.secondaryDrinkRule.condition}}</span>
-            <span>{{data.secondaryDrinkRule.description}}</span>
-          </p>
-          <div class="drink-rule-drinks">
-            <iron-icon icon="face"></iron-icon>
+          <div class="panel-head-header">
+            <h4>Rule type</h4>
+            <h3 class$="{{data.secondaryDrinkRule.type}}">{{data.secondaryDrinkRule.type}}</h3>
+          </div>
+          <div class="panel-head-corner">
             <h4>{{data.secondaryDrinkRule.value}}</h4>
+            <iron-icon icon="maps:local-drink"></iron-icon>
           </div>
         </div>
-
-        <span class="or-text">or</span>
-
-        <div class="expired-text">
-          Expired
+        <div class="panel-content">
+          <p>{{data.secondaryDrinkRule.description}}</p>
         </div>
       </div>
 
 
+      <div class="expired-text">
+        Expired
+      </div>
 
     </div>
   </template>

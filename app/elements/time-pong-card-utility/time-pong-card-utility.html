@@ -127,23 +127,14 @@
             rarity: 'basic',
             type: 'action',
             title: 'The Witch\'s Cauldron',
-            rules: ['If no cauldron exists, place an empty cup in the middle. It is The Witch\'s Cauldron.',
-              'Pour two drinks worth in.',
-              'If you fill the cauldron, you skull it',
-              'If not, take a drink from your own drink'],
+            rules: ['If The Witch\'s Cauldron does not exist, create it by placing an empty cup in the middle.',
+              'Pour two shots of your drink into the cauldron.'],
             primaryDrinkRule: {
-              value: 'one',
-              type: 'drink',
+              type: 'conditional', // Options 'Mandatory (must do)' / 'Success' (Only on condition cards) / 'Fail (Only on condition cards)' / 'Conditional (IF wearing blue or red drink)' / 'Punishment (What you do if you break the curse)'
+              value: 'skull',
+              drink: 'skull',
               person: 'you',
-              description: 'you need to have a Drink.',
-              condition: 'success'    // optional condition FOR CONDITION CARDS ONLY. Could this also be 'punishment' for when a curse is disobeyed? Too complicated?
-            },
-            secondaryDrinkRule: {
-              value: 'one',
-              type: 'skull',
-              person: 'you',
-              description: 'Skull the cauldron mate good times.',
-              condition: 'fail'    // optional condition FOR CONDITION CARDS ONLY.
+              description: 'If the cauldron is full, skull it.'
             }
           },
           {
@@ -156,7 +147,14 @@
             drinkValue: '1',
             title: 'Drink!',
             rules: ['Sobriety doesn\'t mean you die of thirst.',
-              'Drink whatever it is you people drink.']
+              'Drink whatever it is you people drink.'],
+            primaryDrinkRule: {
+              type: 'conditional', // Options 'Mandatory (must do)' / 'Success' (Only on Challenge cards) / 'Fail (Only on Challenge cards)' / 'Conditional (IF wearing blue or red drink)' / 'Punishment (What you do if you break the curse)'
+              value: 'skull',
+              drink: 'skull',
+              person: 'you',
+              description: 'If the cauldron is full, skull it.'
+            }
           },
           // ------------ regular
           {
@@ -220,21 +218,19 @@
             type: 'action',
             drinkValue: '2',
             title: 'Give and take',
-            rules: ['Give one drink.',
-              'Take two.'],
+            rules: [],
+            flavour: 'You\'re going down, but at least you\'re taking someone else with you',
             primaryDrinkRule: {
+              value: 'one',
+              type: 'mandatory',
+              person: 'someone',
+              description: 'Give one.'
+            },
+            secondaryDrinkRule: {
               value: 'two',
               type: 'drink',
               person: 'you',
-              description: 'Drink.',
-              condition: 'success'    // optional condition FOR CONDITION CARDS ONLY. Could this also be 'punishment' for when a curse is disobeyed? Too complicated?
-            },
-            secondaryDrinkRule: {
-              value: 'one',
-              type: 'drink',
-              person: 'someone',
-              description: 'Choose someone.',
-              condition: 'failure'    // optional condition FOR CONDITION CARDS ONLY.
+              description: 'Take two.'
             }
           },
           {
@@ -371,7 +367,7 @@
             forDrinkers: true,
             deck: 'core',
             rarity: 'regular',
-            type: 'action',
+            type: 'trait',
             drinkValue: '1',
             title: 'Lovers\' lane',
             rules: ['Choose someone to love and sit next to them.',
