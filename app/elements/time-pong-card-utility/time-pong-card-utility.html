@@ -117,6 +117,54 @@
       }
 
       function tempCardsArray() {
+
+        //Card definition
+        /*
+        {
+          creator: Plain string - who created the idea for this card
+
+          created: Date created
+
+          forDrinkers: Boolean - if this card should appear for drinkers (Optional)
+
+          forNonDrinkers: Boolean - if this card should appear for non-drinkers (Optional)
+
+          deck: String - The deck / set / expansion that this card came from
+                [core, W&W, popCulture, nudity, orgasmic]
+
+          rarity: String - the rarity level of this card
+                [basic(Do not edit these), regular, limited, special, rare]
+
+          type: String - The type of card
+                [action, challenge, spell, curse, trait, dare, (ability different from trait?)]
+
+          duration: Number - If the card should last for X rounds, primarily for use with Spells. (Optional)
+
+          title: String - The title of the card. Limited to X characters
+
+          flavour: String - humerous flavour text for the card, themed around the card name or rules (Optional)
+
+          rules: Array[String] - List of instructions to do for the card (Optional)
+
+          primaryRule: {
+            hideFromDrinkers: Boolean - hide if this rule shouldn't be seen for drinkers
+            hideFromNonDrinkers: Boolean - hide if this rule shouldn't be seen for non drinkers
+            type: String - What type of rule is this
+                  [Mandatory, success, failure, conditional, dare, truth]
+            value: String - How many drinks, or the action that needs to be performed (eg: two, or skull, or fetch)
+            action: String - What the rule is
+                  [drink, skull, fetch, perform, remove?(clothes)]
+            person: String - Who this rule applies to
+                  [you, someone, everyone]
+            description: String - A brief description/instruction of the rule (ie: choose someone, everyone wearing X)
+          }
+
+          secondaryRule: {
+            ^^^^ same as primary rule.
+          }
+        }
+         */
+
         return [
           // ------------- BASIC
           {
@@ -130,10 +178,10 @@
             flavour: 'One toad\'s tongue with an owl\'s lung. Three cigarette butts and two squirrel nuts. Brew them for a bit, then skull that shit.',
             rules: ['If The Witch\'s Cauldron does not exist, create it by placing an empty cup in the middle.',
               'Pour two shots of your drink into the cauldron.'],
-            primaryDrinkRule: {
-              type: 'conditional', // Options 'Mandatory (must do)' / 'Success' (Only on condition cards) / 'Fail (Only on condition cards)' / 'Conditional (IF wearing blue or red drink)' / 'Punishment (What you do if you break the curse)'
+            primaryRule: {
+              type: 'conditional',
               value: 'skull',
-              drink: 'skull',
+              action: 'skull',
               person: 'you',
               description: 'If the cauldron is full, skull it.'
             }
@@ -145,9 +193,16 @@
             deck: 'core',
             rarity: 'basic',
             type: 'action',
-            title: 'Drink!',
-            rules: ['Sobriety doesn\'t mean you die of thirst.',
-              'Drink whatever it is you people drink.']
+            title: 'Fetch!',
+            flavour: 'Who\'s a good doggy? You\'re a good doggy!',
+            rules: ['Pass the cup to your left, play continues while you\'re gone.'],
+            primaryRule: {
+              type: 'conditional',
+              value: 'fetch',
+              action: 'fetch',
+              person: 'you',
+              description: 'If anyone wants a drink, you fetch it.'
+            }
           },
           // ------------ regular
           {
@@ -157,10 +212,23 @@
             deck: 'core',
             rarity: 'regular',
             type: 'action',
-            drinkValue: '1',
             title: 'Sharing is caring',
-            rules: ['Choose friend to share your losing experience.',
-              'Both of you drink.']
+            flavour: 'Nobody wants to drink alone.',
+            rules: ['Choose a friend to share your losing experience.'],
+            primaryRule: {
+              type: 'mandatory',
+              value: 'one',
+              action: 'drink',
+              person: 'you',
+              description: 'You drink.'
+            },
+            secondaryRule: {
+              type: 'mandatory',
+              value: 'one',
+              action: 'drink',
+              person: 'someone',
+              description: 'They drink.'
+            }
           },
           {
             creator: 'Jake Turner',
@@ -183,7 +251,7 @@
             drinkValue: '2',
             title: 'Drink!',
             rules: [],
-            primaryDrinkRule: {
+            primaryRule: {
               value: 'two',
               type: 'drink',
               person: 'you',
@@ -213,13 +281,13 @@
             title: 'Give and take',
             rules: [],
             flavour: 'You\'re going down, but at least you\'re taking someone else with you',
-            primaryDrinkRule: {
+            primaryRule: {
               value: 'one',
               type: 'mandatory',
               person: 'someone',
               description: 'Give one.'
             },
-            secondaryDrinkRule: {
+            secondaryRule: {
               value: 'two',
               type: 'drink',
               person: 'you',
@@ -236,17 +304,17 @@
             title: 'Trick shot',
             rules: ['Take a shot, bouncing the ball off the wall, ceiling, floor or other ’tricky’ surface.'],
             flavour: '360 no scope.',
-            primaryDrinkRule: {
+            primaryRule: {
               type: 'success', // Options 'Mandatory (must do)' / 'Success' (Only on Challenge cards) / 'Fail (Only on Challenge cards)' / 'Conditional (IF wearing blue or red drink)' / 'Punishment (What you do if you break the curse)'
               value: 'skull',
-              drink: 'skull',
+              action: 'skull',
               person: 'someone',
               description: 'Choose someone to skull.'
             },
-            secondaryDrinkRule: {
+            secondaryRule: {
               type: 'failure', // Options 'Mandatory (must do)' / 'Success' (Only on Challenge cards) / 'Failure (Only on Challenge cards)' / 'Conditional (IF wearing blue or red drink)' / 'Punishment (What you do if you break the curse)'
               value: 'one',
-              drink: 'drink',
+              action: 'drink',
               person: 'you',
               description: 'You drink.'
             }
@@ -508,18 +576,6 @@
             rules: ['Place the cup flat on it\'s side on the ground.',
               'Take a step back and drop the ball. You have one shot. Putt the ball in using your foot.',
               'If you succeed choose someone to skull, if you fail, drink.']
-          },
-          {
-            creator: 'Jake Turner',
-            created: '08/05/2016',
-            forNonDrinkers: true,
-            deck: 'core',
-            rarity: 'limited',
-            type: 'action',
-            title: 'Fetch',
-            rules: ['Fetch a drink for everyone running on empty.',
-              'If no one is empty, fetch a drink for someone that asks.',
-              'If no one asks, fetch a stick from outside.']
           },
           {
             creator: 'Jake Turner',

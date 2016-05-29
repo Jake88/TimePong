@@ -1,0 +1,56 @@
+<link rel="import" href="../../../styles/app-theme.html">
+<link rel="import" href="../../../styles/shared-styles.html">
+<link rel="import" href="../../../styles/card-panel-styles.html">
+
+<link rel="import" href="../../../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../../../bower_components/iron-icons/social-icons.html">
+<link rel="import" href="../../../bower_components/iron-icons/places-icons.html">
+
+<link rel="import" href="../../../bower_components/iron-meta/iron-meta.html">
+
+<dom-module id="time-pong-card-rule-panel">
+  <template>
+    <style include="card-panel-styles">
+    </style>
+
+    <div class$="panel {{rarity}} {{expired}}">
+      <div class="panel-head">
+        <div class="panel-head-corner">
+          <h4> {{data.person}} </h4>
+          <iron-icon icon="social:group"></iron-icon>
+        </div>
+        <div class="panel-head-header">
+          <h4>Rule type</h4>
+          <h3 class$="{{data.type}}">{{data.type}}</h3>
+        </div>
+        <div class="panel-head-corner">
+          <h4>{{data.value}}</h4>
+          <iron-icon icon="maps:local-drink"></iron-icon>
+        </div>
+      </div>
+      <div class="panel-content">
+        <p>{{data.description}}</p>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'time-pong-card-rule-panel',
+
+        properties: {
+          data: {
+            type: Object,
+            notify: true
+          },
+          rarity: String,
+          expired: String
+        }
+      });
+    })();
+  </script>
+</dom-module>

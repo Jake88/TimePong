@@ -1,0 +1,68 @@
+<link rel="import" href="../../../styles/app-theme.html">
+<link rel="import" href="../../../styles/shared-styles.html">
+<link rel="import" href="../../../styles/card-panel-styles.html">
+
+
+<link rel="import" href="../../../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../../../bower_components/iron-icons/social-icons.html">
+<link rel="import" href="../../../bower_components/iron-icons/places-icons.html">
+
+
+<dom-module id="time-pong-card-main-panel">
+  <template>
+    <style include="card-panel-styles">
+      :host {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+      }
+    </style>
+
+    <div class$="panel main-panel {{data.rarity}} {{expired}}">
+      <h2>{{data.title}}</h2>
+      <div class="panel-head">
+        <div class="panel-head-corner">
+          <h4>type</h4>
+          <iron-icon icon="places:fitness-center"></iron-icon>
+        </div>
+        <div class="panel-head-header">
+          <h4>{{data.rarity}}</h4>
+          <h3>{{data.type}}</h3>
+        </div>
+        <div class="panel-head-corner">
+          <h4>Deck</h4>
+          <iron-icon icon="alarm"></iron-icon>
+        </div>
+      </div>
+      <div class="panel-content">
+        <template is="dom-repeat" items="{{data.rules}}">
+          <p>{{item}}</p>
+        </template>
+        <p class="flavour-text">{{data.flavour}}</p>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'time-pong-card-main-panel',
+
+        properties: {
+          data: {
+            type: Object,
+            notify: true
+          },
+          expired: String
+        }
+      });
+    })();
+  </script>
+</dom-module>

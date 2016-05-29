@@ -1,21 +1,21 @@
 <link rel="import" href="../../styles/app-theme.html">
 <link rel="import" href="../../styles/shared-styles.html">
 
+<link rel="import" href="../../styles/card-panel-styles.html"> <!--REMOVE-->
+
 <link rel="import" href="../../bower_components/iron-icons/maps-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/social-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/places-icons.html">
 
 <link rel="import" href="../../bower_components/iron-meta/iron-meta.html">
 
+<link rel="import" href="time-pong-card-main-panel/time-pong-card-main-panel.html">
+<link rel="import" href="time-pong-card-rule-panel/time-pong-card-rule-panel.html">
+
+
 <dom-module id="time-pong-card-face-two">
   <template>
-    <style>
-      :host h4 {
-        text-transform: uppercase;
-        font-size: .7em;
-        margin: 0;
-      }
-
+    <style include="card-panel-styles">
       :host .wrapper {
         box-sizing: border-box;
         position: relative;
@@ -25,7 +25,14 @@
         border: .2em solid var(--common-highlight);
         padding: .2em;
         border-radius: .7em;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
         flex-direction: column;
       }
       :host .wrapper.limited {
@@ -39,145 +46,6 @@
       :host .wrapper.rare {
         background-color: var(--rare-soft-tint);
         border-color: var(--rare-highlight);
-      }
-
-      :host.expired .wrapper {
-        color: var(--light-grey);
-      }
-
-      :host .wrapper .panel {
-        border-radius: .7em;
-        background-color: var(--common-soft);
-        border: 1px solid var(--common-highlight);
-        color: var(--secondary-text-color);
-        margin-top: .2em;
-        position: relative;
-        text-align: center;
-        overflow: hidden;
-        flex-shrink: 0;
-      }
-      :host .wrapper.limited .panel {
-        background-color: var(--limited-soft);
-        border-color: var(--limited-highlight);
-      }
-      :host .wrapper.special .panel {
-        background-color: var(--special-soft);
-        border-color: var(--special-highlight);
-      }
-      :host .wrapper.rare .panel {
-        background-color: var(--rare-soft);
-        border-color: var(--rare-highlight);
-      }
-      :host .wrapper .main-panel {
-        display:flex;
-        flex-direction: column;
-        flex: 1 1 100%;
-        margin-top: 0;
-      }
-
-
-      :host .wrapper .main-panel h2 {
-        padding: .5em 0;
-        margin: 0;
-      }
-
-      :host .panel-head {
-        display: flex;
-        flex-direction: row;
-        height: 3.4em;
-        overflow: hidden;
-      }
-      :host .panel-head .panel-head-corner {
-        flex: 1 1 20%;
-        border-bottom: 1px solid var(--common-soft-tint);
-      }
-      :host .wrapper.limited .panel-head .panel-head-corner {
-        border-color: var(--limited-soft-tint);
-      }
-      :host .wrapper.special .panel-head .panel-head-corner {
-        border-color: var(--special-soft-tint);
-      }
-      :host .wrapper.rare .panel-head .panel-head-corner {
-        border-color: var(--rare-soft-tint);
-      }
-      :host .panel-head .panel-head-corner:first-child {
-        padding-left: .5em;
-      }
-      :host .panel-head .panel-head-corner:last-child {
-        padding-right: .5em;
-      }
-      :host .panel-head iron-icon {
-        --iron-icon-height: 2.2em;
-        --iron-icon-width: 2.2em;
-      }
-      :host .panel-head .panel-head-corner h4 {
-        padding-top: .4em;
-        font-weight: 100;
-      }
-
-      :host .panel-head .panel-head-header {
-        background-color: var(--primary-background-color);
-        flex: 1 1 60%;
-        display: flex;
-        flex-direction: column;
-        height: 6em;
-        margin-top: .5em;
-        padding-top: .7em;
-        border-radius: 50%;
-        border: 1px solid var(--common-soft-tint);
-        color: var(--common-highlight);
-      }
-      :host .wrapper.limited .panel-head .panel-head-header {
-        border-color: var(--limited-soft-tint);
-        color: var(--limited-highlight);
-      }
-      :host .wrapper.special .panel-head .panel-head-header {
-        border-color: var(--special-soft-tint);
-        color: var(--special-highlight);
-      }
-      :host .wrapper.rare .panel-head .panel-head-header {
-        border-color: var(--rare-soft-tint);
-        color: var(--rare-highlight);
-      }
-      :host .panel-head .panel-head-header h4 {
-        color: var(--overlay-background-color);
-      }
-      :host .wrapper .panel-head .panel-head-header h3 {
-        font-size: 1em;
-        text-transform: uppercase;
-        margin: .1em 0 0 0;
-      }
-      :host .wrapper .panel-head .panel-head-header h3.success {
-        color: var(--limited-highlight);
-      }
-      :host .wrapper .panel-head .panel-head-header h3.failure {
-        color: var(--special-highlight);
-      }
-
-      :host .panel .panel-content {
-        background-color: var(--primary-background-color);
-        border-radius: 0 0 .7em .7em;
-        flex: 1 1 100%;
-        padding: 1em .7em;
-        font-weight: 100;
-        display: flex;
-        flex-direction: column;
-      }
-      :host .panel .panel-content p {
-        font-weight: 100;
-        margin: 0 0 .7em 0;
-      }
-      :host .panel .panel-content p:last-child {
-        margin: 0;
-      }
-      :host .panel .panel-content .flavour-text {
-        font-size: .8em;
-        font-style: oblique;
-        color: var(--light-grey);
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        justify-content: flex-end;
       }
 
       :host .expired-text {
@@ -201,70 +69,24 @@
     <iron-meta id="appPropsMeta"></iron-meta>
 
     <div class$="wrapper {{data.rarity}}">
-      <div class="main-panel panel">
-        <h2>{{data.title}}</h2>
-        <div class="panel-head">
-          <div class="panel-head-corner">
-            <h4>type</h4>
-            <iron-icon icon="places:fitness-center"></iron-icon>
-          </div>
-          <div class="panel-head-header">
-            <h4>{{data.rarity}}</h4>
-            <h3>{{data.type}}</h3>
-          </div>
-          <div class="panel-head-corner">
-            <h4>Deck</h4>
-            <iron-icon icon="alarm"></iron-icon>
-          </div>
-        </div>
-        <div class="panel-content">
-          <template is="dom-repeat" items="{{data.rules}}">
-            <p>{{item}}</p>
-          </template>
-          <p class="flavour-text">{{data.flavour}}</p>
-        </div>
-      </div>
+      <time-pong-card-main-panel
+          data="{{data}}"
+          expired="{{expired}}">
+      </time-pong-card-main-panel>
 
-      <div class="panel-head-card panel" hidden="{{hideElement(data.primaryDrinkRule)}}">
-        <div class="panel-head">
-          <div class="panel-head-corner">
-            <h4> {{data.primaryDrinkRule.person}} </h4>
-            <iron-icon icon="social:group"></iron-icon>
-          </div>
-          <div class="panel-head-header">
-            <h4>Rule type</h4>
-            <h3 class$="{{data.primaryDrinkRule.type}}">{{data.primaryDrinkRule.type}}</h3>
-          </div>
-          <div class="panel-head-corner">
-            <h4>{{data.primaryDrinkRule.value}}</h4>
-            <iron-icon icon="maps:local-drink"></iron-icon>
-          </div>
-        </div>
-        <div class="panel-content">
-          <p>{{data.primaryDrinkRule.description}}</p>
-        </div>
-      </div>
+      <time-pong-card-rule-panel
+        hidden="{{hideElement(data.primaryRule)}}"
+        data="{{data.primaryRule}}"
+        rarity="{{data.rarity}}"
+        expired="{{expired}}">
+      </time-pong-card-rule-panel>
 
-      <div class="panel-head-card panel" hidden="{{hideElement(data.secondaryDrinkRule)}}">
-        <div class="panel-head">
-          <div class="panel-head-corner">
-            <h4> {{data.secondaryDrinkRule.person}} </h4>
-            <iron-icon icon="social:group"></iron-icon>
-          </div>
-          <div class="panel-head-header">
-            <h4>Rule type</h4>
-            <h3 class$="{{data.secondaryDrinkRule.type}}">{{data.secondaryDrinkRule.type}}</h3>
-          </div>
-          <div class="panel-head-corner">
-            <h4>{{data.secondaryDrinkRule.value}}</h4>
-            <iron-icon icon="maps:local-drink"></iron-icon>
-          </div>
-        </div>
-        <div class="panel-content">
-          <p>{{data.secondaryDrinkRule.description}}</p>
-        </div>
-      </div>
-
+      <time-pong-card-rule-panel
+        hidden="{{hideElement(data.secondaryRule)}}"
+        data="{{data.secondaryRule}}"
+        rarity="{{data.rarity}}"
+        expired="{{expired}}">
+      </time-pong-card-rule-panel>
 
       <div class="expired-text">
         Expired
@@ -285,7 +107,8 @@
             type: Object,
             notify: true,
             observer: '_dataChange'
-          }
+          },
+          expired: String
         },
 
         _dataChange: function(newVal) {
@@ -293,30 +116,26 @@
           if (newVal && newVal.duration) {
             this.toggleClass('showDuration', true, this.$.duration);
           }
-
-          function updateStyle() {
-            this.updateStyles();
-          }
-          setTimeout(updateStyle.bind(this), 10); // Hack to ensure styles are updated after the data changes.
         },
 
-        getDrinkLabel: function(drinksValue) {
-          return ['1', 'S'].indexOf(drinksValue) > -1 ? 'Drink' : 'Drinks';
-        },
 
         hideElement: function(property) {
           var appProps = this.$.appPropsMeta.byKey('appProps');
-          if (_.isUndefined(property) || appProps.isNonDrinking) {
+          if (!property ||
+              appProps.drinkingStatus === 'drinking' && property.hideFromDrinkers ||
+              appProps.drinkingStatus === 'nonDrinking' && property.hideFromNonDrinkers) {
             return true;
           }
         },
 
         expire: function() {
           this.toggleClass('expired', true);
+          this.expired = 'expired';
         },
 
         reset: function() {
           this.toggleClass('expired', false);
+          this.expired = '';
         }
       });
     })();

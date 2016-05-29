@@ -44,24 +44,12 @@
           -ms-user-select: none;       /* Internet Explorer/Edge */
           user-select: none;
         }
+      }
 
-        --soft-color-loop: {
-          animation: soft-color-loop 10s infinite;
-          -moz-animation: soft-color-loop 10s infinite; /* Firefox */
-          -webkit-animation: soft-color-loop 10s infinite; /* Safari and Chrome */
-        }
-
-        --highlight-color-loop: {
-          animation: highlight-color-loop 10s infinite;
-          -moz-animation: highlight-color-loop 10s infinite; /* Firefox */
-          -webkit-animation: highlight-color-loop 10s infinite; /* Safari and Chrome */
-        }
-
-        --border-highlight-color-loop: {
-          animation: border-highlight-color-loop 10s infinite;
-          -moz-animation: border-highlight-color-loop 10s infinite; /* Firefox */
-          -webkit-animation: border-highlight-color-loop 10s infinite; /* Safari and Chrome */
-        }
+      :root h4 {
+        text-transform: uppercase;
+        font-size: .7em;
+        margin: 0;
       }
 
       @media (max-width: 600px) {
@@ -69,29 +57,6 @@
           font-size: 24px!important;
         }
       }
-      @-webkit-keyframes soft-color-loop
-        /* Safari and Chrome */ {
-        0%   {background-color: var(--red-soft);}
-        33%  {background-color: var(--blue-soft);}
-        66%   {background-color: var(--green-soft);}
-        100%   {background-color: var(--red-soft);}
-      }
-      @-webkit-keyframes highlight-color-loop
-        /* Safari and Chrome */ {
-        0%   {color: var(--red-highlight);}
-        33%  {color: var(--blue-highlight);}
-        66%   {color: var(--green-highlight);}
-        100%   {color: var(--red-highlight);}
-      }
-      @-webkit-keyframes border-highlight-color-loop
-        /* Safari and Chrome */ {
-        0%   {border-color: var(--red-highlight);}
-        33%  {border-color: var(--blue-highlight);}
-        66%   {border-color: var(--green-highlight);}
-        100%   {border-color: var(--red-highlight);}
-      }
-
-
 
       .page-title {
       @apply(--paper-font-display2);
