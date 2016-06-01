@@ -20,7 +20,7 @@
           <iron-icon icon="social:group"></iron-icon>
         </div>
         <div class="panel-head-header">
-          <h4>Rule type</h4>
+          <!--<h4>Rule type</h4>-->
           <h3 class$="{{data.type}}">{{data.type}}</h3>
         </div>
         <div class="panel-head-corner">
@@ -29,7 +29,9 @@
         </div>
       </div>
       <div class="panel-content">
-        <p>{{data.description}}</p>
+        <template is="dom-repeat" items="{{data.description}}">
+          <p>{{item}}</p>
+        </template>
       </div>
     </div>
 

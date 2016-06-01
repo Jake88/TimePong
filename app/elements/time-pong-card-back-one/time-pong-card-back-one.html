@@ -218,8 +218,7 @@
         is: 'time-pong-card-back-one',
 
         selectCard: function(e) {
-          var isDrinking = e.currentTarget.id === 'drunk-button';
-          this.fire('category-selected', isDrinking);
+          this.fire('category-selected', e.currentTarget.id);
         }
       });
     })();

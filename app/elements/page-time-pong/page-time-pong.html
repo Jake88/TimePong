@@ -64,7 +64,9 @@
           currentEffects: {
             type: Object,
             notify: true,
-            value: function() { return {};}
+            value: function () {
+              return {};
+            }
           },
           currentCard: {
             type: Object,
@@ -72,7 +74,14 @@
           },
           appProps: {
             type: Object,
-            value: function() {return {};}
+            value: function () {
+              return {};
+            }
+          },
+          // DEBUGGING: For debugging purposes
+          firstCardFlag: {
+            type: Boolean,
+            value: true
           }
         },
 
@@ -92,12 +101,21 @@
         },
 
         chooseCard: function(e) {
+
           var filters = {
-            isDrinking: e.detail,
-            isSpellActive: !!this.currentEffects.spell
+            isDrinking: e.detail  === 'drinking',
+            isSpellActive: !!this.currentEffects.spell,
+            // TODO: may need to extend this to function that checks all active cards or cards with durations. (traits, spells, cruses etc)
+            restrictTo: this.currentEffects.spell ? this.currentEffects.spell.restrict : ''
           };
 
-          this.appProps.drinkingStatus = !e.detail;
+          // DEBUGGING: Set an id to grab a specific card for the first time.;
+          if (this.firstCardFlag) {
+            this.firstCardFlag = false;
+            filters.id = 'asd';
+          }
+
+          this.appProps.drinkingStatus = e.detail;
 
           this.currentCard = this.$$('time-pong-card-utility').getRandomCard(filters);
         },

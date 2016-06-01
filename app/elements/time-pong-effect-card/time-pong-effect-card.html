@@ -156,7 +156,7 @@
         <div class="icon-wrapper">
           <iron-icon icon="block"></iron-icon>
         </div>
-        <h4 class="title">{{stripLabel(data.title)}}</h4>
+        <h4 class="title">{{data.title}}</h4>
       </div>
     </div>
 
@@ -179,10 +179,6 @@
           },
           label: String,
           index: Number
-        },
-
-        stripLabel: function(title) {
-          return title ? title.replace(this.label + ': ', '') : '';
         },
 
         _dataChanged: function(newVal) {
