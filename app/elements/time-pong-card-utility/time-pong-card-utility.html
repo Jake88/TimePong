@@ -184,21 +184,17 @@
           {
             creator: 'Jake Turner',
             created: '08/05/2016',
-            forDrinkers: true,
             deck: 'W&W',
             rarity: 'basic',
-            type: 'action',
-            title: 'The Witch\'s cauldron',
+            forDrinkers: true,
+            card: 'default',
+            type: 'cauldron',
+            image: 'the-witchs-cauldron',
+            title: 'The Witch\'s Cauldron',
+            helpText: ['If The Witch\'s Cauldron does not exist, create it by placing an empty cup in the middle.'],
             flavour: 'One toad\'s tongue with an owl\'s lung. Three cigarette butts and two squirrel nuts. Brew them for a bit, then skull that shit.',
-            rules: ['If The Witch\'s Cauldron does not exist, create it by placing an empty cup in the middle.',
-              'Pour two shots of your drink into the cauldron.'],
-            primaryRule: {
-              type: 'conditional',
-              value: 'skull',
-              action: 'skull',
-              person: 'you',
-              description: ['If the cauldron is full, skull it.']
-            }
+            rules: ['Pour two shots of your drink into the cauldron.'],
+            boldRules: [{instruction:'If the cauldron is full, skull it.'}]
           },
           {
             creator: 'Jake Turner',
@@ -207,16 +203,12 @@
             deck: 'core',
             rarity: 'basic',
             type: 'action',
+            card: 'default',
+            image: 'fetch',
             title: 'Fetch!',
             flavour: 'Who\'s a good doggy? You\'re a good doggy!',
             rules: ['Pass the cup to your left, play continues while you\'re gone.'],
-            primaryRule: {
-              type: 'conditional',
-              value: 'fetch',
-              action: 'fetch',
-              person: 'you',
-              description: ['If anyone wants a drink, you fetch it.']
-            }
+            boldRules: [{instruction:'If anyone wants a drink, you fetch it.'}]
           },
           // ------------ regular
           {
@@ -224,43 +216,14 @@
             created: '08/05/2016',
             forDrinkers: true,
             deck: 'core',
+            card: 'default',
+            image: 'drink-two',
             rarity: 'regular',
             type: 'action',
             title: 'Sharing is caring',
             flavour: 'Nobody wants to drink alone.',
-            rules: [],
-            primaryRule: {
-              type: 'mandatory',
-              value: 'one',
-              action: 'drink',
-              person: 'you',
-              description: ['You drink.']
-            },
-            secondaryRule: {
-              type: 'mandatory',
-              value: 'one',
-              action: 'drink',
-              person: 'someone',
-              description: ['Choose a friend to share your losing experience.']
-            }
-          },
-          {
-            creator: 'Jake Turner',
-            created: '08/05/2016',
-            forDrinkers: true,
-            deck: 'Core',
-            rarity: 'regular',
-            type: 'action',
-            drinkValue: '1',
-            title: 'Drink!',
-            rules: [],
-            primaryRule: {
-              type: 'mandatory',
-              value: 'one',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+            rules: ['Choose a friend to share your losing experience.'],
+            boldRules: [{instruction:'You both drink two.'}]
           },
           {
             creator: 'Jake Turner',
@@ -269,16 +232,10 @@
             deck: 'core',
             rarity: 'regular',
             type: 'action',
-            drinkValue: '2',
-            title: 'Drink!',
-            rules: [],
-            primaryRule: {
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+            card: 'default',
+            image: 'drink-one',
+            title: '',
+            boldRules: [{instruction:'You drink one'}]
           },
           {
             creator: 'Jake Turner',
@@ -287,17 +244,10 @@
             deck: 'core',
             rarity: 'regular',
             type: 'action',
-            drinkValue: '2',
-            title: 'Dodged a bullet',
-            flavour: 'Phew.. That was close.',
-            rules: [],
-            primaryRule: {
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'someone',
-              description: ['Allocate drinks to someone else.']
-            }
+            card: 'default',
+            image: 'drink-two',
+            title: '',
+            boldRules: [{instruction:'You drink two'}]
           },
           {
             creator: 'Jake Turner',
@@ -306,24 +256,30 @@
             deck: 'core',
             rarity: 'regular',
             type: 'action',
-            drinkValue: '2',
+            card: 'default',
+            image: 'delegate',
+            title: 'Delegate',
+            flavour: 'It\'s a hard job, but someone has to do it. Time to delegate.',
+            boldRules: [{instruction:'Choose someone to drink two.'}]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'core',
+            rarity: 'regular',
+            type: 'action',
+            card: 'default',
+            image: 'give-and-take',
             title: 'Give and take',
-            rules: [],
-            flavour: 'You\'re going down, but at least you\'re taking someone with you.',
-            primaryRule: {
-              type: 'mandatory',
-              value: 'one',
-              action: 'drink',
-              person: 'someone',
-              description: ['Give one.']
-            },
-            secondaryRule: {
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'you',
-              description: ['Take two.']
-            }
+            boldRules: [
+              {
+                instruction: 'Give someone two drinks.'
+              }, {
+                instruction: 'You take one.'
+              }
+            ],
+            flavour: 'You\'re going down, but at least you\'re taking someone with you.'
           },
           {
             creator: 'Jake Turner',
@@ -332,23 +288,23 @@
             deck: 'core',
             rarity: 'regular',
             type: 'challenge',
+            card: 'challenge',
+            image: 'trick-shot',
             title: 'Trick shot',
             rules: ['Take a shot, bouncing the ball off the wall, ceiling, floor or other ’tricky’ surface.'],
             flavour: 'Bend it like Beckham.',
-            primaryRule: {
-              type: 'success',
-              value: 'skull',
-              action: 'skull',
-              person: 'someone',
-              description: ['Choose someone to skull.']
-            },
-            secondaryRule: {
-              type: 'failure',
-              value: 'one',
-              action: 'drink',
-              person: 'you',
-              description: ['You drink.']
-            }
+            boldRules: [
+              {
+                //hideFromDrinkers: true,
+                //hideFromNonDrinkers: true,
+                type: 'success',
+                instruction: 'Choose someone to skull.'
+              },
+              {
+                type: 'failure',
+                instruction: 'You drink two.'
+              }
+            ]
           },
           {
             creator: 'Jake Turner',
@@ -356,45 +312,35 @@
             forDrinkers: true,
             deck: 'core',
             rarity: 'regular',
+            card: 'default',
+            image: 'return-to-sender',
             type: 'action',
             title: 'Return to sender',
             flavour: 'Must have got lost in transit.',
-            rules: ['Return the ball and cup to the person who passed it to you this round.'],
-            primaryRule: {
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'someone',
-              description: ['That person drinks.']
-            },
-            secondaryRule: {
-              type: 'conditional',
-              value: 'skull',
-              action: 'skull',
-              person: 'you',
-              description: ['If no one passed it to you this round, skull your drink.']
-            }
+            rules: ['Return the cup to the last person who passed it to you this round.'],
+            boldRules: [{
+              instruction: 'They drink two.'
+            }, {
+              instruction: 'If no one passed it to you this round, skull your drink.'
+            }]
           },
           {
             creator: 'Jake Turner',
             created: '08/05/2016',
             forNonDrinkers: true,
             forDrinkers: true,
+            card: 'default',
+            image: 'the-wizards-hat',
             deck: 'W&W',
             rarity: 'regular',
             type: 'trait',
             title: 'The Wizard\'s hat',
             flavour: 'With great power, comes great responsibility.',
+            helpText: [
+              'Traits remain until the end of the game.', 'If duplicate traits are drawn, the trait moves to that player.'
+            ],
             rules: ['You don the wizard’s hat.',
-              'If there are any disputes on rules or who had the cup when the timer went off, you decide.'],
-            primaryRule: {
-              hideFromNonDrinkers: true,
-              type: 'mandatory',
-              value: 'one',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+              'If there are any disputes on rules or who had the cup when the timer went off, you decide.']
           },
           {
             creator: 'Jake Turner',
@@ -402,33 +348,29 @@
             forNonDrinkers: true,
             deck: 'core',
             rarity: 'regular',
+            card: 'default',
+            image: 'singing-cow',
             type: 'action',
             title: 'Moosic to our ears',
             flavour: 'Don\'t have a cow, man.',
-            primaryRule: {
-              type: 'mandatory',
-              value: 'perform',
-              action: 'perform',
-              person: 'you',
-              description: ['Give us your best bovine imitation.']
-            }
+            boldRules: [{
+              instruction: 'Give us your best bovine imitation.'
+            }]
           },
           {
             creator: 'Jake Turner',
             created: '08/05/2016',
             forNonDrinkers: true,
             deck: 'core',
+            card: 'default',
+            image: 'gift-drink',
             rarity: 'regular',
             type: 'action',
             title: 'Give',
             flavour: 'With some people it\'s all take and no give. But not you! You\'re the generous type.',
-            primaryRule: {
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'someone',
-              description: ['Choose someone to drink.']
-            }
+            boldRules: [{
+              instruction: 'Choose someone to drink two.'
+            }]
           },
           {
             creator: 'Jake Turner',

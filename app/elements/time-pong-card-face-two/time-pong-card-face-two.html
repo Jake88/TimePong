@@ -3,19 +3,23 @@
 
 <link rel="import" href="../../styles/card-panel-styles.html"> <!--REMOVE-->
 
-<link rel="import" href="../../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+
+<link rel="import" href="../tp-icons/tp-card-images.html">
+<link rel="import" href="../tp-icons/tp-card-type-icons.html">
+
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/social-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/places-icons.html">
 
 <link rel="import" href="../../bower_components/iron-meta/iron-meta.html">
 
-<link rel="import" href="time-pong-card-main-panel/time-pong-card-main-panel.html">
-<link rel="import" href="time-pong-card-rule-panel/time-pong-card-rule-panel.html">
 
 
 <dom-module id="time-pong-card-face-two">
   <template>
-    <style include="card-panel-styles">
+    <style include="card-panel-styles iron-flex">
       :host .wrapper {
         box-sizing: border-box;
         position: relative;
@@ -25,15 +29,6 @@
         border: .2em solid var(--common-highlight);
         padding: .2em;
         border-radius: .7em;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
       }
       :host .wrapper.limited {
         background-color: var(--limited-soft-tint);
@@ -46,6 +41,217 @@
       :host .wrapper.rare {
         background-color: var(--rare-soft-tint);
         border-color: var(--rare-highlight);
+      }
+
+      :host .expired {
+        color: var(--light-grey);
+      }
+
+      :host .panel {
+        border-radius: .7em;
+        background-color: var(--common-soft);
+        border: 1px solid var(--common-highlight);
+        color: var(--secondary-text-color);
+        margin-top: .2em;
+        position: relative;
+        text-align: center;
+        overflow: hidden;
+        -webkit-flex-shrink: 0;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+      }
+      :host .wrapper.limited .panel {
+        background-color: var(--limited-soft);
+        border-color: var(--limited-highlight);
+      }
+      :host .wrapper.special .panel {
+        background-color: var(--special-soft);
+        border-color: var(--special-highlight);
+      }
+      :host .wrapper.rare .panel {
+        background-color: var(--rare-soft);
+        border-color: var(--rare-highlight);
+      }
+      :host .panel.main-panel {
+        margin-top: 0;
+      }
+
+
+      :host .panel.main-panel h2 {
+        padding: .5em 0;
+        margin: 0;
+        font-size: 1.4em;
+      }
+
+      :host .panel-head {
+        height: 2.6em;
+      }
+      :host .panel-head .panel-head-corner {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 1 20%;
+        -ms-flex: 1 1 20%;
+        flex: 1 1 20%;
+        border-bottom: 1px solid var(--common-soft-tint);
+        color: var(--common-highlight);
+      }
+      :host .wrapper.limited .panel-head .panel-head-corner {
+        border-color: var(--limited-soft-tint);
+        color: var(--limited-highlight);
+      }
+      :host .wrapper.special .panel-head .panel-head-corner {
+        border-color: var(--special-soft-tint);
+        color: var(--special-highlight);
+      }
+      :host .wrapper.rare .panel-head .panel-head-corner {
+        border-color: var(--rare-soft-tint);
+        color: var(--rare-highlight);
+      }
+
+      :host .panel-head iron-icon {
+        --iron-icon-height: 2.4em;
+        --iron-icon-width: 2.4em;
+      }
+
+      :host .panel-head .panel-head-header {
+        box-sizing: border-box;
+        background-color: var(--primary-background-color);
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 1 60%;
+        -ms-flex: 1 1 60%;
+        flex: 1 1 60%;
+        z-index: 1;
+        height: 5.2rem;
+        padding-top: .5em;
+        border-radius: 50%;
+        border: 1px solid var(--common-soft-tint);
+        text-align: center;
+      }
+
+      :host .wrapper.limited .panel-head .panel-head-header {
+        border-color: var(--limited-soft-tint);
+      }
+      :host .wrapper.special .panel-head .panel-head-header {
+        border-color: var(--special-soft-tint);
+      }
+      :host .wrapper.rare .panel-head .panel-head-header {
+        border-color: var(--rare-soft-tint);
+      }
+
+      :host .panel-head .panel-head-header iron-icon {
+        --iron-icon-height: 3em;
+        --iron-icon-width: 100%;
+      }
+
+      :host .panel-head .panel-head-header h4 {
+        color: var(--light-grey);
+        margin-bottom: .2rem;
+      }
+
+      :host .panel .panel-content {
+        box-sizing: border-box;
+        background-color: var(--primary-background-color);
+        border-radius: 0 0 .7em .7em;
+        padding: .3em;
+        padding-top: 2.9em;
+        font-weight: 100;
+        position: relative;
+      }
+
+      :host .panel .panel-content .help-icon {
+        box-sizing: border-box;
+        position: absolute;
+        color: var(--link-color);
+        width: 3.5em;
+        height: 3.5em;
+        top: 0;
+        left: 0;
+        padding-top: .3em;
+      }
+
+      :host .panel .panel-content .help-icon iron-icon {
+        --iron-icon-height: 2em;
+        --iron-icon-width: 2em;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      :host .panel .panel-content .help-icon.toggled iron-icon {
+        cursor: auto;
+        transform: translate3d(0, 3em, 0) scale(.8);
+        opacity: .8;
+        transition: transform .3s ease, opacity .3s ease;
+      }
+
+      :host .help-content {
+        color: var(--link-color);
+        transform: scaleY(0);
+        transition: transform .2s ease;
+        transform-origin: top;
+        height: 0;
+        padding-left: 2.5em;
+        text-align: left;
+      }
+      :host .help-content.toggled {
+        transform: scaleY(1);
+        height: auto;
+      }
+
+      :host .panel .panel-content p {
+        font-weight: 100;
+        padding: .5em;
+        margin: 0;
+      }
+
+      :host .wrapper .challenge h4 {
+        background-color: var(--primary-background-color);
+        margin: -.4rem auto;
+        width: 5rem;
+      }
+      :host .wrapper .challenge .success h4  {
+        color: var(--success-green);
+      }
+      :host .wrapper .challenge .failure h4  {
+        color: var(--failure-red);
+      }
+      :host .wrapper .challenge .success  {
+        border-top: 1px solid var(--success-green);
+        padding-bottom: 1em;
+        margin-top: 1em;
+      }
+      :host .wrapper .challenge .failure  {
+        border-top: 1px solid var(--failure-red);
+      }
+
+
+      :host .panel .panel-content .image-wrapper {
+        position: relative;
+      }
+
+      :host .panel #helpContent .image-wrapper {
+        color: var(--light-grey);
+      }
+
+      :host .panel .panel-content .image-wrapper iron-icon {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      :host .panel .panel-content .flavour-text {
+        margin: 0;
+        font-size: .8em;
+        font-style: oblique;
+        color: var(--light-grey);
+      }
+
+      :host .duration {
+        display: none;
+      }
+
+      :host.showDuration .duration {
+        display: block;
       }
 
       :host .expired-text {
@@ -68,25 +274,60 @@
 
     <iron-meta id="appPropsMeta"></iron-meta>
 
-    <div class$="wrapper {{data.rarity}}">
-      <time-pong-card-main-panel
-          data="{{data}}"
-          expired="{{expired}}">
-      </time-pong-card-main-panel>
+    <div class$="wrapper layout vertical {{data.rarity}}">
+      <div class="panel main-panel layout vertical flex">
+        <h2>{{data.title}}</h2>
+        <div class="panel-head layout horizontal">
+          <div class="panel-head-corner">
+          </div>
+          <div class="panel-head-header layout vertical">
+            <h4>{{data.type}}</h4>
+            <iron-icon class="type-icon" icon="tp-card-type-icons:{{data.type}}"></iron-icon>
+          </div>
+          <div class="panel-head-corner">
+            <div class="duration">
+              <iron-icon icon="cached" ></iron-icon>
+            </div>
+          </div>
+        </div>
 
-      <time-pong-card-rule-panel
-        hidden="{{hideElement(data.primaryRule)}}"
-        data="{{data.primaryRule}}"
-        rarity="{{data.rarity}}"
-        expired="{{expired}}">
-      </time-pong-card-rule-panel>
+        <div class="panel-content layout vertical flex">
+          <div id="helpIcon" class="help-icon"  on-tap="toggleHelp" hidden="{{hideElement(data.helpText)}}">
+            <iron-icon icon="help-outline" ></iron-icon>
+          </div>
+          <div id="helpContent" class="help-content">
+            <template is="dom-repeat" items="{{data.helpText}}">
+              <p>{{item}}</p>
+            </template>
+          </div>
 
-      <time-pong-card-rule-panel
-        hidden="{{hideElement(data.secondaryRule)}}"
-        data="{{data.secondaryRule}}"
-        rarity="{{data.rarity}}"
-        expired="{{expired}}">
-      </time-pong-card-rule-panel>
+          <template is="dom-repeat" items="{{data.rules}}">
+            <p>{{item}}</p>
+          </template>
+
+          <div hidden="{{hideElement(data.card, 'default')}}">
+            <template is="dom-repeat" items="{{data.boldRules}}">
+              <p><b>{{item.instruction}}</b></p>
+            </template>
+          </div>
+
+          <div class="challenge layout vertical" hidden="{{hideElement(data.card, 'challenge')}}">
+            <template is="dom-repeat" items="{{data.boldRules}}">
+              <div class$="{{item.type}} layout flex">
+                <h4>{{item.type}}</h4>
+                <p><b>{{item.instruction}}</b></p>
+              </div>
+            </template>
+          </div>
+
+          <div class="image-wrapper layout flex">
+            <iron-icon icon="tp-card-images:{{data.image}}"></iron-icon>
+          </div>
+
+          <p class="flavour-text">{{data.flavour}}</p>
+        </div>
+
+      </div>
 
       <div class="expired-text">
         Expired
@@ -118,14 +359,18 @@
           }
         },
 
+        toggleHelp: function() {
+          this.toggleClass('toggled', true, this.$.helpContent);
+          this.toggleClass('toggled', true, this.$.helpIcon);
+        },
 
-        hideElement: function(property) {
-          var appProps = this.$.appPropsMeta.byKey('appProps');
-          if (!property ||
-              appProps.drinkingStatus === 'drinking' && property.hideFromDrinkers ||
-              appProps.drinkingStatus === 'nonDrinking' && property.hideFromNonDrinkers) {
-            return true;
+        hideElement: function(property, propertyToMatch) {
+          if (propertyToMatch) {
+            console.log(propertyToMatch);
+            console.log(property);
+            return property !== propertyToMatch;
           }
+          return !property;
         },
 
         expire: function() {
