@@ -6,12 +6,9 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 
+<link rel="import" href="../tp-icons/tp-utility-icons.html">
 <link rel="import" href="../tp-icons/tp-card-images.html">
 <link rel="import" href="../tp-icons/tp-card-type-icons.html">
-
-<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../../bower_components/iron-icons/social-icons.html">
-<link rel="import" href="../../bower_components/iron-icons/places-icons.html">
 
 <link rel="import" href="../../bower_components/iron-meta/iron-meta.html">
 
@@ -177,7 +174,7 @@
 
       :host .panel .panel-content .help-icon.toggled iron-icon {
         cursor: auto;
-        transform: translate3d(0, 3em, 0) scale(.8);
+        transform: translate3d(0, 2.7em, 0) scale(.8);
         opacity: .8;
         transition: transform .3s ease, opacity .3s ease;
       }
@@ -210,15 +207,17 @@
       :host .wrapper .challenge .success h4  {
         color: var(--success-green);
       }
-      :host .wrapper .challenge .failure h4  {
+      :host .wrapper .challenge .failure h4,
+      :host .wrapper .challenge .punishment h4{
         color: var(--failure-red);
       }
       :host .wrapper .challenge .success  {
         border-top: 1px solid var(--success-green);
-        padding-bottom: 1em;
         margin-top: 1em;
       }
-      :host .wrapper .challenge .failure  {
+      :host .wrapper .challenge .failure,
+      :host .wrapper .challenge .punishment  {
+        margin-top: 1em;
         border-top: 1px solid var(--failure-red);
       }
 
@@ -248,6 +247,23 @@
 
       :host .duration {
         display: none;
+        width: 100%;
+        position: relative;
+      }
+
+      :host .duration iron-icon {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+      }
+
+      :host .duration p {
+        position: relative;
+        margin: 0;
+        font-size: 1.5em;
+        line-height: 2.6rem;
+        color: var(--secondary-text-color);
       }
 
       :host.showDuration .duration {
@@ -286,7 +302,8 @@
           </div>
           <div class="panel-head-corner">
             <div class="duration">
-              <iron-icon icon="cached" ></iron-icon>
+              <iron-icon icon="tp-utility-icons:duration"></iron-icon>
+              <p>{{data.duration}}</p>
             </div>
           </div>
         </div>
@@ -305,16 +322,10 @@
             <p>{{item}}</p>
           </template>
 
-          <div hidden="{{hideElement(data.card, 'default')}}">
-            <template is="dom-repeat" items="{{data.boldRules}}">
-              <p><b>{{item.instruction}}</b></p>
-            </template>
-          </div>
-
-          <div class="challenge layout vertical" hidden="{{hideElement(data.card, 'challenge')}}">
+          <div class="challenge layout vertical">
             <template is="dom-repeat" items="{{data.boldRules}}">
               <div class$="{{item.type}} layout flex">
-                <h4>{{item.type}}</h4>
+                <h4 hidden="{{hideElement(item.type)}}">{{item.type}}</h4>
                 <p><b>{{item.instruction}}</b></p>
               </div>
             </template>

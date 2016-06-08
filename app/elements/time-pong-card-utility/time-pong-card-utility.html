@@ -170,7 +170,7 @@
                   [drink, skull, fetch, perform, remove?(clothes)]
             person: String - Who this rule applies to
                   [you, someone, everyone]
-            description: Array[String] - A brief description/instruction of the rule (ie: choose someone, everyone wearing X)
+            instruction: rray[String] - A brief instruction/istruction of the rule (ie: choose someone, everyone wearing X
           }
 
           secondaryRule: { TODO: Convert this to an array so we can have 2 secondary rules MAX on a card.
@@ -235,7 +235,7 @@
             card: 'default',
             image: 'drink-one',
             title: '',
-            boldRules: [{instruction:'You drink one'}]
+            boldRules: [{instruction:'You drink one.'}]
           },
           {
             creator: 'Jake Turner',
@@ -247,7 +247,7 @@
             card: 'default',
             image: 'drink-two',
             title: '',
-            boldRules: [{instruction:'You drink two'}]
+            boldRules: [{instruction:'You drink two.'}]
           },
           {
             creator: 'Jake Turner',
@@ -340,7 +340,11 @@
               'Traits remain until the end of the game.', 'If duplicate traits are drawn, the trait moves to that player.'
             ],
             rules: ['You don the wizard’s hat.',
-              'If there are any disputes on rules or who had the cup when the timer went off, you decide.']
+              'If there are any disputes on rules or who had the cup when the timer went off, you decide.'],
+            boldRules: [
+              {hideFromNonDrinkers: true,
+              instruction: 'You drink two.'}
+            ]
           },
           {
             creator: 'Jake Turner',
@@ -379,26 +383,21 @@
             forNonDrinkers: true,
             deck: 'core',
             rarity: 'regular',
+            card: 'ability',
+            image: 'nosey',
             type: 'ability',
+            helpText: ['Abilities have a one time use.'],
             title: 'You\'re so nosey!',
-            rules: ['At any time you may choose to put your finger on your nose.',
-              'Abilities have a one time use.'],
-            flavour: 'Stop sticking your nose where it doesn\'t belong.',
-            primaryRule: {
-              type: 'punishment',
-              value: 'skull',
-              action: 'skull',
-              person: 'someone',
-              description: ['The last person to match you drinks.']
-            },
-            secondaryRule: {
-              hideFromNonDrinkers: true,
-              type: 'mandatory',
-              value: 'one',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+            rules: ['At any time you may put your finger on your nose.', 'The last person to follow you is punished.'],
+            flavour: 'Eyes and ears and mouth and nose.',
+            boldRules: [
+              {
+                instruction: 'You drink two.'
+              }, {
+                type: 'punishment',
+                instruction: 'Drink four.'
+              }
+            ]
           },
           {
             creator: 'Jake Turner',
@@ -406,20 +405,19 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'W&W',
+            card: 'default',
+            image: 'the-witchs-curse',
             rarity: 'regular',
-            type: 'curse',
-            title: 'The Witch\'s curse',
-            rules: ['Create a curse of your choosing.',
-              'Curse effects remain until another curse is drawn.',
+            helpText: ['Curse effects remain until another curse is drawn.',
               'If anyone breaks the curse they drink.'],
-            primaryRule: {
+            type: 'curse',
+            flavour: 'Think of a curse, and keep it quick. But make it annoying, that\'s the trick.',
+            title: 'The Witch\'s Curse',
+            rules: ['Create a curse of your choosing.'],
+            boldRules: [{
               hideFromNonDrinkers: true,
-              type: 'mandatory',
-              value: 'one',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+              instruction: 'You drink two.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -429,18 +427,17 @@
             deck: 'W&W',
             rarity: 'regular',
             type: 'curse',
+            card: 'default',
+            image: 'anonymous',
+            helpText: ['Curse effects remain until another curse is drawn.',
+              'If anyone breaks the curse they drink.'],
+            flavour: 'Address without their name to avoid your own shame.',
             title: 'A girl has no name', // Rename this?
-            rules: ['You cannot use the real or abbreviated name of anyone in the group.',
-              'Curse effects remain until another curse is drawn.',
-              'If anyone breaks the curse they drink.'],
-            primaryRule: {
+            rules: ['You cannot use real or abbreviated names of people playing.'],
+            boldRules: [{
               hideFromNonDrinkers: true,
-              type: 'mandatory',
-              value: 'one',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+              instruction: 'You drink two.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -450,18 +447,17 @@
             deck: 'W&W',
             rarity: 'regular',
             type: 'curse',
+            card: 'default',
+            image: 'orgasmic',
+            flavour: 'What\'s that sound? You\'re in pleasure. Whenever you moan, be loud for good measure.',
+            helpText: ['Curse effects remain until another curse is drawn.',
+              'If anyone breaks the curse they drink.'],
             title: 'Orgasmic',
-            rules: ['Before each drink, moan like you mean it.',
-              'Curse effects remain until another curse is drawn.',
-              'If anyone breaks the curse they drink.'],
-            primaryRule: {
+            rules: ['Before each drink, moan like you mean it.'],
+            boldRules: [{
               hideFromNonDrinkers: true,
-              type: 'mandatory',
-              value: 'one',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+              instruction: 'You drink two.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -471,18 +467,17 @@
             deck: 'W&W',
             rarity: 'regular',
             type: 'curse',
-            title: 'What’s the point?',
-            rules: ['You cannot point with your fingers.',
-              'Curse effects remain until another curse is drawn.',
+            card: 'default',
+            image: 'no-point',
+            flavour: 'Lower your hands and keep them closed, for if fingers point you\'ll be exposed.',
+            helpText: ['Curse effects remain until another curse is drawn.',
               'If anyone breaks the curse they drink.'],
-            primaryRule: {
+            title: 'What’s the point?',
+            rules: ['You cannot point with your fingers.'],
+            boldRules: [{
               hideFromNonDrinkers: true,
-              type: 'mandatory',
-              value: 'one',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+              instruction: 'You drink two.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -491,18 +486,19 @@
             deck: 'core',
             rarity: 'regular',
             type: 'trait',
+            card: 'default',
+            image: 'lovers-lane',
+            helpText: [
+              'Traits remain until the end of the game.', 'If duplicate traits are drawn, the trait moves to that player.'
+            ],
             title: 'Lovers\' lane',
-            rules: ['Choose someone to love and sit next to them.', // Need to do some refactoring of trait cards
-              'Whenever one drinks, so does the other.',
-              'You remain lovers until Lovers’ Lane is drawn again.'],
-            primaryRule: {
+            flavour: 'You don\'t wanna know how many lovers\' used that bench before you.',
+            rules: ['Choose a lover and sit with them.',
+              'Whenever one drinks, so does the other.'],
+            boldRules: [{
               hideFromNonDrinkers: true,
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+              instruction: 'Take one drink.'
+            }]
           },
           // ------------ limited
           {
@@ -511,20 +507,19 @@
             forDrinkers: true,
             forNonDrinkers: true,
             deck: 'W&W',
+            card: 'default',
+            image: 'lead-cup',
             rarity: 'limited',
             type: 'spell',
             duration: 3,
+            flavour: 'Adbra kadabra alakazam! From plastic to lead, that\'s what he said.',
+            helpText: ['Spell effects expire after a specified number of rounds.'],
             title: 'Lead Cup',
-            rules: ['You may only pass to the person on your left.',
-              'This effect leaves play when the spell expires.'],
-            primaryRule: {
+            rules: ['You may only pass left.'],
+            boldRules: [{
               hideFromNonDrinkers: true,
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+              instruction: 'You drink two.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -532,16 +527,13 @@
             forDrinkers: true,
             deck: 'core',
             rarity: 'limited',
+            card: 'default',
+            image: 'drink-three',
             type: 'action',
-            title: 'Drink!',
-            rules: [],
-            primaryRule: {
-              type: 'mandatory',
-              value: 'three',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+            title: '',
+            boldRules: [{
+              instruction: 'You drink three.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -550,14 +542,13 @@
             forNonDrinkers: true,
             rarity: 'limited',
             type: 'action',
+            card: 'default',
+            image: 'push-up',
             title: 'Drop and gimme',
-            primaryRule: {
-              type: 'mandatory',
-              value: 'five',
-              action: 'perform',
-              person: 'you',
-              description: ['Perform push ups.']
-            }
+            flavour: 'Girl look at that body. Girl look at that body. I work out!',
+            boldRules: [{
+              instruction: 'Perform five push ups.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -567,18 +558,16 @@
             deck: 'W&W',
             rarity: 'limited',
             type: 'spell',
+            card: 'default',
+            image: 'rewind',
+            helpText: ['Spell effects expire after a specified number of rounds.'],
             duration: 3,
             title: 'Rewind',
-            rules: ['Instead of passing left, pass to the right.',
-              'This effect leaves play when the spell expires.'],
-            primaryRule: {
+            rules: ['Instead of passing left, pass to the right.'],
+            boldRules: [{
               hideFromNonDrinkers: true,
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+              instruction: 'You drink three.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -588,18 +577,17 @@
             deck: 'W&W',
             rarity: 'limited',
             type: 'spell',
+            card: 'default',
+            image: 'free-throw',
+            helpText: ['Spell effects expire after a specified number of rounds.'],
             duration: 3,
+            flavour: 'He shoots, he scoooooores!',
             title: 'Free throws',
             rules: ['Move the cup to the middle.',
-              'Players must shoot the ball in without bouncing.',
-              'This effect leaves play when the spell expires.'],
+              'Players must shoot the ball in without bouncing.'],
             primaryRule: {
               hideFromNonDrinkers: true,
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
+              instruction: 'You drink three.'
             }
           },
           {
@@ -609,16 +597,14 @@
             deck: 'core',
             rarity: 'limited',
             type: 'action',
+            card: 'default',
+            image: 'redemption',
             title: 'Redemption',
             rules: ['You have one shot to redeem yourself.'],
             flavour: 'Careful now. You risk bringing shame upon your family.',
-            primaryRule: {
-              type: 'conditional',
-              value: 'skull',
-              action: 'skull',
-              person: 'you',
-              description: ['If you miss, finish your drink.']
-            }
+            boldRules: [{
+              instruction: 'If you miss, skull your drink.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -627,16 +613,15 @@
             deck: 'core',
             rarity: 'limited',
             type: 'action',
+            card: 'default',
+            image: 'doing-it-wrong',
+            helpText: ['Place your lips on the far side of the cup. Tilt your head forward until you can take your drink.'],
+            flavour: 'Oops. You\'ve gone full retard. You should never go full retard.',
             title: 'You\'re doing it wrong',
-            rules: ['Drink from the opposite side of the cup.',
-              '( Place your lips on the far side of the cup. Tilt your head forward until you can take your drink. )'],
-            primaryRule: {
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+            rules: ['Drink from the opposite side of the cup.'],
+            boldRules: [{
+              instruction: 'You drink three.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -645,6 +630,8 @@
             deck: 'core',
             rarity: 'limited',
             type: 'action',
+            card: 'default',
+            image: 'rehydrate',
             title: 'Rehydrate',
             rules: ['Slow down, cowboy. You’re looking a little tipsy!',
               'Get excluded from rounds while you drink a glass of water.'],
@@ -656,24 +643,14 @@
             forDrinkers: true,
             deck: 'core',
             rarity: 'limited',
+            card: 'default',
+            image: 'red-tops-blue-pants',
             type: 'global',
             title: 'Tops are red, pants are blue',
-            rules: ['Anyone wearing these, drinks with you'],
-            flavour: 'Lookout! It\'s the fashion police',
-            primaryRule: {
-              type: 'mandatory',
-              value: 'three',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            },
-            secondaryRule: {
-              type: 'mandatory',
-              value: 'three',
-              action: 'drink',
-              person: 'everyone',
-              description: ['Anyone wearing a red top or blue pants, drinks.']
-            }
+            flavour: 'Lookout! It\'s the fashion police.',
+            boldRules: [{
+              instruction: 'Anyone wearing these, drinks two with you.'
+            }]
           },
           {
             creator: 'Dejan and Dragana',
@@ -681,24 +658,20 @@
             forDrinkers: true,
             deck: 'core',
             rarity: 'limited',
-            type: 'challenege',
+            card: 'default',
+            image: 'hole-in-one',
+            type: 'challenge',
             title: 'A hole in one',
-            rules: ['Place the cup on the ground on it\'s side. Step back.',
-              'You have one shot to Putt the ball in using your foot.'],
-            primaryRule: {
+            rules: ['You have one shot. Putt the ball in using your foot from a distance.'],
+            flavour: 'Are you too good for your home?!',
+            boldRules: [{
               type: 'success',
-              value: 'skull',
-              action: 'skull',
-              person: 'someone',
-              description: ['Choose someone.']
+              instruction: 'Choose someone to skull.'
             },
-            secondaryRule: {
+            {
               type: 'failure',
-              value: 'three',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+              instruction: 'You drink three.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -707,25 +680,17 @@
             forDrinkers: true,
             deck: 'core',
             rarity: 'limited',
-            type: 'action',
-            drinkValue: '2',
+            card: 'default',
+            image: 'justin-bieber',
+            type: 'perform',
             title: 'You\'re a Belieber',
-            flavour: 'Let\'s hope you have the voice of an angel',
-            primaryRule: {
-              type: 'mandatory',
-              value: 'sing',
-              action: 'perform',
-              person: 'you',
-              description: ['Sing the chorus of any Justin Bieber song.']
-            },
-            secondaryRule: {
+            flavour: 'You can\'t butcher it more than he did.',
+            rules: ['Sing the chorus of any Justin Bieber song.'],
+            boldRules: [
+            {
               hideFromNonDrinkers: true,
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink.']
-            }
+              instruction: 'You drink three.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -735,20 +700,20 @@
             deck: 'W&W',
             rarity: 'limited',
             type: 'spell',
+            card: 'default',
+            image: 'threes-a-crowd',
+            helpText: ['Spell effects expire after a specified number of rounds.'],
             duration: 3,
+            flavour: 'Balls that play together, stay together.',
             restrict: 'action',
             title: 'Three\'s a crowd',
-            rules: ['Adjacent players receive a ball.',
-              'When all three balls have been sunk, pass the cup to anyone.',
-              'Once time’s up, all three perform the action',
-              'This effect leaves play when the spell expires.'],
-            primaryRule: {
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink']
-            }
+            rules: ['Add a ball for adjacent players.',
+              'When all balls are sunk, pass the cup to anyone.',
+              'All ball carriers perform the action.'],
+            boldRules: [{
+              hideFromNonDrinkers: true,
+              instruction: 'You drink three.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -758,18 +723,18 @@
             deck: 'W&W',
             rarity: 'limited',
             type: 'spell',
+            card: 'default',
+            image: 'multiball',
+            helpText: ['Spell effects expire after a specified number of rounds.'],
             duration: 3,
+            flavour: 'Nice balls you have there.',
             title: 'Multiball',
             rules: ['Add one ball to the game.',
-              'Once the player has sunk both balls, they may pass to anyone.',
-              'This effect leaves play when the spell expires.'],
-            primaryRule: {
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink']
-            }
+              'When all balls are sunk, pass the cup to anyone.'],
+            boldRules: [{
+              hideFromNonDrinkers: true,
+              instruction: 'You drink three.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -780,18 +745,16 @@
             rarity: 'limited',
             type: 'spell',
             duration: 3,
-            drinkValue: '2',
+            card: 'default',
+            flavour: 'You. Shall. Not. PASS!',
+            image: 'gatekeeper',
+            helpText: ['Spell effects expire after a specified number of rounds.'],
             title: 'The gatekeeper',
-            rules: ['You are the Gatekeeper.',
-              'When you sink the ball, you may pass to anyone.',
-              'Other players may only pass to you.',
-              'This effect leaves play when the spell expires.'],
+            rules: ['You are the Gatekeeper and may pass to anyone.',
+              'Other players may only pass to you.'],
             primaryRule: {
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink']
+              hideFromNonDrinkers: true,
+              instruction: 'You drink two.'
             }
           },
           {
@@ -803,18 +766,17 @@
             rarity: 'limited',
             limit: 'action',
             type: 'spell',
+            card: 'default',
+            flavour: 'Cup hoarders will be punished severely.',
+            image: 'double-trouble',
+            helpText: ['Spell effects expire after a specified number of rounds.'],
             duration: 3,
-            title: 'Double or nothing',
-            rules: ['Add another ball and cup.',
-              'The cups start at opposite players.',
-              'When the timer ends, both players do the action',
-              'This effect leaves play when the spell expires.'],
-            primaryRule: {
-              type: 'mandatory',
-              value: 'two',
-              action: 'drink',
-              person: 'you',
-              description: ['Drink']
+            title: 'Double trouble',
+            rules: ['To start this spell, give the opposite player a ball and cup.',
+              'For each cup a player holds, they perform the action.'],
+            boldRules: {
+              hideFromNonDrinkers: true,
+              instruction: 'You drink two.'
             }
           },
           {
@@ -825,11 +787,15 @@
             deck: 'core',
             rarity: 'limited',
             limit: 'action',
+            card: 'default',
+            flavour: 'Three inevitable things: Dying, taxes and someone drinking twice what they had too.',
+            image: 'delay',
+            duration: 1,
             restrict: 'action',
-            type: 'action',
+            type: '??status??',
             title: 'Delay the inevitable',
-            rules: ['Only drinkers should participate next round',
-              'Double the values of the card drawn next']
+            rules: ['Only drinkers should participate next round.',
+              'Double the values of the card drawn next.']
           },
 
           // ------------ special
@@ -840,21 +806,13 @@
             forDrinkers: true,
             rarity: 'special',
             type: 'action',
+            card: 'default',
+            flavour: 'One have-a-sippy..... Two have-a-sippy..... Three have-a-sippy.',
+            image: 'sipping-situp',
             title: 'The sipping sit up',
-            primaryRule: {
-              type: 'mandatory',
-              value: 'three',
-              action: 'perform',
-              person: 'you',
-              description: ['Perform sit ups.']
-            },
-            secondaryRule: {
-              type: 'mandatory',
-              value: 'three',
-              action: 'drink',
-              person: 'you',
-              description: ['While doing each sit up, drink.']
-            }
+            boldRules: [{
+              instruction:'Perform three sit ups and drink once during each.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -874,7 +832,7 @@
               value: 'skull',
               action: 'skull',
               person: 'you',
-              description: ['If you\'re too chicken to dare, drink.']
+              instruction: 'If you\'re too chicken to dare, drink.'
             },
             secondaryRule: {
               hideFromDrinkers: true,
@@ -882,7 +840,7 @@
               value: 'truth',
               action: 'truth',
               person: 'you',
-              description: ['If you\'re too chicken to dare, have you ever tried to twerking?']
+              instruction: 'If you\'re too chicken to dare, have you ever tried to twerking?'
             }
           },
           {
@@ -899,7 +857,7 @@
               value: 'skull',
               action: 'skull',
               person: 'you',
-              description: ['No explanation needed.']
+              instruction: 'No explanation needed.'
             }
           },
           {
@@ -916,7 +874,7 @@
               value: 'x',
               action: 'drink',
               person: 'you',
-              description: ['Take a drink for each person playing.']
+              instruction: 'Take a drink for each person playing.'
             }
           },
           {
@@ -945,7 +903,7 @@
               value: 'X',
               action: 'drink',
               person: 'you',
-              description: ['When the timer starts, start drinking.',
+              instruction: ['When the timer starts, start drinking.',
                 'Only stop when the timer rings, or you have finished your drink.']
             }
           },
@@ -965,14 +923,14 @@
               value: 'five',
               action: 'drink',
               person: 'everyone',
-              description: ['Drink five as a tribute to the girls.']
+              instruction: 'Drink five as a tribute to the girls.'
             },
             secondaryRule: {
               type: 'failure',
               value: 'skull',
               action: 'skull',
               person: 'you',
-              description: ['Drink.']
+              instruction: 'Drink.'
             }
 
           },
@@ -991,14 +949,14 @@
               value: 'two',
               action: 'drink',
               person: 'everyone',
-              description: ['You must be Kobe Bryant and everybody else drinks in your name.']
+              instruction: 'You must be Kobe Bryant and everybody else drinks in your name.'
             },
             secondaryRule: {
               type: 'failure',
               value: 'skull',
               action: 'skull',
               person: 'you',
-              description: ['Drink.']
+              instruction: 'Drink.'
             }
           },
           {
@@ -1018,7 +976,7 @@
               value: 'skull',
               action: 'skull',
               person: 'you',
-              description: ['If you\'re too chicken to dare, drink.']
+              instruction: 'If you\'re too chicken to dare, drink.'
             },
             secondaryRule: {
               hideFromDrinkers: true,
@@ -1026,7 +984,7 @@
               value: 'truth',
               action: 'truth',
               person: 'you',
-              description: ['If you\'re too chicken to dare, where\'s the strangest place you\'ve made out?']
+              instruction: 'If you\'re too chicken to dare, where\'s the strangest place you\'ve made out?'
             }
           },
           {
@@ -1045,7 +1003,7 @@
               value: 'skull',
               action: 'skull',
               person: 'you',
-              description: ['Drink.']
+              instruction: 'Drink.'
             }
           },
           {
@@ -1062,7 +1020,7 @@
               value: 'skull',
               action: 'skull',
               person: 'everyone',
-              description: ['You, and anyone matching your skin colour, skulls their drink.']
+              instruction: 'You, and anyone matching your skin colour, skulls their drink.'
             }
           },
           {
@@ -1079,14 +1037,14 @@
               value: 'one',
               action: 'drink',
               person: 'you',
-              description: ['Drink if you know a Sharon.']
+              instruction: 'Drink if you know a Sharon.'
             },
             secondaryRule: {
               type: 'conditional',
               value: 'skull',
               action: 'skull',
               person: 'you',
-              description: ['Skull if you don\'t.']
+              instruction: 'Skull if you don\'t.'
             }
           },
           {
@@ -1129,7 +1087,7 @@
               value: 'skull',
               action: 'skull',
               person: 'you',
-              description: ['Both of you skull by drinking from the cup at the same time.']
+              instruction: 'Both of you skull by drinking from the cup at the same time.'
             }
           },
           {
@@ -1146,7 +1104,7 @@
               value: 'x',
               action: 'drink',
               person: 'you',
-              description: ['When the round starts, everyone must start drinking.',
+              instruction: ['When the round starts, everyone must start drinking.',
                 'Continue drinking through the round until the timer stops (even if you control a ball).']
             }
           },
@@ -1164,14 +1122,14 @@
               value: 'skull',
               action: 'skull',
               person: 'everyone',
-              description: ['Everyone skulls.']
+              instruction: 'Everyone skulls.'
             },
             secondaryRule: {
               type: 'conditional',
               value: 'skull',
               action: 'skull',
               person: 'someone',
-              description: ['The last person to finish their drink, skulls another.']
+              instruction: 'The last person to finish their drink, skulls another.'
             }
           }
         ];
