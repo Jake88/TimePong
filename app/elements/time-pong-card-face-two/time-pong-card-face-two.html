@@ -40,10 +40,6 @@
         border-color: var(--rare-highlight);
       }
 
-      :host .expired {
-        color: var(--light-grey);
-      }
-
       :host .panel {
         border-radius: .7em;
         background-color: var(--common-soft);
@@ -72,7 +68,6 @@
       :host .panel.main-panel {
         margin-top: 0;
       }
-
 
       :host .panel.main-panel h2 {
         padding: .5em 0;
@@ -208,7 +203,8 @@
         color: var(--success-green);
       }
       :host .wrapper .challenge .failure h4,
-      :host .wrapper .challenge .punishment h4{
+      :host .wrapper .challenge .punishment h4,
+      :host .wrapper .challenge .chicken h4{
         color: var(--failure-red);
       }
       :host .wrapper .challenge .success  {
@@ -216,11 +212,11 @@
         margin-top: 1em;
       }
       :host .wrapper .challenge .failure,
-      :host .wrapper .challenge .punishment  {
+      :host .wrapper .challenge .punishment,
+      :host .wrapper .challenge .chicken {
         margin-top: 1em;
         border-top: 1px solid var(--failure-red);
       }
-
 
       :host .panel .panel-content .image-wrapper {
         position: relative;
@@ -272,12 +268,12 @@
 
       :host .expired-text {
       @apply(--absolute-template);
-        height: inherit;
+        height: auto;
         display: none;
         font-size: 4.5em;
-        color: var(--special-highlight);
-        bottom: 2rem;
-        left: 0;
+        color: var(--failure-red);
+        bottom: 0;
+        top:9rem;
         text-align: center;
         font-weight: bold;
         text-shadow: 0 1px 1px var(--secondary-text-color);
@@ -285,6 +281,17 @@
 
       :host.expired .expired-text{
         display: block;
+      }
+
+      :host.expired h4,
+      :host.expired h2,
+      :host.expired p,
+      :host.expired iron-icon {
+        opacity: .3;
+      }
+
+      :host.expired .wrapper .challenge div {
+        border: none;
       }
     </style>
 
@@ -324,7 +331,7 @@
 
           <div class="challenge layout vertical">
             <template is="dom-repeat" items="{{data.boldRules}}">
-              <div class$="{{item.type}} layout flex">
+              <div class$="{{item.type}} layout flex" hidden="{{hideRule(item)}}">
                 <h4 hidden="{{hideElement(item.type)}}">{{item.type}}</h4>
                 <p><b>{{item.instruction}}</b></p>
               </div>
@@ -360,28 +367,45 @@
             notify: true,
             observer: '_dataChange'
           },
-          expired: String
+          expired: {
+            type: String
+          }
         },
 
         _dataChange: function(newVal) {
+          this.toggleClass('toggled', false, this.$.helpContent);
+          this.toggleClass('toggled', false, this.$.helpIcon);
           this.toggleClass('showDuration', false, this.$.duration);
           if (newVal && newVal.duration) {
             this.toggleClass('showDuration', true, this.$.duration);
           }
         },
 
-        toggleHelp: function() {
-          this.toggleClass('toggled', true, this.$.helpContent);
-          this.toggleClass('toggled', true, this.$.helpIcon);
+        toggleHelp: function(e) {
+          if (!this.expired) {
+            e.stopPropagation(true);
+            this.toggleClass('toggled', true, this.$.helpContent);
+            this.toggleClass('toggled', true, this.$.helpIcon);
+          }
         },
 
         hideElement: function(property, propertyToMatch) {
           if (propertyToMatch) {
-            console.log(propertyToMatch);
-            console.log(property);
             return property !== propertyToMatch;
           }
           return !property;
+        },
+
+        hideRule: function(rule) {
+          var appProps = this.$.appPropsMeta.byKey('appProps');
+
+          if (appProps) {
+            if (rule.hideFromNonDrinkers && appProps.drinkingStatus === 'nonDrinking') {
+              return true;
+            } else if (rule.hideFromDrinkers && appProps.drinkingStatus === 'drinking') {
+              return true;
+            }
+          }
         },
 
         expire: function() {

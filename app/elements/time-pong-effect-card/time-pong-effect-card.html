@@ -2,6 +2,7 @@
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
 
 <link rel="import" href="../time-pong-card-face-two/time-pong-card-face-two.html">
+<link rel="import" href="../tp-icons/tp-card-type-icons.html">
 
 <dom-module id="time-pong-effect-card">
   <template>
@@ -154,7 +155,7 @@
 
       <div class$="effect-wrapper {{data.rarity}}" on-tap="toggleCard">
         <div class="icon-wrapper">
-          <iron-icon icon="block"></iron-icon>
+          <iron-icon icon="tp-card-type-icons:{{label}}"></iron-icon>
         </div>
         <h4 class="title">{{data.title}}</h4>
       </div>

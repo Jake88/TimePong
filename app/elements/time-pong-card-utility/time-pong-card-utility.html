@@ -752,10 +752,10 @@
             title: 'The gatekeeper',
             rules: ['You are the Gatekeeper and may pass to anyone.',
               'Other players may only pass to you.'],
-            primaryRule: {
+            boldRules: [{
               hideFromNonDrinkers: true,
               instruction: 'You drink two.'
-            }
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -773,11 +773,11 @@
             duration: 3,
             title: 'Double trouble',
             rules: ['To start this spell, give the opposite player a ball and cup.',
-              'For each cup a player holds, they perform the action.'],
-            boldRules: {
+              'Continue with two cups in play.'],
+            boldRules: [{
               hideFromNonDrinkers: true,
               instruction: 'You drink two.'
-            }
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -792,7 +792,7 @@
             image: 'delay',
             duration: 1,
             restrict: 'action',
-            type: '??status??',
+            type: 'spell',
             title: 'Delay the inevitable',
             rules: ['Only drinkers should participate next round.',
               'Double the values of the card drawn next.']
@@ -822,26 +822,22 @@
             deck: 'core',
             rarity: 'special',
             type: 'dare',
+            card: 'default',
+            helpText: ['Dare cards provide alternative options if you\'re too chicken to perform the dare.'],
+            image: 'twerk',
             title: 'Twerk it like Miley',
-            flavour: 'Shake it. Sh-sh-sh-shake it. Shake it like a polaroid picture.',
+            flavour: 'Shake it. Sh-sh-shake it like a polaroid picture.',
             rules: ['Stand up and face away.',
               'Make Miley proud.'],
-            primaryRule: {
+            boldRules: [{
               hideFromNonDrinkers: true,
               type: 'chicken',
-              value: 'skull',
-              action: 'skull',
-              person: 'you',
-              instruction: 'If you\'re too chicken to dare, drink.'
-            },
-            secondaryRule: {
+              instruction: 'Skull.'
+            }, {
               hideFromDrinkers: true,
               type: 'chicken',
-              value: 'truth',
-              action: 'truth',
-              person: 'you',
-              instruction: 'If you\'re too chicken to dare, have you ever tried to twerking?'
-            }
+              instruction: 'Have you ever tried to twerk?'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -851,14 +847,9 @@
             rarity: 'special',
             type: 'action',
             title: 'Skull',
-            flavour: '\'Cause fuck you and fuck your liver, that\'s why.',
-            primaryRule: {
-              type: 'mandatory',
-              value: 'skull',
-              action: 'skull',
-              person: 'you',
-              instruction: 'No explanation needed.'
-            }
+            card: 'default',
+            image: 'skull',
+            flavour: '\'Cause fuck you and fuck your liver, that\'s why.'
           },
           {
             creator: 'Jake Turner',
@@ -867,17 +858,16 @@
             deck: 'core',
             rarity: 'special',
             type: 'action',
-            title: 'Take one for the team',
+            card: 'default',
+            image: 'one-for-all',
+            title: 'One for all',
             flavour: 'Your heroic efforts won\'t be forgotten... until this is drawn again.',
-            primaryRule: {
-              type: 'mandatory',
-              value: 'x',
-              action: 'drink',
-              person: 'you',
-              instruction: 'Take a drink for each person playing.'
-            }
+            boldRules: [{
+              instruction: 'Drink one for each person playing.'
+            }]
           },
           {
+            id: 'asd',
             creator: 'Jake Turner',
             created: '08/05/2016',
             forDrinkers: true,
@@ -885,9 +875,12 @@
             deck: 'core',
             rarity: 'special',
             type: 'ability',
+            card: 'default',
+            image: 'jail-free',
+            flavour: 'When you have one of those \'Nope!\' moments.',
+            helpText: ['Abilities have a one time use.'],
             title: 'Get out of jail free',
-            rules: ['Use this ability to get out of a rule on any card',
-              'Abilities have a one time use.']
+            rules: ['Use this ability to get out of a rule on any card']
           },
           {
             creator: 'Jake Turner',
@@ -897,15 +890,12 @@
             rarity: 'special',
             type: 'action',
             title: 'Thirsty',
-            rules: ['Fill your drink and sit out the following round.'],
-            primaryRule: {
-              type: 'mandatory',
-              value: 'X',
-              action: 'drink',
-              person: 'you',
-              instruction: ['When the timer starts, start drinking.',
-                'Only stop when the timer rings, or you have finished your drink.']
-            }
+            card: 'default',
+            image: 'thirsty',
+            flavour: 'We\'re nothing if not conciderate. Let\'s quench that thirst.',
+            rules: ['Fill your drink.',
+              'When the timer starts next round, start drinking.',
+              'Only stop when the timer rings, or you have finished your drink.']
           },
           {
             creator: 'Jake Turner',
@@ -914,25 +904,19 @@
             deck: 'popCulture',
             rarity: 'special',
             type: 'challenge',
+            card: 'default',
+            image: 'spicey',
             title: 'Mmmm, Spicey!',
-            rules: ['You have 5 seconds.',
-              'Name the five spice girls.'],
-            flavour: 'Yo, I\'ll tell you what I want, what I really really want. I wanna really really really wanna see you skull, ha.',
-            primaryRule: {
+            rules: ['five seconds to name five spice girls.'],
+            flavour: 'Cumin, Paprika, Cinnamon, Nutmeg, Saffron.',
+            boldRules: [{
               type: 'success',
-              value: 'five',
-              action: 'drink',
-              person: 'everyone',
-              instruction: 'Drink five as a tribute to the girls.'
+              instruction: 'Everyone else drinks five.'
             },
-            secondaryRule: {
+            {
               type: 'failure',
-              value: 'skull',
-              action: 'skull',
-              person: 'you',
-              instruction: 'Drink.'
-            }
-
+              instruction: 'You skull.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -942,22 +926,17 @@
             rarity: 'special',
             type: 'challenge',
             title: 'Kobe!',
-            rules: ['Put the cup on the opposite side, away from you.',
-              'Take a shot, no bouncing.'],
-            primaryRule: {
+            card: 'default',
+            image: 'kobe',
+            flavour: 'Some guys were born with natural ball skills.',
+            rules: ['Place the cup at a distance and take a shot without bouncing.'],
+            boldRules: [{
               type: 'success',
-              value: 'two',
-              action: 'drink',
-              person: 'everyone',
-              instruction: 'You must be Kobe Bryant and everybody else drinks in your name.'
-            },
-            secondaryRule: {
+              instruction: 'Everybody else drinks two.'
+            }, {
               type: 'failure',
-              value: 'skull',
-              action: 'skull',
-              person: 'you',
-              instruction: 'Drink.'
-            }
+              instruction: 'You drink three.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -967,25 +946,20 @@
             deck: 'core',
             rarity: 'special',
             type: 'dare',
+            card: 'default',
+            image: 'kiss',
             title: 'Smooches',
-            rules: ['Kiss the person next to you on the lips.'],
+            rules: ['Kiss the adjacent person on the lips.'],
             flavour: 'Pucker up. This one could be sloppy!',
-            primaryRule: {
+            boldRules: [{
               hideFromNonDrinkers: true,
               type: 'chicken',
-              value: 'skull',
-              action: 'skull',
-              person: 'you',
-              instruction: 'If you\'re too chicken to dare, drink.'
-            },
-            secondaryRule: {
+              instruction: 'You skull.'
+            }, {
               hideFromDrinkers: true,
               type: 'chicken',
-              value: 'truth',
-              action: 'truth',
-              person: 'you',
-              instruction: 'If you\'re too chicken to dare, where\'s the strangest place you\'ve made out?'
-            }
+              instruction: 'Where\'s the strangest place you\'ve made out?'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -994,17 +968,15 @@
             deck: 'W&W',
             rarity: 'rare',
             type: 'action',
-            title: 'The witch\'s potion',
-            rules: ['The three people to your left each pour a portion of their drink into one cup.',
+            flavour: 'A little bit of piss and a little bit of poo. Mix it up and there\'s a brew for you.',
+            card: 'default',
+            image: 'potion',
+            title: 'The Witch\'s Potion',
+            rules: ['The three players to your left pour a portion of their drink into one cup.',
               'Top it up with your own drink.'],
-            flavour: '',
-            primaryRule: {
-              type: 'mandatory',
-              value: 'skull',
-              action: 'skull',
-              person: 'you',
-              instruction: 'Drink.'
-            }
+            boldRules: [{
+              instruction: 'Now skull.'
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -1013,15 +985,13 @@
             deck: 'core',
             rarity: 'rare',
             type: 'global',
-            flavour: 'I\'m not really racist. I want to wreck you all equally.',
+            card: 'default',
+            image: 'racist',
+            flavour: 'I\'m not really racist. I want you all to drink equally.',
             title: 'That\'s just racist.',
-            primaryRule: {
-              type: 'mandatory',
-              value: 'skull',
-              action: 'skull',
-              person: 'everyone',
+            boldRules: [{
               instruction: 'You, and anyone matching your skin colour, skulls their drink.'
-            }
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -1030,22 +1000,15 @@
             deck: 'core',
             rarity: 'rare',
             type: 'action',
+            card: 'default',
+            image: 'sharon',
             title: 'Our friend, Sharon',
             flavour: 'Did you hear about what our friend Sharon did with her friend Cory in the chicken shed last Christmas? I hear there were cocks involved!',
-            primaryRule: {
-              type: 'conditional',
-              value: 'one',
-              action: 'drink',
-              person: 'you',
+            boldRules: [{
               instruction: 'Drink if you know a Sharon.'
-            },
-            secondaryRule: {
-              type: 'conditional',
-              value: 'skull',
-              action: 'skull',
-              person: 'you',
+            },{
               instruction: 'Skull if you don\'t.'
-            }
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -1055,6 +1018,8 @@
             rarity: 'rare',
             type: 'action',
             title: 'Now that\'s hot!',
+            card: 'default',
+            image: 'chilli',
             flavour: 'Things are really starting to heat up now.',
             rules: ['Find and bite a hot chilli.',
               'If no chilli can be found, take a sip of hot sauce.',
@@ -1067,9 +1032,11 @@
             deck: 'core',
             rarity: 'rare',
             type: 'action',
+            image: 'gross',
+            card: 'default',
             title: 'Host\'s most gross',
             flavour: 'Delicious AND nutritious.',
-            rules: ['The host of the house gets to choose something from their cupboard.',
+            rules: ['The host of the house chooses something from their cupboard.',
               'Take a bite of it.']
           },
           {
@@ -1079,16 +1046,13 @@
             deck: 'core',
             rarity: 'rare',
             type: 'action',
-            drinkValue: 'S',
+            image: 'two-grills',
+            card: 'default',
             title: 'Two grills, one cup',
             rules: ['Pick another person and combine drinks to fill a cup.'],
-            primaryRule: {
-              type: 'mandatory',
-              value: 'skull',
-              action: 'skull',
-              person: 'you',
+            boldRules: [{
               instruction: 'Both of you skull by drinking from the cup at the same time.'
-            }
+            }]
           },
           {
             creator: 'Jake Turner',
@@ -1097,16 +1061,13 @@
             deck: 'core',
             rarity: 'rare',
             type: 'global',
+            image: 'waterfall',
+            card: 'default',
+            flavour: '',
             title: 'Waterfall',
-            rules: ['Everyone refill their cups before the next round starts.'],
-            primaryRule: {
-              type: 'mandatory',
-              value: 'x',
-              action: 'drink',
-              person: 'you',
-              instruction: ['When the round starts, everyone must start drinking.',
-                'Continue drinking through the round until the timer stops (even if you control a ball).']
-            }
+            rules: ['Everyone refills their cups.',
+              'When timer starts, everyone drinks.',
+              'No one stops until the timer stops, even if you control a ball.']
           },
           {
             creator: 'Jake Turner',
@@ -1115,22 +1076,15 @@
             deck: 'core',
             rarity: 'rare',
             type: 'global',
+            image: 'no-mercy',
+            card: 'default',
             title: 'No mercy',
             flavour: 'You\'re drunk, and you\'re drunk. You\'re also drunk. And you, you\'re extra drunk.',
-            primaryRule: {
-              type: 'mandatory',
-              value: 'skull',
-              action: 'skull',
-              person: 'everyone',
+            boldRules: [{
               instruction: 'Everyone skulls.'
-            },
-            secondaryRule: {
-              type: 'conditional',
-              value: 'skull',
-              action: 'skull',
-              person: 'someone',
-              instruction: 'The last person to finish their drink, skulls another.'
-            }
+            }, {
+              instruction: 'Last person to finish skulls another.'
+            }]
           }
         ];
       }

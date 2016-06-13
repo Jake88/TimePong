@@ -1,0 +1,163 @@
+<link rel="import" href="../../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../tp-icons/tp-card-images.html">
+
+<link rel="import" href="../../styles/app-theme.html">
+<link rel="import" href="../../styles/shared-styles.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<dom-module id="time-pong-card-back-two">
+  <template>
+    <style include="card-panel-styles iron-flex iron-flex-alignment">
+      :host .wrapper {
+        box-sizing: border-box;
+        position: relative;
+        height: 28.75em;
+        width: 18.75em;
+        background-color: var(--common-soft-tint);
+        border: .2em solid var(--common-highlight);
+        padding: .2em;
+        border-radius: .7em;
+      }
+
+      :host .panel {
+        border-radius: .7em;
+        background-color: var(--common-soft);
+        border: 1px solid var(--common-highlight);
+        color: var(--secondary-text-color);
+        margin-top: .2em;
+        position: relative;
+        text-align: center;
+        overflow: hidden;
+        -webkit-flex-shrink: 0;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+      }
+
+      :host .panel h2 {
+        padding: .5em 0;
+        margin: 0;
+        font-size: 1.4em;
+      }
+
+      :host .panel-head {
+        height: 2.6em;
+      }
+      :host .panel-head .panel-head-corner {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 1 20%;
+        -ms-flex: 1 1 20%;
+        flex: 1 1 20%;
+        border-bottom: 1px solid var(--common-soft-tint);
+      }
+
+      :host .panel-head iron-icon {
+        --iron-icon-height: 2.4em;
+        --iron-icon-width: 2.4em;
+      }
+
+      :host .panel-head .panel-head-header {
+        box-sizing: border-box;
+        background-color: var(--primary-background-color);
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 1 60%;
+        -ms-flex: 1 1 60%;
+        flex: 1 1 60%;
+        z-index: 1;
+        height: 5.2rem;
+        padding-top: .5em;
+        border-radius: 50%;
+        border: 1px solid var(--common-soft-tint);
+        text-align: center;
+      }
+
+      :host .panel-head .panel-head-header iron-icon {
+        --iron-icon-height: 3em;
+        --iron-icon-width: 100%;
+      }
+
+      :host .panel .panel-content {
+        box-sizing: border-box;
+        background-color: var(--primary-background-color);
+        border-radius: 0 0 .7em .7em;
+        padding: .3em;
+        position: relative;
+      }
+
+      :host .panel .answers {
+        width: 100%;
+        border-top: 1px solid var(--light-grey);
+      }
+
+      :host .panel .answers .answer {
+        padding: 1em;
+        position: relative;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+
+      :host .panel .answers .answer.drunk:active {
+        background-color: var(--limited-soft);
+      }
+      :host .panel .answers .answer.sober:active {
+        background-color: var(--rare-soft);
+      }
+      :host .panel .answers .answer iron-icon {
+        --iron-icon-height: 6rem;
+        --iron-icon-width: 6rem;
+      }
+      :host .panel .answers .answer.drunk iron-icon {
+        color: var(--failure-red);
+      }
+      :host .panel .answers .answer.sober iron-icon {
+        color: var(--rare-highlight);
+      }
+    </style>
+
+    <div class="wrapper layout vertical">
+      <div class="panel layout vertical flex">
+        <h2>Time Pong</h2>
+        <div class="panel-head layout horizontal">
+          <div class="panel-head-corner">
+          </div>
+          <div class="panel-head-header layout vertical">
+            <iron-icon class="type-icon" icon="tp-utility-icons:logo"></iron-icon>
+          </div>
+          <div class="panel-head-corner">
+          </div>
+        </div>
+
+        <div class="panel-content layout vertical flex end-justified">
+          <div>
+            <h2>Getting drunk?</h2>
+            <div class="layout horizontal answers">
+              <div id="drinking" class="answer drunk layout flex vertical" on-tap="selectCard">
+                <iron-icon icon="tp-card-images:no-mercy"></iron-icon>
+                <h2>Yes</h2>
+              </div>
+              <div id="nonDrinking" class="answer sober layout flex vertical" on-tap="selectCard">
+                <iron-icon icon="tp-utility-icons:angel"></iron-icon>
+                <h2>No</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'time-pong-card-back-two',
+
+        selectCard: function(e) {
+          this.fire('category-selected', e.currentTarget.id);
+        }
+      });
+    })();
+  </script>
+</dom-module>

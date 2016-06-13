@@ -2,7 +2,7 @@
 <link rel="import" href="../../styles/app-theme.html">
 <link rel="import" href="../../styles/shared-styles.html">
 <link rel="import" href="../time-pong-card-face-two/time-pong-card-face-two.html">
-<link rel="import" href="../time-pong-card-back-one/time-pong-card-back-one.html">
+<link rel="import" href="../time-pong-card-back-two/time-pong-card-back-two.html">
 
 <dom-module id="time-pong-deck">
   <template>
@@ -31,8 +31,7 @@
       @apply(--absolute-template);
         left: 0;
         bottom: 0;
-        border-radius: 10px;
-        border: 1px solid var(--primary-text-color);
+        border-radius: .7em;
         box-shadow: 0 0 3px var(--primary-text-color);
       }
 
@@ -102,16 +101,16 @@
 
     <div id="flipContainer" class="flip-container">
       <div class="card-main flipper">
-        <time-pong-card-back-one
+        <time-pong-card-back-two
           id="cardBack"
           class="back"
           selected-category="{{cardCategory}}">
-        </time-pong-card-back-one>
+        </time-pong-card-back-two>
 
         <time-pong-card-face-two
           on-tap="closeCard"
           id="currentCard"
-          class$="face {{currentCard.rarity}}"
+          class="face"
           data="{{currentCard}}">
         </time-pong-card-face-two>
       </div>
