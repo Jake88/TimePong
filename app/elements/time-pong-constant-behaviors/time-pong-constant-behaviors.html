@@ -1,0 +1,57 @@
+<script>
+//  window.myBehaviors = window.myBehaviors || {};
+
+  ConstantsBehavior = {
+    properties: {
+      CARD_TYPES: {
+        readOnly: true,
+        type: Object,
+        value: {
+          CAULDRON: 'cauldron',
+          ACTION: 'action',
+          CHALLENGE: 'challenge',
+          TRAIT: 'trait',
+          ABILITY: 'ability',
+          CURSE: 'curse',
+          GLOBAL: 'global',
+          SPELL: 'spell',
+          PERFORM: 'perform',
+          DARE: 'dare'
+        }
+      },
+
+      DECK_TYPES: {
+        readOnly: true,
+        type: Object,
+        value: {
+          DEFAULT: 'default'
+        }
+      },
+
+      RARITY_TYPES: {
+        readOnly: true,
+        type: Object,
+        value: {
+          BASIC: 'basic',
+          REGULAR: 'regular',
+          LIMITED: 'limited',
+          SPECIAL: 'special',
+          RARE: 'rare'
+        }
+      },
+
+      HELP_TEXT: {
+        readOnly: true,
+        type: Object,
+        value: {
+          cauldron: ['If The Witch\'s Cauldron does not exist, create it by placing an empty cup in the middle.'],
+          trait: ['Traits remain until the end of the game.', 'If duplicate traits are drawn, the trait moves to that player.'],
+          ability: ['Abilities have a one time use.'],
+          curse: ['Curse effects remain until another curse is drawn.', 'If anyone breaks the curse they drink.'],
+          spell: ['Spell effects expire after a specified number of rounds.'],
+          dare: ['Dare cards provide a \'chicken out\' option if you\'re too embarrassed.']
+        }
+      }
+    }
+  };
+</script>

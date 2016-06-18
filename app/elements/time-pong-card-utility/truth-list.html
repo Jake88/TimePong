@@ -1,0 +1,132 @@
+<dom-module id="truth-list">
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer.timePongUtility = Polymer({
+        is: 'truth-list',
+
+        properties: {
+          truthList: {
+            type: Object
+          },
+          selectedTruths: {
+            type: Object,
+            value: function () {
+              return []
+            }
+          }
+        },
+
+        ready: function () {
+          this.truthList = getTruthQuestions();
+        },
+
+        getTruth: function() {
+          var selectedTruth = getRandomArrayItem(_.difference(this.truthList, this.selectedTruths));
+          this.selectedTruths.push(selectedTruth);
+          if (this.selectedTruths.length === this.truthList.length) {
+            this.selectedTruths = [];
+          }
+          return selectedTruth;
+        }
+      });
+
+      function getTruthQuestions() {
+        return [
+          'The person to your left asks you a truth question.',
+          'The person to your right asks you a truth question.',
+          'The person opposite you asks you a truth question.',
+          'How old were you when you first had sex?',
+          'Have you ever twerked infront of a mirror?',
+          'Have you ever twerked for another person?',
+          'Have you ever given oral sex?',
+          'Have you ever smoked weed?',
+          'Have you ever eaten weed infused baked goods?',
+          'Have you ever done an illicit drug other than weed?',
+          'Have you ever faked an orgasm?',
+          'Have you ever flashed a person on webcam?',
+          'Have you ever made a porn video?',
+          'Have you ever been naked and in a photo as an adult?',
+          'Have you ever skinny dipped?',
+          'Have you ever kissed a nipple?',
+          'Do like your nipples being teased?',
+          'Have you ever given or received a motorboat?',
+          'Where is the most public place you\'ve had sex?',
+          'What is something that turns you off?',
+          'What is something that turns you on?',
+          'What is your weirdest habit?',
+          'Do you fold or scrunch your toilet paper?',
+          'Would you ever consider being a nudist?',
+          'What is a guilty pleasure of yours?',
+          'What is the most exotic food that you have ever eaten?',
+          'If you could change one thing on your body, what would it be?',
+          'What do you daydream about the most?',
+          'How was your first kiss?',
+          'Describe the worst kiss you can remember.',
+          'What was your best sexual experience?',
+          'What is the longest you’ve ever given head?',
+          'Would you ever do a 3-some?',
+          'How do you feel about sex in groups?',
+          'Would you ever watch your partner have sex with someone else?',
+          'How many partners have you had at one time?',
+          'Where is your favourite place to be kissed?',
+          'Have you ever taken it in the butt or would you?',
+          'What is the longest time you’ve gone without sex?',
+          'Do you enjoy rough or slow sex?',
+          'Do you prefer to be on top or bottom?',
+          'What is your favourite position?',
+          'Do you like anal?',
+          'What is your least favourite position?',
+          'What is the worst sexual experience you’ve ever had?',
+          'Have you ever had sex outside?',
+          'Where is the strangest place you’ve ever had sex?',
+          'Have you ever performed oral on someone of the same sex?',
+          'Have you ever paid for sex?',
+          'Have you ever made a video of yourself?',
+          'Who is your favourite porn star?',
+          'What is your favourite type of porn?',
+          'Have you ever been to a strip club?',
+          'Have you ever thought about being a stripper?',
+          'Do you prefer the lights on or off?',
+          'Does size matter?',
+          'Do you prefer to have music in the background, or for it to be be quiet?',
+          'Do you prefer for your partner to be silent, or do you like moans?',
+          'Do you like a lot of foreplay?',
+          'What is your favourite type of foreplay?',
+          'Have you done role-playing?',
+          'What is your role-playing fantasy?',
+          'What is your “sweet spot”?',
+          'What is your strangest sexual fantasy?',
+          'Would you ever have sex for money?',
+          'How flexible are you?',
+          'How many orgasms have you had in one sexual encounter?',
+          'Spit or Swallow?',
+          'What are you most self-conscious about?',
+          'What would you do if you were the opposite sex for a month?',
+          'What is the most expensive thing you have stolen?',
+          'Have you ever let someone take the blame for something you did?',
+          'Have you ever cheated or been cheated on?',
+          'What lie have you told that hurt someone?',
+          'What is something that people think you would never do but you have?',
+          'What is the silliest thing you have an emotional attachment to?',
+          'What is your deepest darkest fear?',
+          'Where is the strangest place you have peed?',
+          'Who is the person you most regret kissing?',
+          'Have you ever crapped your pants since you were a child?',
+          'What is the most embarrassing thing your parents have caught you doing?',
+          'What secret about yourself did you tell someone in confidence and then they told a lot of other people?',
+          'When was the most inappropriate time you farted?',
+          'What is the grossest thing you have had in your mouth?',
+          'What is the most embarrassing nickname you have ever had?'
+        ]
+      }
+
+      function getRandomArrayItem(array) {
+        var length = array ? array.length : 0;
+        var index = Math.floor(Math.random() * length);
+        return array[index];
+      }
+    })();
+  </script>
+</dom-module>

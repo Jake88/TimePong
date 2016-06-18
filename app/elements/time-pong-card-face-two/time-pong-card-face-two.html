@@ -4,6 +4,7 @@
 <link rel="import" href="../../styles/card-panel-styles.html"> <!--REMOVE-->
 
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../time-pong-constant-behaviors/time-pong-constant-behaviors.html">
 
 
 <link rel="import" href="../tp-icons/tp-utility-icons.html">
@@ -316,11 +317,11 @@
         </div>
 
         <div class="panel-content layout vertical flex">
-          <div id="helpIcon" class="help-icon"  on-tap="toggleHelp" hidden="{{hideElement(data.helpText)}}">
+          <div id="helpIcon" class="help-icon"  on-tap="toggleHelp" hidden="{{hideElement(helpText)}}">
             <iron-icon icon="help-outline" ></iron-icon>
           </div>
           <div id="helpContent" class="help-content">
-            <template is="dom-repeat" items="{{data.helpText}}">
+            <template is="dom-repeat" items="{{helpText}}">
               <p>{{item}}</p>
             </template>
           </div>
@@ -360,12 +361,17 @@
 
       Polymer({
         is: 'time-pong-card-face-two',
+        behaviors: [ConstantsBehavior],
 
         properties: {
           data: {
             type: Object,
             notify: true,
             observer: '_dataChange'
+          },
+          helpText: {
+            type: String,
+            value: null
           },
           expired: {
             type: String
@@ -378,6 +384,12 @@
           this.toggleClass('showDuration', false, this.$.duration);
           if (newVal && newVal.duration) {
             this.toggleClass('showDuration', true, this.$.duration);
+          }
+
+          // Set up correct help texts based on card type and custom help text properties on the card.
+          var helpText = this.HELP_TEXT[newVal.type];
+          if (helpText || newVal.helpText) {
+            this.helpText = newVal.helpText ? _.merge(newVal.helpText, helpText) : helpText;
           }
         },
 

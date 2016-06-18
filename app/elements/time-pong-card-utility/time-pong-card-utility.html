@@ -1,4 +1,10 @@
+<link rel="import" href="./truth-list.html">
+<link rel="import" href="../time-pong-constant-behaviors/time-pong-constant-behaviors.html">
+
 <dom-module id="time-pong-card-utility">
+  <template>
+    <truth-list id="truthList"></truth-list>
+  </template>
   <script>
     (function() {
       'use strict';
@@ -11,8 +17,9 @@
         rare: 100
       };
 
-      Polymer.timePongUtility = Polymer({
+      Polymer({
         is: 'time-pong-card-utility',
+        behaviors: [ConstantsBehavior],
 
         properties: {
           grandCardList: {
@@ -79,6 +86,16 @@
           console.log('filters', filters);
 
           this.lastFoundCard = getRandomArrayItem(getValidCards(this.filteredCardList, filters));
+
+          if(this.lastFoundCard.type === 'dare') {
+            var truth = this.$.truthList.getTruth();
+            _.forEach(this.lastFoundCard.boldRules, function(rule) {
+              if (rule.type === 'chicken') {
+                rule.instruction = truth;
+              }
+            });
+          }
+
           return this.lastFoundCard;
         }
       });
@@ -191,7 +208,6 @@
             type: 'cauldron',
             image: 'the-witchs-cauldron',
             title: 'The Witch\'s Cauldron',
-            helpText: ['If The Witch\'s Cauldron does not exist, create it by placing an empty cup in the middle.'],
             flavour: 'One toad\'s tongue with an owl\'s lung. Three cigarette butts and two squirrel nuts. Brew them for a bit, then skull that shit.',
             rules: ['Pour two shots of your drink into the cauldron.'],
             boldRules: [{instruction:'If the cauldron is full, skull it.'}]
@@ -336,9 +352,6 @@
             type: 'trait',
             title: 'The Wizard\'s hat',
             flavour: 'With great power, comes great responsibility.',
-            helpText: [
-              'Traits remain until the end of the game.', 'If duplicate traits are drawn, the trait moves to that player.'
-            ],
             rules: ['You don the wizard’s hat.',
               'If there are any disputes on rules or who had the cup when the timer went off, you decide.'],
             boldRules: [
@@ -386,7 +399,6 @@
             card: 'ability',
             image: 'nosey',
             type: 'ability',
-            helpText: ['Abilities have a one time use.'],
             title: 'You\'re so nosey!',
             rules: ['At any time you may put your finger on your nose.', 'The last person to follow you is punished.'],
             flavour: 'Eyes and ears and mouth and nose.',
@@ -408,8 +420,6 @@
             card: 'default',
             image: 'the-witchs-curse',
             rarity: 'regular',
-            helpText: ['Curse effects remain until another curse is drawn.',
-              'If anyone breaks the curse they drink.'],
             type: 'curse',
             flavour: 'Think of a curse, and keep it quick. But make it annoying, that\'s the trick.',
             title: 'The Witch\'s Curse',
@@ -429,8 +439,6 @@
             type: 'curse',
             card: 'default',
             image: 'anonymous',
-            helpText: ['Curse effects remain until another curse is drawn.',
-              'If anyone breaks the curse they drink.'],
             flavour: 'Address without their name to avoid your own shame.',
             title: 'A girl has no name', // Rename this?
             rules: ['You cannot use real or abbreviated names of people playing.'],
@@ -450,8 +458,6 @@
             card: 'default',
             image: 'orgasmic',
             flavour: 'What\'s that sound? You\'re in pleasure. Whenever you moan, be loud for good measure.',
-            helpText: ['Curse effects remain until another curse is drawn.',
-              'If anyone breaks the curse they drink.'],
             title: 'Orgasmic',
             rules: ['Before each drink, moan like you mean it.'],
             boldRules: [{
@@ -470,8 +476,6 @@
             card: 'default',
             image: 'no-point',
             flavour: 'Lower your hands and keep them closed, for if fingers point you\'ll be exposed.',
-            helpText: ['Curse effects remain until another curse is drawn.',
-              'If anyone breaks the curse they drink.'],
             title: 'What’s the point?',
             rules: ['You cannot point with your fingers.'],
             boldRules: [{
@@ -488,9 +492,6 @@
             type: 'trait',
             card: 'default',
             image: 'lovers-lane',
-            helpText: [
-              'Traits remain until the end of the game.', 'If duplicate traits are drawn, the trait moves to that player.'
-            ],
             title: 'Lovers\' lane',
             flavour: 'You don\'t wanna know how many lovers\' used that bench before you.',
             rules: ['Choose a lover and sit with them.',
@@ -498,6 +499,23 @@
             boldRules: [{
               hideFromNonDrinkers: true,
               instruction: 'Take one drink.'
+            }]
+          },
+
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'core',
+            rarity: 'regular',
+            type: 'global',
+            card: 'default',
+            image: 'spilt-milk',
+            title: 'Spilt Milk',
+            flavour: 'I guess there\'s a point crying over spilt milk after all.',
+            rules: ['You and anyone who has spilt a drink today'],
+            boldRules: [{
+              instruction: 'Drinks two.'
             }]
           },
           // ------------ limited
@@ -513,7 +531,6 @@
             type: 'spell',
             duration: 3,
             flavour: 'Adbra kadabra alakazam! From plastic to lead, that\'s what he said.',
-            helpText: ['Spell effects expire after a specified number of rounds.'],
             title: 'Lead Cup',
             rules: ['You may only pass left.'],
             boldRules: [{
@@ -560,7 +577,6 @@
             type: 'spell',
             card: 'default',
             image: 'rewind',
-            helpText: ['Spell effects expire after a specified number of rounds.'],
             duration: 3,
             title: 'Rewind',
             rules: ['Instead of passing left, pass to the right.'],
@@ -579,7 +595,6 @@
             type: 'spell',
             card: 'default',
             image: 'free-throw',
-            helpText: ['Spell effects expire after a specified number of rounds.'],
             duration: 3,
             flavour: 'He shoots, he scoooooores!',
             title: 'Free throws',
@@ -702,7 +717,6 @@
             type: 'spell',
             card: 'default',
             image: 'threes-a-crowd',
-            helpText: ['Spell effects expire after a specified number of rounds.'],
             duration: 3,
             flavour: 'Balls that play together, stay together.',
             restrict: 'action',
@@ -725,7 +739,6 @@
             type: 'spell',
             card: 'default',
             image: 'multiball',
-            helpText: ['Spell effects expire after a specified number of rounds.'],
             duration: 3,
             flavour: 'Nice balls you have there.',
             title: 'Multiball',
@@ -748,7 +761,6 @@
             card: 'default',
             flavour: 'You. Shall. Not. PASS!',
             image: 'gatekeeper',
-            helpText: ['Spell effects expire after a specified number of rounds.'],
             title: 'The gatekeeper',
             rules: ['You are the Gatekeeper and may pass to anyone.',
               'Other players may only pass to you.'],
@@ -769,7 +781,6 @@
             card: 'default',
             flavour: 'Cup hoarders will be punished severely.',
             image: 'double-trouble',
-            helpText: ['Spell effects expire after a specified number of rounds.'],
             duration: 3,
             title: 'Double trouble',
             rules: ['To start this spell, give the opposite player a ball and cup.',
@@ -823,21 +834,19 @@
             rarity: 'special',
             type: 'dare',
             card: 'default',
-            helpText: ['Dare cards provide alternative options if you\'re too chicken to perform the dare.'],
             image: 'twerk',
             title: 'Twerk it like Miley',
             flavour: 'Shake it. Sh-sh-shake it like a polaroid picture.',
-            rules: ['Stand up and face away.',
-              'Make Miley proud.'],
+            rules: ['Stand up. Face away.', 'Now make Miley proud.'],
             boldRules: [{
-              hideFromNonDrinkers: true,
-              type: 'chicken',
-              instruction: 'Skull.'
-            }, {
-              hideFromDrinkers: true,
-              type: 'chicken',
-              instruction: 'Have you ever tried to twerk?'
-            }]
+                type: 'chicken',
+                instruction: ''
+              },
+              {
+                hideFromNonDrinkers: true,
+                instruction: 'You drink three.'
+              }
+            ]
           },
           {
             creator: 'Jake Turner',
@@ -867,7 +876,6 @@
             }]
           },
           {
-            id: 'asd',
             creator: 'Jake Turner',
             created: '08/05/2016',
             forDrinkers: true,
@@ -878,7 +886,6 @@
             card: 'default',
             image: 'jail-free',
             flavour: 'When you have one of those \'Nope!\' moments.',
-            helpText: ['Abilities have a one time use.'],
             title: 'Get out of jail free',
             rules: ['Use this ability to get out of a rule on any card']
           },
@@ -952,14 +959,14 @@
             rules: ['Kiss the adjacent person on the lips.'],
             flavour: 'Pucker up. This one could be sloppy!',
             boldRules: [{
-              hideFromNonDrinkers: true,
               type: 'chicken',
-              instruction: 'You skull.'
-            }, {
-              hideFromDrinkers: true,
-              type: 'chicken',
-              instruction: 'Where\'s the strangest place you\'ve made out?'
-            }]
+              instruction: ''
+            },
+              {
+                hideFromNonDrinkers: true,
+                instruction: 'You drink three.'
+              }
+            ]
           },
           {
             creator: 'Jake Turner',

@@ -6,13 +6,15 @@
 <link rel="import" href="../time-pong-effect-card/time-pong-effect-card.html">
 <link rel="import" href="../time-pong-card-utility/time-pong-card-utility.html">
 
+<link rel="import" href="../bower-components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-meta/iron-meta.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 
 
 <dom-module id="page-time-pong">
   <template>
-    <style include="shared-styles">
+    <style include="shared-styles iron-flex">
       :host div.content {
         height: 100%;
         box-sizing: border-box;
@@ -30,6 +32,34 @@
         justify-content: center;
       }
 
+      :host .rounds {
+        text-transform: uppercase;
+        color: var(--light-grey);
+        text-align: center;
+        /*line-height: 2rem;*/
+      }
+
+      :host .rounds .darken{
+        color: var(--secondary-text-color);
+      }
+
+      :host .rounds h4 {
+        font-weight: 100;
+        line-height: 1rem;
+      }
+
+      :host .add-rounds {
+        border-radius: .2rem;
+        border: 1px solid var(--light-grey);
+        padding: .5rem;
+      }
+
+      :host .rounds .add-rounds iron-icon {
+        color: var(--success-green);
+        --iron-icon-height: 2rem;
+        --iron-icon-width: 2rem;
+      }
+
       :host time-pong-effect-card {
         margin: 0 1em;
       }
@@ -39,6 +69,15 @@
 
     <div class="content">
       <time-pong-card-utility></time-pong-card-utility>
+
+      <h2 class="rounds layout horizontal">
+        Rounds remaining: <span class="darken">{{roundsRemaining}}</span>
+        <div class="layout vertical center add-rounds" on-tap="addRounds">
+          <h4>Free</h4>
+          <iron-icon icon="add-circle"></iron-icon>
+          <h4>Rounds</h4>
+        </div>
+      </h2>
 
       <div class="effects-container">
         <time-pong-effect-card id="spellEffect" data="{{currentEffects.spell}}" label="spell" index="0"></time-pong-effect-card>
@@ -78,6 +117,10 @@
               return {};
             }
           },
+          roundsRemaining: {
+            type: Number,
+            value: 10
+          },
           // DEBUGGING: For debugging purposes
           firstCardFlag: {
             type: Boolean,
@@ -112,12 +155,16 @@
           // DEBUGGING: Set an id to grab a specific card for the first time.;
           if (this.firstCardFlag) {
             this.firstCardFlag = false;
-            filters.id = 'asd';
+//            filters.id = 'asd';
           }
 
           this.appProps.drinkingStatus = e.detail;
 
           this.currentCard = this.$$('time-pong-card-utility').getRandomCard(filters);
+        },
+
+        addRounds: function() {
+          this.roundsRemaining += 10;
         },
 
         roundEnd: function(e) {
@@ -132,6 +179,8 @@
           if (this.currentCard.type === 'spell') {
             this.set('currentEffects.spell', _.cloneDeep(this.currentCard));
           }
+
+          this.roundsRemaining -= 1;
         }
 
       });
