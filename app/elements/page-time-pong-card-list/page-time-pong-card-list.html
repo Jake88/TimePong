@@ -60,6 +60,11 @@
         justify-content: space-around;
       }
 
+      :host .card-list-helper {
+        position: relative;
+        width: 300px;
+      }
+
       :host .card-wrapper {
         position: relative;
         height: 460px;
@@ -67,6 +72,11 @@
         box-shadow: 0 3px 3px #ccc;
         border-radius: .7em;
         margin-bottom: 20px;
+      }
+
+      :host .creator {
+        color: var(--light-grey);
+        text-align: center;
       }
 
       .dropdown-content {
@@ -99,8 +109,11 @@
 
       <div class="cards-container">
         <template is="dom-repeat" items="{{filteredCardList}}">
-          <div class="card-wrapper">
-            <time-pong-card-face-two data="{{item}}"></time-pong-card-face-two>
+          <div class="card-list-helper">
+            <p class="creator">Creator: {{item.creator}}</p>
+            <div class="card-wrapper">
+              <time-pong-card-face-two data="{{item}}"></time-pong-card-face-two>
+            </div>
           </div>
         </template>
       </div>

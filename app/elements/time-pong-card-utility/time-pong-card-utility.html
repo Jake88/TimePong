@@ -83,8 +83,6 @@
             filters.rarity = 'basic';
           }
 
-          console.log('filters', filters);
-
           this.lastFoundCard = getRandomArrayItem(getValidCards(this.filteredCardList, filters));
 
           if(this.lastFoundCard.type === 'dare') {
@@ -130,8 +128,6 @@
           // Finally return false if the card matches the previous card drawn.
           return card !== filters.previousCard;
         });
-
-        console.log(filteredCards);
 
         return filteredCards;
       }
@@ -205,8 +201,9 @@
             rarity: 'basic',
             forDrinkers: true,
             card: 'default',
-            type: 'cauldron',
+            type: 'action',
             image: 'the-witchs-cauldron',
+            helpText: ['If The Witch\'s Cauldron does not exist, create it by placing an empty cup in the middle.'],
             title: 'The Witch\'s Cauldron',
             flavour: 'One toad\'s tongue with an owl\'s lung. Three cigarette butts and two squirrel nuts. Brew them for a bit, then skull that shit.',
             rules: ['Pour two shots of your drink into the cauldron.'],
@@ -306,19 +303,86 @@
             type: 'challenge',
             card: 'challenge',
             image: 'trick-shot',
-            title: 'Trick shot',
+            title: 'Trick Shot',
             rules: ['Take a shot, bouncing the ball off the wall, ceiling, floor or other ’tricky’ surface.'],
             flavour: 'Bend it like Beckham.',
             boldRules: [
               {
-                //hideFromDrinkers: true,
-                //hideFromNonDrinkers: true,
                 type: 'success',
                 instruction: 'Choose someone to skull.'
               },
               {
                 type: 'failure',
                 instruction: 'You drink two.'
+              }
+            ]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'core',
+            rarity: 'regular',
+            type: 'challenge',
+            card: 'challenge',
+            image: 'rim-job',
+            title: 'Rim Job',
+            rules: ['Take a normal shot. The ball must circle the cup rim before falling in.'],
+            flavour: 'Be careful. It\'s an unfriendly rim.',
+            boldRules: [
+              {
+                type: 'success',
+                instruction: 'Choose someone to skull.'
+              },
+              {
+                type: 'failure',
+                instruction: 'You drink two.'
+              }
+            ]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'core',
+            rarity: 'regular',
+            type: 'challenge',
+            card: 'challenge',
+            image: 'flip-cup',
+            title: 'Flip Cup',
+            rules: ['Place the cup upside down, half off the table with the ball behind it.', 'Flip the cup, landing it over the ball.'],
+            flavour: '',
+            boldRules: [
+              {
+                type: 'success',
+                instruction: 'Choose someone to skull.'
+              },
+              {
+                type: 'failure',
+                instruction: 'You drink two.'
+              }
+            ]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'core',
+            rarity: 'regular',
+            type: 'challenge',
+            card: 'challenge',
+            image: 'looks-can-kill',
+            title: 'Looks can Kill',
+            rules: ['Enter into a staring contest with another player of your choosing.'],
+            flavour: '',
+            boldRules: [
+              {
+                type: 'success',
+                instruction: 'Your opponent drinks three.'
+              },
+              {
+                type: 'failure',
+                instruction: 'You drink three.'
               }
             ]
           },
@@ -357,6 +421,25 @@
             boldRules: [
               {hideFromNonDrinkers: true,
               instruction: 'You drink two.'}
+            ]
+          },
+
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forNonDrinkers: true,
+            forDrinkers: true,
+            card: 'default',
+            image: '', // todo add img
+            deck: 'popCulture',
+            rarity: 'regular',
+            type: 'trait',
+            title: 'He who must not be named',
+            flavour: '',
+            rules: ['Anyone that says your name, or an abbreviation of it must drink.'],
+            boldRules: [
+              {hideFromNonDrinkers: true,
+                instruction: 'You drink two.'}
             ]
           },
           {
@@ -402,6 +485,29 @@
             title: 'You\'re so nosey!',
             rules: ['At any time you may put your finger on your nose.', 'The last person to follow you is punished.'],
             flavour: 'Eyes and ears and mouth and nose.',
+            boldRules: [
+              {
+                instruction: 'You drink two.'
+              }, {
+                type: 'punishment',
+                instruction: 'Drink four.'
+              }
+            ]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            forNonDrinkers: true,
+            deck: 'core',
+            rarity: 'regular',
+            card: 'ability',
+            image: 'simon-says',
+            type: 'ability',
+            helpText: ['Don\'t know Simon Says? Just drink and skip this card.'],
+            title: 'Simon Says',
+            rules: ['At any time you may start a \'Simon Says\' game.', 'The first person(s) to fail is punished.'],
+            flavour: 'Simon says drink. Simon says drink. Drink.',
             boldRules: [
               {
                 instruction: 'You drink two.'
@@ -501,7 +607,6 @@
               instruction: 'Take one drink.'
             }]
           },
-
           {
             creator: 'Jake Turner',
             created: '08/05/2016',
@@ -516,6 +621,60 @@
             rules: ['You and anyone who has spilt a drink today'],
             boldRules: [{
               instruction: 'Drinks two.'
+            }]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            forNonDrinkers: true,
+            deck: 'core',
+            rarity: 'regular',
+            type: 'trait',
+            card: 'default',
+            image: 'snake-eyes',
+            title: 'Snake Eyes',
+            flavour: 'Sssstaring is rude. Sssstop it.',
+            rules: ['Anyone you make eye contact with must drink.'],
+            boldRules: [{
+              hideFromNonDrinkers: true,
+              instruction: 'You drink two.'
+            }]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            forNonDrinkers: true,
+            deck: 'core',
+            rarity: 'regular',
+            type: 'trait',
+            card: 'default',
+            image: '',
+            title: 'Spiked Questions',
+            flavour: '',
+            rules: ['Anyone that answers your question without another question must drink.'],
+            boldRules: [{
+              hideFromNonDrinkers: true,
+              instruction: 'You drink two.'
+            }]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            forNonDrinkers: true,
+            deck: 'core',
+            rarity: 'regular',
+            type: 'action',
+            card: 'default',
+            image: 'paralyzed',
+            title: 'Paralyzed',
+            flavour: 'Your shoulder bone\'s connected to your - wrist bone. O-oh.',
+            rules: ['Hold your drink in both hands. Drink without bending your arms.'],
+            boldRules: [{
+              hideFromNonDrinkers: true,
+              instruction: 'You drink two.'
             }]
           },
           // ------------ limited
@@ -542,6 +701,42 @@
             creator: 'Jake Turner',
             created: '08/05/2016',
             forDrinkers: true,
+            forNonDrinkers: true,
+            deck: 'W&W',
+            rarity: 'limited',
+            type: 'curse',
+            card: 'default',
+            image: 'yoda',
+            flavour: 'Learn to speak Yoda, you must. Widely accepted language, it is.',
+            title: 'Yoda says',
+            rules: ['Speak like Yoda, you must.'],
+            boldRules: [{
+              hideFromNonDrinkers: true,
+              instruction: 'You drink three.'
+            }]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            forNonDrinkers: true,
+            deck: 'W&W',
+            rarity: 'limited',
+            type: 'curse',
+            card: 'default',
+            image: 'tripple-dees',
+            flavour: 'Double d\'s are good. Tripple d\'s are bad..',
+            title: 'Tripple Dees',
+            rules: ['Saying the words Drink, Drank, or Drunk is forbidden.'],
+            boldRules: [{
+              hideFromNonDrinkers: true,
+              instruction: 'You drink three.'
+            }]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
             deck: 'core',
             rarity: 'limited',
             card: 'default',
@@ -550,6 +745,20 @@
             title: '',
             boldRules: [{
               instruction: 'You drink three.'
+            }]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'core',
+            rarity: 'limited',
+            card: 'default',
+            image: 'drink-four',
+            type: 'action',
+            title: '',
+            boldRules: [{
+              instruction: 'You drink four.'
             }]
           },
           {
@@ -604,6 +813,20 @@
               hideFromNonDrinkers: true,
               instruction: 'You drink three.'
             }
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'popCulture',
+            rarity: 'limited',
+            type: 'global',
+            card: 'default',
+            image: 'hodor',// todo add img
+            title: 'Hold the Door',
+            flavour: 'Hodor hodor, hodor. Hodor!?',
+            rules: ['Pay tribute to Hodor by giving a eulogy to him, using only his vocabulary.'],
+            boldRules: [{instruction:'Everyone toast and drink two.'}]
           },
           {
             creator: 'Jake Turner',
@@ -808,8 +1031,101 @@
             rules: ['Only drinkers should participate next round.',
               'Double the values of the card drawn next.']
           },
+          {
+            creator: 'Tim Weightman',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'core',
+            rarity: 'limited',
+            type: 'challenge',
+            card: 'challenge',
+            image: 'hacky-sack',
+            title: 'Hacky Sack',
+            rules: ['One chance to bounce the ball off your feet five consecutive times.'],
+            flavour: 'Yeah, put put your balls in their mouth!',
+            boldRules: [
+              {
+                type: 'success',
+                instruction: 'Choose someone to skull..'
+              },
+              {
+                type: 'failure',
+                instruction: 'You drink three.'
+              }
+            ]
+          },
 
           // ------------ special
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'core',
+            rarity: 'special',
+            card: 'default',
+            image: 'drink-five',
+            type: 'action',
+            title: '',
+            boldRules: [{
+              instruction: 'You drink five.'
+            }]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            forNonDrinkers: true,
+            deck: 'W&W',
+            rarity: 'special',
+            type: 'spell',
+            card: 'default',
+            flavour: 'Some call you The Punisher, others call you Bob.',
+            image: 'punisher',
+            duration: 1,
+            title: 'The Punisher',
+            rules: ['You are the only person who can play next round.', 'Each time you get the ball in, allocate one drink.'],
+            boldRules: [{
+              hideFromNonDrinkers: true,
+              instruction: 'You drink three.'
+            }]
+          },
+          {
+            creator: 'Cute Ben',
+            created: '08/05/2016',
+            forDrinkers: true,
+            forNonDrinkers: true,
+            deck: 'W&W',
+            rarity: 'special',
+            type: 'spell',
+            card: 'default',
+            flavour: 'Let\'s get ready tooo rummmmmmmble.',
+            image: 'duel',
+            duration: 1,
+            title: 'Duel',
+            rules: ['Choose any other player. You may only pass to each other next round.'],
+            boldRules: [{
+              hideFromNonDrinkers: true,
+              instruction: 'You drink three.'
+            }]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            forNonDrinkers: true,
+            deck: 'W&W',
+            rarity: 'special',
+            type: 'curse',
+            card: 'default',
+            flavour: 'If laughter\'s the best medicine, let\'s hope you\'re not sick.',
+            image: 'laughter',
+            title: 'Nothing\'s Funny',
+            rules: ['laughing is forbidden.'],
+            boldRules: [{
+              hideFromNonDrinkers: true,
+              instruction: 'You drink three.'
+            }]
+          },
           {
             creator: 'Jake Turner',
             created: '08/05/2016',
@@ -914,7 +1230,7 @@
             card: 'default',
             image: 'spicey',
             title: 'Mmmm, Spicey!',
-            rules: ['five seconds to name five spice girls.'],
+            rules: ['Five seconds to name five spice girls.'],
             flavour: 'Cumin, Paprika, Cinnamon, Nutmeg, Saffron.',
             boldRules: [{
               type: 'success',
@@ -1092,6 +1408,79 @@
             }, {
               instruction: 'Last person to finish skulls another.'
             }]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'core',
+            rarity: 'rare',
+            type: 'global',
+            image: 'apocolypse',    // Todo add img
+            card: 'default',
+            title: 'Apocolypse',
+            flavour: '.',
+            boldRules: [{
+              instruction: 'Everyone skulls.'
+            }]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            forNonDrinkers: true,
+            deck: 'W&W',
+            rarity: 'rare',
+            type: 'curse',
+            card: 'default',
+            flavour: 'What good\'s a phone call, if you cannot talk?',
+            image: 'mute',
+            title: 'Sounds of Silence',
+            rules: ['You cannot make any sound with your mouth.'],
+            boldRules: [{
+              hideFromNonDrinkers: true,
+              instruction: 'You skull.'
+            }]
+          },
+          {
+            creator: 'Jake Turner',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'W&W',
+            rarity: 'rare',
+            type: 'action',
+            card: 'default',
+            flavour: '',
+            image: 'kamikaze',
+            title: 'Kamikaze',
+            boldRules: [{
+              instruction: 'You skull.'
+            },{
+              instruction: 'Choose someone to skull.'
+            }]
+          },
+          {
+            creator: 'Tim Weightman',
+            created: '08/05/2016',
+            forDrinkers: true,
+            deck: 'core',
+            rarity: 'rare',
+            type: 'challenge',
+            card: 'challenge',
+            image: 'ball-mouth',
+            title: 'Right in the Kisser',
+            rules: ['Take a shot, no bouncing, aiming for the mouth of the person opposite.'],
+            flavour: 'Yeah, put put your balls in their mouth!',
+            boldRules: [
+              {
+                type: 'success',
+                instruction: 'Both people choose others to skull.'
+              },
+              {
+                type: 'failure',
+                instruction: 'Both people skull.'
+              }
+            ]
           }
         ];
       }

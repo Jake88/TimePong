@@ -36,28 +36,22 @@
         text-transform: uppercase;
         color: var(--light-grey);
         text-align: center;
-        /*line-height: 2rem;*/
+        line-height: 2.2rem;
       }
 
       :host .rounds .darken{
         color: var(--secondary-text-color);
       }
 
-      :host .rounds h4 {
-        font-weight: 100;
-        line-height: 1rem;
-      }
-
-      :host .add-rounds {
-        border-radius: .2rem;
-        border: 1px solid var(--light-grey);
-        padding: .5rem;
+      :host .rounds .add-rounds {
+        padding-left: .5rem;
       }
 
       :host .rounds .add-rounds iron-icon {
         color: var(--success-green);
         --iron-icon-height: 2rem;
         --iron-icon-width: 2rem;
+        cursor: pointer;
       }
 
       :host time-pong-effect-card {
@@ -71,11 +65,9 @@
       <time-pong-card-utility></time-pong-card-utility>
 
       <h2 class="rounds layout horizontal">
-        Rounds remaining: <span class="darken">{{roundsRemaining}}</span>
+        Rounds:&nbsp;<span class="darken"> {{roundsRemaining}}</span>
         <div class="layout vertical center add-rounds" on-tap="addRounds">
-          <h4>Free</h4>
           <iron-icon icon="add-circle"></iron-icon>
-          <h4>Rounds</h4>
         </div>
       </h2>
 
@@ -84,7 +76,15 @@
         <time-pong-effect-card id="curseEffect" data="{{currentEffects.curse}}" label="curse" index="1"></time-pong-effect-card>
       </div>
 
-      <time-pong-timer is-running="{{isTimerRunning}}"></time-pong-timer>
+      <time-pong-timer is-running="{{isTimerRunning}}" hidden="{{hideElement(roundsRemaining)}}"></time-pong-timer>
+
+      <div class="game-over" hidden="{{!hideElement(roundsRemaining)}}">
+        <h3>Out of Rounds.</h3>
+        <p>Not ready to finish? Add more rounds to continue inebriating!</p>
+        <div class="layout vertical center add-rounds" on-tap="addRounds">
+          <iron-icon icon="add-circle"></iron-icon>
+        </div>
+      </div>
 
       <time-pong-deck
         current-card="{{currentCard}}">
@@ -119,7 +119,7 @@
           },
           roundsRemaining: {
             type: Number,
-            value: 10
+            value: 2
           },
           // DEBUGGING: For debugging purposes
           firstCardFlag: {
@@ -141,6 +141,13 @@
 
         timerFinished: function() {
           this.$$('time-pong-deck').drawCard();
+        },
+
+        hideElement: function(property, propertyToMatch) {
+          if (propertyToMatch) {
+            return property !== propertyToMatch;
+          }
+          return !property;
         },
 
         chooseCard: function(e) {

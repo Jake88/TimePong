@@ -339,7 +339,7 @@
             </template>
           </div>
 
-          <div class="image-wrapper layout flex">
+          <div class="image-wrapper layout flex" hidden="{{hideElement(data.image)}}">
             <iron-icon icon="tp-card-images:{{data.image}}"></iron-icon>
           </div>
 
@@ -387,9 +387,9 @@
           }
 
           // Set up correct help texts based on card type and custom help text properties on the card.
-          var helpText = this.HELP_TEXT[newVal.type];
-          if (helpText || newVal.helpText) {
-            this.helpText = newVal.helpText ? _.merge(newVal.helpText, helpText) : helpText;
+          this.helpText = this.HELP_TEXT[newVal.type];
+          if (newVal.helpText) {
+            this.helpText = this.helpText ? this.helpText.concat(newVal.helpText) : newVal.helpText;
           }
         },
 
