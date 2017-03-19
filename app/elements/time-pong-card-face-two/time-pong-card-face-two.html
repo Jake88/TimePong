@@ -18,6 +18,15 @@
 <dom-module id="time-pong-card-face-two">
   <template>
     <style include="card-panel-styles iron-flex">
+      :host h4 {
+        position: relative;
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        text-transform: uppercase;
+        font-size: .7em;
+      }
+
       :host .wrapper {
         box-sizing: border-box;
         position: relative;
@@ -382,14 +391,17 @@
           this.toggleClass('toggled', false, this.$.helpContent);
           this.toggleClass('toggled', false, this.$.helpIcon);
           this.toggleClass('showDuration', false, this.$.duration);
-          if (newVal && newVal.duration) {
-            this.toggleClass('showDuration', true, this.$.duration);
-          }
 
-          // Set up correct help texts based on card type and custom help text properties on the card.
-          this.helpText = this.HELP_TEXT[newVal.type];
-          if (newVal.helpText) {
-            this.helpText = this.helpText ? this.helpText.concat(newVal.helpText) : newVal.helpText;
+          if(newVal) {
+            if (newVal.duration) {
+              this.toggleClass('showDuration', true, this.$.duration);
+            }
+
+            // Set up correct help texts based on card type and custom help text properties on the card.
+            this.helpText = this.HELP_TEXT[newVal.type];
+            if (newVal.helpText) {
+              this.helpText = this.helpText ? this.helpText.concat(newVal.helpText) : newVal.helpText;
+            }
           }
         },
 
