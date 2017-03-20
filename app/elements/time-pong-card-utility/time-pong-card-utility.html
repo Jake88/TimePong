@@ -10,8 +10,8 @@
       'use strict';
 
       var _BOUNDS = {
-        basic: 35,
-        regular: 65,
+        basic: 20,
+        regular: 62,
         limited: 85,
         special: 97,
         rare: 100
@@ -35,11 +35,14 @@
         },
 
         ready: function() {
-          // TODO Fetch the card list from the db
-          // this.grandCardList = db.allCards
-          this.grandCardList = tempCardsArray(); // TODO Remove once we're getting it from filteredFunction
+          // TODO Fetch the card list from the db filtered by user config
+          // We only wanted cards user has access too to be returned so that they can't change the code and access all cards
+          // this.grandCardList = db.cards()
+
           // TODO Pluck out the card categories that don't match the user's config
           // this.filteredCardList = filterUnwantedDecks(this.grandCardList, user.config)
+          this.grandCardList = tempCardsArray(); // TODO Remove once we're getting it from filteredFunction
+
           this.filteredCardList = tempCardsArray(); // TODO Remove once we're getting it from filteredFunction
         },
 
@@ -54,8 +57,8 @@
             whether a spell card is currently in play.
           isDrinking: Boolean
             Yay or nay
-          restrictTo: String
-            Whether we restrict the card type being found to a particular type ie. 'action' or 'curse'
+          restrictTo: Object
+            Whether we restrict the card type being found to the passed obj. ie {type: 'action', rarity 'basic'}
         }
        */
         getRandomCard: function(filters) {
@@ -64,11 +67,11 @@
           // First we set up filters.
           filters = filters || {};
           filters.previousCard = this.lastFoundCard;
-          filters.restrictTo = filters.restrictTo || this.lastFoundCard.restrict;
+          filters.restrictTo = filters.restrictTo || this.lastFoundCard.restrict || {};
 
           // Add a rarity filter
           // Special check to see if we draw a basic card.
-          if (result < _BOUNDS.basic && _.get(this.lastFoundCard, 'rarity') !== 'basic') {
+          if (result < _BOUNDS.basic && _.get(this.lastFoundCard, 'rarity') !== 'basic' && !filters.restrictTo.multi) {
             filters.rarity = 'basic';
           } else if(result < _BOUNDS.regular) {
             filters.rarity = 'regular';
@@ -100,30 +103,15 @@
 
       function getValidCards(cards, filters) {
         // For debugging purposes. Grab a specific card.
-        if (filters.id) {
-          return _.where(cards, {id: filters.id});
-        }
+        if (filters.id) return _.where(cards, {id: filters.id});
+
         var filteredCards =  _.filter(cards, function(card) {
-          if (filters.rarity !== card.rarity) {
-            return false;
-          }
-
-          if (filters.isDrinking && !card.forDrinkers) {
-            return false;
-          }
-
-          if (!filters.isDrinking && !card.forNonDrinkers) {
-            return false;
-          }
-
-          if (filters.restrictTo && card.type !== filters.restrictTo) {
-            return false;
-          }
-
+          if (filters.rarity !== card.rarity) return false;
+          if (filters.isDrinking && !card.forDrinkers) return false;
+          if (!filters.isDrinking && !card.forNonDrinkers) return false;
+          if (filters.restrictTo && !_.find([card], filters.restrictTo)) return false;
           // Is a spell card currently in play. If so, remove all other spells.
-          if (filters.isSpellActive && card.type === 'spell') {
-            return false;
-          }
+          if (filters.isSpellActive && card.type === 'spell') return false;
 
           // Finally return false if the card matches the previous card drawn.
           return card !== filters.previousCard;
@@ -166,29 +154,13 @@
 
           flavour: String - humerous flavour text for the card, themed around the card name or rules (Optional)
 
+          multipleLosers: Boolean - whether or not this card makes sense if multiple people lost
+
           rules: Array[String] - List of instructions to do for the card (Optional)
 
-          primaryRule: {
-            //TODO: NOTE Drinking Rule restrictions:
-            //    Only ONE primary rule can be applied.
-            //    ONLY ONE secondary rule can be applied of each drinkStatus (hideFromDrinkers / nonDrinkers must be set on BOTH
-            //        secondary rules for them to be applied, otherwise only one can be set.)
-
-            hideFromDrinkers: Boolean - hide if this rule shouldn't be seen for drinkers
-            hideFromNonDrinkers: Boolean - hide if this rule shouldn't be seen for non drinkers
-            type: String - What type of rule is this
-                  [Mandatory, success, failure, conditional, dare, truth]
-            value: String - How many drinks, or the action that needs to be performed (eg: two, or skull, or fetch)
-            action: String - What the rule is
-                  [drink, skull, fetch, perform, remove?(clothes)]
-            person: String - Who this rule applies to
-                  [you, someone, everyone]
-            instruction: rray[String] - A brief instruction/istruction of the rule (ie: choose someone, everyone wearing X
-          }
-
-          secondaryRule: { TODO: Convert this to an array so we can have 2 secondary rules MAX on a card.
-            ^^^^ same as primary rule.
-          }
+          boldRules: Object {  - bottom rules, drink amount / challenge result etc (required)
+            instruction: [String]
+           }
         }
          */
 
@@ -220,6 +192,7 @@
             image: 'fetch',
             title: 'Fetch!',
             flavour: 'Who\'s a good doggy? You\'re a good doggy!',
+            multipleLosers: true,
             rules: ['Pass the cup to your left, play continues while you\'re gone.'],
             boldRules: [{instruction:'If anyone wants a drink, you fetch it.'}]
           },
@@ -235,6 +208,7 @@
             type: 'action',
             title: 'Sharing is caring',
             flavour: 'Nobody wants to drink alone.',
+            multipleLosers: true,
             rules: ['Choose a friend to share your losing experience.'],
             boldRules: [{instruction:'You both drink two.'}]
           },
@@ -248,6 +222,7 @@
             card: 'default',
             image: 'drink-one',
             title: '',
+            multipleLosers: true,
             boldRules: [{instruction:'You drink one.'}]
           },
           {
@@ -260,6 +235,7 @@
             card: 'default',
             image: 'drink-two',
             title: '',
+            multipleLosers: true,
             boldRules: [{instruction:'You drink two.'}]
           },
           {
@@ -273,6 +249,7 @@
             image: 'delegate',
             title: 'Delegate',
             flavour: 'It\'s a hard job, but someone has to do it. Time to delegate.',
+            multipleLosers: true,
             boldRules: [{instruction:'Choose someone to drink two.'}]
           },
           {
@@ -285,6 +262,7 @@
             card: 'default',
             image: 'give-and-take',
             title: 'Give and take',
+            multipleLosers: true,
             boldRules: [
               {
                 instruction: 'Give someone two drinks.'
@@ -468,6 +446,7 @@
             type: 'action',
             title: 'Give',
             flavour: 'With some people it\'s all take and no give. But not you! You\'re the generous type.',
+            multipleLosers: true,
             boldRules: [{
               instruction: 'Choose someone to drink two.'
             }]
@@ -725,6 +704,7 @@
             image: 'drink-three',
             type: 'action',
             title: '',
+            multipleLosers: true,
             boldRules: [{
               instruction: 'You drink three.'
             }]
@@ -739,6 +719,7 @@
             image: 'drink-four',
             type: 'action',
             title: '',
+            multipleLosers: true,
             boldRules: [{
               instruction: 'You drink four.'
             }]
@@ -754,6 +735,7 @@
             image: 'push-up',
             title: 'Drop and gimme',
             flavour: 'Girl look at that body. Girl look at that body. I work out!',
+            multipleLosers: true,
             boldRules: [{
               instruction: 'Perform five push ups.'
             }]
@@ -837,6 +819,7 @@
             image: 'doing-it-wrong',
             helpText: ['Place your lips on the far side of the cup. Tilt your head forward until you can take your drink.'],
             flavour: 'Oops. You\'ve gone full retard. You should never go full retard.',
+            multipleLosers: true,
             title: 'You\'re doing it wrong',
             rules: ['Drink from the opposite side of the cup.'],
             boldRules: [{
@@ -853,6 +836,7 @@
             card: 'default',
             image: 'rehydrate',
             title: 'Rehydrate',
+            multipleLosers: true,
             rules: ['Slow down, cowboy. You’re looking a little tipsy!',
               'Get excluded from rounds while you drink a glass of water.'],
             flavour: 'Remember kids, always drink responsibly.'
@@ -924,7 +908,10 @@
             image: 'threes-a-crowd',
             duration: 3,
             flavour: 'Balls that play together, stay together.',
-            restrict: 'action',
+            restrict: {
+              type: 'action',
+              multipleLosers: true
+            },
             title: 'Three\'s a crowd',
             rules: ['Add a ball for adjacent players.',
               'When all balls are sunk, pass the cup to anyone.',
@@ -988,6 +975,10 @@
             image: 'double-trouble',
             duration: 3,
             title: 'Double trouble',
+            restrict: {
+              type: 'action',
+              multipleLosers: true
+            },
             rules: ['To start this spell, give the opposite player a ball and cup.',
               'Continue with two cups in play.'],
             boldRules: [{
@@ -1007,7 +998,10 @@
             flavour: 'Three inevitable things: Dying, taxes and someone drinking twice what they had too.',
             image: 'delay',
             duration: 1,
-            restrict: 'action',
+            restrict: {
+              type: 'action',
+              multipleLosers: true
+            },
             type: 'spell',
             title: 'Delay the inevitable',
             rules: ['Only drinkers should participate next round.',
@@ -1024,7 +1018,8 @@
             image: 'hacky-sack',
             title: 'Hacky Sack',
             rules: ['One chance to bounce the ball off your feet five consecutive times.'],
-            flavour: 'Yeah, put put your balls in their mouth!',
+            flavour: '',
+            multipleLosers: true,
             boldRules: [
               {
                 type: 'success',
@@ -1047,6 +1042,7 @@
             card: 'default',
             image: 'drink-five',
             type: 'action',
+            multipleLosers: true,
             title: '',
             boldRules: [{
               instruction: 'You drink five.'
@@ -1060,6 +1056,7 @@
             deck: 'core',
             rarity: 'special',
             type: 'action',
+            multipleLosers: true,
             card: 'default',
             image: 'paralyzed',
             title: 'Paralyzed',
@@ -1133,6 +1130,7 @@
             forDrinkers: true,
             rarity: 'special',
             type: 'action',
+            multipleLosers: true,
             card: 'default',
             flavour: 'One have-a-sippy..... Two have-a-sippy..... Three have-a-sippy.',
             image: 'sipping-situp',
@@ -1171,6 +1169,7 @@
             deck: 'core',
             rarity: 'special',
             type: 'action',
+            multipleLosers: true,
             title: 'Skull',
             card: 'default',
             image: 'skull',
@@ -1183,6 +1182,7 @@
             deck: 'core',
             rarity: 'special',
             type: 'action',
+            multipleLosers: true,
             card: 'default',
             image: 'one-for-all',
             title: 'One for all',
@@ -1326,6 +1326,7 @@
             card: 'default',
             image: 'sharon',
             title: 'Our friend, Sharon',
+            multipleLosers: true,
             flavour: 'Did you hear about what our friend Sharon did with her friend Cory in the chicken shed last Christmas? I hear there were cocks involved!',
             boldRules: [{
               instruction: 'Drink if you know a Sharon.'
@@ -1343,6 +1344,7 @@
             title: 'Now that\'s hot!',
             card: 'default',
             image: 'chilli',
+            multipleLosers: true,
             flavour: 'Things are really starting to heat up now.',
             rules: ['Find and bite a hot chilli.',
               'If no chilli can be found, take a sip of hot sauce.',
@@ -1356,6 +1358,7 @@
             rarity: 'rare',
             type: 'action',
             image: 'gross',
+            multipleLosers: true,
             card: 'default',
             title: 'Host\'s most gross',
             flavour: 'Delicious AND nutritious.',
@@ -1453,6 +1456,7 @@
             flavour: '',
             image: 'kamikaze',
             title: 'Kamikaze',
+            multipleLosers: true,
             boldRules: [{
               instruction: 'You skull.'
             },{
