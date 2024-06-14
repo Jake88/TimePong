@@ -1,28 +1,30 @@
 ![](https://cloud.githubusercontent.com/assets/110953/7877439/6a69d03e-0590-11e5-9fac-c614246606de.png)
+
 ## Polymer Starter Kit
 
 > A starting point for building web applications with Polymer 1.0
 
 ### Included out of the box:
 
-* [Polymer](https://www.polymer-project.org/), [Paper](https://elements.polymer-project.org/browse?package=paper-elements), [Iron](https://elements.polymer-project.org/browse?package=iron-elements) and [Neon](https://elements.polymer-project.org/browse?package=neon-elements) elements
-* [Material Design](http://www.google.com/design/spec/material-design/introduction.html) layout
-* Routing with [Page.js](https://visionmedia.github.io/page.js/)
-* Unit testing with [Web Component Tester](https://github.com/Polymer/web-component-tester)
-* Optional offline setup through [Platinum](https://elements.polymer-project.org/browse?package=platinum-elements) Service Worker elements
-* End-to-end Build Tooling (including [Vulcanize](https://github.com/Polymer/vulcanize))
-* [Recipes](/docs/README.md/) for ES2015 support, Polymer performance, using Chrome Dev Editor, Deploying to GitHub Pages, Deploying to Firebase, Mobile Chrome Apps and lint tools.
+- [Polymer](https://www.polymer-project.org/), [Paper](https://elements.polymer-project.org/browse?package=paper-elements), [Iron](https://elements.polymer-project.org/browse?package=iron-elements) and [Neon](https://elements.polymer-project.org/browse?package=neon-elements) elements
+- [Material Design](http://www.google.com/design/spec/material-design/introduction.html) layout
+- Routing with [Page.js](https://visionmedia.github.io/page.js/)
+- Unit testing with [Web Component Tester](https://github.com/Polymer/web-component-tester)
+- Optional offline setup through [Platinum](https://elements.polymer-project.org/browse?package=platinum-elements) Service Worker elements
+- End-to-end Build Tooling (including [Vulcanize](https://github.com/Polymer/vulcanize))
+- [Recipes](/docs/README.md/) for ES2015 support, Polymer performance, using Chrome Dev Editor, Deploying to GitHub Pages, Deploying to Firebase, Mobile Chrome Apps and lint tools.
 
 ### Demo
+
 See latest Polymer Starter Kit Demo (from master) at https://polymerelements.github.io/polymer-starter-kit/
 
 ### Tutorials
 
 Check out the Polymer Starter Kit tutorials on [polymer-project.org](https://www.polymer-project.org):
 
-* [Set up the PSK](https://www.polymer-project.org/1.0/docs/start/psk/set-up.html)
-* [Create a page](https://www.polymer-project.org/1.0/docs/start/psk/create-a-page.html)
-* [Deploy the PSK to the web](https://www.polymer-project.org/1.0/docs/start/psk/deploy.html)
+- [Set up the PSK](https://www.polymer-project.org/1.0/docs/start/psk/set-up.html)
+- [Create a page](https://www.polymer-project.org/1.0/docs/start/psk/create-a-page.html)
+- [Deploy the PSK to the web](https://www.polymer-project.org/1.0/docs/start/psk/deploy.html)
 
 ## Getting Started
 
@@ -67,7 +69,16 @@ The full starter kit requires the following major dependencies:
 
 **To install dependencies:**
 
-1)  Check your Node.js version.
+```sh
+npm install
+npm install bower
+// add 'bowser: bower install' as package script
+npm run bower
+
+npm start
+```
+
+1.  Check your Node.js version.
 
 ```sh
 node --version
@@ -75,9 +86,9 @@ node --version
 
 The version should be at or above 0.12.x.
 
-2)  If you don't have Node.js installed, or you have a lower version, go to [nodejs.org](https://nodejs.org) and click on the big green Install button.
+2.  If you don't have Node.js installed, or you have a lower version, go to [nodejs.org](https://nodejs.org) and click on the big green Install button.
 
-3)  Install `gulp` and `bower` globally.
+3.  Install `gulp` and `bower` globally.
 
 ```sh
 npm install -g gulp bower
@@ -85,7 +96,7 @@ npm install -g gulp bower
 
 This lets you run `gulp` and `bower` from the command line.
 
-4)  Install the starter kit's local `npm` and `bower` dependencies.
+4.  Install the starter kit's local `npm` and `bower` dependencies.
 
 ```sh
 cd polymer-starter-kit && npm install && bower install
@@ -111,7 +122,7 @@ gulp test:local
 
 This runs the unit tests defined in the `app/test` directory through [web-component-tester](https://github.com/Polymer/web-component-tester).
 
-To run tests Java 7 or higher is required. To update Java go to http://www.oracle.com/technetwork/java/javase/downloads/index.html and download ***JDK*** and install it.
+To run tests Java 7 or higher is required. To update Java go to http://www.oracle.com/technetwork/java/javase/downloads/index.html and download **_JDK_** and install it.
 
 #### Build & Vulcanize
 
@@ -128,28 +139,29 @@ Polymer 1.0 introduces a shim for CSS custom properties. We take advantage of th
 [Read more](https://www.polymer-project.org/1.0/docs/devguide/styling.html) about CSS custom properties.
 
 ### Styling
-1. ***main.css*** - to define styles that can be applied outside of Polymer's custom CSS properties implementation. Some of the use-cases include defining styles that you want to be applied for a splash screen, styles for your application 'shell' before it gets upgraded using Polymer or critical style blocks that you want parsed before your elements are.
-2. ***app-theme.html*** - to provide theming for your application. You can also find our presets for Material Design breakpoints in this file.
-3. ***shared-styles.html*** - to share styles between elements and index.html.
-4. ***element styles only*** - styles specific to element. These styles should be inside the `<style></style>` inside `template`.
 
-  ```HTML
-  <dom-module id="my-list">
-    <template>
-      <style>
-        :host {
-          display: block;
-          background-color: yellow;
-        }
-      </style>
-      <ul>
-        <template is="dom-repeat" items="{{items}}">
-          <li><span class="paper-font-body1">{{item}}</span></li>
-        </template>
-      </ul>
-    </template>
-  </dom-module>
-  ```
+1. **_main.css_** - to define styles that can be applied outside of Polymer's custom CSS properties implementation. Some of the use-cases include defining styles that you want to be applied for a splash screen, styles for your application 'shell' before it gets upgraded using Polymer or critical style blocks that you want parsed before your elements are.
+2. **_app-theme.html_** - to provide theming for your application. You can also find our presets for Material Design breakpoints in this file.
+3. **_shared-styles.html_** - to share styles between elements and index.html.
+4. **_element styles only_** - styles specific to element. These styles should be inside the `<style></style>` inside `template`.
+
+```HTML
+<dom-module id="my-list">
+  <template>
+    <style>
+      :host {
+        display: block;
+        background-color: yellow;
+      }
+    </style>
+    <ul>
+      <template is="dom-repeat" items="{{items}}">
+        <li><span class="paper-font-body1">{{item}}</span></li>
+      </template>
+    </ul>
+  </template>
+</dom-module>
+```
 
 These style files are located in the [styles folder](app/styles/).
 
@@ -169,8 +181,8 @@ Components installed by Bower live in the `app/bower_components` directory. This
 
 ### Github Pages
 
-1. Uncomment this line  `// app.baseUrl = '/polymer-starter-kit/';` in app.js near the top
-2. Change `app.baseUrl = '/polymer-starter-kit/';`  to `app.baseUrl = '/your-pathname/';` (ex: if you repo is `github.com/username/bobs-awesome-site` you would change this to `app.baseUrl = '/bobs-awesome-site/';`)
+1. Uncomment this line `// app.baseUrl = '/polymer-starter-kit/';` in app.js near the top
+2. Change `app.baseUrl = '/polymer-starter-kit/';` to `app.baseUrl = '/your-pathname/';` (ex: if you repo is `github.com/username/bobs-awesome-site` you would change this to `app.baseUrl = '/bobs-awesome-site/';`)
 3. Run `gulp build-deploy-gh-pages` from command line
 4. To see changes wait 1-2 minutes then load Github pages for your app (ex: https://polymerelements.github.io/polymer-starter-kit/)
 
@@ -191,56 +203,59 @@ Our optional offline setup should work well for relatively simple applications. 
 To enable Service Worker support for Polymer Starter Kit project use these 3 steps:
 
 1. Uncomment Service Worker code in index.html
-  ```HTML
-  <!-- Uncomment next block to enable Service Worker support (1/2) -->
-  <!--
-  <paper-toast id="caching-complete"
-               duration="6000"
-               text="Caching complete! This app will work offline.">
-  </paper-toast>
 
-  <platinum-sw-register auto-register
-                        clients-claim
-                        skip-waiting
-                        on-service-worker-installed="displayInstalledToast">
-    <platinum-sw-cache default-cache-strategy="networkFirst"
-                       cache-config-file="cache-config.json">
-    </platinum-sw-cache>
-  </platinum-sw-register>
-  -->
-  ```
+```HTML
+<!-- Uncomment next block to enable Service Worker support (1/2) -->
+<!--
+<paper-toast id="caching-complete"
+             duration="6000"
+             text="Caching complete! This app will work offline.">
+</paper-toast>
+
+<platinum-sw-register auto-register
+                      clients-claim
+                      skip-waiting
+                      on-service-worker-installed="displayInstalledToast">
+  <platinum-sw-cache default-cache-strategy="networkFirst"
+                     cache-config-file="cache-config.json">
+  </platinum-sw-cache>
+</platinum-sw-register>
+-->
+```
+
 2. Uncomment Service Worker code in elements.html
 
-  ```HTML
-  <!-- Uncomment next block to enable Service Worker Support (2/2) -->
-  <!--
-  <link rel="import" href="../bower_components/platinum-sw/platinum-sw-cache.html">
-  <link rel="import" href="../bower_components/platinum-sw/platinum-sw-register.html">
-  -->
-  ```
-3. Uncomment 'cache-config' in the `runSequence()` section of the 'default' gulp task, like below:
-[(gulpfile.js)](https://github.com/PolymerElements/polymer-starter-kit/blob/master/gulpfile.js)
+```HTML
+<!-- Uncomment next block to enable Service Worker Support (2/2) -->
+<!--
+<link rel="import" href="../bower_components/platinum-sw/platinum-sw-cache.html">
+<link rel="import" href="../bower_components/platinum-sw/platinum-sw-register.html">
+-->
+```
 
-  ```JavaScript
-  // Build Production Files, the Default Task
-  gulp.task('default', ['clean'], function (cb) {
-    runSequence(
-      ['copy', 'styles'],
-      'elements',
-      ['images', 'fonts', 'html'],
-      'vulcanize', 'cache-config',
-      cb);
-  });
-  ```
+3. Uncomment 'cache-config' in the `runSequence()` section of the 'default' gulp task, like below:
+   [(gulpfile.js)](https://github.com/PolymerElements/polymer-starter-kit/blob/master/gulpfile.js)
+
+```JavaScript
+// Build Production Files, the Default Task
+gulp.task('default', ['clean'], function (cb) {
+  runSequence(
+    ['copy', 'styles'],
+    'elements',
+    ['images', 'fonts', 'html'],
+    'vulcanize', 'cache-config',
+    cb);
+});
+```
 
 #### Filing bugs in the right place
 
 If you experience an issue with Service Worker support in your application, check the origin of the issue and use the appropriate issue tracker:
 
-* [sw-toolbox](https://github.com/GoogleChrome/sw-toolbox/issues)
-* [platinum-sw](https://github.com/PolymerElements/platinum-sw/issues)
-* [platinum-push-notifications-manager](https://github.com/PolymerElements/platinum-push-messaging)
-* For all other issues, feel free to file them [here](https://github.com/polymerelements/polymer-starter-kit/issues).
+- [sw-toolbox](https://github.com/GoogleChrome/sw-toolbox/issues)
+- [platinum-sw](https://github.com/PolymerElements/platinum-sw/issues)
+- [platinum-push-notifications-manager](https://github.com/PolymerElements/platinum-push-messaging)
+- For all other issues, feel free to file them [here](https://github.com/polymerelements/polymer-starter-kit/issues).
 
 #### I get an error message about "Only secure origins are allowed"
 
@@ -254,20 +269,20 @@ If you need to debug the event listener wire-up use `chrome://serviceworker-inte
 
 This page shows your registered workers and provides some basic operations.
 
-* Unregister: Unregisters the worker.
-* Start: Starts the worker. This would happen automatically when you navigate to a page in the worker's scope.
-* Stop: Stops the worker.
-* Sync: Dispatches a 'sync' event to the worker. If you don't handle this event, nothing will happen.
-* Push: Dispatches a 'push' event to the worker. If you don't handle this event, nothing will happen.
-* Inspect: Opens the worker in the Inspector.
+- Unregister: Unregisters the worker.
+- Start: Starts the worker. This would happen automatically when you navigate to a page in the worker's scope.
+- Stop: Stops the worker.
+- Sync: Dispatches a 'sync' event to the worker. If you don't handle this event, nothing will happen.
+- Push: Dispatches a 'push' event to the worker. If you don't handle this event, nothing will happen.
+- Inspect: Opens the worker in the Inspector.
 
 #### Development flow
 
 In order to guarantee that the latest version of your Service Worker script is being used, follow these instructions:
 
-* After you made changes to your service worker script, close all but one of the tabs pointing to your web application
-* Hit shift-reload to bypass the service worker as to ensure that the remaining tab isn't under the control of a service worker
-* Hit reload to let the newer version of the Service Worker control the page.
+- After you made changes to your service worker script, close all but one of the tabs pointing to your web application
+- Hit shift-reload to bypass the service worker as to ensure that the remaining tab isn't under the control of a service worker
+- Hit reload to let the newer version of the Service Worker control the page.
 
 If you find anything to still be stale, you can also try navigating to `chrome:serviceworker-internals` (in Chrome), finding the relevant Service Worker entry for your application and clicking 'Unregister' before refreshing your app. This will (of course) only clear it from the local development machine. If you have already deployed to production then further work will be necessary to remove it from your users' machines.
 
@@ -353,7 +368,6 @@ There is also an [in-flight](https://github.com/PolymerElements/polymer-starter-
 where some are finding they need to disable the `inlineCss` option in our configuration for Vulcanize
 to correctly build. We are still investigating this, however for the time-being use the workaround if
 you find your builds getting stuck here.
-
 
 ### How do I add new JavaScript files to Starter Kit so they're picked up by the build process?
 

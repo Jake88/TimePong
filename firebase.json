@@ -1,9 +1,9 @@
 {
-  "firebase": "Time-Pong",
-  "public": "dist",
-  "ignore": [
-    "firebase.json",
-    "**/.*",
-    "**/node_modules/**"
-  ]
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "hosting": {
+    "site": "time-pong",
+    "public": "dist"
+  }
 }

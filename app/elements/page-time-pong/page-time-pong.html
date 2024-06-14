@@ -63,13 +63,13 @@
 
     <div class="content">
       <time-pong-card-utility></time-pong-card-utility>
-
+<!-- 
       <h2 class="rounds layout horizontal">
         Rounds:&nbsp;<span class="darken"> {{roundsRemaining}}</span>
         <div class="layout vertical center add-rounds" on-tap="addRounds">
           <iron-icon icon="add-circle"></iron-icon>
         </div>
-      </h2>
+      </h2> -->
 
       <div class="effects-container">
         <time-pong-effect-card id="spellEffect" data="{{currentEffects.spell}}" label="spell" index="0"></time-pong-effect-card>
@@ -119,7 +119,7 @@
           },
           roundsRemaining: {
             type: Number,
-            value: 2
+            value: 10000 // get rid of rounds...
           },
           // DEBUGGING: For debugging purposes
           firstCardFlag: {
@@ -162,7 +162,7 @@
           // DEBUGGING: Set an id to grab a specific card for the first time.;
           if (this.firstCardFlag) {
             this.firstCardFlag = false;
-            // filters.id = 'asd';
+            // filters.title = 'Lead Cup';
           }
 
           this.appProps.drinkingStatus = e.detail;

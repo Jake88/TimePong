@@ -119,6 +119,7 @@
       }
       :host.overlay .overlay-wrapper {
         left: 0;
+        z-index: 899;
       }
 
       :host .overlay-inner {
@@ -138,18 +139,8 @@
       }
     </style>
 
-    <div class="overlay-wrapper">
-      <div class="overlay-inner"></div>
-    </div>
 
-
-    <time-pong-card-face-two
-      on-tap="toggleCard"
-      class$="{{data.rarity}}"
-      data="{{data}}"
-      is-effect="true">
-    </time-pong-card-face-two>
-
+    <!--Mini card display-->
     <div>
       <h4 class="label">{{label}}</h4>
 
@@ -162,6 +153,18 @@
     </div>
 
 
+    <!-- dark overlay -->
+    <div class="overlay-wrapper">
+      <div class="overlay-inner"></div>
+    </div>
+
+    <!-- Large card info -->
+    <time-pong-card-face-two
+      on-tap="toggleCard"
+      class$="{{data.rarity}}"
+      data="{{data}}"
+      is-effect="true">
+    </time-pong-card-face-two>
 
   </template>
 
@@ -183,12 +186,17 @@
         },
 
         _dataChanged: function(newVal) {
+          console.log('JT: _dataChanged', {newVal});
           this.toggleClass('active', (newVal && newVal.title));
         },
 
         roundEnd: function() {
+          console.log('JT: roundEnd', {data: this.data});
+
           if (this.data && this.data.duration) {
             this.set('data.duration', this.data.duration -= 1);
+
+
             if (this.data.duration === 0) {
               setTimeout(this.expire.bind(this), 200);
             }
@@ -196,18 +204,25 @@
         },
 
         expire: function() {
-
           this.toggleCard();
           this.$$('time-pong-card-face-two').expire();
         },
 
         toggleCard: function() {
+          if (!this.data) return;
+
           if (this.className.indexOf('animating') === -1) {
             this.$$('time-pong-card-face-two').style.display = 'block';
+            // this.$$('overlay-wrapper').style.display = 'block';
+
             setTimeout(function() {
               if (this.data.duration === 0 && this.className.indexOf('open') > -1) {
                 this.fade();
+                console.log('JT: toggleCard - fading', {data: this.data});
+
               } else {
+                console.log('JT: toggleCard - opening', {data: this.data});
+
                 this.toggleClass('open');
               }
               this.toggleClass('overlay');
@@ -218,23 +233,34 @@
         },
 
         stopAnimating: function() {
+          console.log('JT: stopAnimating', {data: this.data});
+
           if (this.className.indexOf('open') === -1) {
+            console.log('JT: stopAnimating - set displays to none', {data: this.data});
+
             this.$$('time-pong-card-face-two').style.display = 'none';
           }
           this.toggleClass('animating', false);
         },
 
         fade: function() {
+          console.log('JT: fade', {data: this.data});
+
           this.toggleClass('fade', true);
           this.toggleClass('active', false);
           setTimeout(this.clearEffect.bind(this), 300)
         },
 
         clearEffect: function() {
-          this.data = null;
+          console.log('JT: clearEffect - begin', {data: this.data});
+          this.set('data', null);
           this.toggleClass('open', false);
           this.toggleClass('fade', false);
           this.$$('time-pong-card-face-two').reset();
+          this.$$('time-pong-card-face-two').style.display = 'none';
+
+          console.log('JT: clearEffect - end', {data: this.data});
+
         }
       });
     })();

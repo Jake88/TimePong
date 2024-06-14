@@ -9,6 +9,8 @@
     (function() {
       'use strict';
 
+      var playedOneHitWonders = [];
+
       var _BOUNDS = {
         basic: 20,
         regular: 62,
@@ -97,15 +99,20 @@
             });
           }
 
+          if (this.lastFoundCard.oneHitWonder) {
+            playedOneHitWonders.push(this.lastFoundCard.title);
+          }
+
           return this.lastFoundCard;
         }
       });
 
       function getValidCards(cards, filters) {
         // For debugging purposes. Grab a specific card.
-        if (filters.id) return _.where(cards, {id: filters.id});
+        if (filters.title) return _.where(cards, {title: filters.title});
 
         var filteredCards =  _.filter(cards, function(card) {
+          if (card.oneHitWonder && playedOneHitWonders.includes(card.title)) return false;
           if (filters.rarity !== card.rarity) return false;
           if (filters.isDrinking && !card.forDrinkers) return false;
           if (!filters.isDrinking && !card.forNonDrinkers) return false;
@@ -161,6 +168,8 @@
           boldRules: Object {  - bottom rules, drink amount / challenge result etc (required)
             instruction: [String]
            }
+
+          oneHitWonder: Boolean - should this card appear more than once in a single session?
         }
          */
 
@@ -482,6 +491,7 @@
             rarity: 'regular',
             card: 'ability',
             image: 'simon-says',
+            oneHitWonder: true,
             type: 'ability',
             helpText: ['Don\'t know Simon Says? Just drink and skip this card.'],
             title: 'Simon Says',
@@ -890,6 +900,7 @@
             title: 'You\'re a Belieber',
             flavour: 'You can\'t butcher it more than he did.',
             rules: ['Sing the chorus of any Justin Bieber song.'],
+            oneHitWonder: true,
             boldRules: [
             {
               hideFromNonDrinkers: true,
@@ -1229,6 +1240,7 @@
             type: 'challenge',
             card: 'default',
             image: 'spicey',
+            oneHitWonder: true,
             title: 'Mmmm, Spicey!',
             rules: ['Five seconds to name five spice girls.'],
             flavour: 'Cumin, Paprika, Cinnamon, Nutmeg, Saffron.',
