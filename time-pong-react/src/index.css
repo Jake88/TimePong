@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+/* Custom CSS variables for TimePong theme */
+:root {
+  /* Text colors */
+  --primary-text-color: #333;
+  --secondary-text-color: #666;
+  --primary-background-color: #fafafa;
+  --overlay-background-color: #999;
+  --light-grey: #ccc;
+  --link-color: #3B76D4;
+
+  /* Rarity colors - Common */
+  --common-soft: #eee;
+  --common-soft-tint: #ddd;
+  --common-highlight: #666;
+
+  /* Rarity colors - Rare */
+  --rare-soft: #E3E4FF;
+  --rare-soft-tint: #D0D1F5;
+  --rare-highlight: #787AFF;
+
+  /* Rarity colors - Limited */
+  --limited-soft: #E5FFE3;
+  --limited-soft-tint: #CEF2CB;
+  --limited-highlight: #8AE690;
+
+  /* Rarity colors - Special */
+  --special-soft: #FFE3E3;
+  --special-soft-tint: #F2CECE;
+  --special-highlight: #FF7878;
+
+  /* Game colors */
+  --success-green: #0AC900;
+  --failure-red: #E30000;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+}
+
+* {
+  box-sizing: border-box;
+}
