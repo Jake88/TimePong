@@ -16,6 +16,8 @@ const Wrapper = styled.div`
   border: 0.2em solid ${theme.commonHighlight};
   padding: 0.2em;
   border-radius: 0.7em;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Panel = styled.div`
@@ -30,7 +32,7 @@ const Panel = styled.div`
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
 `;
 
 const PanelTitle = styled.h2`
@@ -78,7 +80,6 @@ const PanelContent = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  align-items: flex-end;
   justify-content: flex-end;
 `;
 
@@ -167,7 +168,6 @@ export const CardBack: React.FC<CardBackProps> = ({ onCategorySelected }) => {
           <PanelHeadHeader>
             <LogoIcon viewBox="0 0 100 100" fill="currentColor">
               <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="3"/>
-              <text x="50" y="60" fontSize="40" textAnchor="middle" fill="currentColor" fontWeight="bold">TP</text>
             </LogoIcon>
           </PanelHeadHeader>
 
