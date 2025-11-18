@@ -65,7 +65,6 @@ const Label = styled.h4<{ $isActive: boolean }>`
 const EffectWrapper = styled.div<{ $isActive: boolean; $rarity?: Rarity }>`
   box-sizing: border-box;
   padding: 0.3em;
-  z-index: 1;
   border: 1px solid ${props => props.$isActive && props.$rarity
     ? getRarityColors(props.$rarity).highlight
     : theme.lightGrey};
@@ -109,25 +108,17 @@ const Title = styled.h4`
   font-size: 0.7em;
 `;
 
-const OverlayWrapper = styled.div<{ $isOverlay: boolean }>`
+const Overlay = styled.div<{ $isVisible: boolean }>`
   position: fixed;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  pointer-events: ${props => props.$isOverlay ? 'auto' : 'none'};
-`;
-
-const OverlayInner = styled.div<{ $isOverlay: boolean }>`
-  position: absolute;
-  opacity: ${props => props.$isOverlay ? '0.7' : '0'};
-  transition: opacity 0.5s linear;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: ${theme.overlayBackgroundColor};
-  z-index: ${props => props.$isOverlay ? '100' : '-1'};
+  opacity: ${props => props.$isVisible ? '0.7' : '0'};
+  z-index: ${props => props.$isVisible ? '100' : '-1'};
+  pointer-events: ${props => props.$isVisible ? 'auto' : 'none'};
+  transition: opacity 0.5s linear, z-index 0s ${props => props.$isVisible ? '0s' : '0.5s'};
 `;
 
 const CardWrapper = styled.div<{ $isOpen: boolean; $isFade: boolean; $isAnimating: boolean }>`
@@ -254,9 +245,7 @@ export const EffectCard = forwardRef<EffectCardRef, EffectCardProps>(
         </div>
 
         {/* Dark overlay */}
-        <OverlayWrapper $isOverlay={isOverlay}>
-          <OverlayInner $isOverlay={isOverlay} />
-        </OverlayWrapper>
+        <Overlay $isVisible={isOverlay} />
 
         {/* Large card info */}
         {cardData && (
