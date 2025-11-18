@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Angel } from '@/components/icons/UtilityIcons';
+import { Angel, NoMercy } from '@/components/icons';
 import { theme } from '@/theme';
 
 interface CardBackProps {
@@ -83,7 +83,8 @@ const PanelContent = styled.div`
 `;
 
 const ContentTitle = styled.h2`
-  margin-bottom: 0.5em;
+  padding: 0.5em 0;
+  margin: 0;
   font-size: 1.4em;
   font-weight: normal;
 `;
@@ -117,7 +118,8 @@ const Answer = styled.button<{ variant: 'drunk' | 'sober' }>`
 `;
 
 const AnswerTitle = styled.h2<{ variant: 'drunk' | 'sober' }>`
-  margin-top: 0.5em;
+  padding: 0.5em 0;
+  margin: 0;
   font-size: 1.4em;
   font-weight: normal;
   color: ${props =>
@@ -130,10 +132,11 @@ const LogoIcon = styled.svg`
   width: 100%;
 `;
 
-const NoMercyIcon = styled.svg`
+const NoMercyIcon = styled(NoMercy)`
   height: 6rem;
   width: 6rem;
   color: ${theme.failureRed};
+  fill: currentColor;
 `;
 
 const AngelIcon = styled(Angel)`
@@ -182,10 +185,7 @@ export const CardBack: React.FC<CardBackProps> = ({ onCategorySelected }) => {
                 variant="drunk"
                 onClick={() => handleSelection('drinking')}
               >
-                <NoMercyIcon viewBox="0 0 100 100" fill="currentColor">
-                  <path d="M50,0C22.4,0,0,22.4,0,50s22.4,50,50,50s50-22.4,50-50S77.6,0,50,0z M50,90c-22.1,0-40-17.9-40-40s17.9-40,40-40 s40,17.9,40,40S72.1,90,50,90z"/>
-                  <path d="M70,35L50,55L30,35L20,45l20,20L20,85l10,10l20-20l20,20l10-10L60,65l20-20L70,35z"/>
-                </NoMercyIcon>
+                <NoMercyIcon />
                 <AnswerTitle variant="drunk">Yes</AnswerTitle>
               </Answer>
 
