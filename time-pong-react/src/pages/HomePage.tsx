@@ -34,36 +34,113 @@ const TodoItem = styled.li`
   line-height: 1.5;
 `;
 
+// ============================================================================
+// TODO ITEMS - ORGANIZED BY CATEGORY
+// ============================================================================
+
+// 📋 USER SETTINGS & CUSTOMIZATION (CODE-ONLY) - HIGH PRIORITY
+// ============================================================================
+const userSettingsItems = [
+  '⚙️ User Settings Page - Create a new page/route for app configuration (localStorage-based)',
+  '  └─ Min/max timer duration (currently hardcoded 2-40 seconds)',
+  '  └─ Number of rounds until "game end" (currently hardcoded to 10)',
+  '  └─ Game mode selection with dynamic forms:',
+  '     • Endless Mode: Random cards drawn indefinitely (current behavior)',
+  '     • Rounds Mode: Play until X rounds complete (configurable round count)',
+  '     • Set Deck Mode: Fixed deck of specific cards (configurable card selection)',
+  '  └─ Card pack toggles (enable/disable specific decks: core, W&W, popCulture, nudity, orgasmic)',
+  '  └─ Rarity distribution customization (adjust probability of basic/regular/limited/special/rare)',
+  '  └─ Audio settings (timer bell volume, enable/disable sounds)',
+  '  └─ Animation preferences (fade speed, performance mode toggle)',
+  '  └─ Display preferences (card back style, color theme)',
+  '  └─ Drinking mode default (default to drinking/non-drinking on game start)',
+];
+
+// 🎮 GAME MECHANICS IMPROVEMENTS (CODE-ONLY)
+// ============================================================================
+const gameMechanicsItems = [
+  '🎯 Improve round counter UI - Make end-game more prominent, add restart/continue options',
+  '⚡ No-ball mode - Quick timing/reflex game for device passing (like Paul Davis showed)',
+  '🎲 Consolidate card types - Review trait/ability/perform consolidation into action/global types',
+  '🎭 Refactor card classification - Some cards should be ability/trait to avoid unwanted draws during action requirements',
+  '🔄 Redesign card filter system - Build unified restrictTo object for cleaner filtering logic',
+  '📊 Adjust rarity tiers - Consider reducing from 5 to 3-4 tiers, rebalance probabilities',
+  '👥 Player count awareness - Track player count and adjust global card frequency accordingly',
+  '⏱️ Pacing improvements - Favor quicker cards, avoid cards that remove players from table (Tuna\'s feedback)',
+];
+
+// 🎨 UI/UX ENHANCEMENTS (CODE-ONLY)
+// ============================================================================
+const uiUxItems = [
+  '❓ Rules and help popup - Add info icon with game rules and card type explanations',
+  '🔔 Fix timer bell - Verify audio playback works reliably on all devices',
+  '✨ Test mobile animations - Ensure fade in/out animations are fluid on mobile devices',
+  '🚀 Mobile performance - Add translate3d(0,0,0) to body tag for hardware acceleration',
+  '🎴 Visual card variety - Different patterns for card types while maintaining consistency (Dil\'s suggestion)',
+  '🎯 Function cards UI - Design and implement function card display (if different from current)',
+];
+
+// 🃏 CARD CONTENT ADDITIONS (CODE-ONLY)
+// ============================================================================
+const cardContentItems = [
+  '🍺 Add "link arms and drink" card',
+  '🎤 Add David Attenborough impression card (narrate taking 2 drinks)',
+  '😈 Add wedgie dare card',
+  '🌍 Add more global cards for group involvement',
+  '💋 Create strip/flirt pack (new deck type)',
+  '🔥 Create kinky/hardcore pack (new deck type)',
+];
+
+// 🔧 INFRASTRUCTURE & BACKEND (REQUIRES FIREBASE/EXTERNAL SERVICES)
+// ============================================================================
+const infrastructureItems = [
+  '🔥 Firebase card storage - Move card list to Firestore with user config for unlocked packs',
+  '🔐 Firebase Auth - Google authentication with userConfig (unlocked packs, preferences)',
+  '📚 Deck list management - CRUD operations for user-created deck lists',
+  '🎨 Card creation GUI - Tool for users to create custom cards/decks',
+  '💰 Monetization system - Free base game with paid expansions or round-based payments',
+  '🎟️ Daily/weekly round limits - Free rounds with option to purchase more',
+];
+
+// 🎯 DESIGN DECISIONS & BRAINSTORMING
+// ============================================================================
+const brainstormingItems = [
+  '💭 Rarity naming - Finalize tier names (Basic/Common/Rare vs Epic/Legendary/Mythical)',
+  '🤔 "scott free" - Clarify what this means',
+  '💡 Function cards concept - Define what function cards should do',
+];
+
+// Combine all items for display
 const todoItems = [
-  'Move the card list to a Firebase store and get it coming back using a (hardcoded) user config that allows all cards from `default` category',
-  'Then setup Firebase/Google auth. User objects should return with a userConfig that includes unlocked packs',
-  'UserConfig should also have an array of `deck lists` they have put together - also a list of pre-defined lists',
-  'They should be able to create, update, delete deck lists',
-  'Probably recreate the app in Polymer 2.0 - try to tidy it up a bit more. Componentise and abrast logic a bit better',
-  'Redesign card filter. We should build a restrictTo object which we then simply filter by _.filter(cardList, restrictToObj)',
-  'Add a card for linking arms and drinking',
-  'Add a round counter? The game should probably have an end point instead of being an endless cycle.',
-  'On that, Monetisation options: Free base game, $ for expansions. || Pay per round || Video and ads?',
-  'Possible monetisation - If I give X drink rounds for free each day or week, the user can purchase more drink rounds for $',
-  'Dil says: Not all cards need to look identical. I could have different patterns to depict different card types. Note though that these must still share similarities so users aren\'t completely confused.',
-  'Card idea: Using your best david attenbourough impression, narrate yourself taking 2 drinks',
-  'Put translate3d(0,0,0) on the body tag to see if it improves animation performance on mobile.',
-  'Create a GUI for card creation. People can create decks (or single cards?) of cards that can be viewed and included in the game',
-  'Basic, Common, Rare, (Epic or legendary or special or exquisit or Mythical / mythic or unique)',
-  'scott free',
-  'Test new fade in / out animations on mobile to ensure theyre fluid.',
-  'Fix the timer bell',
-  'Rules and help icon with popup.',
-  'Function cards?',
-  'Refactor some cards to be ability or trait type, to avoid being drawn when an action is required',
-  'No ball mode - Add a quick timing / reflex sort of game so people pass round the device - like the game Paul Davis showed',
-  'Remove one level of rareness - only 3 - increase the likliness of the rare ones..',
-  'Do I try to consolidate trait / ability / perform cards? I could look at changing the limitTo part of cards to be value-only instead, then apply the value only property onto cards that have a value action. This way I can safely consolidate perform cards into action and possibly global into action?',
-  'add a wedgie dare?',
-  'strip / flirt pack',
-  'kiknky / hardcore pack',
-  'Tuna says : Cards that make you leave the table are bad, and cards should be quicker - more fast paced.',
-  'More \'global\' cards where everyone ahs to drink or whatever to keep larger groups involved. Possibly check how many people are playing before including these into the roster?'
+  '═══════════════════════════════════════════════════════════════',
+  '📋 USER SETTINGS & CUSTOMIZATION (CODE-ONLY) - HIGH PRIORITY',
+  '═══════════════════════════════════════════════════════════════',
+  ...userSettingsItems,
+  '',
+  '═══════════════════════════════════════════════════════════════',
+  '🎮 GAME MECHANICS IMPROVEMENTS (CODE-ONLY)',
+  '═══════════════════════════════════════════════════════════════',
+  ...gameMechanicsItems,
+  '',
+  '═══════════════════════════════════════════════════════════════',
+  '🎨 UI/UX ENHANCEMENTS (CODE-ONLY)',
+  '═══════════════════════════════════════════════════════════════',
+  ...uiUxItems,
+  '',
+  '═══════════════════════════════════════════════════════════════',
+  '🃏 CARD CONTENT ADDITIONS (CODE-ONLY)',
+  '═══════════════════════════════════════════════════════════════',
+  ...cardContentItems,
+  '',
+  '═══════════════════════════════════════════════════════════════',
+  '🔧 INFRASTRUCTURE & BACKEND (REQUIRES FIREBASE)',
+  '═══════════════════════════════════════════════════════════════',
+  ...infrastructureItems,
+  '',
+  '═══════════════════════════════════════════════════════════════',
+  '🎯 DESIGN DECISIONS & BRAINSTORMING',
+  '═══════════════════════════════════════════════════════════════',
+  ...brainstormingItems,
 ];
 
 export default function HomePage() {
