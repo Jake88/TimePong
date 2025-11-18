@@ -1,8 +1,181 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { useGame } from '@/context/GameContext';
 import { CardFace } from '@/components/CardFace';
 import type { Card } from '@/types/card.types';
+import { theme } from '@/theme';
+
+const Container = styled.div`
+  min-height: 100vh;
+  padding-bottom: 2em;
+`;
+
+const Header = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  height: 3.5em;
+  align-items: center;
+  justify-content: space-between;
+  background-color: ${theme.primaryBackgroundColor};
+  padding: 0 1em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const BackButton = styled.button`
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: ${theme.primaryTextColor};
+  cursor: pointer;
+  padding: 0.5em;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: ${theme.secondaryTextColor};
+  }
+
+  svg {
+    height: 1.5em;
+    width: 1.5em;
+  }
+
+  span {
+    margin-left: 0.5em;
+  }
+`;
+
+const HeaderTitle = styled.h2`
+  font-size: 1.125em;
+  font-weight: 600;
+  color: ${theme.primaryTextColor};
+  margin: 0;
+`;
+
+const Spacer = styled.div`
+  width: 4em;
+`;
+
+const Content = styled.div`
+  padding: 0 1em;
+  padding-top: 4em;
+`;
+
+const FiltersSection = styled.div`
+  margin-bottom: 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+  }
+`;
+
+const FilterGroup = styled.div`
+  flex: 1;
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 0.5em;
+  font-size: 0.875em;
+  font-weight: 500;
+  color: ${theme.secondaryTextColor};
+`;
+
+const Select = styled.select`
+  width: 100%;
+  border-radius: 0.5em;
+  border: 1px solid ${theme.lightGrey};
+  background-color: ${theme.primaryBackgroundColor};
+  padding: 0.5em 1em;
+  color: ${theme.primaryTextColor};
+  font-size: 1em;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: ${theme.limitedHighlight};
+    box-shadow: 0 0 0 3px ${theme.limitedSoft};
+  }
+`;
+
+const CardCount = styled.h3`
+  margin-bottom: 1.5em;
+  text-align: center;
+  font-size: 1.25em;
+  color: ${theme.secondaryTextColor};
+`;
+
+const CardsGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5em;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+`;
+
+const CardItem = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const CreatorText = styled.p`
+  margin-bottom: 0.5em;
+  text-align: center;
+  font-size: 0.875em;
+  color: ${theme.lightGrey};
+`;
+
+const CardWrapper = styled.div`
+  position: relative;
+  margin: 0 auto;
+  height: 28.75em;
+  width: 18.75em;
+  border-radius: 0.7em;
+  box-shadow: 0 3px 3px ${theme.lightGrey};
+`;
+
+const NoCardsSection = styled.div`
+  margin-top: 3em;
+  text-align: center;
+`;
+
+const NoCardsText = styled.p`
+  font-size: 1.125em;
+  color: ${theme.secondaryTextColor};
+  margin-bottom: 1em;
+`;
+
+const ClearButton = styled.button`
+  border-radius: 0.5em;
+  background-color: ${theme.limitedHighlight};
+  padding: 0.5em 1.5em;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
 
 export default function CardListPage() {
   const navigate = useNavigate();
@@ -73,15 +246,11 @@ export default function CardListPage() {
   };
 
   return (
-    <div className="min-h-screen pb-8">
+    <Container>
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-[10] flex h-14 items-center justify-between bg-[var(--app-header-background-color)] px-4 shadow-md">
-        <button
-          onClick={handleBack}
-          className="flex items-center text-[var(--primary-text-color)] transition-colors hover:text-[var(--secondary-text-color)]"
-        >
+      <Header>
+        <BackButton onClick={handleBack}>
           <svg
-            className="h-6 w-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -93,56 +262,46 @@ export default function CardListPage() {
               d="M15 19l-7-7 7-7"
             />
           </svg>
-          <span className="ml-2">Home</span>
-        </button>
+          <span>Home</span>
+        </BackButton>
 
-        <h2 className="text-lg font-semibold text-[var(--primary-text-color)]">
-          Card List
-        </h2>
+        <HeaderTitle>Card List</HeaderTitle>
 
-        <div className="w-16" /> {/* Spacer for centering */}
-      </header>
+        <Spacer />
+      </Header>
 
       {/* Content */}
-      <div className="px-4 pt-16">
+      <Content>
         {/* Filters */}
-        <div className="mb-6 flex flex-col gap-4 sm:flex-row">
+        <FiltersSection>
           {/* Card property dropdown */}
-          <div className="flex-1">
-            <label
-              htmlFor="property-select"
-              className="mb-2 block text-sm font-medium text-[var(--secondary-text-color)]"
-            >
+          <FilterGroup>
+            <Label htmlFor="property-select">
               Card Property
-            </label>
-            <select
+            </Label>
+            <Select
               id="property-select"
               value={selectedProperty}
               onChange={handlePropertyChange}
-              className="w-full rounded-lg border border-[var(--light-grey)] bg-[var(--secondary-bg)] px-4 py-2 text-[var(--primary-text-color)] focus:border-[var(--limited-highlight)] focus:outline-none focus:ring-2 focus:ring-[var(--limited-highlight)] focus:ring-opacity-50"
             >
               {cardProperties.map((prop) => (
                 <option key={prop.code} value={prop.code}>
                   {prop.label}
                 </option>
               ))}
-            </select>
-          </div>
+            </Select>
+          </FilterGroup>
 
           {/* Property option dropdown */}
           {selectedProperty && propertyOptions.length > 0 && (
-            <div className="flex-1">
-              <label
-                htmlFor="option-select"
-                className="mb-2 block text-sm font-medium text-[var(--secondary-text-color)]"
-              >
+            <FilterGroup>
+              <Label htmlFor="option-select">
                 Property Option
-              </label>
-              <select
+              </Label>
+              <Select
                 id="option-select"
                 value={selectedOption}
                 onChange={handleOptionChange}
-                className="w-full rounded-lg border border-[var(--light-grey)] bg-[var(--secondary-bg)] px-4 py-2 text-[var(--primary-text-color)] focus:border-[var(--limited-highlight)] focus:outline-none focus:ring-2 focus:ring-[var(--limited-highlight)] focus:ring-opacity-50"
               >
                 <option value="">Select an option</option>
                 {propertyOptions.map((option) => (
@@ -150,51 +309,50 @@ export default function CardListPage() {
                     {option}
                   </option>
                 ))}
-              </select>
-            </div>
+              </Select>
+            </FilterGroup>
           )}
-        </div>
+        </FiltersSection>
 
         {/* Card count */}
-        <h3 className="mb-6 text-center text-xl text-[var(--secondary-text-color)]">
+        <CardCount>
           {filteredCards.length} card{filteredCards.length !== 1 ? 's' : ''} found
-        </h3>
+        </CardCount>
 
         {/* Cards grid */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <CardsGrid>
           {filteredCards.map((card, index) => (
-            <div key={`${card.title}-${index}`} className="flex flex-col">
+            <CardItem key={`${card.title}-${index}`}>
               {/* Creator */}
-              <p className="mb-2 text-center text-sm text-[var(--light-grey)]">
+              <CreatorText>
                 Creator: {card.creator}
-              </p>
+              </CreatorText>
 
               {/* Card wrapper */}
-              <div className="relative mx-auto h-[460px] w-[300px] rounded-[0.7em] shadow-[0_3px_3px_#ccc]">
+              <CardWrapper>
                 <CardFace card={card} />
-              </div>
-            </div>
+              </CardWrapper>
+            </CardItem>
           ))}
-        </div>
+        </CardsGrid>
 
         {/* No cards message */}
         {filteredCards.length === 0 && (
-          <div className="mt-12 text-center">
-            <p className="text-lg text-[var(--secondary-text-color)]">
+          <NoCardsSection>
+            <NoCardsText>
               No cards found with the selected filters.
-            </p>
-            <button
+            </NoCardsText>
+            <ClearButton
               onClick={() => {
                 setSelectedProperty('');
                 setSelectedOption('');
               }}
-              className="mt-4 rounded-lg bg-[var(--limited-highlight)] px-6 py-2 text-white transition-all hover:bg-opacity-90"
             >
               Clear Filters
-            </button>
-          </div>
+            </ClearButton>
+          </NoCardsSection>
         )}
-      </div>
-    </div>
+      </Content>
+    </Container>
   );
 }

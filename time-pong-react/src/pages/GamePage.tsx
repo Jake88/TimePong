@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { useGame } from '@/context/GameContext';
 import { Timer } from '@/components/Timer';
 import { CardDeck } from '@/components/CardDeck';
@@ -7,6 +8,137 @@ import { EffectCard } from '@/components/EffectCard';
 import type { CardDeckRef } from '@/components/CardDeck';
 import type { EffectCardRef } from '@/components/EffectCard';
 import type { Card } from '@/types/card.types';
+import { theme } from '@/theme';
+
+const Container = styled.div`
+  position: relative;
+  min-height: 100vh;
+`;
+
+const Header = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  height: 3.5em;
+  align-items: center;
+  justify-content: space-between;
+  background-color: ${theme.primaryBackgroundColor};
+  padding: 0 1em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const BackButton = styled.button`
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: ${theme.primaryTextColor};
+  cursor: pointer;
+  padding: 0.5em;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: ${theme.secondaryTextColor};
+  }
+
+  svg {
+    height: 1.5em;
+    width: 1.5em;
+  }
+
+  span {
+    margin-left: 0.5em;
+  }
+`;
+
+const HeaderTitle = styled.h2`
+  font-size: 1.125em;
+  font-weight: 600;
+  color: ${theme.primaryTextColor};
+  margin: 0;
+`;
+
+const Spacer = styled.div`
+  width: 4em;
+`;
+
+const MainContent = styled.div`
+  margin: 0 auto;
+  box-sizing: border-box;
+  max-width: 25em;
+  padding: 0 1em;
+  padding-top: 3.5em;
+`;
+
+const EffectsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const GameOverSection = styled.div`
+  margin: 2em 0;
+  text-align: center;
+`;
+
+const GameOverTitle = styled.h3`
+  font-size: 1.5em;
+  font-weight: bold;
+  color: ${theme.primaryTextColor};
+  margin: 0 0 1em 0;
+`;
+
+const GameOverText = styled.p`
+  color: ${theme.secondaryTextColor};
+  margin: 0;
+  line-height: 1.5;
+`;
+
+const InstructionsSection = styled.div`
+  margin: 2em auto;
+  max-width: 25em;
+  padding: 0 1em 2em;
+`;
+
+const InstructionsBox = styled.div`
+  border-radius: 0.5em;
+  background-color: ${theme.primaryBackgroundColor};
+  padding: 1em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+`;
+
+const InstructionsTitle = styled.h3`
+  margin: 0 0 0.5em 0;
+  font-size: 0.875em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: ${theme.secondaryTextColor};
+`;
+
+const InstructionsList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+`;
+
+const InstructionItem = styled.li`
+  font-size: 0.875em;
+  color: ${theme.lightGrey};
+  margin: 0 0 0.5em 0;
+  line-height: 1.5;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:before {
+    content: '• ';
+    margin-right: 0.5em;
+  }
+`;
 
 export default function GamePage() {
   const navigate = useNavigate();
@@ -66,15 +198,11 @@ export default function GamePage() {
   };
 
   return (
-    <div className="relative min-h-screen">
+    <Container>
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-[10] flex h-14 items-center justify-between bg-[var(--app-header-background-color)] px-4 shadow-md">
-        <button
-          onClick={handleBack}
-          className="flex items-center text-[var(--primary-text-color)] transition-colors hover:text-[var(--secondary-text-color)]"
-        >
+      <Header>
+        <BackButton onClick={handleBack}>
           <svg
-            className="h-6 w-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -86,20 +214,18 @@ export default function GamePage() {
               d="M15 19l-7-7 7-7"
             />
           </svg>
-          <span className="ml-2">Home</span>
-        </button>
+          <span>Home</span>
+        </BackButton>
 
-        <h2 className="text-lg font-semibold text-[var(--primary-text-color)]">
-          TimePong
-        </h2>
+        <HeaderTitle>TimePong</HeaderTitle>
 
-        <div className="w-16" /> {/* Spacer for centering */}
-      </header>
+        <Spacer />
+      </Header>
 
       {/* Main content */}
-      <div className="mx-auto box-border max-w-[400px] px-4 pt-14">
+      <MainContent>
         {/* Effects container */}
-        <div className="flex flex-row justify-center">
+        <EffectsContainer>
           <EffectCard
             ref={spellEffectRef}
             data={spellEffect}
@@ -112,7 +238,7 @@ export default function GamePage() {
             label="curse"
             index={1}
           />
-        </div>
+        </EffectsContainer>
 
         {/* Timer */}
         {gameState.roundsRemaining > 0 && (
@@ -125,14 +251,12 @@ export default function GamePage() {
 
         {/* Game over message */}
         {gameState.roundsRemaining === 0 && (
-          <div className="my-8 space-y-4 text-center">
-            <h3 className="text-2xl font-bold text-[var(--primary-text-color)]">
-              Out of Rounds
-            </h3>
-            <p className="text-[var(--secondary-text-color)]">
+          <GameOverSection>
+            <GameOverTitle>Out of Rounds</GameOverTitle>
+            <GameOverText>
               Not ready to finish? The game continues as long as you keep playing!
-            </p>
-          </div>
+            </GameOverText>
+          </GameOverSection>
         )}
 
         {/* Card deck */}
@@ -142,23 +266,21 @@ export default function GamePage() {
           onClose={handleCardClose}
           onCategorySelected={handleCategorySelected}
         />
-      </div>
+      </MainContent>
 
       {/* Instructions */}
-      <div className="mx-auto mt-8 max-w-[400px] px-4 pb-8">
-        <div className="rounded-lg bg-[var(--secondary-bg)] p-4">
-          <h3 className="mb-2 text-sm font-semibold uppercase text-[var(--secondary-text-color)]">
-            How to Play
-          </h3>
-          <ul className="space-y-2 text-sm text-[var(--light-grey)]">
-            <li>• Press the timer to start the countdown</li>
-            <li>• When the timer rings, draw a card</li>
-            <li>• Choose drinking or non-drinking option</li>
-            <li>• Follow the card instructions</li>
-            <li>• Click the card to close and continue</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+      <InstructionsSection>
+        <InstructionsBox>
+          <InstructionsTitle>How to Play</InstructionsTitle>
+          <InstructionsList>
+            <InstructionItem>Press the timer to start the countdown</InstructionItem>
+            <InstructionItem>When the timer rings, draw a card</InstructionItem>
+            <InstructionItem>Choose drinking or non-drinking option</InstructionItem>
+            <InstructionItem>Follow the card instructions</InstructionItem>
+            <InstructionItem>Click the card to close and continue</InstructionItem>
+          </InstructionsList>
+        </InstructionsBox>
+      </InstructionsSection>
+    </Container>
   );
 }

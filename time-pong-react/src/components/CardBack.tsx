@@ -1,9 +1,147 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Angel } from '@/components/icons/UtilityIcons';
+import { theme } from '@/theme';
 
 interface CardBackProps {
   onCategorySelected?: (category: 'drinking' | 'nonDrinking') => void;
 }
+
+const Wrapper = styled.div`
+  box-sizing: border-box;
+  position: relative;
+  height: 28.75em;
+  width: 18.75em;
+  background-color: ${theme.commonSoftTint};
+  border: 0.2em solid ${theme.commonHighlight};
+  padding: 0.2em;
+  border-radius: 0.7em;
+`;
+
+const Panel = styled.div`
+  border-radius: 0.7em;
+  background-color: ${theme.commonSoft};
+  border: 1px solid ${theme.commonHighlight};
+  color: ${theme.secondaryTextColor};
+  margin-top: 0.2em;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
+
+const PanelTitle = styled.h2`
+  padding: 0.5em 0;
+  margin: 0;
+  font-size: 1.4em;
+  font-weight: normal;
+`;
+
+const PanelHead = styled.div`
+  height: 2.6em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+`;
+
+const PanelHeadCorner = styled.div`
+  flex: 1 1 20%;
+  border-bottom: 1px solid ${theme.commonSoftTint};
+`;
+
+const PanelHeadHeader = styled.div`
+  box-sizing: border-box;
+  background-color: ${theme.primaryBackgroundColor};
+  flex: 1 1 60%;
+  z-index: 1;
+  height: 5.2rem;
+  padding-top: 0.5em;
+  border-radius: 50%;
+  border: 1px solid ${theme.commonSoftTint};
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+const PanelContent = styled.div`
+  box-sizing: border-box;
+  background-color: ${theme.primaryBackgroundColor};
+  border-radius: 0 0 0.7em 0.7em;
+  padding: 0.3em;
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+`;
+
+const ContentTitle = styled.h2`
+  margin-bottom: 0.5em;
+  font-size: 1.4em;
+  font-weight: normal;
+`;
+
+const Answers = styled.div`
+  width: 100%;
+  border-top: 1px solid ${theme.lightGrey};
+  display: flex;
+  flex-direction: row;
+`;
+
+const Answer = styled.button<{ variant: 'drunk' | 'sober' }>`
+  padding: 1em;
+  position: relative;
+  cursor: pointer;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: inherit;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.1s ease;
+
+  &:active {
+    background-color: ${props =>
+      props.variant === 'drunk' ? theme.limitedSoft : theme.rareSoft
+    };
+  }
+`;
+
+const AnswerTitle = styled.h2<{ variant: 'drunk' | 'sober' }>`
+  margin-top: 0.5em;
+  font-size: 1.4em;
+  font-weight: normal;
+  color: ${props =>
+    props.variant === 'drunk' ? theme.failureRed : theme.rareHighlight
+  };
+`;
+
+const LogoIcon = styled.svg`
+  height: 3em;
+  width: 100%;
+`;
+
+const NoMercyIcon = styled.svg`
+  height: 6rem;
+  width: 6rem;
+  color: ${theme.failureRed};
+`;
+
+const AngelIcon = styled(Angel)`
+  height: 6rem;
+  width: 6rem;
+  color: ${theme.rareHighlight};
+  fill: currentColor;
+`;
 
 export const CardBack: React.FC<CardBackProps> = ({ onCategorySelected }) => {
   const handleSelection = (category: 'drinking' | 'nonDrinking') => {
@@ -12,67 +150,57 @@ export const CardBack: React.FC<CardBackProps> = ({ onCategorySelected }) => {
     }
   };
 
-  // Get NoMercy icon from CardImages - for now using a simple SVG
-  const NoMercyIcon = () => (
-    <svg className="h-24 w-24" viewBox="0 0 100 100" fill="currentColor">
-      <path d="M50,0C22.4,0,0,22.4,0,50s22.4,50,50,50s50-22.4,50-50S77.6,0,50,0z M50,90c-22.1,0-40-17.9-40-40s17.9-40,40-40 s40,17.9,40,40S72.1,90,50,90z"/>
-      <path d="M70,35L50,55L30,35L20,45l20,20L20,85l10,10l20-20l20,20l10-10L60,65l20-20L70,35z"/>
-    </svg>
-  );
-
-  // Get logo icon
-  const LogoIcon = () => (
-    <svg className="h-12 w-full" viewBox="0 0 100 100" fill="currentColor">
-      <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="3"/>
-      <text x="50" y="60" fontSize="40" textAnchor="middle" fill="currentColor" fontWeight="bold">TP</text>
-    </svg>
-  );
-
   return (
-    <div className="relative h-[28.75em] w-[18.75em] rounded-[0.7em] border-[0.2em] border-[var(--common-highlight)] bg-[var(--common-soft-tint)] p-[0.2em]">
-      <div className="flex h-full flex-col overflow-hidden rounded-[0.7em] border border-[var(--common-highlight)] bg-[var(--common-soft)] text-center text-[var(--secondary-text-color)]">
-        <h2 className="m-0 p-2 text-[1.4em] font-normal">Time Pong</h2>
+    <Wrapper>
+      <Panel>
+        <PanelTitle>Time Pong</PanelTitle>
 
         {/* Panel head */}
-        <div className="relative flex h-[2.6em] items-center">
+        <PanelHead>
           {/* Left corner */}
-          <div className="flex-[1_1_20%] border-b border-[var(--common-soft-tint)]" />
+          <PanelHeadCorner />
 
           {/* Center header */}
-          <div className="z-[1] box-border flex h-[5.2rem] flex-[1_1_60%] flex-col items-center justify-start rounded-[50%] border border-[var(--common-soft-tint)] bg-[var(--primary-background-color)] pt-2 text-center">
-            <LogoIcon />
-          </div>
+          <PanelHeadHeader>
+            <LogoIcon viewBox="0 0 100 100" fill="currentColor">
+              <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="3"/>
+              <text x="50" y="60" fontSize="40" textAnchor="middle" fill="currentColor" fontWeight="bold">TP</text>
+            </LogoIcon>
+          </PanelHeadHeader>
 
           {/* Right corner */}
-          <div className="flex-[1_1_20%] border-b border-[var(--common-soft-tint)]" />
-        </div>
+          <PanelHeadCorner />
+        </PanelHead>
 
         {/* Panel content */}
-        <div className="relative box-border flex flex-1 flex-col items-end justify-end rounded-b-[0.7em] bg-[var(--primary-background-color)] p-[0.3em]">
-          <div className="w-full">
-            <h2 className="mb-2 text-[1.4em] font-normal">Getting drunk?</h2>
-            <div className="flex w-full border-t border-[var(--light-grey)]">
+        <PanelContent>
+          <div>
+            <ContentTitle>Getting drunk?</ContentTitle>
+            <Answers>
               {/* Yes - Drinking */}
-              <button
+              <Answer
+                variant="drunk"
                 onClick={() => handleSelection('drinking')}
-                className="flex flex-1 cursor-pointer flex-col items-center p-4 transition-colors active:bg-[var(--limited-soft)]"
               >
-                <NoMercyIcon />
-                <h2 className="mt-2 text-[1.4em] font-normal text-[var(--failure-red)]">Yes</h2>
-              </button>
+                <NoMercyIcon viewBox="0 0 100 100" fill="currentColor">
+                  <path d="M50,0C22.4,0,0,22.4,0,50s22.4,50,50,50s50-22.4,50-50S77.6,0,50,0z M50,90c-22.1,0-40-17.9-40-40s17.9-40,40-40 s40,17.9,40,40S72.1,90,50,90z"/>
+                  <path d="M70,35L50,55L30,35L20,45l20,20L20,85l10,10l20-20l20,20l10-10L60,65l20-20L70,35z"/>
+                </NoMercyIcon>
+                <AnswerTitle variant="drunk">Yes</AnswerTitle>
+              </Answer>
 
               {/* No - Non-drinking */}
-              <button
+              <Answer
+                variant="sober"
                 onClick={() => handleSelection('nonDrinking')}
-                className="flex flex-1 cursor-pointer flex-col items-center p-4 transition-colors active:bg-[var(--rare-soft)]"
               >
-                <Angel className="h-24 w-24 text-[var(--rare-highlight)]" fill="currentColor" />
-                <h2 className="mt-2 text-[1.4em] font-normal text-[var(--rare-highlight)]">No</h2>
-              </button>
-            </div>
+                <AngelIcon />
+                <AnswerTitle variant="sober">No</AnswerTitle>
+              </Answer>
+            </Answers>
           </div>
-        </div>
-      </div>
-    </div>
+        </PanelContent>
+      </Panel>
+    </Wrapper>
   );
 };

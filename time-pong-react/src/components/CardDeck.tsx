@@ -1,7 +1,9 @@
 import { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
+import styled from 'styled-components';
 import type { Card } from '@/types/card.types';
 import { CardFace } from './CardFace';
 import { CardBack } from './CardBack';
+import { theme } from '@/theme';
 
 export interface CardDeckRef {
   drawCard: () => void;
@@ -13,6 +15,51 @@ interface CardDeckProps {
   onClose?: () => void;
   onCategorySelected?: (category: 'drinking' | 'nonDrinking') => void;
 }
+
+const DarkOverlay = styled.div<{ $isOpen: boolean }>`
+  fixed: left-[-2000px] top-[-2000px];
+  position: fixed;
+  left: -2000px;
+  top: -2000px;
+  height: 5000px;
+  width: 5000px;
+  background-color: #333;
+  transition: opacity 0.3s ease;
+  opacity: ${props => props.$isOpen ? '0.5' : '0'};
+  z-index: ${props => props.$isOpen ? '4' : '-1'};
+`;
+
+const FlipContainer = styled.div<{ $isVisible: boolean; $isOpen: boolean }>`
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 4;
+  height: 28.75em;
+  width: 18.75em;
+  perspective: 1000px;
+  display: ${props => props.$isVisible ? 'block' : 'none'};
+  opacity: ${props => props.$isOpen ? '1' : '0'};
+  transform: ${props => props.$isOpen ? 'translateY(0)' : 'translateY(10em)'};
+  transition: all 0.25s ease;
+`;
+
+const FlipInner = styled.div<{ $isFlipped: boolean; $isOpen: boolean }>`
+  position: relative;
+  border-radius: 0.7em;
+  box-shadow: ${props => props.$isOpen ? `0 0 13px ${theme.primaryTextColor}` : `0 0 3px ${theme.primaryTextColor}`};
+  transition: all 0.8s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  transform: ${props => props.$isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'};
+`;
+
+const CardSide = styled.div<{ $isBack?: boolean }>`
+  position: absolute;
+  left: 0;
+  top: 0;
+  backface-visibility: hidden;
+  transform: ${props => props.$isBack ? 'translate3d(0, 0, 0) rotateY(0deg)' : 'translate3d(0, 0, 0) rotateY(180deg)'};
+  z-index: ${props => props.$isBack ? '100' : '1'};
+`;
 
 export const CardDeck = forwardRef<CardDeckRef, CardDeckProps>(
   ({ currentCard, onClose, onCategorySelected }, ref) => {
@@ -59,51 +106,22 @@ export const CardDeck = forwardRef<CardDeckRef, CardDeckProps>(
     return (
       <>
         {/* Dark overlay */}
-        <div
-          className={`fixed left-[-2000px] top-[-2000px] h-[5000px] w-[5000px] bg-[#333] transition-opacity duration-300 ${
-            isOpen ? 'z-[4] opacity-50' : '-z-[1] opacity-0'
-          }`}
-        />
+        <DarkOverlay $isOpen={isOpen} />
 
         {/* Flip container */}
-        <div
-          className={`fixed left-0 bottom-0 z-[4] h-[28.75em] w-[18.75em] transition-all duration-250 ${
-            !isVisible ? 'hidden' : ''
-          } ${
-            isOpen
-              ? 'translate-y-0 opacity-100'
-              : 'translate-y-[10em] opacity-0'
-          }`}
-          style={{ perspective: '1000px' }}
-        >
-          <div
-            className={`relative rounded-[0.7em] shadow-[0_0_3px_var(--primary-text-color)] transition-all duration-800 ${
-              isOpen ? 'shadow-[0_0_13px_var(--primary-text-color)]' : ''
-            } ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}
-            style={{
-              transformStyle: 'preserve-3d',
-            }}
-          >
+        <FlipContainer $isVisible={isVisible} $isOpen={isOpen}>
+          <FlipInner $isFlipped={isFlipped} $isOpen={isOpen}>
             {/* Card back */}
-            <div
-              className="absolute left-0 top-0 z-[100] [backface-visibility:hidden]"
-              style={{ transform: 'translate3d(0, 0, 0) rotateY(0deg)' }}
-            >
-              <CardBack
-                onCategorySelected={onCategorySelected}
-              />
-            </div>
+            <CardSide $isBack={true}>
+              <CardBack onCategorySelected={onCategorySelected} />
+            </CardSide>
 
             {/* Card face */}
-            <div
-              className="absolute left-0 top-0 [backface-visibility:hidden]"
-              style={{ transform: 'translate3d(0, 0, 0) rotateY(180deg)' }}
-              onClick={handleCardClick}
-            >
+            <CardSide onClick={handleCardClick}>
               {currentCard && <CardFace card={currentCard} />}
-            </div>
-          </div>
-        </div>
+            </CardSide>
+          </FlipInner>
+        </FlipContainer>
       </>
     );
   }
