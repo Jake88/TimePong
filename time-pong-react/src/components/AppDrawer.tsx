@@ -20,8 +20,9 @@ const Overlay = styled.div<{ $isOpen: boolean }>`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 99;
+  z-index: 200;
   display: ${props => props.$isOpen ? 'block' : 'none'};
+  pointer-events: ${props => props.$isOpen ? 'auto' : 'none'};
 `;
 
 const DrawerPanel = styled.aside<{ $isOpen: boolean }>`
@@ -33,7 +34,7 @@ const DrawerPanel = styled.aside<{ $isOpen: boolean }>`
   background-color: ${theme.primaryBackgroundColor};
   transform: translateX(${props => props.$isOpen ? '0' : '-100%'});
   transition: transform 0.3s ease-in-out;
-  z-index: 100;
+  z-index: 201;
   overflow-y: auto;
   box-shadow: ${props => props.$isOpen ? '2px 0 8px rgba(0, 0, 0, 0.2)' : 'none'};
 `;

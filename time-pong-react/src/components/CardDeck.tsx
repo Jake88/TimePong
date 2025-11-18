@@ -24,7 +24,7 @@ const DarkOverlay = styled.div<{ $isOpen: boolean }>`
   height: 100%;
   background-color: #333;
   opacity: ${props => props.$isOpen ? '0.5' : '0'};
-  z-index: ${props => props.$isOpen ? '4' : '-1'};
+  z-index: ${props => props.$isOpen ? '100' : '-1'};
   transition: ${props => props.$isOpen ? 'opacity 0.5s linear' : 'opacity 0.3s linear, z-index 0.5s linear'};
   pointer-events: ${props => props.$isOpen ? 'auto' : 'none'};
 `;
@@ -36,7 +36,7 @@ const FlipContainer = styled.div<{ $isVisible: boolean; $isOpen: boolean }>`
   opacity: ${props => props.$isOpen ? '1' : '0'};
   transform: ${props => props.$isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, 10em, 0)'};
   transition: transform 0.25s ease, opacity 0.25s ease;
-  z-index: 4;
+  z-index: 101;
 `;
 
 const FlipInner = styled.div<{ $isFlipped: boolean; $isOpen: boolean }>`
@@ -57,7 +57,7 @@ const CardSide = styled.div<{ $isBack?: boolean }>`
   left: 0;
   backface-visibility: hidden;
   transform: ${props => props.$isBack ? 'translate3d(0, 0, 0) rotateY(0deg)' : 'translate3d(0, 0, 0) rotateY(180deg)'};
-  z-index: ${props => props.$isBack ? '100' : '1'};
+  z-index: ${props => props.$isBack ? '2' : '1'};
 `;
 
 export const CardDeck = forwardRef<CardDeckRef, CardDeckProps>(
