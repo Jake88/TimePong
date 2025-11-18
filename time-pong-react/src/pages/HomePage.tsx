@@ -1,55 +1,167 @@
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { theme } from '@/theme';
+
+const Container = styled.div`
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+`;
+
+const ContentWrapper = styled.div`
+  width: 100%;
+  max-width: 28em;
+  text-align: center;
+`;
+
+const TitleSection = styled.div`
+  margin-bottom: 2em;
+`;
+
+const Title = styled.h1`
+  font-size: 3.5em;
+  font-weight: bold;
+  color: ${theme.primaryTextColor};
+  margin: 0 0 0.5em 0;
+
+  @media (min-width: 768px) {
+    font-size: 4em;
+  }
+`;
+
+const Subtitle = styled.p`
+  font-size: 1.25em;
+  color: ${theme.secondaryTextColor};
+  margin: 0;
+`;
+
+const Description = styled.div`
+  background-color: ${theme.primaryBackgroundColor};
+  border-radius: 0.5em;
+  padding: 1.5em;
+  text-align: left;
+  margin-bottom: 2em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+`;
+
+const DescriptionText = styled.p`
+  color: ${theme.secondaryTextColor};
+  margin: 0 0 1em 0;
+  line-height: 1.5;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-bottom: 2em;
+`;
+
+const PrimaryButton = styled.button`
+  width: 100%;
+  border-radius: 0.5em;
+  background-color: ${theme.limitedHighlight};
+  padding: 1em 2em;
+  font-size: 1.125em;
+  font-weight: 600;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+`;
+
+const SecondaryButton = styled.button`
+  width: 100%;
+  border-radius: 0.5em;
+  border: 2px solid ${theme.limitedHighlight};
+  background-color: transparent;
+  padding: 1em 2em;
+  font-size: 1.125em;
+  font-weight: 600;
+  color: ${theme.limitedHighlight};
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: ${theme.limitedSoft};
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+`;
+
+const Footer = styled.div`
+  margin-top: 2em;
+  text-align: center;
+`;
+
+const FooterText = styled.p`
+  font-size: 0.875em;
+  color: ${theme.lightGrey};
+  margin: 0 0 0.5em 0;
+`;
+
+const SmallText = styled.p`
+  font-size: 0.75em;
+  color: ${theme.lightGrey};
+  margin: 0;
+`;
 
 export default function HomePage() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-4">
-      {/* Main content container */}
-      <div className="w-full max-w-md space-y-8 text-center">
+    <Container>
+      <ContentWrapper>
         {/* Game title */}
-        <div className="space-y-4">
-          <h1 className="text-5xl font-bold text-[var(--primary-text-color)] md:text-6xl">
-            TimePong
-          </h1>
-          <p className="text-xl text-[var(--secondary-text-color)]">
-            The Ultimate Drinking Game
-          </p>
-        </div>
+        <TitleSection>
+          <Title>TimePong</Title>
+          <Subtitle>The Ultimate Drinking Game</Subtitle>
+        </TitleSection>
 
         {/* Game description */}
-        <div className="space-y-3 rounded-lg bg-[var(--secondary-bg)] p-6 text-left">
-          <p className="text-[var(--secondary-text-color)]">
+        <Description>
+          <DescriptionText>
             A fast-paced drinking game that combines timing, luck, and hilarious challenges.
-          </p>
-          <p className="text-[var(--secondary-text-color)]">
+          </DescriptionText>
+          <DescriptionText>
             Draw cards to reveal actions, challenges, spells, and curses. The timer keeps everyone on their toes!
-          </p>
-        </div>
+          </DescriptionText>
+        </Description>
 
         {/* Navigation buttons */}
-        <div className="space-y-4">
-          <button
-            onClick={() => navigate('/game')}
-            className="w-full rounded-lg bg-[var(--limited-highlight)] px-8 py-4 text-lg font-semibold text-white transition-all hover:bg-opacity-90 active:scale-95"
-          >
+        <ButtonGroup>
+          <PrimaryButton onClick={() => navigate('/game')}>
             Start Game
-          </button>
+          </PrimaryButton>
 
-          <button
-            onClick={() => navigate('/cards')}
-            className="w-full rounded-lg border-2 border-[var(--limited-highlight)] bg-transparent px-8 py-4 text-lg font-semibold text-[var(--limited-highlight)] transition-all hover:bg-[var(--limited-highlight)] hover:bg-opacity-10 active:scale-95"
-          >
+          <SecondaryButton onClick={() => navigate('/cards')}>
             Browse Cards
-          </button>
-        </div>
+          </SecondaryButton>
+        </ButtonGroup>
 
         {/* Footer info */}
-        <div className="mt-8 space-y-2 text-sm text-[var(--light-grey)]">
-          <p>Please drink responsibly</p>
-          <p className="text-xs">Must be 21+ to play</p>
-        </div>
-      </div>
-    </div>
+        <Footer>
+          <FooterText>Please drink responsibly</FooterText>
+          <SmallText>Must be 21+ to play</SmallText>
+        </Footer>
+      </ContentWrapper>
+    </Container>
   );
 }

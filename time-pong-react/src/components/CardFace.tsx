@@ -1,8 +1,10 @@
 import { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
+import styled from 'styled-components';
 import type { Card } from '@/types/card.types';
 import { HELP_TEXT } from '@/types/card.types';
 import * as CardTypeIcons from '@/components/icons/CardTypeIcons';
 import { Duration } from '@/components/icons/UtilityIcons';
+import { theme } from '@/theme';
 
 export interface CardFaceRef {
   expire: () => void;
@@ -14,6 +16,263 @@ interface CardFaceProps {
   isEffect?: boolean;
   isDrinking?: boolean;
 }
+
+type Rarity = 'common' | 'rare' | 'limited' | 'special';
+
+const getRarityColors = (rarity: Rarity) => {
+  switch (rarity) {
+    case 'limited':
+      return {
+        soft: theme.limitedSoft,
+        softTint: theme.limitedSoftTint,
+        highlight: theme.limitedHighlight,
+      };
+    case 'special':
+      return {
+        soft: theme.specialSoft,
+        softTint: theme.specialSoftTint,
+        highlight: theme.specialHighlight,
+      };
+    case 'rare':
+      return {
+        soft: theme.rareSoft,
+        softTint: theme.rareSoftTint,
+        highlight: theme.rareHighlight,
+      };
+    default:
+      return {
+        soft: theme.commonSoft,
+        softTint: theme.commonSoftTint,
+        highlight: theme.commonHighlight,
+      };
+  }
+};
+
+const Wrapper = styled.div<{ $rarity: Rarity }>`
+  box-sizing: border-box;
+  position: relative;
+  height: 28.75em;
+  width: 18.75em;
+  background-color: ${props => getRarityColors(props.$rarity).softTint};
+  border: 0.2em solid ${props => getRarityColors(props.$rarity).highlight};
+  padding: 0.2em;
+  border-radius: 0.7em;
+`;
+
+const Panel = styled.div<{ $rarity: Rarity }>`
+  border-radius: 0.7em;
+  background-color: ${props => getRarityColors(props.$rarity).soft};
+  border: 1px solid ${props => getRarityColors(props.$rarity).highlight};
+  color: ${theme.secondaryTextColor};
+  margin-top: 0.2em;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  flex-shrink: 0;
+`;
+
+const MainPanel = styled(Panel)`
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+
+const PanelTitle = styled.h2`
+  padding: 0.5em 0;
+  margin: 0;
+  font-size: 1.4em;
+  font-weight: normal;
+`;
+
+const PanelHead = styled.div`
+  height: 2.6em;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+`;
+
+const PanelHeadCorner = styled.div<{ $rarity: Rarity }>`
+  flex: 1 1 20%;
+  border-bottom: 1px solid ${props => getRarityColors(props.$rarity).softTint};
+  color: ${props => getRarityColors(props.$rarity).highlight};
+`;
+
+const PanelHeadHeader = styled.div<{ $rarity: Rarity }>`
+  box-sizing: border-box;
+  background-color: ${theme.primaryBackgroundColor};
+  flex: 1 1 60%;
+  z-index: 1;
+  height: 5.2rem;
+  padding-top: 0.5em;
+  border-radius: 50%;
+  border: 1px solid ${props => getRarityColors(props.$rarity).softTint};
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+`;
+
+const TypeLabel = styled.h4`
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  font-weight: normal;
+  color: ${theme.lightGrey};
+`;
+
+const TypeIconWrapper = styled.div`
+  height: 3em;
+  width: 100%;
+`;
+
+const DurationWrapper = styled.div`
+  width: 100%;
+  position: relative;
+`;
+
+const DurationIcon = styled(Duration)`
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+`;
+
+const DurationText = styled.p`
+  position: relative;
+  margin: 0;
+  font-size: 1.5em;
+  line-height: 2.6rem;
+  color: ${theme.secondaryTextColor};
+`;
+
+const PanelContent = styled.div`
+  box-sizing: border-box;
+  background-color: ${theme.primaryBackgroundColor};
+  border-radius: 0 0 0.7em 0.7em;
+  padding: 0.3em;
+  padding-top: 2.9em;
+  font-weight: 100;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+
+const HelpIcon = styled.div<{ $toggled: boolean }>`
+  box-sizing: border-box;
+  position: absolute;
+  color: ${theme.linkColor};
+  width: 3.5em;
+  height: 3.5em;
+  top: 0;
+  left: 0;
+  padding-top: 0.3em;
+  cursor: ${props => props.$toggled ? 'auto' : 'pointer'};
+
+  svg {
+    height: 2em;
+    width: 2em;
+    border-radius: 50%;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    ${props => props.$toggled && `
+      transform: translate3d(0, 2.7em, 0) scale(0.8);
+      opacity: 0.8;
+    `}
+  }
+`;
+
+const HelpContent = styled.div<{ $toggled: boolean }>`
+  color: ${theme.linkColor};
+  transform: scaleY(${props => props.$toggled ? '1' : '0'});
+  transition: transform 0.2s ease;
+  transform-origin: top;
+  height: ${props => props.$toggled ? 'auto' : '0'};
+  padding-left: 2.5em;
+  text-align: left;
+`;
+
+const RuleText = styled.p`
+  font-weight: 100;
+  padding: 0.5em;
+  margin: 0;
+`;
+
+const ChallengeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ChallengeItem = styled.div<{ $type?: string }>`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-top: 1em;
+  border-top: 1px solid ${props =>
+    props.$type === 'success'
+      ? theme.successGreen
+      : props.$type === 'failure' || props.$type === 'punishment' || props.$type === 'chicken'
+      ? theme.failureRed
+      : 'transparent'
+  };
+`;
+
+const ChallengeTitle = styled.h4<{ $type?: string }>`
+  position: relative;
+  width: 5rem;
+  text-align: center;
+  margin: -0.4rem auto 0;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  font-weight: normal;
+  background-color: ${theme.primaryBackgroundColor};
+  color: ${props =>
+    props.$type === 'success'
+      ? theme.successGreen
+      : props.$type === 'failure' || props.$type === 'punishment' || props.$type === 'chicken'
+      ? theme.failureRed
+      : 'inherit'
+  };
+`;
+
+const ImageWrapper = styled.div`
+  position: relative;
+  flex: 1;
+  display: flex;
+`;
+
+const FlavourText = styled.p`
+  margin: 0;
+  font-size: 0.8em;
+  font-style: oblique;
+  color: ${theme.lightGrey};
+`;
+
+const ExpiredText = styled.div`
+  ${theme.absoluteTemplate}
+  height: auto;
+  font-size: 4.5em;
+  color: ${theme.failureRed};
+  bottom: 0;
+  top: 9rem;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 0 1px 1px ${theme.secondaryTextColor};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ExpiredOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  background-color: white;
+  opacity: 0.7;
+  pointer-events: none;
+`;
 
 export const CardFace = forwardRef<CardFaceRef, CardFaceProps>(
   ({ card, isDrinking = true }, ref) => {
@@ -66,198 +325,111 @@ export const CardFace = forwardRef<CardFaceRef, CardFaceProps>(
     const getTypeIcon = () => {
       const iconName = card.type.charAt(0).toUpperCase() + card.type.slice(1);
       const IconComponent = CardTypeIcons[iconName as keyof typeof CardTypeIcons] as React.FC<any>;
-      return IconComponent ? <IconComponent className="h-12 w-full" fill="currentColor" /> : null;
+      return IconComponent ? <IconComponent style={{ height: '3em', width: '100%' }} fill="currentColor" /> : null;
     };
 
+    const rarity = (card.rarity || 'common') as Rarity;
+
     return (
-      <div
-        className={`relative h-[28.75em] w-[18.75em] rounded-[0.7em] border-[0.2em] p-[0.2em] ${
-          card.rarity === 'limited'
-            ? 'border-[var(--limited-highlight)] bg-[var(--limited-soft-tint)]'
-            : card.rarity === 'special'
-            ? 'border-[var(--special-highlight)] bg-[var(--special-soft-tint)]'
-            : card.rarity === 'rare'
-            ? 'border-[var(--rare-highlight)] bg-[var(--rare-soft-tint)]'
-            : 'border-[var(--common-highlight)] bg-[var(--common-soft-tint)]'
-        }`}
-      >
-        <div className="relative flex h-full flex-col overflow-hidden rounded-[0.7em] border bg-[var(--primary-background-color)] text-center text-[var(--secondary-text-color)]">
-          {/* Main panel */}
-          <div className="flex flex-1 flex-col">
-            <h2 className="m-0 p-2 text-[1.4em] font-normal">{card.title}</h2>
+      <Wrapper $rarity={rarity}>
+        <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100%' }}>
+          <MainPanel $rarity={rarity}>
+            <PanelTitle>{card.title}</PanelTitle>
 
             {/* Panel head */}
-            <div className="relative flex h-[2.6em] items-center">
+            <PanelHead>
               {/* Left corner */}
-              <div
-                className={`flex-[1_1_20%] border-b ${
-                  card.rarity === 'limited'
-                    ? 'border-[var(--limited-soft-tint)] text-[var(--limited-highlight)]'
-                    : card.rarity === 'special'
-                    ? 'border-[var(--special-soft-tint)] text-[var(--special-highlight)]'
-                    : card.rarity === 'rare'
-                    ? 'border-[var(--rare-soft-tint)] text-[var(--rare-highlight)]'
-                    : 'border-[var(--common-soft-tint)] text-[var(--common-highlight)]'
-                }`}
-              />
+              <PanelHeadCorner $rarity={rarity} />
 
               {/* Center header */}
-              <div
-                className={`z-[1] box-border flex h-[5.2rem] flex-[1_1_60%] flex-col items-center justify-start rounded-[50%] border bg-[var(--primary-background-color)] pt-2 text-center ${
-                  card.rarity === 'limited'
-                    ? 'border-[var(--limited-soft-tint)]'
-                    : card.rarity === 'special'
-                    ? 'border-[var(--special-soft-tint)]'
-                    : card.rarity === 'rare'
-                    ? 'border-[var(--rare-soft-tint)]'
-                    : 'border-[var(--common-soft-tint)]'
-                }`}
-              >
-                <h4 className="m-0 mb-[0.2rem] w-full text-center text-[0.7em] font-normal uppercase text-[var(--light-grey)]">
-                  {card.type}
-                </h4>
-                {getTypeIcon()}
-              </div>
+              <PanelHeadHeader $rarity={rarity}>
+                <TypeLabel>{card.type}</TypeLabel>
+                <TypeIconWrapper>
+                  {getTypeIcon()}
+                </TypeIconWrapper>
+              </PanelHeadHeader>
 
               {/* Right corner with duration */}
-              <div
-                className={`flex-[1_1_20%] border-b ${
-                  card.rarity === 'limited'
-                    ? 'border-[var(--limited-soft-tint)] text-[var(--limited-highlight)]'
-                    : card.rarity === 'special'
-                    ? 'border-[var(--special-soft-tint)] text-[var(--special-highlight)]'
-                    : card.rarity === 'rare'
-                    ? 'border-[var(--rare-soft-tint)] text-[var(--rare-highlight)]'
-                    : 'border-[var(--common-soft-tint)] text-[var(--common-highlight)]'
-                }`}
-              >
+              <PanelHeadCorner $rarity={rarity}>
                 {card.duration && (
-                  <div className="relative w-full">
-                    <Duration className="absolute left-0 top-0 w-full" fill="currentColor" />
-                    <p className="relative m-0 text-[1.5em] leading-[2.6rem] text-[var(--secondary-text-color)]">
-                      {card.duration}
-                    </p>
-                  </div>
+                  <DurationWrapper>
+                    <DurationIcon fill="currentColor" />
+                    <DurationText>{card.duration}</DurationText>
+                  </DurationWrapper>
                 )}
-              </div>
-            </div>
+              </PanelHeadCorner>
+            </PanelHead>
 
             {/* Panel content */}
-            <div className="relative box-border flex flex-1 flex-col rounded-b-[0.7em] bg-[var(--primary-background-color)] px-[0.3em] pb-[0.3em] pt-[2.9em] font-light">
+            <PanelContent>
               {/* Help icon */}
               {helpText.length > 0 && (
-                <div
-                  className={`absolute left-0 top-0 box-border h-[3.5em] w-[3.5em] cursor-pointer pt-[0.3em] text-[var(--link-color)] ${
-                    showHelp ? '' : ''
-                  }`}
-                  onClick={toggleHelp}
-                >
-                  <svg
-                    className={`h-8 w-8 rounded-[50%] transition-all duration-300 ${
-                      showHelp ? 'translate-y-[2.7em] scale-[0.8] opacity-80' : ''
-                    }`}
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
+                <HelpIcon $toggled={showHelp} onClick={toggleHelp}>
+                  <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z" />
                   </svg>
-                </div>
+                </HelpIcon>
               )}
 
               {/* Help content */}
               {helpText.length > 0 && (
-                <div
-                  className={`origin-top pl-[2.5em] text-left text-[var(--link-color)] transition-transform duration-200 ${
-                    showHelp ? 'h-auto scale-y-100' : 'h-0 scale-y-0'
-                  }`}
-                >
+                <HelpContent $toggled={showHelp}>
                   {helpText.map((text, index) => (
-                    <p key={index} className="m-0 p-2 font-light">
-                      {text}
-                    </p>
+                    <RuleText key={index}>{text}</RuleText>
                   ))}
-                </div>
+                </HelpContent>
               )}
 
               {/* Rules */}
               {card.rules &&
                 card.rules.map((rule, index) => (
-                  <p key={index} className="m-0 p-2 font-light">
-                    {rule}
-                  </p>
+                  <RuleText key={index}>{rule}</RuleText>
                 ))}
 
               {/* Challenge section with bold rules */}
               {card.boldRules && card.boldRules.length > 0 && (
-                <div className="flex flex-col">
+                <ChallengeWrapper>
                   {card.boldRules.map(
                     (rule, index) =>
                       !hideRule(rule) && (
-                        <div
-                          key={index}
-                          className={`mt-4 flex flex-1 flex-col border-t ${
-                            rule.type === 'success'
-                              ? 'border-[var(--success-green)]'
-                              : rule.type === 'failure' ||
-                                rule.type === 'punishment' ||
-                                rule.type === 'chicken'
-                              ? 'border-[var(--failure-red)]'
-                              : ''
-                          }`}
-                        >
+                        <ChallengeItem key={index} $type={rule.type}>
                           {rule.type && (
-                            <h4
-                              className={`relative m-[-0.4rem] mx-auto my-0 w-[5rem] bg-[var(--primary-background-color)] text-[0.7em] font-normal uppercase ${
-                                rule.type === 'success'
-                                  ? 'text-[var(--success-green)]'
-                                  : rule.type === 'failure' ||
-                                    rule.type === 'punishment' ||
-                                    rule.type === 'chicken'
-                                  ? 'text-[var(--failure-red)]'
-                                  : ''
-                              }`}
-                            >
+                            <ChallengeTitle $type={rule.type}>
                               {rule.type}
-                            </h4>
+                            </ChallengeTitle>
                           )}
-                          <p className="m-0 p-2 font-light">
+                          <RuleText>
                             <b>{rule.instruction}</b>
-                          </p>
-                        </div>
+                          </RuleText>
+                        </ChallengeItem>
                       )
                   )}
-                </div>
+                </ChallengeWrapper>
               )}
 
-              {/* Image wrapper - would need CardImages component */}
+              {/* Image wrapper */}
               {card.image && (
-                <div className="relative flex flex-1">
+                <ImageWrapper>
                   {/* Image icon would go here if we had the CardImages component */}
-                </div>
+                </ImageWrapper>
               )}
 
               {/* Flavour text */}
               {card.flavour && (
-                <p className="m-0 text-[0.8em] italic text-[var(--light-grey)]">
-                  {card.flavour}
-                </p>
+                <FlavourText>{card.flavour}</FlavourText>
               )}
-            </div>
-          </div>
+            </PanelContent>
+          </MainPanel>
 
           {/* Expired overlay */}
           {isExpired && (
-            <div className="absolute bottom-0 left-0 right-0 top-[9rem] flex items-center justify-center text-center text-[4.5em] font-bold text-[var(--failure-red)] [text-shadow:0_1px_1px_var(--secondary-text-color)]">
-              Expired
-            </div>
-          )}
-
-          {/* Opacity overlay for expired state */}
-          {isExpired && (
-            <div className="pointer-events-none absolute inset-0 bg-white opacity-70" />
+            <>
+              <ExpiredText>Expired</ExpiredText>
+              <ExpiredOverlay />
+            </>
           )}
         </div>
-      </div>
+      </Wrapper>
     );
   }
 );
