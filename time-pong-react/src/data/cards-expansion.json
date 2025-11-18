@@ -1,0 +1,2056 @@
+[
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "action",
+    "image": "reverse-psychology",
+    "title": "Reverse Psychology",
+    "flavour": "Sometimes the best offense is a good defense.",
+    "multipleLosers": true,
+    "boldRules": [
+      {
+        "instruction": "Choose someone who must choose someone else to drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "action",
+    "image": "social-butterfly",
+    "title": "Social Butterfly",
+    "flavour": "The more the merrier!",
+    "multipleLosers": true,
+    "rules": [
+      "Choose three people."
+    ],
+    "boldRules": [
+      {
+        "instruction": "You all drink one together."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "basic",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "action",
+    "image": "mirror-match",
+    "title": "Mirror Match",
+    "flavour": "Imitation is the sincerest form of flattery... and drinking.",
+    "multipleLosers": true,
+    "rules": [
+      "Point to someone. Whatever you drink, they drink."
+    ],
+    "boldRules": [
+      {
+        "instruction": "You both drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "action",
+    "image": "tax-collector",
+    "title": "Tax Collector",
+    "flavour": "Nothing is certain except death and taxes.",
+    "rules": [
+      "Every player contributes one drink to the tax pool."
+    ],
+    "boldRules": [
+      {
+        "instruction": "You drink the total collected."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "action",
+    "image": "sympathy-drinks",
+    "title": "Sympathy Drinks",
+    "flavour": "Misery loves company.",
+    "multipleLosers": true,
+    "rules": [
+      "Choose the person who looks most sober."
+    ],
+    "boldRules": [
+      {
+        "instruction": "They drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "basic",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "action",
+    "image": "lucky-escape",
+    "title": "Lucky Escape",
+    "flavour": "Sometimes it's better to be lucky than good.",
+    "rules": [
+      "Rock, paper, scissors with the person to your left."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Loser drinks two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "action",
+    "image": "brotherhood",
+    "title": "Brotherhood",
+    "flavour": "United we stand, drunk we fall.",
+    "multipleLosers": true,
+    "rules": [
+      "All players of your gender drink together."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Everyone drinks one."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "action",
+    "image": "bargain",
+    "title": "The Bargain",
+    "flavour": "Let's make a deal.",
+    "multipleLosers": true,
+    "rules": [
+      "Offer any player: they can drink two now, or four later if you choose."
+    ],
+    "boldRules": [
+      {
+        "instruction": "You drink one regardless."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "basic",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "action",
+    "image": "pay-it-forward",
+    "title": "Pay It Forward",
+    "flavour": "Good karma goes around.",
+    "multipleLosers": true,
+    "rules": [
+      "Give one drink to three different people."
+    ],
+    "boldRules": [
+      {
+        "instruction": "You drink one."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "action",
+    "image": "Robin-hood",
+    "title": "Robin Hood",
+    "flavour": "Steal from the sober, give to the drunk.",
+    "multipleLosers": true,
+    "rules": [
+      "The most sober person gives three drinks to the drunkest person."
+    ],
+    "boldRules": [
+      {
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "challenge",
+    "type": "challenge",
+    "image": "behind-back",
+    "title": "Behind the Back",
+    "flavour": "Show off those skills!",
+    "rules": [
+      "Take a shot from behind your back."
+    ],
+    "boldRules": [
+      {
+        "type": "success",
+        "instruction": "Choose two people to drink two each."
+      },
+      {
+        "type": "failure",
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "challenge",
+    "type": "challenge",
+    "image": "eyes-closed",
+    "title": "Blind Faith",
+    "flavour": "Trust your instincts.",
+    "rules": [
+      "Take a normal shot with your eyes closed."
+    ],
+    "boldRules": [
+      {
+        "type": "success",
+        "instruction": "Choose someone to skull."
+      },
+      {
+        "type": "failure",
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "card": "challenge",
+    "type": "challenge",
+    "image": "dizzy",
+    "title": "Spin Cycle",
+    "flavour": "Round and round she goes!",
+    "rules": [
+      "Spin around five times, then take a shot."
+    ],
+    "boldRules": [
+      {
+        "type": "success",
+        "instruction": "Choose someone to skull."
+      },
+      {
+        "type": "failure",
+        "instruction": "You drink four."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "challenge",
+    "type": "challenge",
+    "image": "one-handed",
+    "title": "One Arm Bandit",
+    "flavour": "Who needs two hands anyway?",
+    "rules": [
+      "Put one hand behind your back and take a shot."
+    ],
+    "boldRules": [
+      {
+        "type": "success",
+        "instruction": "Give out three drinks."
+      },
+      {
+        "type": "failure",
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "card": "challenge",
+    "type": "challenge",
+    "image": "speed-round",
+    "title": "Speed Demon",
+    "flavour": "Gotta go fast!",
+    "rules": [
+      "Make three shots in a row within 10 seconds."
+    ],
+    "boldRules": [
+      {
+        "type": "success",
+        "instruction": "Everyone else drinks three."
+      },
+      {
+        "type": "failure",
+        "instruction": "You drink five."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "challenge",
+    "type": "challenge",
+    "image": "arm-wrestle",
+    "title": "Test of Strength",
+    "flavour": "May the best arm win!",
+    "rules": [
+      "Arm wrestle with someone of your choosing."
+    ],
+    "boldRules": [
+      {
+        "type": "success",
+        "instruction": "Loser drinks four."
+      },
+      {
+        "type": "failure",
+        "instruction": "You drink four."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "challenge",
+    "type": "challenge",
+    "image": "underleg",
+    "title": "Through the Wickets",
+    "flavour": "Flexibility is key.",
+    "rules": [
+      "Shoot the ball through your legs into the cup."
+    ],
+    "boldRules": [
+      {
+        "type": "success",
+        "instruction": "Choose someone to skull."
+      },
+      {
+        "type": "failure",
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "card": "challenge",
+    "type": "challenge",
+    "image": "triple-threat",
+    "title": "Hat Trick",
+    "flavour": "Three's a charm!",
+    "rules": [
+      "Make three consecutive shots. Miss once and you fail."
+    ],
+    "boldRules": [
+      {
+        "type": "success",
+        "instruction": "Choose three people to skull."
+      },
+      {
+        "type": "failure",
+        "instruction": "You drink four."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "challenge",
+    "type": "challenge",
+    "image": "thumb-war",
+    "title": "Thumb War Champion",
+    "flavour": "1, 2, 3, 4, I declare a thumb war!",
+    "rules": [
+      "Challenge someone to a thumb war."
+    ],
+    "boldRules": [
+      {
+        "type": "success",
+        "instruction": "They drink three."
+      },
+      {
+        "type": "failure",
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "card": "challenge",
+    "type": "challenge",
+    "image": "juggle",
+    "title": "Juggle Master",
+    "flavour": "Keep your eye on the ball... or balls.",
+    "rules": [
+      "Juggle two balls 5 times, then make a shot."
+    ],
+    "boldRules": [
+      {
+        "type": "success",
+        "instruction": "Everyone else drinks two."
+      },
+      {
+        "type": "failure",
+        "instruction": "You drink four."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "trait",
+    "image": "king",
+    "title": "The King/Queen",
+    "flavour": "Heavy is the head that wears the crown.",
+    "rules": [
+      "You are royalty. Everyone must address you as 'Your Majesty' or drink."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "trait",
+    "image": "rhyme-time",
+    "title": "Rhyme Time",
+    "flavour": "Roses are red, violets are blue, if you talk to me, you better rhyme too.",
+    "rules": [
+      "Anyone who speaks to you must rhyme their last word with yours, or drink."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "trait",
+    "image": "drink-buddy",
+    "title": "Drink Buddies",
+    "flavour": "Best friends drink together.",
+    "rules": [
+      "Choose two people. Whenever any one of you drinks, all three drink the same amount."
+    ],
+    "boldRules": [
+      {
+        "instruction": "You all drink one now."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "trait",
+    "image": "thumb-master",
+    "title": "Thumb Master",
+    "flavour": "All thumbs on deck!",
+    "rules": [
+      "At any time, put your thumb on the table. Last person to do so is punished."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      },
+      {
+        "type": "punishment",
+        "instruction": "Drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "trait",
+    "image": "photo-op",
+    "title": "Photographer",
+    "flavour": "Say cheese!",
+    "rules": [
+      "You may force any player to take a photo with you at any time. They must comply or drink."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "trait",
+    "image": "compliment",
+    "title": "Compliment Collector",
+    "flavour": "Everyone loves a compliment.",
+    "rules": [
+      "Anyone who wants to speak to you must first give you a genuine compliment."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "trait",
+    "image": "nickname",
+    "title": "Nickname Master",
+    "flavour": "What's in a name? Everything!",
+    "rules": [
+      "Give everyone a nickname. They must use each other's nicknames or drink."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "trait",
+    "image": "toast-master",
+    "title": "Toast Master",
+    "flavour": "Cheers to that!",
+    "rules": [
+      "Before anyone drinks, they must toast you. If they forget, they drink double."
+    ],
+    "boldRules": [
+      {
+        "instruction": "You drink one."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "trait",
+    "image": "accent",
+    "title": "The Accent",
+    "flavour": "G'day mate! Pip pip cheerio!",
+    "rules": [
+      "Choose an accent. Anyone who speaks to you must use that accent or drink."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "trait",
+    "image": "bodyguard",
+    "title": "Personal Bodyguard",
+    "flavour": "I'll take that bullet for you!",
+    "rules": [
+      "Choose someone. Any drinks assigned to them, you drink half (rounded up)."
+    ],
+    "boldRules": [
+      {
+        "instruction": "You both drink one."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "ability",
+    "type": "ability",
+    "image": "veto",
+    "title": "Veto Power",
+    "flavour": "I object!",
+    "oneHitWonder": true,
+    "rules": [
+      "Use this ability to cancel any one card effect at any time."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "ability",
+    "type": "ability",
+    "image": "swap",
+    "title": "The Switcheroo",
+    "flavour": "Now you see it, now you don't!",
+    "oneHitWonder": true,
+    "rules": [
+      "Use this ability to swap drinking assignments between any two players."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "ability",
+    "type": "ability",
+    "image": "freeze",
+    "title": "Freeze Frame",
+    "flavour": "Everybody freeze!",
+    "rules": [
+      "At any time, shout 'FREEZE!' All players must freeze immediately. Last person to freeze is punished."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      },
+      {
+        "type": "punishment",
+        "instruction": "Drink four."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "ability",
+    "type": "ability",
+    "image": "double-down",
+    "title": "Double Down",
+    "flavour": "Go big or go home!",
+    "oneHitWonder": true,
+    "rules": [
+      "Use this ability when someone assigns you drinks. Double the amount and assign it back to them."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "ability",
+    "type": "ability",
+    "image": "copycat",
+    "title": "Copycat",
+    "flavour": "Monkey see, monkey do!",
+    "rules": [
+      "At any time, start copying someone's actions. Everyone must join in. Last person is punished."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      },
+      {
+        "type": "punishment",
+        "instruction": "Drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "ability",
+    "type": "ability",
+    "image": "redirect",
+    "title": "Deflector Shield",
+    "flavour": "Not today, Satan!",
+    "oneHitWonder": true,
+    "rules": [
+      "Use this ability to redirect any card effect to a player of your choosing."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "ability",
+    "type": "ability",
+    "image": "dance-off",
+    "title": "Dance Battle",
+    "flavour": "It's time to bust a move!",
+    "oneHitWonder": true,
+    "rules": [
+      "Challenge any player to a dance-off. Group votes on winner."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      },
+      {
+        "type": "punishment",
+        "instruction": "Loser drinks four."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "ability",
+    "type": "ability",
+    "image": "whisper",
+    "title": "Chinese Whispers",
+    "flavour": "Pass it on!",
+    "oneHitWonder": true,
+    "rules": [
+      "Whisper a message to the person next to you. It goes around the circle. If it comes back correct, everyone else drinks."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "If wrong, you drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "ability",
+    "type": "ability",
+    "image": "floor-is-lava",
+    "title": "Floor is Lava",
+    "flavour": "Get your feet up!",
+    "rules": [
+      "At any time, shout 'The floor is lava!' Last person to get their feet off the ground is punished."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      },
+      {
+        "type": "punishment",
+        "instruction": "Drink four."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "ability",
+    "type": "ability",
+    "image": "immunity",
+    "title": "Immunity Idol",
+    "flavour": "Can't touch this!",
+    "oneHitWonder": true,
+    "rules": [
+      "Use this ability to become immune to all card effects for one full round."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink one."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "curse",
+    "image": "little-person",
+    "title": "Leprechaun Curse",
+    "flavour": "You're a wee little person now!",
+    "rules": [
+      "You must remain on your knees whenever standing or moving."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "curse",
+    "image": "air-quotes",
+    "title": "Air Quote Everything",
+    "flavour": "I'm being 'sarcastic' here.",
+    "rules": [
+      "You must use air quotes whenever you say a noun."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "curse",
+    "image": "t-rex",
+    "title": "T-Rex Arms",
+    "flavour": "Rawr! Tiny arms, big problems.",
+    "rules": [
+      "Keep your arms bent at the elbows, hands at your chest like a T-Rex."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "curse",
+    "image": "third-person",
+    "title": "Third Person",
+    "flavour": "Bob thinks this is ridiculous. Bob is right.",
+    "rules": [
+      "You must refer to yourself in the third person."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "curse",
+    "image": "stand-up",
+    "title": "No Sitting",
+    "flavour": "Stand and deliver!",
+    "rules": [
+      "You must remain standing at all times."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "curse",
+    "image": "pirate",
+    "title": "Pirate Speak",
+    "flavour": "Arrr matey!",
+    "rules": [
+      "You must talk like a pirate. End every sentence with 'Arrr!'"
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "curse",
+    "image": "one-eye",
+    "title": "Cyclops",
+    "flavour": "I've got my eye on you!",
+    "rules": [
+      "Keep one eye closed at all times."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "curse",
+    "image": "shakespeare",
+    "title": "Shakespearean",
+    "flavour": "To drink or not to drink, that is the question.",
+    "rules": [
+      "You must speak in old English. Use 'thee', 'thou', 'art', etc."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "curse",
+    "image": "backwards",
+    "title": "Backwards Talk",
+    "flavour": "gnikniht sdrawkcab si drah.",
+    "rules": [
+      "You must say every word backwards."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "curse",
+    "image": "rapper",
+    "title": "Drop the Beat",
+    "flavour": "Yo yo yo, check it out!",
+    "rules": [
+      "Everything you say must rhyme and be said in a rap cadence."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "global",
+    "image": "birthday",
+    "title": "Birthday Drinks",
+    "flavour": "Let's celebrate!",
+    "rules": [
+      "Anyone who has a birthday this month."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Drinks three with you."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "global",
+    "image": "social-media",
+    "title": "Social Media Addicts",
+    "flavour": "Put down the phone!",
+    "rules": [
+      "Anyone who has checked their phone in the last 10 minutes."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Drinks two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "global",
+    "image": "relationships",
+    "title": "Relationship Status",
+    "flavour": "Singles vs Couples!",
+    "rules": [
+      "All single people drink two.",
+      "All people in relationships drink two."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Everyone drinks!"
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "global",
+    "image": "cheers",
+    "title": "Group Cheers",
+    "flavour": "To friendship!",
+    "rules": [
+      "Everyone stands and raises their glass."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Give a toast and everyone drinks three together."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "global",
+    "image": "vote",
+    "title": "Popularity Contest",
+    "flavour": "Who's the favorite?",
+    "rules": [
+      "Everyone votes on who they'd want to be stuck on an island with."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Person with least votes drinks four."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "global",
+    "image": "glasses",
+    "title": "Four Eyes",
+    "flavour": "Specs appeal!",
+    "rules": [
+      "Anyone wearing glasses or contacts."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Drinks two with you."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "global",
+    "image": "leftie",
+    "title": "Left Handed Legion",
+    "flavour": "Lefties unite!",
+    "rules": [
+      "All left-handed people."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Drink one. Everyone else drinks three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "global",
+    "image": "work",
+    "title": "Work Week Woes",
+    "flavour": "We all hate Mondays.",
+    "rules": [
+      "Anyone who has work tomorrow."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Drinks two. You have our sympathy."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "regular",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "global",
+    "image": "tattoo",
+    "title": "Ink and Drinks",
+    "flavour": "Show off that body art!",
+    "rules": [
+      "Anyone with a tattoo."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Drinks one per tattoo (max 5)."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "global",
+    "image": "youngest",
+    "title": "Youth vs Experience",
+    "flavour": "Age before beauty... or is it the other way around?",
+    "rules": [
+      "The youngest person drinks one.",
+      "The oldest person drinks one."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Everyone else drinks two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "spell",
+    "image": "slow-mo",
+    "duration": 3,
+    "title": "Slow Motion",
+    "flavour": "Everything in slooooow motion.",
+    "rules": [
+      "All actions must be performed in slow motion."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "spell",
+    "image": "whisper-mode",
+    "duration": 3,
+    "title": "Library Rules",
+    "flavour": "Shhhhhh!",
+    "rules": [
+      "Everyone must whisper. Speaking at normal volume results in drinking two."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "spell",
+    "image": "musical-chairs",
+    "duration": 2,
+    "title": "Musical Chairs",
+    "flavour": "Don't get too comfortable!",
+    "rules": [
+      "After each turn, everyone must move one seat to the left."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "spell",
+    "image": "rapid-fire",
+    "duration": 2,
+    "title": "Speed Mode",
+    "flavour": "Hurry up!",
+    "rules": [
+      "Players have 5 seconds to take their shot or drink two."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "card": "default",
+    "type": "spell",
+    "image": "opposite-hand",
+    "duration": 3,
+    "title": "Wrong Hand",
+    "flavour": "Use your bad hand!",
+    "rules": [
+      "Everyone must use their non-dominant hand for shooting and drinking."
+    ],
+    "boldRules": [
+      {
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "spell",
+    "image": "standing-only",
+    "duration": 3,
+    "title": "Standing Ovation",
+    "flavour": "On your feet!",
+    "rules": [
+      "No one may sit down during this spell."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "spell",
+    "image": "no-names",
+    "duration": 3,
+    "title": "Name Amnesia",
+    "flavour": "What was your name again?",
+    "rules": [
+      "No one may use anyone's name. Break this and drink two."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "special",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "spell",
+    "image": "chaos",
+    "duration": 2,
+    "title": "Pure Chaos",
+    "flavour": "All hell breaks loose!",
+    "rules": [
+      "Add all extra balls available.",
+      "Everyone plays at once.",
+      "Pass cups to anyone when you sink a ball."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "spell",
+    "image": "silent-game",
+    "duration": 3,
+    "title": "The Silent Game",
+    "flavour": "Not a word!",
+    "rules": [
+      "No talking allowed. Communicate only through gestures. Break silence and drink three."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "W&W",
+    "rarity": "limited",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "spell",
+    "image": "team-up",
+    "duration": 2,
+    "title": "Team Spirit",
+    "flavour": "There's no 'I' in team!",
+    "rules": [
+      "Players are divided into two teams.",
+      "Teams alternate turns. When one team member fails, the whole team drinks."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "special",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "dare",
+    "image": "pole-dance",
+    "title": "Pole Position",
+    "flavour": "Work that pole!",
+    "rules": [
+      "Find a pole, post, or door frame and give us your best pole dance."
+    ],
+    "boldRules": [
+      {
+        "type": "chicken",
+        "instruction": ""
+      },
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "special",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "dare",
+    "image": "selfie",
+    "title": "Embarrassing Selfie",
+    "flavour": "Insta-regret!",
+    "rules": [
+      "Take an embarrassing selfie and post it to social media with the hashtag #TimePong."
+    ],
+    "boldRules": [
+      {
+        "type": "chicken",
+        "instruction": ""
+      },
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink four."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "special",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "dare",
+    "image": "call-ex",
+    "title": "Blast from the Past",
+    "flavour": "This won't be awkward at all...",
+    "rules": [
+      "Call an ex or old flame and tell them you miss them."
+    ],
+    "boldRules": [
+      {
+        "type": "chicken",
+        "instruction": ""
+      },
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink five."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "special",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "dare",
+    "image": "strip",
+    "title": "Strip Tease",
+    "flavour": "Getting hot in here!",
+    "rules": [
+      "Remove one article of clothing."
+    ],
+    "boldRules": [
+      {
+        "type": "chicken",
+        "instruction": ""
+      },
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "rare",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "dare",
+    "image": "lap-dance",
+    "title": "Lap Dance",
+    "flavour": "Someone's getting lucky!",
+    "rules": [
+      "Give the person to your right a 30-second lap dance."
+    ],
+    "boldRules": [
+      {
+        "type": "chicken",
+        "instruction": ""
+      },
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink four."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "special",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "dare",
+    "image": "confession",
+    "title": "Confession Time",
+    "flavour": "The truth will set you free... or get you judged.",
+    "rules": [
+      "Confess your most embarrassing moment to the group in detail."
+    ],
+    "boldRules": [
+      {
+        "type": "chicken",
+        "instruction": ""
+      },
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "special",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "dare",
+    "image": "love-letter",
+    "title": "Love Letter",
+    "flavour": "Romance is in the air!",
+    "rules": [
+      "Write a love letter to the person across from you and read it aloud dramatically."
+    ],
+    "boldRules": [
+      {
+        "type": "chicken",
+        "instruction": ""
+      },
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "rare",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "dare",
+    "image": "ice-cube",
+    "title": "Ice Ice Baby",
+    "flavour": "Chill out!",
+    "rules": [
+      "Put an ice cube down your pants and keep it there until it melts."
+    ],
+    "boldRules": [
+      {
+        "type": "chicken",
+        "instruction": ""
+      },
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink four."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "special",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "dare",
+    "image": "serenade",
+    "title": "Serenade Me",
+    "flavour": "Sweet, sweet music!",
+    "rules": [
+      "Serenade the person to your left with a romantic song of their choosing."
+    ],
+    "boldRules": [
+      {
+        "type": "chicken",
+        "instruction": ""
+      },
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "core",
+    "rarity": "rare",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "card": "default",
+    "type": "dare",
+    "image": "dare-reveal",
+    "title": "Truth or Drink",
+    "flavour": "The ultimate choice!",
+    "rules": [
+      "Each player asks you one truth question. Answer honestly or drink two per question."
+    ],
+    "boldRules": [
+      {
+        "type": "chicken",
+        "instruction": ""
+      },
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "Base drinks apply."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "popCulture",
+    "rarity": "regular",
+    "forNonDrinkers": true,
+    "forDrinkers": true,
+    "card": "default",
+    "type": "perform",
+    "image": "disney",
+    "title": "Disney Karaoke",
+    "flavour": "Let it go, let it gooooo!",
+    "rules": [
+      "Sing the chorus of any Disney song chosen by the group."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "popCulture",
+    "rarity": "regular",
+    "forNonDrinkers": true,
+    "forDrinkers": true,
+    "card": "default",
+    "type": "perform",
+    "image": "moonwalk",
+    "title": "Moonwalk Master",
+    "flavour": "Hee-hee!",
+    "rules": [
+      "Perform a moonwalk across the room."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "popCulture",
+    "rarity": "regular",
+    "forNonDrinkers": true,
+    "forDrinkers": true,
+    "card": "default",
+    "type": "perform",
+    "image": "impression",
+    "title": "Celebrity Impression",
+    "flavour": "Lights, camera, action!",
+    "rules": [
+      "Do your best impression of a celebrity. Group guesses who it is."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "If no one guesses in 30 seconds, you drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "popCulture",
+    "rarity": "limited",
+    "forNonDrinkers": true,
+    "forDrinkers": true,
+    "card": "default",
+    "type": "perform",
+    "image": "rap-battle",
+    "title": "Rap Battle",
+    "flavour": "Drop that mic!",
+    "oneHitWonder": true,
+    "rules": [
+      "Perform a 30-second freestyle rap about the person to your left."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "popCulture",
+    "rarity": "regular",
+    "forNonDrinkers": true,
+    "forDrinkers": true,
+    "card": "default",
+    "type": "perform",
+    "image": "commercial",
+    "title": "Infomercial",
+    "flavour": "But wait, there's more!",
+    "rules": [
+      "Create and perform a 30-second infomercial for any object in the room."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "popCulture",
+    "rarity": "regular",
+    "forNonDrinkers": true,
+    "forDrinkers": true,
+    "card": "default",
+    "type": "perform",
+    "image": "stand-up",
+    "title": "Stand-Up Comedy",
+    "flavour": "You're hilarious! Or not...",
+    "rules": [
+      "Tell your best joke. If no one laughs, you fail."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "If no one laughs, you drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "popCulture",
+    "rarity": "limited",
+    "forNonDrinkers": true,
+    "forDrinkers": true,
+    "card": "default",
+    "type": "perform",
+    "image": "opera",
+    "title": "Opera Singer",
+    "flavour": "Figaro! Figaro! Figaro!",
+    "oneHitWonder": true,
+    "rules": [
+      "Sing whatever you say next in opera style for the next minute."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "popCulture",
+    "rarity": "regular",
+    "forNonDrinkers": true,
+    "forDrinkers": true,
+    "card": "default",
+    "type": "perform",
+    "image": "movie-quote",
+    "title": "Movie Quote Master",
+    "flavour": "I'll be back!",
+    "rules": [
+      "Perform a famous movie quote in character. Group has to guess the movie."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "If no one guesses, you drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "popCulture",
+    "rarity": "regular",
+    "forNonDrinkers": true,
+    "forDrinkers": true,
+    "card": "default",
+    "type": "perform",
+    "image": "beatbox",
+    "title": "Beatboxer",
+    "flavour": "Boots and cats and boots and cats!",
+    "rules": [
+      "Beatbox for 30 seconds while others try not to laugh."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink two."
+      }
+    ]
+  },
+  {
+    "creator": "Claude AI",
+    "created": "11/18/2025",
+    "deck": "popCulture",
+    "rarity": "limited",
+    "forNonDrinkers": true,
+    "forDrinkers": true,
+    "card": "default",
+    "type": "perform",
+    "image": "shakespeare-monologue",
+    "title": "Shakespeare Performance",
+    "flavour": "To be or not to be, that is the question!",
+    "oneHitWonder": true,
+    "rules": [
+      "Perform a dramatic Shakespeare-style monologue about beer pong."
+    ],
+    "boldRules": [
+      {
+        "hideFromNonDrinkers": true,
+        "instruction": "You drink three."
+      }
+    ]
+  }
+]
