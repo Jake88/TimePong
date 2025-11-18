@@ -127,20 +127,18 @@ const OverlayInner = styled.div<{ $isOverlay: boolean }>`
   width: 100%;
   height: 100%;
   background-color: ${theme.overlayBackgroundColor};
-  z-index: ${props => props.$isOverlay ? '900' : '-1'};
+  z-index: ${props => props.$isOverlay ? '1000' : '-1'};
 `;
 
 const CardWrapper = styled.div<{ $isOpen: boolean; $isFade: boolean; $isAnimating: boolean }>`
   ${theme.cardWrapper}
   border-radius: 10px;
   display: ${props => props.$isOpen || props.$isAnimating ? 'block' : 'none'};
-  z-index: 999;
+  z-index: 1001;
   opacity: ${props => props.$isFade ? '0' : props.$isOpen ? '1' : '0'};
   transform: ${props => props.$isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, -10em, 0)'};
   transition: opacity 0.3s, transform 0.3s linear;
   position: fixed;
-  left: 0;
-  bottom: 0;
 `;
 
 export const EffectCard = forwardRef<EffectCardRef, EffectCardProps>(
