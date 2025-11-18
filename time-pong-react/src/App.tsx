@@ -8,7 +8,8 @@ import CardListPage from '@/pages/CardListPage';
 import { theme } from '@/theme';
 
 const AppContainer = styled.div`
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
   background-color: ${theme.primaryBackgroundColor};
   font-family: ${theme.fontFamily};
 `;

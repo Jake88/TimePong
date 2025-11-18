@@ -10,8 +10,8 @@ import type { Card } from '@/types/card.types';
 import { theme } from '@/theme';
 
 const Container = styled.div`
+  height: 100%;
   position: relative;
-  min-height: 100vh;
 `;
 
 const MainContent = styled.div`

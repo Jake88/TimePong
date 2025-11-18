@@ -132,7 +132,7 @@ const HeaderTitle = styled.h1`
 
 const ContentArea = styled.div`
   padding-top: 3.5em;
-  min-height: 100vh;
+  height: 100%;
 `;
 
 export default function AppDrawer({ children }: AppDrawerProps) {

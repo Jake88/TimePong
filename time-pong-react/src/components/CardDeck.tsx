@@ -17,15 +17,16 @@ interface CardDeckProps {
 }
 
 const DarkOverlay = styled.div<{ $isOpen: boolean }>`
-  position: absolute;
-  top: -2000px;
-  left: -2000px;
-  width: 5000px;
-  height: 5000px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: #333;
   opacity: ${props => props.$isOpen ? '0.5' : '0'};
   z-index: ${props => props.$isOpen ? '4' : '-1'};
   transition: ${props => props.$isOpen ? 'opacity 0.5s linear' : 'opacity 0.3s linear, z-index 0.5s linear'};
+  pointer-events: ${props => props.$isOpen ? 'auto' : 'none'};
 `;
 
 const FlipContainer = styled.div<{ $isVisible: boolean; $isOpen: boolean }>`
