@@ -15,10 +15,14 @@ const Container = styled.div`
 `;
 
 const MainContent = styled.div`
-  margin: 0 auto;
+  height: 100%;
   box-sizing: border-box;
-  max-width: 25em;
-  padding: 0 1em;
+  padding-top: 56px;
+  width: 100%;
+  margin: auto;
+  margin-top: -56px;
+  max-width: 400px;
+  position: relative;
 `;
 
 const EffectsContainer = styled.div`
