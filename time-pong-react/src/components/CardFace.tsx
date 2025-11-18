@@ -215,9 +215,6 @@ const ChallengeWrapper = styled.div`
 `;
 
 const ChallengeItem = styled.div<{ $type?: string }>`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
   margin-top: 1em;
   border-top: 1px solid ${props =>
     props.$type === 'success'
@@ -261,6 +258,7 @@ const ImageWrapper = styled.div`
 
 const FlavourText = styled.p`
   margin: 0;
+  padding: 0.5em;
   font-size: 0.8em;
   font-style: oblique;
   color: ${theme.lightGrey};
