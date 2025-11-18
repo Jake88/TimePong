@@ -109,12 +109,13 @@ const Title = styled.h4`
   font-size: 0.7em;
 `;
 
-const OverlayWrapper = styled.div`
+const OverlayWrapper = styled.div<{ $isOverlay: boolean }>`
   position: fixed;
   top: 0;
   height: 100%;
   width: 100%;
   left: 0;
+  pointer-events: ${props => props.$isOverlay ? 'auto' : 'none'};
 `;
 
 const OverlayInner = styled.div<{ $isOverlay: boolean }>`
@@ -255,7 +256,7 @@ export const EffectCard = forwardRef<EffectCardRef, EffectCardProps>(
         </div>
 
         {/* Dark overlay */}
-        <OverlayWrapper>
+        <OverlayWrapper $isOverlay={isOverlay}>
           <OverlayInner $isOverlay={isOverlay} />
         </OverlayWrapper>
 
