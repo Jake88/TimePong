@@ -39,7 +39,7 @@ const PanelTitle = styled.h2`
   padding: 0.5em 0;
   margin: 0;
   font-size: 1.4em;
-  font-weight: normal;
+  font-weight: 700;
 `;
 
 const PanelHead = styled.div`
@@ -48,6 +48,7 @@ const PanelHead = styled.div`
   flex-direction: row;
   align-items: center;
   position: relative;
+  padding-top: 2.5em;
 `;
 
 const PanelHeadCorner = styled.div`
@@ -64,11 +65,6 @@ const PanelHeadHeader = styled.div`
   padding-top: 0.5em;
   border-radius: 50%;
   border: 1px solid ${theme.commonSoftTint};
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
 `;
 
 const PanelContent = styled.div`
@@ -166,9 +162,6 @@ export const CardBack: React.FC<CardBackProps> = ({ onCategorySelected }) => {
 
           {/* Center header */}
           <PanelHeadHeader>
-            <LogoIcon viewBox="0 0 100 100" fill="currentColor">
-              <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="3"/>
-            </LogoIcon>
           </PanelHeadHeader>
 
           {/* Right corner */}
