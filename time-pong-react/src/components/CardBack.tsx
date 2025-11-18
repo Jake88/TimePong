@@ -124,11 +124,6 @@ const AnswerTitle = styled.h2<{ variant: 'drunk' | 'sober' }>`
   };
 `;
 
-const LogoIcon = styled.svg`
-  height: 3em;
-  width: 100%;
-`;
-
 const NoMercyIcon = styled(NoMercy)`
   height: 6rem;
   width: 6rem;

@@ -4,6 +4,7 @@ import type { Card } from '@/types/card.types';
 import { CardFace } from './CardFace';
 import type { CardFaceRef } from './CardFace';
 import * as CardTypeIcons from '@/components/icons/CardTypeIcons';
+import { useGame } from '@/context/GameContext';
 import { theme } from '@/theme';
 
 export interface EffectCardRef {
@@ -64,7 +65,6 @@ const Label = styled.h4<{ $isActive: boolean }>`
 const EffectWrapper = styled.div<{ $isActive: boolean; $rarity?: Rarity }>`
   box-sizing: border-box;
   padding: 0.3em;
-  z-index: 1;
   border: 1px solid ${props => props.$isActive && props.$rarity
     ? getRarityColors(props.$rarity).highlight
     : theme.lightGrey};
@@ -108,41 +108,33 @@ const Title = styled.h4`
   font-size: 0.7em;
 `;
 
-const OverlayWrapper = styled.div`
+const Overlay = styled.div<{ $isVisible: boolean }>`
   position: fixed;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  left: 0;
-`;
-
-const OverlayInner = styled.div<{ $isOverlay: boolean }>`
-  position: absolute;
-  opacity: ${props => props.$isOverlay ? '0.7' : '0'};
-  transition: opacity 0.5s linear;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: ${theme.overlayBackgroundColor};
-  z-index: ${props => props.$isOverlay ? '900' : '-1'};
+  opacity: ${props => props.$isVisible ? '0.7' : '0'};
+  z-index: ${props => props.$isVisible ? '100' : '-1'};
+  pointer-events: ${props => props.$isVisible ? 'auto' : 'none'};
+  transition: opacity 0.5s linear, z-index 0s ${props => props.$isVisible ? '0s' : '0.5s'};
 `;
 
 const CardWrapper = styled.div<{ $isOpen: boolean; $isFade: boolean; $isAnimating: boolean }>`
   ${theme.cardWrapper}
   border-radius: 10px;
   display: ${props => props.$isOpen || props.$isAnimating ? 'block' : 'none'};
-  z-index: 999;
+  z-index: 101;
   opacity: ${props => props.$isFade ? '0' : props.$isOpen ? '1' : '0'};
   transform: ${props => props.$isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, -10em, 0)'};
   transition: opacity 0.3s, transform 0.3s linear;
   position: fixed;
-  left: 0;
-  bottom: 0;
 `;
 
 export const EffectCard = forwardRef<EffectCardRef, EffectCardProps>(
   ({ data, label }, ref) => {
+    const { removeEffect } = useGame();
     const [isActive, setIsActive] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [isOverlay, setIsOverlay] = useState(false);
@@ -212,6 +204,11 @@ export const EffectCard = forwardRef<EffectCardRef, EffectCardProps>(
     };
 
     const clearEffect = () => {
+      // Remove the effect from GameContext if it has expired (duration = 0)
+      if (cardData && cardData.duration === 0) {
+        removeEffect(cardData);
+      }
+
       setCardData(null);
       setIsOpen(false);
       setIsFade(false);
@@ -248,9 +245,7 @@ export const EffectCard = forwardRef<EffectCardRef, EffectCardProps>(
         </div>
 
         {/* Dark overlay */}
-        <OverlayWrapper>
-          <OverlayInner $isOverlay={isOverlay} />
-        </OverlayWrapper>
+        <Overlay $isVisible={isOverlay} />
 
         {/* Large card info */}
         {cardData && (
