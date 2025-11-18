@@ -215,14 +215,19 @@ const ChallengeWrapper = styled.div`
 `;
 
 const ChallengeItem = styled.div<{ $type?: string }>`
-  margin-top: 1em;
-  border-top: 1px solid ${props =>
-    props.$type === 'success'
-      ? theme.successGreen
-      : props.$type === 'failure' || props.$type === 'punishment' || props.$type === 'chicken'
-      ? theme.failureRed
-      : 'transparent'
-  };
+  ${props => props.$type && (
+    props.$type === 'success' ||
+    props.$type === 'failure' ||
+    props.$type === 'punishment' ||
+    props.$type === 'chicken'
+  ) && `
+    margin-top: 1em;
+    border-top: 1px solid ${
+      props.$type === 'success'
+        ? theme.successGreen
+        : theme.failureRed
+    };
+  `}
 `;
 
 const ChallengeTitle = styled.h4<{ $type?: string }>`
