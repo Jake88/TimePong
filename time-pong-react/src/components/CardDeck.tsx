@@ -17,45 +17,44 @@ interface CardDeckProps {
 }
 
 const DarkOverlay = styled.div<{ $isOpen: boolean }>`
-  fixed: left-[-2000px] top-[-2000px];
   position: fixed;
-  left: -2000px;
-  top: -2000px;
-  height: 5000px;
-  width: 5000px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: #333;
-  transition: opacity 0.3s ease;
   opacity: ${props => props.$isOpen ? '0.5' : '0'};
   z-index: ${props => props.$isOpen ? '4' : '-1'};
+  transition: ${props => props.$isOpen ? 'opacity 0.5s linear' : 'opacity 0.3s linear, z-index 0.5s linear'};
+  pointer-events: ${props => props.$isOpen ? 'auto' : 'none'};
 `;
 
 const FlipContainer = styled.div<{ $isVisible: boolean; $isOpen: boolean }>`
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  z-index: 4;
-  height: 28.75em;
-  width: 18.75em;
+  ${theme.cardWrapper}
   perspective: 1000px;
   display: ${props => props.$isVisible ? 'block' : 'none'};
   opacity: ${props => props.$isOpen ? '1' : '0'};
-  transform: ${props => props.$isOpen ? 'translateY(0)' : 'translateY(10em)'};
-  transition: all 0.25s ease;
+  transform: ${props => props.$isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, 10em, 0)'};
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  z-index: 4;
 `;
 
 const FlipInner = styled.div<{ $isFlipped: boolean; $isOpen: boolean }>`
-  position: relative;
+  ${theme.absoluteTemplate}
+  left: 0;
+  bottom: 0;
   border-radius: 0.7em;
   box-shadow: ${props => props.$isOpen ? `0 0 13px ${theme.primaryTextColor}` : `0 0 3px ${theme.primaryTextColor}`};
-  transition: all 0.8s ease, box-shadow 0.3s ease;
+  transition: 0.8s linear;
   transform-style: preserve-3d;
   transform: ${props => props.$isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'};
+  position: relative;
 `;
 
 const CardSide = styled.div<{ $isBack?: boolean }>`
-  position: absolute;
-  left: 0;
+  ${theme.absoluteTemplate}
   top: 0;
+  left: 0;
   backface-visibility: hidden;
   transform: ${props => props.$isBack ? 'translate3d(0, 0, 0) rotateY(0deg)' : 'translate3d(0, 0, 0) rotateY(180deg)'};
   z-index: ${props => props.$isBack ? '100' : '1'};

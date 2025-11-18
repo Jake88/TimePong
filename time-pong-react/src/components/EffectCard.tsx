@@ -45,6 +45,7 @@ const getRarityColors = (rarity: Rarity) => {
 
 const Container = styled.div`
   position: relative;
+  margin: 0 1em;
 `;
 
 const Label = styled.h4<{ $isActive: boolean }>`
