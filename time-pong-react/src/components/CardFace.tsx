@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import type { Card } from '@/types/card.types';
 import { HELP_TEXT } from '@/types/card.types';
 import * as CardTypeIcons from '@/components/icons/CardTypeIcons';
+import * as CardImages from '@/components/icons/CardImages';
 import { Duration } from '@/components/icons/UtilityIcons';
+import { kebabToPascalCase } from '@/lib/utils';
 import { theme } from '@/theme';
 
 export interface CardFaceRef {
@@ -131,12 +133,14 @@ const TypeIconWrapper = styled.div`
 
 const DurationWrapper = styled.div`
   width: 100%;
+  height: 2.6em;
   position: relative;
 `;
 
 const DurationIcon = styled(Duration)`
   position: absolute;
   width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
 `;
@@ -199,6 +203,10 @@ const RuleText = styled.p`
   font-weight: 100;
   padding: 0.5em;
   margin: 0;
+
+  b {
+    font-weight: bold;
+  }
 `;
 
 const ChallengeWrapper = styled.div`
@@ -207,24 +215,26 @@ const ChallengeWrapper = styled.div`
 `;
 
 const ChallengeItem = styled.div<{ $type?: string }>`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  margin-top: 1em;
-  border-top: 1px solid ${props =>
-    props.$type === 'success'
-      ? theme.successGreen
-      : props.$type === 'failure' || props.$type === 'punishment' || props.$type === 'chicken'
-      ? theme.failureRed
-      : 'transparent'
-  };
+  ${props => props.$type && (
+    props.$type === 'success' ||
+    props.$type === 'failure' ||
+    props.$type === 'punishment' ||
+    props.$type === 'chicken'
+  ) && `
+    margin-top: 1em;
+    border-top: 1px solid ${
+      props.$type === 'success'
+        ? theme.successGreen
+        : theme.failureRed
+    };
+  `}
 `;
 
 const ChallengeTitle = styled.h4<{ $type?: string }>`
   position: relative;
   width: 5rem;
   text-align: center;
-  margin: -0.4rem auto 0;
+  margin: -0.4rem auto;
   text-transform: uppercase;
   font-size: 0.7em;
   font-weight: normal;
@@ -241,11 +251,19 @@ const ChallengeTitle = styled.h4<{ $type?: string }>`
 const ImageWrapper = styled.div`
   position: relative;
   flex: 1;
-  display: flex;
+
+  svg {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 `;
 
 const FlavourText = styled.p`
   margin: 0;
+  padding: 0.5em;
   font-size: 0.8em;
   font-style: oblique;
   color: ${theme.lightGrey};
@@ -326,6 +344,15 @@ export const CardFace = forwardRef<CardFaceRef, CardFaceProps>(
       const iconName = card.type.charAt(0).toUpperCase() + card.type.slice(1);
       const IconComponent = CardTypeIcons[iconName as keyof typeof CardTypeIcons] as React.FC<any>;
       return IconComponent ? <IconComponent style={{ height: '3em', width: '100%' }} fill="currentColor" /> : null;
+    };
+
+    // Get the appropriate card image component
+    const getCardImage = () => {
+      if (!card.image) return null;
+      // Convert kebab-case to PascalCase (e.g., 'the-witchs-cauldron' -> 'TheWitchsCauldron')
+      const componentName = kebabToPascalCase(card.image);
+      const ImageComponent = CardImages[componentName as keyof typeof CardImages] as React.FC<any>;
+      return ImageComponent ? <ImageComponent fill="currentColor" /> : null;
     };
 
     const rarity = (card.rarity || 'common') as Rarity;
@@ -410,7 +437,7 @@ export const CardFace = forwardRef<CardFaceRef, CardFaceProps>(
               {/* Image wrapper */}
               {card.image && (
                 <ImageWrapper>
-                  {/* Image icon would go here if we had the CardImages component */}
+                  {getCardImage()}
                 </ImageWrapper>
               )}
 

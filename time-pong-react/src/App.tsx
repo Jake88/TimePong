@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { GameProvider } from '@/context/GameContext';
+import AppDrawer from '@/components/AppDrawer';
 import HomePage from '@/pages/HomePage';
 import GamePage from '@/pages/GamePage';
 import CardListPage from '@/pages/CardListPage';
@@ -17,12 +18,14 @@ function App() {
     <GameProvider>
       <Router>
         <AppContainer>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/game" element={<GamePage />} />
-            <Route path="/cards" element={<CardListPage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <AppDrawer>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/game" element={<GamePage />} />
+              <Route path="/cards" element={<CardListPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </AppDrawer>
         </AppContainer>
       </Router>
     </GameProvider>

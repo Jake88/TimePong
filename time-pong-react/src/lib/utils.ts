@@ -1,2 +1,12 @@
 // Utility functions for TimePong
-// This file is kept for future utility functions
+
+/**
+ * Converts kebab-case string to PascalCase
+ * Example: 'the-witchs-cauldron' -> 'TheWitchsCauldron'
+ */
+export function kebabToPascalCase(str: string): string {
+  return str
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
+}

@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useGame } from '@/context/GameContext';
 import { CardFace } from '@/components/CardFace';
@@ -11,59 +10,9 @@ const Container = styled.div`
   padding-bottom: 2em;
 `;
 
-const Header = styled.header`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  display: flex;
-  height: 3.5em;
-  align-items: center;
-  justify-content: space-between;
-  background-color: ${theme.primaryBackgroundColor};
-  padding: 0 1em;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-const BackButton = styled.button`
-  display: flex;
-  align-items: center;
-  background: none;
-  border: none;
-  color: ${theme.primaryTextColor};
-  cursor: pointer;
-  padding: 0.5em;
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: ${theme.secondaryTextColor};
-  }
-
-  svg {
-    height: 1.5em;
-    width: 1.5em;
-  }
-
-  span {
-    margin-left: 0.5em;
-  }
-`;
-
-const HeaderTitle = styled.h2`
-  font-size: 1.125em;
-  font-weight: 600;
-  color: ${theme.primaryTextColor};
-  margin: 0;
-`;
-
-const Spacer = styled.div`
-  width: 4em;
-`;
-
 const Content = styled.div`
   padding: 0 1em;
-  padding-top: 4em;
+  padding-top: 1em;
 `;
 
 const FiltersSection = styled.div`
@@ -178,7 +127,6 @@ const ClearButton = styled.button`
 `;
 
 export default function CardListPage() {
-  const navigate = useNavigate();
   const { getAllCards } = useGame();
 
   const [selectedProperty, setSelectedProperty] = useState<string>('');
@@ -240,37 +188,8 @@ export default function CardListPage() {
     setSelectedOption(e.target.value);
   };
 
-  // Handle back navigation
-  const handleBack = () => {
-    navigate('/');
-  };
-
   return (
     <Container>
-      {/* Header */}
-      <Header>
-        <BackButton onClick={handleBack}>
-          <svg
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-          <span>Home</span>
-        </BackButton>
-
-        <HeaderTitle>Card List</HeaderTitle>
-
-        <Spacer />
-      </Header>
-
-      {/* Content */}
       <Content>
         {/* Filters */}
         <FiltersSection>
