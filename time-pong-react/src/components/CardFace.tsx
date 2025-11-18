@@ -243,7 +243,14 @@ const ChallengeTitle = styled.h4<{ $type?: string }>`
 const ImageWrapper = styled.div`
   position: relative;
   flex: 1;
-  display: flex;
+
+  svg {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 `;
 
 const FlavourText = styled.p`
@@ -336,7 +343,7 @@ export const CardFace = forwardRef<CardFaceRef, CardFaceProps>(
       // Convert kebab-case to PascalCase (e.g., 'the-witchs-cauldron' -> 'TheWitchsCauldron')
       const componentName = kebabToPascalCase(card.image);
       const ImageComponent = CardImages[componentName as keyof typeof CardImages] as React.FC<any>;
-      return ImageComponent ? <ImageComponent style={{ height: '100%', width: '100%' }} fill="currentColor" /> : null;
+      return ImageComponent ? <ImageComponent fill="currentColor" /> : null;
     };
 
     const rarity = (card.rarity || 'common') as Rarity;
