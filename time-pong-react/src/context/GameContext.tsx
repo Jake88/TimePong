@@ -236,7 +236,9 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           ...effect,
           duration: effect.duration ? effect.duration - 1 : undefined,
         }))
-        .filter((effect) => !effect.duration || effect.duration > 0),
+        // Keep effects with duration = 0 to allow expire animation in EffectCard
+        // EffectCard will remove them after animation completes
+        .filter((effect) => !effect.duration || effect.duration >= 0),
     }));
   }, []);
 

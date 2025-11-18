@@ -50,7 +50,7 @@ const GameOverText = styled.p`
 `;
 
 export default function GamePage() {
-  const { gameState, drawCard, setIsDrinking, decrementRound } = useGame();
+  const { gameState, drawCard, setIsDrinking, decrementRound, addEffect, removeEffect } = useGame();
   const cardDeckRef = useRef<CardDeckRef>(null);
   const spellEffectRef = useRef<EffectCardRef>(null);
   const curseEffectRef = useRef<EffectCardRef>(null);
@@ -91,10 +91,31 @@ export default function GamePage() {
 
   // Handle card close - trigger round end
   const handleCardClose = () => {
-    // Decrement round and update effect durations
+    // First, decrement durations on active effects (for visual feedback in EffectCard)
     spellEffectRef.current?.roundEnd();
     curseEffectRef.current?.roundEnd();
+
+    // Decrement round counter and update effect durations in GameContext
+    // This decrements existing effects and removes expired ones
     decrementRound();
+
+    // After decrementing, add the current card to effects if it's a curse or spell
+    // This ensures the new effect starts with its original duration
+    if (currentCard) {
+      if (currentCard.type === 'curse') {
+        // Remove any existing curse first (only one curse at a time)
+        const existingCurse = gameState.currentEffects.find(effect => effect.type === 'curse');
+        if (existingCurse) {
+          removeEffect(existingCurse);
+        }
+        // Add the new curse with its original duration
+        addEffect({ ...currentCard });
+      } else if (currentCard.type === 'spell') {
+        // Add the spell with its original duration
+        // (filtering in drawCard prevents multiple spells from being drawn)
+        addEffect({ ...currentCard });
+      }
+    }
 
     // Clear current card
     setCurrentCard(null);

@@ -4,6 +4,7 @@ import type { Card } from '@/types/card.types';
 import { CardFace } from './CardFace';
 import type { CardFaceRef } from './CardFace';
 import * as CardTypeIcons from '@/components/icons/CardTypeIcons';
+import { useGame } from '@/context/GameContext';
 import { theme } from '@/theme';
 
 export interface EffectCardRef {
@@ -143,6 +144,7 @@ const CardWrapper = styled.div<{ $isOpen: boolean; $isFade: boolean; $isAnimatin
 
 export const EffectCard = forwardRef<EffectCardRef, EffectCardProps>(
   ({ data, label }, ref) => {
+    const { removeEffect } = useGame();
     const [isActive, setIsActive] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [isOverlay, setIsOverlay] = useState(false);
@@ -212,6 +214,11 @@ export const EffectCard = forwardRef<EffectCardRef, EffectCardProps>(
     };
 
     const clearEffect = () => {
+      // Remove the effect from GameContext if it has expired (duration = 0)
+      if (cardData && cardData.duration === 0) {
+        removeEffect(cardData);
+      }
+
       setCardData(null);
       setIsOpen(false);
       setIsFade(false);
