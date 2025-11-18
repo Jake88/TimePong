@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import type { Card } from '@/types/card.types';
 import { HELP_TEXT } from '@/types/card.types';
 import * as CardTypeIcons from '@/components/icons/CardTypeIcons';
+import * as CardImages from '@/components/icons/CardImages';
 import { Duration } from '@/components/icons/UtilityIcons';
 import { theme } from '@/theme';
 
@@ -328,6 +329,13 @@ export const CardFace = forwardRef<CardFaceRef, CardFaceProps>(
       return IconComponent ? <IconComponent style={{ height: '3em', width: '100%' }} fill="currentColor" /> : null;
     };
 
+    // Get the appropriate card image component
+    const getCardImage = () => {
+      if (!card.image) return null;
+      const ImageComponent = CardImages[card.image as keyof typeof CardImages] as React.FC<any>;
+      return ImageComponent ? <ImageComponent style={{ height: '100%', width: '100%' }} fill="currentColor" /> : null;
+    };
+
     const rarity = (card.rarity || 'common') as Rarity;
 
     return (
@@ -410,7 +418,7 @@ export const CardFace = forwardRef<CardFaceRef, CardFaceProps>(
               {/* Image wrapper */}
               {card.image && (
                 <ImageWrapper>
-                  {/* Image icon would go here if we had the CardImages component */}
+                  {getCardImage()}
                 </ImageWrapper>
               )}
 
