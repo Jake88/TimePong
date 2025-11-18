@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Angel } from '@/components/icons/UtilityIcons';
+import { Angel, NoMercy } from '@/components/icons';
 import { theme } from '@/theme';
 
 interface CardBackProps {
@@ -16,6 +16,8 @@ const Wrapper = styled.div`
   border: 0.2em solid ${theme.commonHighlight};
   padding: 0.2em;
   border-radius: 0.7em;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Panel = styled.div`
@@ -30,14 +32,14 @@ const Panel = styled.div`
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
 `;
 
 const PanelTitle = styled.h2`
   padding: 0.5em 0;
   margin: 0;
   font-size: 1.4em;
-  font-weight: normal;
+  font-weight: 700;
 `;
 
 const PanelHead = styled.div`
@@ -46,6 +48,7 @@ const PanelHead = styled.div`
   flex-direction: row;
   align-items: center;
   position: relative;
+  padding-top: 2.5em;
 `;
 
 const PanelHeadCorner = styled.div`
@@ -62,11 +65,6 @@ const PanelHeadHeader = styled.div`
   padding-top: 0.5em;
   border-radius: 50%;
   border: 1px solid ${theme.commonSoftTint};
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
 `;
 
 const PanelContent = styled.div`
@@ -78,12 +76,12 @@ const PanelContent = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  align-items: flex-end;
   justify-content: flex-end;
 `;
 
 const ContentTitle = styled.h2`
-  margin-bottom: 0.5em;
+  padding: 0.5em 0;
+  margin: 0;
   font-size: 1.4em;
   font-weight: normal;
 `;
@@ -117,7 +115,8 @@ const Answer = styled.button<{ variant: 'drunk' | 'sober' }>`
 `;
 
 const AnswerTitle = styled.h2<{ variant: 'drunk' | 'sober' }>`
-  margin-top: 0.5em;
+  padding: 0.5em 0;
+  margin: 0;
   font-size: 1.4em;
   font-weight: normal;
   color: ${props =>
@@ -130,10 +129,11 @@ const LogoIcon = styled.svg`
   width: 100%;
 `;
 
-const NoMercyIcon = styled.svg`
+const NoMercyIcon = styled(NoMercy)`
   height: 6rem;
   width: 6rem;
   color: ${theme.failureRed};
+  fill: currentColor;
 `;
 
 const AngelIcon = styled(Angel)`
@@ -162,10 +162,6 @@ export const CardBack: React.FC<CardBackProps> = ({ onCategorySelected }) => {
 
           {/* Center header */}
           <PanelHeadHeader>
-            <LogoIcon viewBox="0 0 100 100" fill="currentColor">
-              <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="3"/>
-              <text x="50" y="60" fontSize="40" textAnchor="middle" fill="currentColor" fontWeight="bold">TP</text>
-            </LogoIcon>
           </PanelHeadHeader>
 
           {/* Right corner */}
@@ -182,10 +178,7 @@ export const CardBack: React.FC<CardBackProps> = ({ onCategorySelected }) => {
                 variant="drunk"
                 onClick={() => handleSelection('drinking')}
               >
-                <NoMercyIcon viewBox="0 0 100 100" fill="currentColor">
-                  <path d="M50,0C22.4,0,0,22.4,0,50s22.4,50,50,50s50-22.4,50-50S77.6,0,50,0z M50,90c-22.1,0-40-17.9-40-40s17.9-40,40-40 s40,17.9,40,40S72.1,90,50,90z"/>
-                  <path d="M70,35L50,55L30,35L20,45l20,20L20,85l10,10l20-20l20,20l10-10L60,65l20-20L70,35z"/>
-                </NoMercyIcon>
+                <NoMercyIcon />
                 <AnswerTitle variant="drunk">Yes</AnswerTitle>
               </Answer>
 
