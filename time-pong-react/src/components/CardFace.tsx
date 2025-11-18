@@ -5,6 +5,7 @@ import { HELP_TEXT } from '@/types/card.types';
 import * as CardTypeIcons from '@/components/icons/CardTypeIcons';
 import * as CardImages from '@/components/icons/CardImages';
 import { Duration } from '@/components/icons/UtilityIcons';
+import { kebabToPascalCase } from '@/lib/utils';
 import { theme } from '@/theme';
 
 export interface CardFaceRef {
@@ -332,7 +333,9 @@ export const CardFace = forwardRef<CardFaceRef, CardFaceProps>(
     // Get the appropriate card image component
     const getCardImage = () => {
       if (!card.image) return null;
-      const ImageComponent = CardImages[card.image as keyof typeof CardImages] as React.FC<any>;
+      // Convert kebab-case to PascalCase (e.g., 'the-witchs-cauldron' -> 'TheWitchsCauldron')
+      const componentName = kebabToPascalCase(card.image);
+      const ImageComponent = CardImages[componentName as keyof typeof CardImages] as React.FC<any>;
       return ImageComponent ? <ImageComponent style={{ height: '100%', width: '100%' }} fill="currentColor" /> : null;
     };
 
