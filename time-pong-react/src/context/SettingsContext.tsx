@@ -92,6 +92,8 @@ interface SettingsContextType {
   resetSettings: () => void;
   exportSettings: () => string;
   importSettings: (jsonString: string) => boolean;
+  toggleCardInDeck: (cardTitle: string) => void;
+  clearSelectedDeck: () => void;
 }
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
@@ -150,12 +152,30 @@ export const SettingsProvider: React.FC<{ children: ReactNode }> = ({ children }
     }
   }, []);
 
+  const toggleCardInDeck = useCallback((cardTitle: string) => {
+    setSettings((prev) => {
+      const isSelected = prev.selectedCards.includes(cardTitle);
+      return {
+        ...prev,
+        selectedCards: isSelected
+          ? prev.selectedCards.filter((title) => title !== cardTitle)
+          : [...prev.selectedCards, cardTitle],
+      };
+    });
+  }, []);
+
+  const clearSelectedDeck = useCallback(() => {
+    setSettings((prev) => ({ ...prev, selectedCards: [] }));
+  }, []);
+
   const value: SettingsContextType = {
     settings,
     updateSettings,
     resetSettings,
     exportSettings,
     importSettings,
+    toggleCardInDeck,
+    clearSelectedDeck,
   };
 
   return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>;

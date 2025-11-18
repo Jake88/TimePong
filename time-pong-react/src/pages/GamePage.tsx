@@ -188,7 +188,7 @@ export default function GamePage() {
         </EffectsContainer>
 
         {/* Timer */}
-        {(settings.gameMode === 'endless' || gameState.roundsRemaining > 0) && (
+        {(settings.gameMode === 'endless' || settings.gameMode === 'setDeck' || gameState.roundsRemaining > 0 || continueEndlessMode) && (
           <Timer
             onTimerFinish={handleTimerFinish}
             minMilliseconds={settings.timerMin}

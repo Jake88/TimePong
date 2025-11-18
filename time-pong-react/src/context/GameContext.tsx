@@ -18,6 +18,7 @@ interface GameState {
   isDrinking: boolean;
   playedOneHitWonders: string[];
   usedTruths: string[];
+  drawnSetDeckCards: string[]; // Track drawn cards in Set Deck mode
 }
 
 interface GameContextType {
@@ -44,6 +45,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     isDrinking: settings.defaultDrinkingMode,
     playedOneHitWonders: [],
     usedTruths: [],
+    drawnSetDeckCards: [],
   }), [settings.gameMode, settings.roundsCount, settings.defaultDrinkingMode]);
 
   const [gameState, setGameState] = useState<GameState>(getInitialState());
@@ -124,7 +126,55 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const drawCard = useCallback(
     (filters: Partial<GameFilters> = {}): Card => {
-      // Merge default filters
+      // Handle Set Deck Mode
+      if (settings.gameMode === 'setDeck') {
+        // Get cards from the selected deck
+        const selectedDeckCards = (cardsData as Card[]).filter((card) =>
+          card.title && settings.selectedCards.includes(card.title)
+        );
+
+        if (selectedDeckCards.length === 0) {
+          // If no cards selected, return a fallback card
+          const fallbackCard = (cardsData as Card[]).find((card) => card.rarity === 'basic');
+          return processCard(fallbackCard || (cardsData as Card[])[0]);
+        }
+
+        // Check if all cards have been drawn
+        const availableCards = selectedDeckCards.filter(
+          (card) => card.title && !gameState.drawnSetDeckCards.includes(card.title)
+        );
+
+        if (availableCards.length === 0) {
+          // Reshuffle - reset drawn cards and draw from full deck
+          setGameState((prev) => ({ ...prev, drawnSetDeckCards: [] }));
+          const selectedCard = getRandomArrayItem(selectedDeckCards);
+
+          // Mark as drawn
+          if (selectedCard.title) {
+            setGameState((prev) => ({
+              ...prev,
+              drawnSetDeckCards: [selectedCard.title!],
+            }));
+          }
+
+          return processCard(selectedCard);
+        }
+
+        // Draw from available cards
+        const selectedCard = getRandomArrayItem(availableCards);
+
+        // Mark as drawn
+        if (selectedCard.title) {
+          setGameState((prev) => ({
+            ...prev,
+            drawnSetDeckCards: [...prev.drawnSetDeckCards, selectedCard.title!],
+          }));
+        }
+
+        return processCard(selectedCard);
+      }
+
+      // Merge default filters (for standard modes)
       const mergedFilters: Partial<GameFilters> = {
         isDrinking: gameState.isDrinking,
         isSpellActive: gameState.currentEffects.some((effect) => effect.type === 'spell'),
@@ -178,7 +228,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const selectedCard = getRandomArrayItem(validCards);
       return processCard(selectedCard);
     },
-    [gameState, getValidCards, getRandomArrayItem, settings.rarityDistribution]
+    [gameState, getValidCards, getRandomArrayItem, settings.rarityDistribution, settings.gameMode, settings.selectedCards]
   );
 
   const processCard = useCallback(

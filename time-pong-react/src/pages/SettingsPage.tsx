@@ -176,10 +176,71 @@ const RarityLabel = styled.span`
   min-width: 80px;
 `;
 
+const CardSelectionContainer = styled.div`
+  margin-top: 1em;
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0.5em;
+`;
+
+const CardSelectionHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+`;
+
+const CardSelectionCount = styled.span`
+  color: ${theme.secondaryTextColor};
+  font-size: 0.9em;
+`;
+
+const CardItem = styled.div<{ $isSelected: boolean }>`
+  display: flex;
+  align-items: center;
+  padding: 0.5em;
+  margin: 0.3em 0;
+  background-color: ${props => props.$isSelected ? 'rgba(76, 175, 80, 0.2)' : 'rgba(255, 255, 255, 0.05)'};
+  border: 1px solid ${props => props.$isSelected ? theme.limitedHighlight : 'rgba(255, 255, 255, 0.1)'};
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: ${props => props.$isSelected ? 'rgba(76, 175, 80, 0.3)' : 'rgba(255, 255, 255, 0.1)'};
+  }
+`;
+
+const CardItemCheckbox = styled(Checkbox)`
+  margin-right: 0.8em;
+`;
+
+const CardItemInfo = styled.div`
+  flex: 1;
+`;
+
+const CardItemTitle = styled.span`
+  color: ${theme.primaryTextColor};
+  font-weight: 500;
+`;
+
+const CardItemMeta = styled.span`
+  color: ${theme.secondaryTextColor};
+  font-size: 0.8em;
+  margin-left: 0.5em;
+`;
+
+const SearchInput = styled(Input)`
+  margin-bottom: 1em;
+`;
+
 export default function SettingsPage() {
-  const { settings, updateSettings, resetSettings } = useSettings();
-  const { resetGame } = useGame();
+  const { settings, updateSettings, resetSettings, toggleCardInDeck, clearSelectedDeck } = useSettings();
+  const { resetGame, getAllCards } = useGame();
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [cardSearchFilter, setCardSearchFilter] = useState('');
 
   const handleGameModeChange = (mode: GameMode) => {
     updateSettings({ gameMode: mode });
@@ -275,9 +336,59 @@ export default function SettingsPage() {
           </SettingRow>
         )}
         {settings.gameMode === 'setDeck' && (
-          <SettingRow>
-            <HelpText>Set Deck mode requires card selection. Visit the Cards page to build your deck.</HelpText>
-          </SettingRow>
+          <>
+            <SettingRow>
+              <Label>Custom Deck Cards</Label>
+              <CardSelectionHeader>
+                <CardSelectionCount>
+                  {settings.selectedCards.length} card{settings.selectedCards.length !== 1 ? 's' : ''} selected
+                </CardSelectionCount>
+                <Button onClick={clearSelectedDeck}>Clear All</Button>
+              </CardSelectionHeader>
+            </SettingRow>
+            <SettingRow>
+              <SearchInput
+                type="text"
+                placeholder="Search cards by title..."
+                value={cardSearchFilter}
+                onChange={(e) => setCardSearchFilter(e.target.value)}
+              />
+              <CardSelectionContainer>
+                {getAllCards()
+                  .filter((card) =>
+                    card.title &&
+                    card.title.toLowerCase().includes(cardSearchFilter.toLowerCase())
+                  )
+                  .map((card) => {
+                    const isSelected = card.title ? settings.selectedCards.includes(card.title) : false;
+                    return card.title ? (
+                      <CardItem
+                        key={card.title}
+                        $isSelected={isSelected}
+                        onClick={() => card.title && toggleCardInDeck(card.title)}
+                      >
+                        <CardItemCheckbox
+                          type="checkbox"
+                          checked={isSelected}
+                          onChange={() => {}}
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                        <CardItemInfo>
+                          <CardItemTitle>{card.title}</CardItemTitle>
+                          <CardItemMeta>
+                            {card.type} • {card.rarity} • {card.deck}
+                          </CardItemMeta>
+                        </CardItemInfo>
+                      </CardItem>
+                    ) : null;
+                  })}
+              </CardSelectionContainer>
+              <HelpText>
+                Select cards to create a custom deck. In Set Deck mode, only these cards will be drawn.
+                When all cards are drawn, the deck reshuffles.
+              </HelpText>
+            </SettingRow>
+          </>
         )}
       </Section>
 
