@@ -39,6 +39,8 @@ export const DECK_TYPES = {
   POP_CULTURE: 'popCulture',
   NUDITY: 'nudity',
   ORGASMIC: 'orgasmic',
+  STRIP_FLIRT: 'stripFlirt',
+  KINKY: 'kinky',
 } as const;
 
 export type DeckType = typeof DECK_TYPES[keyof typeof DECK_TYPES];

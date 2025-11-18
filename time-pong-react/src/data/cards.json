@@ -1526,5 +1526,397 @@
         "instruction": "Both people skull."
       }
     ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "deck": "core",
+    "rarity": "regular",
+    "type": "action",
+    "card": "default",
+    "image": "drink-two",
+    "title": "Link Arms and Drink",
+    "flavour": "Friendship is sharing a drink with linked arms.",
+    "multipleLosers": false,
+    "rules": [
+      "Choose a partner and link arms with them."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Both drink two while arms are linked."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "deck": "popCulture",
+    "rarity": "limited",
+    "type": "perform",
+    "card": "default",
+    "image": "perform",
+    "title": "David Attenborough",
+    "flavour": "And here we observe the magnificent drinking creature in its natural habitat...",
+    "multipleLosers": false,
+    "rules": [
+      "Do your best David Attenborough impression while narrating someone taking 2 drinks.",
+      "Choose someone to be the subject of your nature documentary."
+    ],
+    "boldRules": [
+      {
+        "instruction": "The group votes: If your impression was good, the subject drinks 2. If not, you drink 2."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": false,
+    "forNonDrinkers": true,
+    "deck": "core",
+    "rarity": "limited",
+    "type": "dare",
+    "card": "dare",
+    "image": "dare",
+    "title": "Wedgie Dare",
+    "flavour": "Sometimes you gotta let your friends get up close and personal.",
+    "multipleLosers": false,
+    "rules": [
+      "Let the person to your right give you a wedgie."
+    ],
+    "boldRules": [
+      {
+        "type": "chicken",
+        "instruction": "Answer this truth question instead."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "deck": "core",
+    "rarity": "regular",
+    "type": "global",
+    "card": "default",
+    "image": "drink-one",
+    "title": "Table Tax",
+    "flavour": "Everyone contributes to the cause!",
+    "multipleLosers": true,
+    "rules": [
+      "Everyone at the table must participate."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Everyone drinks one."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "deck": "core",
+    "rarity": "limited",
+    "type": "global",
+    "card": "default",
+    "image": "drink-two",
+    "title": "Group Chug",
+    "flavour": "Unity through synchronized drinking!",
+    "multipleLosers": true,
+    "rules": [
+      "On the count of three, everyone chugs for 3 seconds."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Anyone who stops early drinks two extra."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": false,
+    "forNonDrinkers": true,
+    "deck": "core",
+    "rarity": "regular",
+    "type": "global",
+    "card": "default",
+    "image": "dance",
+    "title": "Dance Break",
+    "flavour": "Let's get this party moving!",
+    "multipleLosers": true,
+    "rules": [
+      "Everyone stands up and dances for 30 seconds."
+    ],
+    "boldRules": [
+      {
+        "instruction": "The person with the worst moves is chosen by group vote and does a solo."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "deck": "core",
+    "rarity": "limited",
+    "type": "global",
+    "card": "default",
+    "image": "global",
+    "title": "Story Circle",
+    "flavour": "One word at a time, create a masterpiece!",
+    "multipleLosers": true,
+    "rules": [
+      "Going around the circle, each person adds one word to create a story.",
+      "Continue for two full rounds around the table."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Anyone who hesitates for more than 3 seconds drinks one."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "deck": "stripFlirt",
+    "rarity": "regular",
+    "type": "dare",
+    "card": "dare",
+    "image": "dare",
+    "title": "Clothing Sacrifice",
+    "flavour": "Time to heat things up!",
+    "multipleLosers": false,
+    "rules": [
+      "Remove one article of clothing of your choice."
+    ],
+    "boldRules": [
+      {
+        "type": "chicken",
+        "instruction": "Answer this truth question instead."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "deck": "stripFlirt",
+    "rarity": "limited",
+    "type": "action",
+    "card": "default",
+    "image": "kiss",
+    "title": "Kiss or Cheers",
+    "flavour": "A little smooch never hurt anyone.",
+    "multipleLosers": false,
+    "rules": [
+      "Choose someone at the table."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Kiss them on the cheek or both drink two."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "deck": "stripFlirt",
+    "rarity": "regular",
+    "type": "challenge",
+    "card": "challenge",
+    "image": "challenge",
+    "title": "Compliment Battle",
+    "flavour": "Kill them with kindness!",
+    "multipleLosers": false,
+    "rules": [
+      "Choose an opponent.",
+      "Take turns giving each other genuine compliments.",
+      "First person to hesitate or repeat loses."
+    ],
+    "boldRules": [
+      {
+        "type": "success",
+        "instruction": "Winner chooses someone to remove an article of clothing."
+      },
+      {
+        "type": "failure",
+        "instruction": "Loser removes an article of clothing."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "deck": "stripFlirt",
+    "rarity": "limited",
+    "type": "perform",
+    "card": "default",
+    "image": "perform",
+    "title": "Sexy Dance",
+    "flavour": "Show off those moves!",
+    "multipleLosers": false,
+    "rules": [
+      "Perform a 20-second sexy dance for the group."
+    ],
+    "boldRules": [
+      {
+        "instruction": "If the group approves, choose someone else to dance. If not, you drink two."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "deck": "stripFlirt",
+    "rarity": "special",
+    "type": "action",
+    "card": "default",
+    "image": "lap",
+    "title": "Lap Sit",
+    "flavour": "Get comfortable!",
+    "multipleLosers": false,
+    "rules": [
+      "Choose someone to sit on their lap for the next round."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Both drink one while sitting."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "deck": "kinky",
+    "rarity": "limited",
+    "type": "dare",
+    "card": "dare",
+    "image": "dare",
+    "title": "Body Shot",
+    "flavour": "Use your imagination!",
+    "multipleLosers": false,
+    "rules": [
+      "Choose a partner for a body shot.",
+      "You decide where the salt and lime go."
+    ],
+    "boldRules": [
+      {
+        "type": "chicken",
+        "instruction": "Both drink three instead."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "deck": "kinky",
+    "rarity": "special",
+    "type": "action",
+    "card": "default",
+    "image": "spicy",
+    "title": "Spanking",
+    "flavour": "A little punishment goes a long way.",
+    "multipleLosers": false,
+    "rules": [
+      "Choose someone to give you a playful spank."
+    ],
+    "boldRules": [
+      {
+        "instruction": "Both drink one after."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "deck": "kinky",
+    "rarity": "rare",
+    "type": "dare",
+    "card": "dare",
+    "image": "dare",
+    "title": "7 Minutes in Heaven",
+    "flavour": "What happens in the closet, stays in the closet.",
+    "multipleLosers": false,
+    "rules": [
+      "Choose a partner and go somewhere private for 7 minutes.",
+      "The group decides what you have to do (keep it fun!)."
+    ],
+    "boldRules": [
+      {
+        "type": "chicken",
+        "instruction": "Both drink three and answer a spicy truth question."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "deck": "kinky",
+    "rarity": "limited",
+    "type": "challenge",
+    "card": "challenge",
+    "image": "challenge",
+    "title": "Staring Contest",
+    "flavour": "Look into my eyes...",
+    "multipleLosers": false,
+    "rules": [
+      "Choose an opponent and have an intense staring contest.",
+      "No blinking, no laughing, no looking away."
+    ],
+    "boldRules": [
+      {
+        "type": "success",
+        "instruction": "Winner gets to command the loser to do one dare of their choice."
+      },
+      {
+        "type": "failure",
+        "instruction": "Loser drinks two and removes an article of clothing."
+      }
+    ]
+  },
+  {
+    "creator": "AI Assistant",
+    "created": "11/18/2025",
+    "forDrinkers": true,
+    "forNonDrinkers": true,
+    "deck": "kinky",
+    "rarity": "special",
+    "type": "action",
+    "card": "default",
+    "image": "massage",
+    "title": "Massage Time",
+    "flavour": "Everyone needs a little touch.",
+    "multipleLosers": false,
+    "rules": [
+      "Choose someone to give them a 1-minute shoulder massage."
+    ],
+    "boldRules": [
+      {
+        "instruction": "They rate it 1-10. If below 7, you drink that many."
+      }
+    ]
   }
 ]

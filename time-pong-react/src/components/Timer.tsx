@@ -7,6 +7,8 @@ interface TimerProps {
   onTimerFinish?: (duration: number) => void;
   minMilliseconds?: number;
   maxMilliseconds?: number;
+  audioEnabled?: boolean;
+  audioVolume?: number;
 }
 
 const spin = keyframes`
@@ -69,6 +71,8 @@ export const Timer: React.FC<TimerProps> = ({
   onTimerFinish,
   minMilliseconds = 2000,
   maxMilliseconds = 40000,
+  audioEnabled = true,
+  audioVolume = 1,
 }) => {
   const [isRunning, setIsRunning] = useState(false);
   const [timer, setTimer] = useState(0);
@@ -78,7 +82,7 @@ export const Timer: React.FC<TimerProps> = ({
   useEffect(() => {
     // Initialize audio
     audioRef.current = new Audio(timerSound);
-    audioRef.current.volume = 1;
+    audioRef.current.volume = audioVolume;
 
     // Cleanup on unmount
     return () => {
@@ -86,14 +90,14 @@ export const Timer: React.FC<TimerProps> = ({
         clearTimeout(timeoutRef.current);
       }
     };
-  }, []);
+  }, [audioVolume]);
 
   const playSound = useCallback(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 1;
+    if (audioRef.current && audioEnabled) {
+      audioRef.current.volume = audioVolume;
       audioRef.current.play();
     }
-  }, []);
+  }, [audioEnabled, audioVolume]);
 
   const stopTimer = useCallback(() => {
     if (timeoutRef.current) {

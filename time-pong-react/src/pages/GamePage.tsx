@@ -1,9 +1,11 @@
 import { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useGame } from '@/context/GameContext';
+import { useSettings } from '@/context/SettingsContext';
 import { Timer } from '@/components/Timer';
 import { CardDeck } from '@/components/CardDeck';
 import { EffectCard } from '@/components/EffectCard';
+import HelpPopup from '@/components/HelpPopup';
 import type { CardDeckRef } from '@/components/CardDeck';
 import type { EffectCardRef } from '@/components/EffectCard';
 import type { Card } from '@/types/card.types';
@@ -32,25 +34,68 @@ const EffectsContainer = styled.div`
 `;
 
 const GameOverSection = styled.div`
-  margin: 2em 0;
+  margin: 2em 1em;
   text-align: center;
+  background: linear-gradient(135deg, ${theme.limitedHighlight}22, ${theme.specialHighlight}22);
+  border: 2px solid ${theme.limitedHighlight};
+  border-radius: 12px;
+  padding: 2em;
 `;
 
 const GameOverTitle = styled.h3`
-  font-size: 1.5em;
+  font-size: 2em;
   font-weight: bold;
   color: ${theme.primaryTextColor};
-  margin: 0 0 1em 0;
+  margin: 0 0 0.5em 0;
 `;
 
 const GameOverText = styled.p`
   color: ${theme.secondaryTextColor};
-  margin: 0;
+  margin: 0 0 1.5em 0;
   line-height: 1.5;
+  font-size: 1.1em;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+const GameButton = styled.button`
+  padding: 0.8em 1.5em;
+  background-color: ${theme.limitedHighlight};
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: ${theme.specialHighlight};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`;
+
+const SecondaryButton = styled(GameButton)`
+  background-color: rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
 `;
 
 export default function GamePage() {
-  const { gameState, drawCard, setIsDrinking, decrementRound, addEffect, removeEffect } = useGame();
+  const { gameState, drawCard, setIsDrinking, decrementRound, addEffect, removeEffect, resetGame } = useGame();
+  const { settings } = useSettings();
   const cardDeckRef = useRef<CardDeckRef>(null);
   const spellEffectRef = useRef<EffectCardRef>(null);
   const curseEffectRef = useRef<EffectCardRef>(null);
@@ -58,6 +103,7 @@ export default function GamePage() {
   const [currentCard, setCurrentCard] = useState<Card | null>(null);
   const [spellEffect, setSpellEffect] = useState<Card | null>(null);
   const [curseEffect, setCurseEffect] = useState<Card | null>(null);
+  const [continueEndlessMode, setContinueEndlessMode] = useState(false);
 
   // Update effect cards when game state changes
   useEffect(() => {
@@ -123,6 +169,7 @@ export default function GamePage() {
 
   return (
     <Container>
+      <HelpPopup />
       <MainContent>
         {/* Effects container */}
         <EffectsContainer>
@@ -141,21 +188,31 @@ export default function GamePage() {
         </EffectsContainer>
 
         {/* Timer */}
-        {gameState.roundsRemaining > 0 && (
+        {(settings.gameMode === 'endless' || gameState.roundsRemaining > 0) && (
           <Timer
             onTimerFinish={handleTimerFinish}
-            minMilliseconds={2000}
-            maxMilliseconds={40000}
+            minMilliseconds={settings.timerMin}
+            maxMilliseconds={settings.timerMax}
+            audioEnabled={settings.audioEnabled}
+            audioVolume={settings.audioVolume}
           />
         )}
 
         {/* Game over message */}
-        {gameState.roundsRemaining === 0 && (
+        {gameState.roundsRemaining === 0 && settings.gameMode === 'rounds' && !continueEndlessMode && (
           <GameOverSection>
-            <GameOverTitle>Out of Rounds</GameOverTitle>
+            <GameOverTitle>🎉 Game Complete!</GameOverTitle>
             <GameOverText>
-              Not ready to finish? The game continues as long as you keep playing!
+              You've finished {settings.roundsCount} rounds! What would you like to do?
             </GameOverText>
+            <ButtonGroup>
+              <GameButton onClick={() => resetGame()}>
+                🔄 Start New Game
+              </GameButton>
+              <SecondaryButton onClick={() => setContinueEndlessMode(true)}>
+                ♾️ Continue Playing
+              </SecondaryButton>
+            </ButtonGroup>
           </GameOverSection>
         )}
 

@@ -3,15 +3,7 @@ import type { ReactNode } from 'react';
 import type { Card, RarityType } from '@/types/card.types';
 import cardsData from '@/data/cards.json';
 import truthQuestions from '@/data/truth-questions.json';
-
-// Rarity bounds for card drawing probability
-const RARITY_BOUNDS = {
-  basic: 20,
-  regular: 62,
-  limited: 85,
-  special: 97,
-  rare: 100,
-};
+import { useSettings } from '@/context/SettingsContext';
 
 interface GameFilters {
   isDrinking: boolean;
@@ -42,17 +34,19 @@ interface GameContextType {
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
 
-const initialState: GameState = {
-  currentCard: null,
-  currentEffects: [],
-  roundsRemaining: 10,
-  isDrinking: true,
-  playedOneHitWonders: [],
-  usedTruths: [],
-};
-
 export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [gameState, setGameState] = useState<GameState>(initialState);
+  const { settings } = useSettings();
+
+  const getInitialState = useCallback((): GameState => ({
+    currentCard: null,
+    currentEffects: [],
+    roundsRemaining: settings.gameMode === 'rounds' ? settings.roundsCount : 10,
+    isDrinking: settings.defaultDrinkingMode,
+    playedOneHitWonders: [],
+    usedTruths: [],
+  }), [settings.gameMode, settings.roundsCount, settings.defaultDrinkingMode]);
+
+  const [gameState, setGameState] = useState<GameState>(getInitialState());
 
   const setIsDrinking = useCallback((isDrinking: boolean) => {
     setGameState((prev) => ({ ...prev, isDrinking }));
@@ -91,6 +85,11 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           return false;
         }
 
+        // Filter by enabled decks
+        if (card.deck && !settings.enabledDecks[card.deck as keyof typeof settings.enabledDecks]) {
+          return false;
+        }
+
         // Filter by rarity if specified
         if (filters.restrictTo?.rarity && card.rarity !== filters.restrictTo.rarity) {
           return false;
@@ -120,7 +119,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         return true;
       });
     },
-    [gameState.playedOneHitWonders, gameState.currentCard]
+    [gameState.playedOneHitWonders, gameState.currentCard, settings.enabledDecks]
   );
 
   const drawCard = useCallback(
@@ -133,23 +132,26 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         ...filters,
       };
 
+      // Use rarity distribution from settings
+      const rarityBounds = settings.rarityDistribution;
+
       // Determine rarity based on random roll
       const result = Math.random() * 100;
       let targetRarity: RarityType;
 
       if (
-        result < RARITY_BOUNDS.basic &&
+        result < rarityBounds.basic &&
         gameState.currentCard?.rarity !== 'basic' &&
         !mergedFilters.restrictTo?.type
       ) {
         targetRarity = 'basic';
-      } else if (result < RARITY_BOUNDS.regular) {
+      } else if (result < rarityBounds.regular) {
         targetRarity = 'regular';
-      } else if (result < RARITY_BOUNDS.limited) {
+      } else if (result < rarityBounds.limited) {
         targetRarity = 'limited';
-      } else if (result < RARITY_BOUNDS.special) {
+      } else if (result < rarityBounds.special) {
         targetRarity = 'special';
-      } else if (result < RARITY_BOUNDS.rare) {
+      } else if (result < rarityBounds.rare) {
         targetRarity = 'rare';
       } else {
         targetRarity = 'basic';
@@ -176,7 +178,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const selectedCard = getRandomArrayItem(validCards);
       return processCard(selectedCard);
     },
-    [gameState, getValidCards, getRandomArrayItem]
+    [gameState, getValidCards, getRandomArrayItem, settings.rarityDistribution]
   );
 
   const processCard = useCallback(
@@ -243,8 +245,8 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, []);
 
   const resetGame = useCallback(() => {
-    setGameState(initialState);
-  }, []);
+    setGameState(getInitialState());
+  }, [getInitialState]);
 
   const getAllCards = useCallback((): Card[] => {
     return cardsData as Card[];
